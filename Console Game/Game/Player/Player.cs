@@ -3,22 +3,23 @@ using Console_Game.Weapons;
 
 namespace Console_Game
 {
-    public sealed class Player : IUpdateable
+    public sealed class Player : IUpdateable, IPlayer
     {
-        private readonly IWeaponInput _weaponInput;
-        private readonly IWeaponWithMagazine _weapon;
-
         public Player(IWeaponInput weaponInput, IWeaponWithMagazine weapon)
         {
-            _weaponInput = weaponInput ?? throw new ArgumentNullException(nameof(weaponInput));
-            _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
+            WeaponInput = weaponInput ?? throw new ArgumentNullException(nameof(weaponInput));
+            Weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
         }
+
+        public IWeaponInput WeaponInput { get; }
+        
+        public IWeaponWithMagazine Weapon { get; }
 
         public void Update(float deltaTime)
         {
-            if (_weaponInput.IsUsing && _weapon.CanShoot)
+            if (WeaponInput.IsUsing && Weapon.CanShoot)
             {
-                _weapon.Shoot();
+                Weapon.Shoot();
             }
         }
     }

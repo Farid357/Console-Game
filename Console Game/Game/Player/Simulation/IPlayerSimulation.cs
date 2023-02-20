@@ -4,6 +4,6 @@ namespace Console_Game
 {
     public interface IPlayerSimulation
     {
-        void CreatePlayer(IWeaponInput weaponInput, IWeaponWithMagazine weapon);
+        IPlayer CreatePlayer(IWeaponInput weaponInput, IWeaponWithMagazine weapon);
     }
 }

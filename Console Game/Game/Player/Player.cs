@@ -22,10 +22,4 @@ namespace Console_Game
             }
         }
     }
-
-    public sealed class CharacterHealth
-    {
-        private readonly IHealth _health;
-        
-    }
 }

@@ -1,0 +1,2 @@
+D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console Game.csprojAssemblyReference.cache
+D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console Game.csproj.CoreCompileInputs.cache

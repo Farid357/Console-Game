@@ -5,8 +5,8 @@ namespace Console_Game.Loop
 {
     public sealed class GameLoop : IGameLoop
     {
-        private readonly GameUpdate _gameUpdate = new();
         private readonly IReadOnlyGameTime _gameTime;
+        private readonly GameUpdate _gameUpdate = new();
 
         public GameLoop(IReadOnlyGameTime gameTime)
         {

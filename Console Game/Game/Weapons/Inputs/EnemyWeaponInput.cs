@@ -2,7 +2,7 @@ using System;
 
 namespace Console_Game
 {
-    public sealed class EnemyWeaponInput : IWeaponInput, IUpdateable
+    public sealed class EnemyWeaponInput : IWeaponInput, IGameLoopObject
     {
         private readonly ITimer _cooldownTimer;
 

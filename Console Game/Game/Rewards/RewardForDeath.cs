@@ -1,8 +1,9 @@
 using System;
+using Console_Game.Tools.Extensions;
 
 namespace Console_Game
 {
-    public sealed class RewardForDeath : IUpdateable
+    public sealed class RewardForDeath : IGameLoopObject
     {
         private readonly IHealth _health;
         private readonly IReward _reward;
@@ -15,7 +16,7 @@ namespace Console_Game
 
         public void Update(float deltaTime)
         {
-            if (_health.IsDied && _reward.IsApplied == false)
+            if (_health.IsDied() && _reward.IsApplied == false)
                 _reward.Apply();
         }
     }

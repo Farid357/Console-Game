@@ -3,43 +3,43 @@ using System.Collections.Generic;
 
 namespace Console_Game.Loop
 {
-    public sealed class GameUpdate : IGameUpdate, IUpdateable
+    public sealed class GameUpdate : IGameUpdate, IGameLoopObject
     {
-        private readonly List<IUpdateable> _updateables;
+        private readonly List<IGameLoopObject> _loopObjects;
 
-        public GameUpdate(List<IUpdateable> updateables)
+        public GameUpdate(List<IGameLoopObject> loopObjects)
         {
-            _updateables = updateables ?? throw new ArgumentNullException(nameof(updateables));
+            _loopObjects = loopObjects ?? throw new ArgumentNullException(nameof(loopObjects));
         }
 
-        public GameUpdate() : this(new List<IUpdateable>())
+        public GameUpdate() : this(new List<IGameLoopObject>())
         {
         }
 
-        public IReadOnlyList<IUpdateable> Updateables => _updateables;
+        public IReadOnlyList<IGameLoopObject> LoopObjects => _loopObjects;
 
-        public void Add(params IUpdateable[] updateables)
+        public void Add(params IGameLoopObject[] loopObjects)
         {
-            if (updateables == null)
-                throw new ArgumentNullException(nameof(updateables));
+            if (loopObjects == null)
+                throw new ArgumentNullException(nameof(loopObjects));
 
-            _updateables.AddRange(updateables);
+            _loopObjects.AddRange(loopObjects);
         }
 
-        public void Remove(params IUpdateable[] updateables)
+        public void Remove(params IGameLoopObject[] loopObjects)
         {
-            if (updateables == null)
-                throw new ArgumentNullException(nameof(updateables));
+            if (loopObjects == null)
+                throw new ArgumentNullException(nameof(loopObjects));
 
-            foreach (var updateable in updateables)
+            foreach (var updateable in loopObjects)
             {
-                _updateables.Remove(updateable);
+                _loopObjects.Remove(updateable);
             }
         }
 
         public void Update(float deltaTime)
         {
-            _updateables.ForEach(updateable => updateable.Update(deltaTime));
+            _loopObjects.ForEach(updateable => updateable.Update(deltaTime));
         }
     }
 }

@@ -3,7 +3,7 @@ using Console_Game.Weapons;
 
 namespace Console_Game
 {
-    public sealed class Player : IUpdateable, IPlayer
+    public sealed class Player : IGameLoopObject, IPlayer
     {
         public Player(IWeaponInput weaponInput, IWeaponWithMagazine weapon)
         {

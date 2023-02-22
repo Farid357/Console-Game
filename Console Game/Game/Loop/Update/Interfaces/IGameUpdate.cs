@@ -4,10 +4,10 @@ namespace Console_Game.Loop
 {
     public interface IGameUpdate
     {
-        IReadOnlyList<IUpdateable> Updateables { get; }
+        IReadOnlyList<IGameLoopObject> LoopObjects { get; }
 
-        void Add(params IUpdateable[] updateables);
+        void Add(params IGameLoopObject[] loopObjects);
 
-        void Remove(params IUpdateable[] updateables);
+        void Remove(params IGameLoopObject[] loopObjects);
     }
 }

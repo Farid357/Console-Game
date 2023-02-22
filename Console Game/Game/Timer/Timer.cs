@@ -3,7 +3,7 @@ using Console_Game.Tools.Extensions;
 
 namespace Console_Game
 {
-    public sealed class Timer : ITimer, IUpdateable
+    public sealed class Timer : ITimer, IGameLoopObject
     {
         private readonly float _cooldown;
         private bool _isActive;

@@ -1,5 +1,5 @@
 using System;
-using Console_Game.Tools.Extensions;
+using Console_Game.Tools;
 
 namespace Console_Game
 {

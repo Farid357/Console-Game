@@ -1,10 +1,10 @@
 namespace Console_Game
 {
-    public interface IEnemyLifeCycle : IGameLoopObject
+    public interface IEnemyLife
     {
         bool IsCompleted { get; }
         
-        IEnemyLifeCyclePeriod CurrentPeriod { get; }
+        IEnemyLifePeriod CurrentPeriod { get; }
 
         void Continue();
 

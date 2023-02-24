@@ -15,7 +15,7 @@ namespace Console_Game
         
         public IWeaponWithMagazine Weapon { get; }
 
-        public void Update(float deltaTime)
+        public void Update(long deltaTime)
         {
             if (WeaponInput.IsUsing && Weapon.CanShoot)
             {

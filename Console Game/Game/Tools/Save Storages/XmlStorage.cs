@@ -10,19 +10,19 @@ namespace Console_Game.Save_Storages
 
         public XmlStorage(Paths.IPath path)
         {
-            if (path is null) 
+            if (path is null)
                 throw new ArgumentNullException(nameof(path));
 
             _pathName = path.Name;
         }
-        
+
         public bool HasSave() => File.Exists(_pathName);
 
         public void DeleteSave()
         {
             if (HasSave() == false)
                 throw new CannotDeleteSaveException(nameof(TStoreValue), _pathName);
-            
+
             File.Delete(_pathName);
         }
 
@@ -33,16 +33,17 @@ namespace Console_Game.Save_Storages
 
             var serializer = new XmlSerializer(typeof(TStoreValue));
             var fileText = File.ReadAllText(_pathName);
-            using var fileStream = new FileStream(_pathName, FileMode.Create);
-            using var stringReader = new StringReader(fileText);
-            return (TStoreValue)serializer.Deserialize(stringReader);
+            
+            using (var stringReader = new StringReader(fileText))
+                return (TStoreValue)serializer.Deserialize(stringReader);
         }
 
         public void Save(TStoreValue value)
         {
             var serializer = new XmlSerializer(typeof(TStoreValue));
-            using var fileStream = new FileStream(_pathName, FileMode.Create);
+            var fileStream = new FileStream(_pathName, FileMode.Create);
             serializer.Serialize(fileStream, value);
+            fileStream.Dispose();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Console_Game
 
         }
 
-        public void VisualizeDeath()
+        public void Die()
         {
             Console.WriteLine($"I'm died!");
         }

@@ -2,6 +2,6 @@ namespace Console_Game
 {
     public interface IGameLoopObject
     {
-        void Update(float deltaTime);
+        void Update(long deltaTime);
     }
 }

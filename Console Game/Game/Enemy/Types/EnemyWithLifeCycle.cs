@@ -4,24 +4,27 @@ namespace Console_Game
 {
     public sealed class EnemyWithLifeCycle : IEnemy, IGameLoopObject
     {
-        private readonly IEnemyLifeCycle _lifeCycle;
+        private readonly IEnemyLife _life;
         private readonly IEnemy _enemy;
 
-        public EnemyWithLifeCycle(IEnemyLifeCycle lifeCycle, IEnemy enemy)
+        public EnemyWithLifeCycle(IEnemyLife life, IEnemy enemy)
         {
-            _lifeCycle = lifeCycle ?? throw new ArgumentNullException(nameof(lifeCycle));
+            _life = life ?? throw new ArgumentNullException(nameof(life));
             _enemy = enemy ?? throw new ArgumentNullException(nameof(enemy));
         }
 
         public IHealth Health => _enemy.Health;
 
-        public IEnemyMovement Movement => _enemy.Movement;
+        public IMovement Movement => _enemy.Movement;
 
         public IEnemyData Data => _enemy.Data;
 
-        public void Update(float deltaTime)
+        public void Update(long deltaTime)
         {
-            _lifeCycle.Update(deltaTime);
+            if (_life.IsCompleted)
+            {
+                _life.Restart();
+            }
         }
     }
 }

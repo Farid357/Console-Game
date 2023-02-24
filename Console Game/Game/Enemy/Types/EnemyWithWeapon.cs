@@ -1,6 +1,5 @@
 using System;
 using System.Numerics;
-using Console_Game.Tools.Extensions;
 
 namespace Console_Game
 {
@@ -19,11 +18,11 @@ namespace Console_Game
 
         public IHealth Health => _enemy.Health;
 
-        public IEnemyMovement Movement => _enemy.Movement;
+        public IMovement Movement => _enemy.Movement;
 
         public IEnemyData Data => _enemy.Data;
 
-        public void Update(float deltaTime)
+        public void Update(long deltaTime)
         {
             if (_weaponInput.IsUsing && _weapon.CanShoot)
                 _weapon.Shoot();
@@ -49,26 +48,6 @@ namespace Console_Game
         public IEnemy Create(Vector2 position)
         {
             return new EnemyWithReward(_reward, _enemyFactory.Create(position));
-        }
-    }
-
-    public sealed class EnemyFactory : IEnemyFactory
-    {
-        private readonly int _healthCount;
-        private readonly IEnemyData _data;
-
-        public EnemyFactory(int healthCount, IEnemyData data)
-        {
-            _data = data ?? throw new ArgumentNullException(nameof(data));
-            _healthCount = healthCount.ThrowIfLessThanOrEqualsToZeroException();
-        }
-
-        public IEnemy Create(Vector2 position)
-        {
-            IEnemyMovement movement = new EnemyMovement(position, new EnemyMovementView());
-            movement.TeleportTo(position);
-            IHealth health = new Health(new HealthView(), _healthCount);
-            return new Enemy(health, movement, _data);
         }
     }
 }

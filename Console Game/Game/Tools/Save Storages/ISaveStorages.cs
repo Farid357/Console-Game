@@ -4,7 +4,7 @@
     {
         bool HasSaves();
         
-        void Add(ICanDeleteSaveStorage storage);
+        void Add(ISaveStorage storage);
         
         void DeleteAllSaves();
 

@@ -37,7 +37,7 @@ namespace Console_Game.Loop
             }
         }
 
-        public void Update(float deltaTime)
+        public void Update(long deltaTime)
         {
             _loopObjects.ForEach(updateable => updateable.Update(deltaTime));
         }

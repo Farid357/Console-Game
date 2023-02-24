@@ -1,30 +1,21 @@
 using System;
 using System.Numerics;
-using System.Threading.Tasks;
 
 namespace Console_Game.Weapons
 {
     public sealed class Bullet : IBullet
     {
-        private readonly IBulletView _bulletView;
-        private readonly Vector2 _direction;
-        private const float Force = 250;
-        private Vector2 _position;
+        private readonly IMovement _movement;
+        private readonly Vector2 _up = new Vector2(0, 1);
         
-        public Bullet(Vector2 direction)
+        public Bullet(IMovement movement)
         {
-            _bulletView = new BulletView();
-            _direction = direction;
+            _movement = movement ?? throw new ArgumentNullException(nameof(movement));
         }
 
-        public async void Throw()
+        public void Throw()
         {
-            for (var i = 0; i < Force; i++)
-            {
-                _position += _direction;
-                _bulletView.VisualizePosition(_position);
-                await Task.Delay(TimeSpan.FromSeconds(0.1f));
-            }
+            _movement.Move(_up);
         }
     }
 }

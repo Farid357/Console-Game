@@ -4,6 +4,8 @@ namespace Console_Game.Loop
     {
         bool IsActive { get; }
 
-        float Delta { get; }
+        long ElapsedMilliseconds { get; }
+        
+        long TimeBetweenFrames { get; }
     }
 }

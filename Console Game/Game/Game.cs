@@ -8,11 +8,12 @@ namespace Console_Game
     public sealed class Game : IGame
     {
         private readonly IGameLoop _gameLoop;
-
+        private readonly IGameTime _gameTime;
+        
         public Game()
         {
-            IGameTime gameTime = new GameTime();
-            _gameLoop = new GameLoop(gameTime);
+            _gameTime = new GameTime();
+            _gameLoop = new GameLoop(_gameTime);
             IGameUpdate gameUpdate = _gameLoop.GameUpdate;
             ISaveStorages saveStorages = new SaveStorages();
             IFactory<IWallet> walletFactory = new WalletFactory(saveStorages);
@@ -22,12 +23,13 @@ namespace Console_Game
             IPlayerSimulation playerSimulation = new PlayerSimulation(gameUpdate);
             playerSimulation.CreatePlayer(weaponInput, weapon);
             walletFactory.Create();
-            _gameLoop.StartUpdating();
+            _gameLoop.Start();
         }
 
         public void Play()
         {
-            _gameLoop.StartUpdating();
+            _gameTime.Play();
+            _gameLoop.Start();
         }
     }
 }

@@ -5,9 +5,9 @@ namespace Console_Game
 {
     public sealed class RandomEnemiesFactory : IFactory<IEnemy>
     {
-        private readonly Vector2[] _positions;
         private readonly IEnemyFactory[] _enemyFactories;
-        private readonly Random _random = new();
+        private readonly Vector2[] _positions;
+        private readonly Random _random = new Random();
         private int _positionIndex;
 
         public RandomEnemiesFactory(Vector2[] positions, IEnemyFactory[] enemyFactories)

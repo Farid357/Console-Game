@@ -1,2 +1,10 @@
 D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console Game.csprojAssemblyReference.cache
 D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console Game.csproj.CoreCompileInputs.cache
+D:\Farid\Downloads\Console Game\Console Game\bin\Debug\Console_Game.exe
+D:\Farid\Downloads\Console Game\Console Game\bin\Debug\Console_Game.pdb
+D:\Farid\Downloads\Console Game\Console Game\bin\Debug\System.IO.dll
+D:\Farid\Downloads\Console Game\Console Game\bin\Debug\System.Numerics.Vectors.dll
+D:\Farid\Downloads\Console Game\Console Game\bin\Debug\System.Numerics.Vectors.xml
+D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console Game.csproj.CopyComplete
+D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console_Game.exe
+D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console_Game.pdb

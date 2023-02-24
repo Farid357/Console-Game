@@ -6,7 +6,7 @@ namespace Console_Game.Save_Storages
 {
     public sealed class BinaryStorage<TStoreValue> : ISaveStorage<TStoreValue>
     {
-        private readonly BinaryFormatter _formatter = new();
+        private readonly BinaryFormatter _formatter = new BinaryFormatter();
         private readonly string _pathName;
 
         public BinaryStorage(Paths.IPath path)
@@ -16,7 +16,7 @@ namespace Console_Game.Save_Storages
 
             _pathName = path.Name;
         }
-        
+
         public bool HasSave() => File.Exists(_pathName);
 
         public void DeleteSave()
@@ -32,14 +32,14 @@ namespace Console_Game.Save_Storages
             if (HasSave() == false)
                 throw new HasNotSaveException(nameof(TStoreValue), _pathName);
 
-            using FileStream file = File.Open(_pathName, FileMode.Open);
-            return (TStoreValue)_formatter.Deserialize(file);
+            using (FileStream file = File.Open(_pathName, FileMode.Open))
+                return (TStoreValue)_formatter.Deserialize(file);
         }
 
         public void Save(TStoreValue value)
         {
-            using var file = File.Create(_pathName);
-            _formatter.Serialize(file, value);
+            using (FileStream file = File.Create(_pathName))
+                _formatter.Serialize(file, value);
         }
     }
 }

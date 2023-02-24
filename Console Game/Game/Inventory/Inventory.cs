@@ -4,13 +4,13 @@ namespace Console_Game
 {
     public sealed class Inventory<TItem> : IInventory<TItem> where TItem : IInventoryItem
     {
-        private readonly List<IInventorySlot<TItem>> _slots = new();
+        private readonly List<IInventorySlot<TItem>> _slots = new List<IInventorySlot<TItem>>();
         
         public IEnumerable<IInventorySlot<TItem>> Slots => _slots;
 
         public void Add(IInventoryItem item)
         {
-            IInventorySlot<TItem> slot = _slots.Find(slot => slot.IsCrowded == false && slot.CanAddItem(item));
+            IInventorySlot<TItem> slot = _slots.Find(s => s.IsCrowded == false && s.CanAddItem(item));
 
             if (slot is null)
             {

@@ -1,5 +1,5 @@
 using System;
-using Console_Game.Tools.Extensions;
+using Console_Game.Tools;
 
 namespace Console_Game
 {
@@ -14,7 +14,7 @@ namespace Console_Game
             _reward = reward ?? throw new ArgumentNullException(nameof(reward));
         }
 
-        public void Update(float deltaTime)
+        public void Update(long deltaTime)
         {
             if (_health.IsDied() && _reward.IsApplied == false)
                 _reward.Apply();

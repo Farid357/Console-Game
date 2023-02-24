@@ -4,7 +4,7 @@ namespace Console_Game
     {
         IHealth Health { get; }
         
-        IEnemyMovement Movement { get; }
+        IMovement Movement { get; }
         
         IEnemyData Data { get; }
     }

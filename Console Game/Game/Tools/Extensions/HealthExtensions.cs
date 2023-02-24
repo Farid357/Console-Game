@@ -1,4 +1,4 @@
-namespace Console_Game.Tools.Extensions
+namespace Console_Game.Tools
 {
     public static class HealthExtensions
     {

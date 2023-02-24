@@ -7,11 +7,21 @@ namespace Console_Game
     public sealed class PlayerSimulation : IPlayerSimulation
     {
         private readonly IGameUpdate _gameUpdate;
-        private Player _lastCreatedPlayer;
+        private Player _currentPlayer;
 
         public PlayerSimulation(IGameUpdate gameUpdate)
         {
             _gameUpdate = gameUpdate ?? throw new ArgumentNullException(nameof(gameUpdate));
+        }
+
+        public IPlayer CurrentPlayer => _currentPlayer;
+
+        public void DeleteCurrentPlayer()
+        {
+            if (CurrentPlayer == null)
+                throw new InvalidOperationException($"Simulation doesn't have player!");
+            
+            _gameUpdate.Remove(_currentPlayer);
         }
 
         public IPlayer CreatePlayer(IWeaponInput weaponInput, IWeaponWithMagazine weapon)
@@ -22,12 +32,9 @@ namespace Console_Game
             if (weapon == null) 
                 throw new ArgumentNullException(nameof(weapon));
            
-            if(_lastCreatedPlayer != null)
-                _gameUpdate.Remove(_lastCreatedPlayer);
-
-            _lastCreatedPlayer = new Player(weaponInput, weapon);
-            _gameUpdate.Add(_lastCreatedPlayer);
-            return _lastCreatedPlayer;
+            _currentPlayer = new Player(weaponInput, weapon);
+            _gameUpdate.Add(_currentPlayer);
+            return _currentPlayer;
         }
     }
 }

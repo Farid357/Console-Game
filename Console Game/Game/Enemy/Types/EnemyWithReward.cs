@@ -1,5 +1,5 @@
 using System;
-using Console_Game.Tools.Extensions;
+using Console_Game.Tools;
 
 namespace Console_Game
 {
@@ -16,11 +16,11 @@ namespace Console_Game
 
         public IHealth Health => _enemy.Health;
 
-        public IEnemyMovement Movement => _enemy.Movement;
+        public IMovement Movement => _enemy.Movement;
 
         public IEnemyData Data => _enemy.Data;
 
-        public void Update(float deltaTime)
+        public void Update(long deltaTime)
         {
             if (_enemy.Health.IsDied() && _reward.IsApplied == false)
                 _reward.Apply();

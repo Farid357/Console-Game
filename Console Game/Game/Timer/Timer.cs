@@ -1,5 +1,5 @@
 using System;
-using Console_Game.Tools.Extensions;
+using Console_Game.Tools;
 
 namespace Console_Game
 {
@@ -24,7 +24,7 @@ namespace Console_Game
             _isActive = true;
         }
 
-        public void Update(float deltaTime)
+        public void Update(long deltaTime)
         {
             if (_isActive)
             {

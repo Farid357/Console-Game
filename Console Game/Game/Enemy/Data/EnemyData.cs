@@ -5,17 +5,16 @@ namespace Console_Game
 {
     public sealed class EnemyData : IEnemyData
     {
-        public EnemyData(EnemyType enemyType, string name)
+        public EnemyData(EnemyType enemyType)
         {
             if (!Enum.IsDefined(typeof(EnemyType), enemyType))
                 throw new InvalidEnumArgumentException(nameof(enemyType), (int)enemyType, typeof(EnemyType));
             
             EnemyType = enemyType;
-            Name = name ?? throw new ArgumentNullException(nameof(name));
         }
 
         public EnemyType EnemyType { get; }
-        
-        public string Name { get; }
+
+        public string Name => EnemyType.ToString();
     }
 }

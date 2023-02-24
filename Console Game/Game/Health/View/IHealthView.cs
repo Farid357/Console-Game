@@ -4,6 +4,6 @@ namespace Console_Game
     {
         void Visualize(int maxValue, int value);
 
-        void VisualizeDeath();
+        void Die();
     }
 }

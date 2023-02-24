@@ -1,19 +1,19 @@
-using System.Numerics;
+using System;
 
 namespace Console_Game.Weapons
 {
     public sealed class BulletsFactory : IBulletsFactory
     {
-        private readonly Vector2 _bulletDirection;
+        private readonly ITransform _transform;
 
-        public BulletsFactory()
+        public BulletsFactory(ITransform transform)
         {
-            _bulletDirection = new Vector2(1, 1);
+            _transform = transform ?? throw new ArgumentNullException(nameof(transform));
         }
 
         public IBullet Create()
         {
-            return new Bullet(_bulletDirection);
+            return new Bullet(new SmoothMovement(0.2f, 0.3f, _transform));
         }
     }
 }

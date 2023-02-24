@@ -9,7 +9,7 @@ namespace Console_Game
             Console.WriteLine($"Enemy Health {value}");
         }
 
-        public void VisualizeDeath()
+        public void Die()
         {
             Console.WriteLine($"Enemy died!");
         }

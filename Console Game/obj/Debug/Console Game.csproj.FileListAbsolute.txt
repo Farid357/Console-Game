@@ -8,3 +8,5 @@ D:\Farid\Downloads\Console Game\Console Game\bin\Debug\System.Numerics.Vectors.x
 D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console Game.csproj.CopyComplete
 D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console_Game.exe
 D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console_Game.pdb
+D:\Farid\Downloads\Console Game\Console Game\bin\Debug\nunit.framework.dll
+D:\Farid\Downloads\Console Game\Console Game\bin\Debug\nunit.framework.xml

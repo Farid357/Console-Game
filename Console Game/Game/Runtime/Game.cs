@@ -20,7 +20,7 @@ namespace Console_Game
             IWeaponInput weaponInput = new WeaponInput(new Key(ConsoleKey.F));
             IFactory<IWeaponWithMagazine> weaponFactory = new StartPlayerWeaponFactory(gameUpdate);
             IWeaponWithMagazine weapon = weaponFactory.Create();
-            IPlayerSimulation playerSimulation = new PlayerSimulation(gameUpdate);
+            IPlayerSimulation playerSimulation = new PlayerSimulation(gameUpdate, new PlayerSimulationView());
             playerSimulation.CreatePlayer(weaponInput, weapon);
             walletFactory.Create();
             _gameLoop.Start();

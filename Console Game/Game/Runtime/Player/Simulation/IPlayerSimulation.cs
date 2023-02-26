@@ -9,5 +9,7 @@ namespace Console_Game
         void DeleteCurrentPlayer();
         
         IPlayer CreatePlayer(IWeaponInput weaponInput, IWeaponWithMagazine weapon);
+        
+        bool HasPlayer();
     }
 }

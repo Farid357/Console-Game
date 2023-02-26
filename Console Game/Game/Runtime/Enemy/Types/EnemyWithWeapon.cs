@@ -9,7 +9,7 @@ namespace Console_Game
         private readonly IWeaponInput _weaponInput;
         private readonly IEnemy _enemy;
         private readonly ITimer _reloadTimer;
-        
+
         public EnemyWithWeapon(IWeaponWithMagazine weapon, IWeaponInput weaponInput, IEnemy enemy, ITimer reloadTimer)
         {
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
@@ -24,17 +24,26 @@ namespace Console_Game
 
         public IEnemyData Data => _enemy.Data;
 
-        public void Update(long deltaTime)
+        public void Update(long deltaTime) => TryShoot();
+
+        private void TryReload()
+        {
+            if (!_weapon.Magazine.IsEmpty)
+                return;
+
+            if (_reloadTimer.IsActive == false)
+                _reloadTimer.Play();
+
+            if (_reloadTimer.FinishedCountdown)
+                _weapon.Reload();
+        }
+
+        private void TryShoot()
         {
             if (_weaponInput.IsUsing && _weapon.CanShoot)
             {
                 _weapon.Shoot();
-            }
-
-            if (_weapon.Magazine.IsEmpty)
-            {
-                _reloadTimer.Play();
-                _weapon.Magazine.Reload();
+                TryReload();
             }
         }
     }

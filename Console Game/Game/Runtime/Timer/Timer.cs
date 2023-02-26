@@ -6,27 +6,28 @@ namespace Console_Game
     public sealed class Timer : ITimer, IGameLoopObject
     {
         private readonly float _cooldown;
-        private bool _isActive;
         private float _elapsedTime;
-
+        
         public Timer(float cooldown)
         {
             _cooldown = cooldown.ThrowIfLessOrEqualsToZeroException();
         }
 
-        public bool FinishedCountdown => _elapsedTime >= _cooldown;
+        public bool IsActive { get; private set; }
+        
+        public bool FinishedCountdown => !IsActive || _elapsedTime >= _cooldown;
 
         public void Play()
         {
-            if (_isActive)
+            if (IsActive)
                 throw new InvalidOperationException($"Timer is already playing!");
 
-            _isActive = true;
+            IsActive = true;
         }
 
         public void Update(long deltaTime)
         {
-            if (_isActive)
+            if (IsActive)
             {
                 _elapsedTime += deltaTime;
 
@@ -37,7 +38,7 @@ namespace Console_Game
 
         private void Reset()
         {
-            _isActive = false;
+            IsActive = false;
             _elapsedTime = 0;
         }
     }

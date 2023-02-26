@@ -12,15 +12,21 @@ namespace Console_Game
         }
 
         public IWeaponInput WeaponInput { get; }
-        
+
         public IWeaponWithMagazine Weapon { get; }
 
         public void Update(long deltaTime)
         {
             if (WeaponInput.IsUsing && Weapon.CanShoot)
-            {
                 Weapon.Shoot();
-            }
+
+            TryReload();
+        }
+
+        private void TryReload()
+        {
+            if (Weapon.Magazine.IsEmpty)
+                Weapon.Reload();
         }
     }
 }

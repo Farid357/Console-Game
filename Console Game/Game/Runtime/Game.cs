@@ -18,7 +18,7 @@ namespace Console_Game
             ISaveStorages saveStorages = new SaveStorages();
             IFactory<IWallet> walletFactory = new WalletFactory(saveStorages);
             IWeaponInput weaponInput = new WeaponInput(new Key(ConsoleKey.F));
-            IFactory<IWeaponWithMagazine> weaponFactory = new StartPlayerWeaponFactory(gameUpdate);
+            IFactory<IWeaponWithMagazine> weaponFactory = new StartPlayerWeaponFactory(gameUpdate, 0.2f);
             IWeaponWithMagazine weapon = weaponFactory.Create();
             IPlayerSimulation playerSimulation = new PlayerSimulation(gameUpdate, new PlayerSimulationView());
             playerSimulation.CreatePlayer(weaponInput, weapon);

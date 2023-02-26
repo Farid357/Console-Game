@@ -1,5 +1,3 @@
-using System;
-
 namespace Console_Game.Weapons
 {
     public interface IWeaponMagazine : IReadOnlyWeaponMagazine
@@ -7,8 +5,6 @@ namespace Console_Game.Weapons
         void Take(int bullets);
 
         void Add(int bullets);
-
-        void Reload();
     }
 
     //Is it right?
@@ -31,10 +27,6 @@ namespace Console_Game.Weapons
         public void Add(int bullets)
         {
             
-        }
-
-        public void Reload()
-        {
         }
     }
 }

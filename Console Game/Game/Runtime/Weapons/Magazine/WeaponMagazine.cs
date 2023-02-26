@@ -42,7 +42,5 @@ namespace Console_Game.Weapons
             Bullets += bullets.ThrowIfLessThanOrEqualsToZeroException();
             _magazineView.Visualize(Bullets, MaxBullets);
         }
-
-        public void Reload() => Add(MaxBullets - Bullets);
     }
 }

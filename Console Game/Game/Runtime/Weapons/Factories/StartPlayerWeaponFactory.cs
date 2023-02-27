@@ -8,13 +8,13 @@ namespace Console_Game
 {
     public sealed class StartPlayerWeaponFactory : IFactory<IWeaponWithMagazine>
     {
-        private readonly IGameUpdate _gameUpdate;
-        private readonly float _reloadTime;
+        private readonly IGroup<IGameLoopObject> _gameLoopObjects;
         private readonly IBulletsFactory _bulletsFactory;
+        private readonly float _reloadTime;
 
-        public StartPlayerWeaponFactory(IGameUpdate gameUpdate, float reloadTime)
+        public StartPlayerWeaponFactory(IGroup<IGameLoopObject> gameLoopObjects, float reloadTime)
         {
-            _gameUpdate = gameUpdate ?? throw new ArgumentNullException(nameof(gameUpdate));
+            _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
             _reloadTime = reloadTime.ThrowIfLessOrEqualsToZeroException();
             _bulletsFactory = new BulletsFactory(new Transform(new ReadOnlyTransform(Vector2.UnitX)));
         }
@@ -26,7 +26,7 @@ namespace Console_Game
             var reloadTimer = new Timer(_reloadTime);
             IWeapon weapon = new Weapon(_bulletsFactory);
             IWeapon weaponWithShootWaiting = new WeaponWithShootWaiting(shootCooldownTimer, weapon);
-            _gameUpdate.Add(shootCooldownTimer, reloadTimer);
+            _gameLoopObjects.Add(shootCooldownTimer, reloadTimer);
             IWeaponWithMagazineView view = new WeaponWithMagazineView(reloadTimer);
             return new WeaponWithMagazine(magazine, weaponWithShootWaiting, view);
         }

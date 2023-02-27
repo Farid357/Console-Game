@@ -34,7 +34,7 @@ namespace Console_Game
             _isStopped = true;
         }
 
-        public void Update(long deltaTime)
+        public void Update(float deltaTime)
         {
             if (_isStopped)
                 return;

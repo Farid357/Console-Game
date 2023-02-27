@@ -28,7 +28,7 @@ namespace Console_Game
             throw new NotImplementedException(nameof(Rotate));
         }
 
-        public void Update(long deltaTime)
+        public void Update(float deltaTime)
         {
             Vector2 position = _transform.Position - new Vector2(0, Body.Gravity);
             _transform.Teleport(position);

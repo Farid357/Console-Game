@@ -8,12 +8,12 @@ namespace Console_Game
     {
         private readonly int _healthCount;
         private readonly IEnemyData _data;
-        private readonly IGameUpdate _gameUpdate;
+        private readonly IGroup<IGameLoopObject> _gameLoopObjects;
 
-        public EnemyFactory(int healthCount, IEnemyData data, IGameUpdate gameUpdate)
+        public EnemyFactory(int healthCount, IEnemyData data, IGroup<IGameLoopObject> gameLoopObjects)
         {
             _data = data ?? throw new ArgumentNullException(nameof(data));
-            _gameUpdate = gameUpdate ?? throw new ArgumentNullException(nameof(gameUpdate));
+            _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
             _healthCount = healthCount.ThrowIfLessThanOrEqualsToZeroException();
         }
 
@@ -21,8 +21,8 @@ namespace Console_Game
         {
             IHealth health = new Health(new HealthView(), _healthCount);
             var movement = new SmoothMovement(0.1f, 0.1f, new Transform(transform));
-            _gameUpdate.Add(movement);
-            return new Enemy(health, new AdjustableMovement(movement), _data);
+            _gameLoopObjects.Add(movement);
+            return new Enemy(health, new AdjustableMovement(movement, new Pause(new NullPauseView())), _data);
         }
     }
 }

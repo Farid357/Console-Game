@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Statistic">
+    <option name="excludedDirectories">
+      <list>
+        <option value="$PROJECT_DIR$/packages" />
+        <option value="$PROJECT_DIR$/Console Game/bin/Debug" />
+        <option value="$PROJECT_DIR$/Console Game/obj" />
+        <option value="$PROJECT_DIR$/Console Game/Properties" />
+      </list>
+    </option>
+  </component>
+</project>

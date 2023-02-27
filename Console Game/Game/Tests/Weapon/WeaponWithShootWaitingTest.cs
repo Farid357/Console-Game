@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace Console_Game.Tests
@@ -16,7 +14,7 @@ namespace Console_Game.Tests
         }
         
         [Test]
-        public async Task WaitsShoot()
+        public void WaitsShoot()
         {
             var cooldownTimer = new Timer(3);
             IWeapon weapon = new WeaponWithShootWaiting(cooldownTimer, new DummyWeapon());

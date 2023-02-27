@@ -25,7 +25,7 @@ namespace Console_Game
             IsActive = true;
         }
 
-        public void Update(long deltaTime)
+        public void Update(float deltaTime)
         {
             if (IsActive)
             {

@@ -19,7 +19,7 @@ namespace Console_Game
 
         public IEnemyData Data => _enemy.Data;
 
-        public void Update(long deltaTime)
+        public void Update(float deltaTime)
         {
             if (_life.IsCompleted)
             {

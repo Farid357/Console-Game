@@ -24,7 +24,7 @@ namespace Console_Game
 
         public IEnemyData Data => _enemy.Data;
 
-        public void Update(long deltaTime) => TryShoot();
+        public void Update(float deltaTime) => TryShoot();
 
         private void TryReload()
         {

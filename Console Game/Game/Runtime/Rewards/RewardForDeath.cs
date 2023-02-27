@@ -14,7 +14,7 @@ namespace Console_Game
             _reward = reward ?? throw new ArgumentNullException(nameof(reward));
         }
 
-        public void Update(long deltaTime)
+        public void Update(float deltaTime)
         {
             if (_health.IsDied() && _reward.IsApplied == false)
                 _reward.Apply();

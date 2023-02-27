@@ -1,21 +1,32 @@
 using System;
-using Console_Game.Weapons;
 
 namespace Console_Game
 {
-    public sealed class WeaponInventoryItem : IWeaponInventoryItem
+    public sealed class WeaponInventoryItem<TWeaponInput, TWeapon> : IInventoryItem
+        where TWeaponInput : IWeaponInput where TWeapon : IWeapon
     {
-        public WeaponInventoryItem(IInventoryItemViewData viewData, IWeaponWithMagazine weapon, IWeaponInput weaponInput)
+        private readonly IInventoryItem _item;
+        private readonly IPlayerFactory<TWeapon, TWeaponInput> _playerFactory;
+        private readonly TWeapon _weapon;
+        private readonly TWeaponInput _weaponInput;
+
+        public WeaponInventoryItem(IInventoryItem item, TWeapon weapon, TWeaponInput weaponInput, IPlayerFactory<TWeapon, TWeaponInput> playerFactory)
         {
-            ViewData = viewData ?? throw new ArgumentNullException(nameof(viewData));
-            Weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
-            WeaponInput = weaponInput ?? throw new ArgumentNullException(nameof(weaponInput));
+            _item = item ?? throw new ArgumentNullException(nameof(item));
+            _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));
+            _weapon = weapon;
+            _weaponInput = weaponInput;
         }
 
-        public IWeaponWithMagazine Weapon { get; }
-        
-        public IWeaponInput WeaponInput { get; }
-        
-        public IInventoryItemViewData ViewData { get; }
+        public IInventoryItemViewData ViewData => _item.ViewData;
+
+        public bool IsSelected => _item.IsSelected;
+
+        public void Unselect() => _item.Unselect();
+
+        public void Select()
+        {
+            _playerFactory.Create(_weaponInput, _weapon);
+        }
     }
 }

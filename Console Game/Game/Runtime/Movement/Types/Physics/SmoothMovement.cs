@@ -20,7 +20,7 @@ namespace Console_Game
         
         public IReadOnlyTransform Transform => _transform;
 
-        public void Update(long deltaTime) => _deltaTime = deltaTime;
+        public void Update(float deltaTime) => _deltaTime = deltaTime;
 
         public void Move(Vector2 direction)
         {

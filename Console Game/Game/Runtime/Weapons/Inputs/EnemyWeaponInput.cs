@@ -13,7 +13,7 @@ namespace Console_Game
 
         public bool IsUsing => _cooldownTimer.FinishedCountdown;
 
-        public void Update(long deltaTime)
+        public void Update(float deltaTime)
         {
             if (IsUsing)
                 _cooldownTimer.Play();

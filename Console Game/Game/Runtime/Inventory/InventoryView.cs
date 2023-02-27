@@ -6,7 +6,11 @@ namespace Console_Game
     {
         public void Visualize(IEnumerable<IInventorySlot<TItem>> slots)
         {
-            //visualize
+            //TODO:
+
+            foreach (var slot in slots)
+            {
+            }
         }
     }
 }

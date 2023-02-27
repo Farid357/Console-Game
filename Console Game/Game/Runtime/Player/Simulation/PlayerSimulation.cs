@@ -1,22 +1,25 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Console_Game.Loop;
-using Console_Game.Weapons;
 
 namespace Console_Game
 {
-    public sealed class PlayerSimulation : IPlayerSimulation
+    public sealed class PlayersSimulation<TPlayer> : IPlayersSimulation<TPlayer> where TPlayer : IPlayer
     {
-        private readonly IGameUpdate _gameUpdate;
-        private readonly IPlayerSimulationView _view;
-        private Player _currentPlayer;
+        private readonly IPlayersSimulationView<TPlayer> _view;
+        private readonly IGroup<IGameLoopObject> _gameLoopObjects;
+        private readonly List<TPlayer> _players = new List<TPlayer>();
 
-        public PlayerSimulation(IGameUpdate gameUpdate, IPlayerSimulationView view)
+        public PlayersSimulation(IGroup<IGameLoopObject> gameLoopObjects, IPlayersSimulationView<TPlayer> view)
         {
-            _gameUpdate = gameUpdate ?? throw new ArgumentNullException(nameof(gameUpdate));
+            _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
             _view = view ?? throw new ArgumentNullException(nameof(view));
         }
 
-        public IPlayer CurrentPlayer => _currentPlayer;
+        public IReadOnlyList<TPlayer> Players => _players;
+
+        public TPlayer CurrentPlayer => Players.Last();
 
         public bool HasPlayer() => CurrentPlayer != null;
 
@@ -25,22 +28,16 @@ namespace Console_Game
             if (HasPlayer() == false)
                 throw new InvalidOperationException($"Simulation doesn't have player!");
 
-            _gameUpdate.Remove(_currentPlayer);
-            _view.DeletePlayerWeapon(_currentPlayer.Weapon);
+            _players.Remove(CurrentPlayer);
+            _gameLoopObjects.Remove(CurrentPlayer);
+            _view.DeletePlayer(CurrentPlayer);
         }
 
-        public IPlayer CreatePlayer(IWeaponInput weaponInput, IWeaponWithMagazine weapon)
+        public void Add(TPlayer player)
         {
-            if (weaponInput == null)
-                throw new ArgumentNullException(nameof(weaponInput));
-
-            if (weapon == null)
-                throw new ArgumentNullException(nameof(weapon));
-
-            _currentPlayer = new Player(weaponInput, weapon);
-            _gameUpdate.Add(_currentPlayer);
-            _view.CreatePlayer(_currentPlayer.Weapon);
-            return _currentPlayer;
+            _players.Add(player);
+            _gameLoopObjects.Add(player);
+            _view.CreatePlayer(player);
         }
     }
 }

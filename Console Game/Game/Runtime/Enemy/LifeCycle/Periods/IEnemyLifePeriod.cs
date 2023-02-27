@@ -9,7 +9,7 @@ namespace Console_Game
     {
         private readonly IAdjustableMovement _enemyMovement;
         
-        public void Update(long deltaTime)
+        public void Update(float deltaTime)
         {
             
         }

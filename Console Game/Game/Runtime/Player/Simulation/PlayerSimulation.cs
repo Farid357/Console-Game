@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Console_Game.Loop;
 
 namespace Console_Game
@@ -19,7 +18,7 @@ namespace Console_Game
 
         public IReadOnlyList<TPlayer> Players => _players;
 
-        public TPlayer CurrentPlayer => Players.Last();
+        public TPlayer CurrentPlayer { get; private set; }
 
         public bool HasPlayer() => CurrentPlayer != null;
 
@@ -38,6 +37,7 @@ namespace Console_Game
             _players.Add(player);
             _gameLoopObjects.Add(player);
             _view.CreatePlayer(player);
+            CurrentPlayer = player;
         }
     }
 }

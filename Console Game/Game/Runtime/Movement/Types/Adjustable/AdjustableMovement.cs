@@ -6,15 +6,15 @@ namespace Console_Game
     public sealed class AdjustableMovement : IAdjustableMovement
     {
         private readonly IMovement _movement;
-        private readonly IPause _pause;
+        private readonly IGamePause _gamePause;
 
-        public AdjustableMovement(IMovement movement, IPause pause)
+        public AdjustableMovement(IMovement movement, IGamePause gamePause)
         {
             _movement = movement ?? throw new ArgumentNullException(nameof(movement));
-            _pause = pause ?? throw new ArgumentNullException(nameof(pause));
+            _gamePause = gamePause ?? throw new ArgumentNullException(nameof(gamePause));
         }
 
-        public bool IsActive => _pause.IsActive;
+        public bool IsActive => _gamePause.IsActive;
 
         public IReadOnlyTransform Transform => _movement.Transform;
 
@@ -34,9 +34,9 @@ namespace Console_Game
             _movement.Rotate(rotation);
         }
 
-        public void Continue() => _pause.Enable();
+        public void Continue() => _gamePause.Enable();
 
-        public void Stop() => _pause.Disable();
+        public void Stop() => _gamePause.Disable();
         
     }
 }

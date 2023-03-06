@@ -26,7 +26,7 @@ namespace Console_Game
             _view.Visualize(_slots);
         }
 
-        public void Remove(IInventorySlot<TItem> slot)
+        public void Drop(IInventorySlot<TItem> slot)
         {
             if (slot == null) 
                 throw new ArgumentNullException(nameof(slot));

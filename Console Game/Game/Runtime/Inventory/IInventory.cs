@@ -4,6 +4,6 @@ namespace Console_Game
     {
         void Add(IInventorySlot<TItem> slot);
 
-        void Remove(IInventorySlot<TItem> slot);
+        void Drop(IInventorySlot<TItem> slot);
     }
 }

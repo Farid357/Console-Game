@@ -27,6 +27,7 @@ namespace Console_Game
         public void Select()
         {
             _playerFactory.Create(_weaponInput, _weapon);
+            _item.Select();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Console_Game
+﻿using System;
+
+namespace Console_Game
 {
     public sealed class Program
     {
@@ -6,6 +8,7 @@
         {
             IGame game = new Game();
             game.Play();
+            Console.ReadKey();
         }
     }
 }

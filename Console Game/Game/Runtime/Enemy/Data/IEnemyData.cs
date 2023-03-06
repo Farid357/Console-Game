@@ -2,7 +2,7 @@ namespace Console_Game
 {
     public interface IEnemyData
     {
-        EnemyType EnemyType { get; }
+     //   EnemyType EnemyType { get; }
         
         string Name { get; }
     }

@@ -13,7 +13,7 @@ namespace Console_Game
             Value = value.ThrowIfLessThanOrEqualsToZeroException();
             MaxValue = Value;
         }
-
+        
         public int Value { get; private set; }
 
         public int MaxValue { get; }

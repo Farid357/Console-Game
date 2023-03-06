@@ -8,14 +8,14 @@ namespace Console_Game.Loop
     {
         private readonly IReadOnlyGameTimer _gameTimer;
         private readonly IFps _fps;
-        private readonly IReadOnlyPause _gamePause;
+        private readonly IReadOnlyGamePause _gamePause;
         private readonly IGameLoopObjects _gameLoopObjects = new GameLoopObjects();
         
         private readonly float _timeStep;
         private float _lastUpdateTime;
         private float _deltaTime;
 
-        public GameLoop(IReadOnlyGameTimer gameTimer, IFps fps, float timeStep, IReadOnlyPause gamePause)
+        public GameLoop(IReadOnlyGameTimer gameTimer, IFps fps, float timeStep, IReadOnlyGamePause gamePause)
         {
             _gameTimer = gameTimer ?? throw new ArgumentNullException(nameof(gameTimer));
             _fps = fps ?? throw new ArgumentNullException(nameof(fps));

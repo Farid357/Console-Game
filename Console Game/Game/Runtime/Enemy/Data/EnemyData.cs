@@ -1,20 +1,19 @@
 using System;
-using System.ComponentModel;
+using Newtonsoft.Json;
 
 namespace Console_Game
 {
-    public class EnemyData : IEnemyData
+    [Serializable]
+    public class EnemyData
     {
-        public EnemyData(EnemyType enemyType)
+        public int EnemyTypeId { get; set; }
+
+        public string Name { get; set; }
+
+        public EnemyData(int enemyTypeId, string name)
         {
-            if (!Enum.IsDefined(typeof(EnemyType), enemyType))
-                throw new InvalidEnumArgumentException(nameof(enemyType), (int)enemyType, typeof(EnemyType));
-            
-            EnemyType = enemyType;
+            EnemyTypeId = enemyTypeId;
+            Name = name;
         }
-
-        public EnemyType EnemyType { get; }
-
-        public string Name => EnemyType.ToString();
     }
 }

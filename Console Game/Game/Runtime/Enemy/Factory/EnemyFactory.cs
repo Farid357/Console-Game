@@ -22,7 +22,7 @@ namespace Console_Game
             IHealth health = new Health(new HealthView(), _healthCount);
             var movement = new SmoothMovement(0.1f, 0.1f, new Transform(transform));
             _gameLoopObjects.Add(movement);
-            return new Enemy(health, new AdjustableMovement(movement, new Pause(new NullPauseView())), _data);
+            return new Enemy(health, new AdjustableMovement(movement, new GamePause(new NullGamePauseView())), _data);
         }
     }
 }

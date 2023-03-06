@@ -18,7 +18,7 @@ namespace Console_Game
             ISaveStorage<IWallet> saveStorage = new BinaryStorage<IWallet>(new Path(nameof(IWallet)));
             IWallet defaultWallet = new Wallet(100, new WalletView());
             _saveStorages.Add(saveStorage);
-            return saveStorage.HasSave() ? new WalletWithSave(saveStorage) : new WalletWithSave(defaultWallet, saveStorage);
+            return saveStorage.HasSave() ? new WalletWithSave(saveStorage.Load(), saveStorage) : new WalletWithSave(defaultWallet, saveStorage);
         }
     }
 }

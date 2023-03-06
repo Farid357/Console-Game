@@ -14,11 +14,6 @@ namespace Console_Game
             _saveStorage = saveStorage ?? throw new ArgumentNullException(nameof(saveStorage));
         }
 
-        public WalletWithSave(ISaveStorage<IWallet> saveStorage) : this(saveStorage.Load(), saveStorage)
-        {
-            _saveStorage = saveStorage ?? throw new ArgumentNullException(nameof(saveStorage));
-        }
-        
         public int Money => _wallet.Money;
 
         public bool CanTake(int money) => _wallet.CanTake(money);

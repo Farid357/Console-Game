@@ -15,7 +15,7 @@ namespace Console_Game
 
         public bool IsActive { get; private set; }
         
-        public bool FinishedCountdown => !IsActive || _elapsedTime >= _cooldown;
+        public bool IsEnded => !IsActive || _elapsedTime >= _cooldown;
 
         public void Play()
         {
@@ -31,7 +31,7 @@ namespace Console_Game
             {
                 _elapsedTime += deltaTime;
 
-                if (FinishedCountdown)
+                if (IsEnded)
                     Reset();
             }
         }

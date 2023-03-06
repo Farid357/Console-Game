@@ -25,7 +25,7 @@ namespace Console_Game
 
         public void Rotate(Quaternion rotation)
         {
-            throw new NotImplementedException(nameof(Rotate));
+            _transform.Rotate(rotation);
         }
 
         public void Update(float deltaTime)

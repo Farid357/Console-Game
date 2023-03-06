@@ -15,7 +15,7 @@ namespace Console_Game
 
         public IEnumerable<IInventorySlot<TItem>> Slots => _slots;
 
-        public bool CanRemove(IInventorySlot<TItem> slot) => slot.ItemsCount == 0 && _slots.Contains(slot);
+        public bool CanDrop(IInventorySlot<TItem> slot) => slot.ItemsCount == 0 && _slots.Contains(slot);
 
         public void Add(IInventorySlot<TItem> slot)
         {
@@ -31,7 +31,7 @@ namespace Console_Game
             if (slot == null) 
                 throw new ArgumentNullException(nameof(slot));
 
-            if (CanRemove(slot) == false)
+            if (CanDrop(slot) == false)
                 throw new InvalidOperationException($"Can't remove {slot}");
 
             _slots.Remove(slot);

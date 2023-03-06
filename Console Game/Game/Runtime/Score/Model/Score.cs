@@ -1,7 +1,7 @@
 using System;
 using Console_Game.Tools;
 
-namespace Console_Game.Score
+namespace Console_Game
 {
     public sealed class Score : IScore
     {

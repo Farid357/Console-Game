@@ -11,7 +11,7 @@ namespace Console_Game
             _cooldownTimer = cooldownTimer ?? throw new ArgumentNullException(nameof(cooldownTimer));
         }
 
-        public bool IsUsing => _cooldownTimer.FinishedCountdown;
+        public bool IsUsing => _cooldownTimer.IsEnded;
 
         public void Update(float deltaTime)
         {

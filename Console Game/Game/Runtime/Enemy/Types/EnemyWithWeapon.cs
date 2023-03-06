@@ -34,7 +34,7 @@ namespace Console_Game
             if (_reloadTimer.IsActive == false)
                 _reloadTimer.Play();
 
-            if (_reloadTimer.FinishedCountdown)
+            if (_reloadTimer.IsEnded)
                 _weapon.Reload();
         }
 

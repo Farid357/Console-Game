@@ -2,7 +2,7 @@ namespace Console_Game
 {
     public interface ITimer
     {
-        bool FinishedCountdown { get; }
+        bool IsEnded { get; }
         
         bool IsActive { get; }
 

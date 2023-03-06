@@ -3,7 +3,7 @@ using Console_Game.Loop;
 using Console_Game.Save_Storages;
 using Console_Game.Save_Storages.Paths;
 
-namespace Console_Game.Score
+namespace Console_Game
 {
     public sealed class ScoreBestRecordFactory : IScoreBestRecordFactory
     {

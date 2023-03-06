@@ -13,7 +13,7 @@ namespace Console_Game
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
         }
 
-        public bool CanShoot => _cooldownTimer.FinishedCountdown && _weapon.CanShoot;
+        public bool CanShoot => _cooldownTimer.IsEnded && _weapon.CanShoot;
         
         public void Shoot()
         {

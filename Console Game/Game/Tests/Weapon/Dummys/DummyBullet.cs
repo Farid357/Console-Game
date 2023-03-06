@@ -6,9 +6,16 @@ namespace Console_Game.Tests
     {
         public bool WasThrew { get; private set; }
 
+        public bool IsDestroyed { get; }
+
         public void Throw()
         {
             WasThrew = true;
+        }
+
+        public void Destroy()
+        {
+            
         }
     }
 }

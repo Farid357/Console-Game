@@ -1,7 +1,7 @@
 using System;
 using Console_Game.Save_Storages;
 
-namespace Console_Game.Score
+namespace Console_Game
 {
     public sealed class ScoreBestRecord : IGameLoopObject, IScoreBestRecord
     {

@@ -12,7 +12,7 @@ namespace Console_Game
         public InfinitePistolFactory(IGroup<IGameLoopObject> gameLoopObjects)
         {
             _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
-            _bulletsFactory = new BulletsFactory(new ReadOnlyTransform());
+            _bulletsFactory = new BulletsFactory(new ReadOnlyTransform(), _gameLoopObjects);
         }
 
         public IWeapon Create()

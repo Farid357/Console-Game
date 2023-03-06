@@ -19,7 +19,7 @@ namespace Console_Game.Weapons
             _reloadTimer.Play();
             IsReloading = true;
             
-            while (_reloadTimer.FinishedCountdown == false)
+            while (_reloadTimer.IsEnded == false)
             {
                 await Task.Yield();
             }

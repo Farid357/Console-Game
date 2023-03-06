@@ -1,4 +1,4 @@
-namespace Console_Game.Score
+namespace Console_Game
 {
     public interface IScoreBestRecordFactory
     {

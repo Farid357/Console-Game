@@ -16,7 +16,7 @@ namespace Console_Game
         {
             _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
             _reloadTime = reloadTime.ThrowIfLessOrEqualsToZeroException();
-            _bulletsFactory = new BulletsFactory(new Transform(new ReadOnlyTransform(Vector2.UnitX)));
+            _bulletsFactory = new BulletsFactory(new Transform(new ReadOnlyTransform(Vector2.UnitX)), _gameLoopObjects);
         }
 
         public IWeaponWithMagazine Create()

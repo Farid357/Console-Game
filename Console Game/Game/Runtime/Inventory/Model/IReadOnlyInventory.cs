@@ -6,6 +6,6 @@ namespace Console_Game
     {
         IEnumerable<IInventorySlot<TItem>> Slots { get; }
 
-        bool CanRemove(IInventorySlot<TItem> slot);
+        bool CanDrop(IInventorySlot<TItem> slot);
     }
 }

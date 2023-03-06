@@ -1,5 +1,4 @@
 using System;
-using Console_Game.Json;
 using Console_Game.Loop;
 using Console_Game.Save_Storages;
 using Console_Game.Weapons;
@@ -26,8 +25,8 @@ namespace Console_Game
             IPlayersSimulation<IPlayer> playersSimulation = new PlayersSimulation<IPlayer>(gameLoopObjects, playersSimulationView);
             playersSimulation = new SelfCleaningPlayerSimulation<IPlayer>(playersSimulation);
             var playerFactory = new PlayerFactory(playersSimulation);
-            var enemyData = new JsonFilesStorage().LoadFile<EnemyData>(JsonFilesPaths.Zombie);
-            Console.WriteLine(enemyData.Name);
+          //  var enemyData = new JsonFilesStorage().LoadFile<EnemyData>(JsonFilesPaths.Zombie);
+            //Console.WriteLine(enemyData.Name);
             playerFactory.Create(weaponInput, weapon);
             walletFactory.Create();
             _gameLoop.Start();

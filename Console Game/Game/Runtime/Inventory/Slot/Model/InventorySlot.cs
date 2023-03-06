@@ -20,17 +20,26 @@ namespace Console_Game
 
         public int ItemsCount { get; private set; }
 
+        public bool CanTake(int itemsCount) => ItemsCount - itemsCount >= 0;
+
         public bool CanAdd(int itemsCount) => ItemsCount + itemsCount <= _maxItemsCount;
 
         public void Add(int itemsCount)
         {
-            itemsCount.ThrowIfLessThanOrEqualsToZeroException();
-
             if (CanAdd(itemsCount) == false)
                 throw new InvalidOperationException($"Can't add {itemsCount}");
 
-            ItemsCount += itemsCount;
-            _view.Visualize(Item, itemsCount);
+            ItemsCount += itemsCount.ThrowIfLessThanZeroException();
+            _view.Visualize(Item, ItemsCount);
+        }
+
+        public void Take(int itemsCount)
+        {
+            if (CanTake(itemsCount) == false)
+                throw new InvalidOperationException();
+            
+            ItemsCount -= itemsCount.ThrowIfLessThanZeroException();
+            _view.Visualize(Item, ItemsCount);
         }
     }
 }

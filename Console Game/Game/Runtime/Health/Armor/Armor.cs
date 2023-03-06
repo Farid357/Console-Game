@@ -36,7 +36,10 @@ namespace Console_Game
                 _view.Visualize(_protection);
                 return;
             }
-            
+
+            if(_protection > 0)
+                damage -= _protection;
+
             _health.TakeDamage(damage);
         }
 

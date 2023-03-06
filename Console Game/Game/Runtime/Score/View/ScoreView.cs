@@ -1,6 +1,6 @@
 using System;
 
-namespace Console_Game.Score
+namespace Console_Game
 {
     public sealed class ScoreView : IScoreView
     {

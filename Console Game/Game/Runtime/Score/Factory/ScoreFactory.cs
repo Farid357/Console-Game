@@ -2,7 +2,7 @@ using System;
 using Console_Game.Save_Storages;
 using Console_Game.Save_Storages.Paths;
 
-namespace Console_Game.Score
+namespace Console_Game
 {
     public sealed class ScoreFactory : IFactory<IScore>
     {
@@ -15,7 +15,7 @@ namespace Console_Game.Score
 
         public IScore Create()
         {
-            ISaveStorage<int> scoreCountStorage = new BinaryStorage<int>(new Path(nameof(Score)));
+            ISaveStorage<int> scoreCountStorage = new BinaryStorage<int>(new Path(nameof(IScore)));
             var startScoreCount = scoreCountStorage.HasSave() ? scoreCountStorage.Load() : 0;
             _saveStorages.Add(scoreCountStorage);
             return new ScoreWithSave(new Score(new ScoreView(), startScoreCount), scoreCountStorage);

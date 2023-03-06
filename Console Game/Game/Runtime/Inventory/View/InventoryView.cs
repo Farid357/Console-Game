@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Console_Game
@@ -6,10 +7,10 @@ namespace Console_Game
     {
         public void Visualize(IEnumerable<IInventorySlot<TItem>> slots)
         {
-            //TODO:
-
             foreach (var slot in slots)
             {
+                Console.WriteLine($"Slot - {slot.Item.ViewData.Name}, has items - {slot.ItemsCount}");
+                Console.WriteLine();
             }
         }
     }

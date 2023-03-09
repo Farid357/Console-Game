@@ -9,7 +9,7 @@ namespace Console_Game.Tests.Inventory
         [Test]
         public void AddsCorrectly()
         {
-            IInventory<IInventoryItem> inventory = new Inventory<IInventoryItem>(new InventoryView<IInventoryItem>());
+            IInventory<IInventoryItem> inventory = new Inventory<IInventoryItem>(new DummyInventoryView<IInventoryItem>());
             inventory.Add(new DummySlot<IInventoryItem>());
             Assert.That(inventory.Slots.Count() == 1);
         }
@@ -17,7 +17,7 @@ namespace Console_Game.Tests.Inventory
         [Test]
         public void RemovesCorrectly()
         {
-            IInventory<IInventoryItem> inventory = new Inventory<IInventoryItem>(new InventoryView<IInventoryItem>());
+            IInventory<IInventoryItem> inventory = new Inventory<IInventoryItem>(new DummyInventoryView<IInventoryItem>());
             IInventorySlot<IInventoryItem> slot = new DummySlot<IInventoryItem>();
             inventory.Add(slot);
             Assert.That(inventory.CanDrop(slot));

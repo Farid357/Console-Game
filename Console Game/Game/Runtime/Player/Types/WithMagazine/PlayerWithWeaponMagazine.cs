@@ -22,9 +22,10 @@ namespace Console_Game
         public void Update(float deltaTime)
         {
             if (WeaponInput.IsUsing && Weapon.CanShoot)
+            {
                 Weapon.Shoot();
-
-            TryReload();
+                TryReload();
+            }
         }
 
         private void TryReload()

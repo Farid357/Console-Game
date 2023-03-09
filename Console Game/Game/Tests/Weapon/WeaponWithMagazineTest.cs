@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Console_Game.Weapons;
 using NUnit.Framework;
 
@@ -17,7 +18,7 @@ namespace Console_Game.Tests
         }
 
         [Test]
-        public void ReloadsCorrectly()
+        public async Task ReloadsCorrectly()
         {
             var bulletsFactory = new DummyBulletsFactory();
             IWeaponMagazine weaponMagazine = new WeaponMagazine(10, new DummyMagazineView());
@@ -28,7 +29,7 @@ namespace Console_Game.Tests
                 weapon.Shoot();
             }
 
-            weapon.Reload();
+            await weapon.Reload();
             Assert.That(weaponMagazine.Bullets == weaponMagazine.MaxBullets);
         }
     }

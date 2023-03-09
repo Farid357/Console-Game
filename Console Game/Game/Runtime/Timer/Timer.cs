@@ -6,8 +6,7 @@ namespace Console_Game
     public sealed class Timer : ITimer, IGameLoopObject
     {
         private readonly float _cooldown;
-        private float _elapsedTime;
-        
+
         public Timer(float cooldown)
         {
             _cooldown = cooldown.ThrowIfLessOrEqualsToZeroException();
@@ -15,7 +14,9 @@ namespace Console_Game
 
         public bool IsActive { get; private set; }
         
-        public bool IsEnded => !IsActive || _elapsedTime >= _cooldown;
+        public float Time { get; private set; }
+        
+        public bool IsEnded => !IsActive || Time >= _cooldown;
 
         public void Play()
         {
@@ -29,7 +30,7 @@ namespace Console_Game
         {
             if (IsActive)
             {
-                _elapsedTime += deltaTime;
+                Time += deltaTime;
 
                 if (IsEnded)
                     Reset();
@@ -39,7 +40,7 @@ namespace Console_Game
         private void Reset()
         {
             IsActive = false;
-            _elapsedTime = 0;
+            Time = 0;
         }
     }
 }

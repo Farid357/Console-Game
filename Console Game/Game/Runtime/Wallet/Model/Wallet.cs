@@ -3,6 +3,7 @@ using Console_Game.Tools;
 
 namespace Console_Game
 {
+    [Serializable]
     public sealed class Wallet : IWallet
     {
         private readonly IWalletView _walletView;

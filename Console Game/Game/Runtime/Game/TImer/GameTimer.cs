@@ -7,7 +7,7 @@ namespace Console_Game.Loop
     {
         private readonly Stopwatch _stopwatch = new Stopwatch();
 
-        public bool IsActive => _stopwatch.IsRunning;
+        public bool IsActive { get; private set; }
 
         public long ElapsedMilliseconds => _stopwatch.ElapsedMilliseconds;
 
@@ -16,6 +16,7 @@ namespace Console_Game.Loop
             if (IsActive)
                 throw new InvalidOperationException($"Game Time is already active");
 
+            IsActive = true;
             _stopwatch.Start();
         }
     }

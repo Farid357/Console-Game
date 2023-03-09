@@ -15,10 +15,9 @@ namespace Console_Game.Loop
         private float _lastUpdateTime;
         private float _deltaTime;
 
-        public GameLoop(IReadOnlyGameTimer gameTimer, IFps fps, float timeStep, IReadOnlyGamePause gamePause)
+        public GameLoop(IReadOnlyGameTimer gameTimer, float timeStep, IReadOnlyGamePause gamePause)
         {
             _gameTimer = gameTimer ?? throw new ArgumentNullException(nameof(gameTimer));
-            _fps = fps ?? throw new ArgumentNullException(nameof(fps));
             _gamePause = gamePause ?? throw new ArgumentNullException(nameof(gamePause));
             _timeStep = timeStep.ThrowIfLessOrEqualsToZeroException();
         }
@@ -36,16 +35,16 @@ namespace Console_Game.Loop
                     continue;
                 
                 _deltaTime = _gameTimer.ElapsedMilliseconds - _lastUpdateTime;
-                Console.WriteLine();
-                Console.WriteLine(_deltaTime);
-                var fpsCount = _fps.Calculate(_deltaTime, _gameTimer.ElapsedMilliseconds);
+            //    var fpsCount = _fps.Calculate(_deltaTime, _gameTimer.ElapsedMilliseconds);
 
-                for (var frame = 0; frame < fpsCount; frame++)
+                for (var frame = 0; frame < 30; frame++)
                 {
                     _gameLoopObjects.Update(_lastUpdateTime + _timeStep * (frame + 1));
+                    Console.WriteLine();
+                    Console.WriteLine(_lastUpdateTime + _timeStep * (frame + 1));
                 }
 
-                _lastUpdateTime += _timeStep * fpsCount;
+                _lastUpdateTime += _timeStep * 30;
                 await Task.Yield();
             }
         }

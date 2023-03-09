@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace Console_Game.Weapons
 {
@@ -20,7 +21,7 @@ namespace Console_Game.Weapons
 
         public bool CanReload() => Magazine.Bullets < Magazine.MaxBullets;
 
-        public async void Reload()
+        public async Task Reload()
         {
             if (CanReload() == false)
                 throw new InvalidOperationException($"Can't reload, it's full!");

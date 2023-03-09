@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace Console_Game.Weapons
 {
     public interface IWeaponWithMagazine : IWeapon
@@ -6,6 +8,6 @@ namespace Console_Game.Weapons
 
         bool CanReload();
         
-        void Reload();
+        Task Reload();
     }
 }

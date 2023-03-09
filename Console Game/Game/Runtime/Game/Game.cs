@@ -13,8 +13,7 @@ namespace Console_Game
         public Game()
         {
             _gameTimer = new GameTimer();
-            IFps fps = new Fps();
-            _gameLoop = new GameLoop(_gameTimer, fps, 0.01f, new GamePause(new GameGamePauseView()));
+            _gameLoop = new GameLoop(_gameTimer, 0.01f, new GamePause(new GameGamePauseView()));
             IGroup<IGameLoopObject> gameLoopObjects = _gameLoop.GameLoopObjects;
             ISaveStorages saveStorages = new SaveStorages();
             IFactory<IWallet> walletFactory = new WalletFactory(saveStorages);
@@ -29,7 +28,6 @@ namespace Console_Game
             //Console.WriteLine(enemyData.Name);
             playerFactory.Create(weaponInput, weapon);
             walletFactory.Create();
-            _gameLoop.Start();
         }
 
         public void Play()

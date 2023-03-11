@@ -4,12 +4,12 @@ using System.Collections.Generic;
 namespace Console_Game.Stats
 {
     [Serializable]
-    public sealed class Levels : ILevel
+    public sealed class ConsecutiveLevels : ILevel
     {
         private readonly List<ILevel> _all;
         private ILevel _currentLevel;
 
-        public Levels(List<ILevel> all, ILevel firstLevel)
+        public ConsecutiveLevels(List<ILevel> all, ILevel firstLevel)
         {
             _all = all ?? throw new ArgumentNullException(nameof(all));
             _currentLevel = firstLevel ?? throw new ArgumentNullException(nameof(firstLevel));

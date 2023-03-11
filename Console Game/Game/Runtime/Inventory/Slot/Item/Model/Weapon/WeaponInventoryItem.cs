@@ -2,13 +2,12 @@ using System;
 
 namespace Console_Game
 {
-    public sealed class WeaponInventoryItem<TWeaponInput, TWeapon> : IWeaponInventoryItem<TWeaponInput, TWeapon>
-        where TWeaponInput : IWeaponInput where TWeapon : IWeapon
+    public sealed class WeaponInventoryItem<TInput, TWeapon> : IWeaponInventoryItem<TInput, TWeapon> where TInput : IWeaponInput where TWeapon : IWeapon
     {
         private readonly IInventoryItem _item;
-        private readonly IPlayerFactory<TWeapon, TWeaponInput> _playerFactory;
+        private readonly IPlayerFactory<TWeapon, TInput> _playerFactory;
 
-        public WeaponInventoryItem(IInventoryItem item, TWeapon weapon, TWeaponInput weaponInput, IPlayerFactory<TWeapon, TWeaponInput> playerFactory)
+        public WeaponInventoryItem(IInventoryItem item, TWeapon weapon, TInput weaponInput, IPlayerFactory<TWeapon, TInput> playerFactory)
         {
             _item = item ?? throw new ArgumentNullException(nameof(item));
             _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));
@@ -18,7 +17,7 @@ namespace Console_Game
 
         public TWeapon Weapon { get; }
 
-        public TWeaponInput WeaponInput { get; }
+        public TInput WeaponInput { get; }
 
         public IInventoryItemViewData ViewData => _item.ViewData;
 

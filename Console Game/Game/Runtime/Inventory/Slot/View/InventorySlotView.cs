@@ -6,7 +6,15 @@ namespace Console_Game
     {
         public void Visualize(TItem item, int count)
         {
-            Console.WriteLine($"item: {item.ViewData.Name}  has count: {count}");
+            if (count > 1)
+            {
+                Console.WriteLine($"item: {item.ViewData.Name}  has count: {count}");
+            }
+            
+            else
+            {
+                Console.WriteLine($"item: {item.ViewData.Name}");
+            }
         }
     }
 }

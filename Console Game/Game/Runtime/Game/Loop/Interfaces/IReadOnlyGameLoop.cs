@@ -2,6 +2,6 @@
 {
     public interface IReadOnlyGameLoop
     {
-        IGroup<IGameLoopObject> GameLoopObjects { get; }
+        IGroup<IGameLoopObject> Objects { get; }
     }
 }

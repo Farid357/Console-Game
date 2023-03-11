@@ -12,9 +12,9 @@ namespace Console_Game
             _playersSimulation = playersSimulation ?? throw new ArgumentNullException(nameof(playersSimulation));
         }
 
-        public IReadOnlyList<TPlayer> Players => _playersSimulation.Players;
+        public IReadOnlyList<IReadOnlyPlayer> Players => _playersSimulation.Players;
 
-        public TPlayer CurrentPlayer => _playersSimulation.CurrentPlayer;
+        public IReadOnlyPlayer CurrentPlayer => _playersSimulation.CurrentPlayer;
 
         public bool HasPlayer() => _playersSimulation.HasPlayer();
 

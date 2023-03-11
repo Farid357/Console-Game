@@ -18,8 +18,8 @@ namespace Console_Game.Json
             if (ContainsFile(path) == false)
                 throw new InvalidOperationException($"Storage doesn't contain file with path {path.Name}");
 
-            string text = File.ReadAllText(path.Name);
-            return JsonConvert.DeserializeObject<TFile>(text);
+            using (var streamReader = new StreamReader(path.Name))
+                return JsonSerializer.Deserialize<TFile>(streamReader.ReadToEnd());
         }
 
         public ValueTask<TFile> LoadFileAsync<TFile>(IPath path)
@@ -27,8 +27,8 @@ namespace Console_Game.Json
             if (ContainsFile(path) == false)
                 throw new InvalidOperationException($"Storage doesn't contain file with path {path.Name}");
 
-            using (var fileStream = new FileStream(path.Name, FileMode.Open))
-                return JsonSerializer.DeserializeAsync<TFile>(fileStream);
+            //   using (var fileStream = new StreamReader("EnemyData.json"))
+            return new ValueTask<TFile>();
         }
     }
 }

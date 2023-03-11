@@ -22,7 +22,7 @@ namespace Console_Game.Loop
             _timeStep = timeStep.ThrowIfLessOrEqualsToZeroException();
         }
 
-        public IGroup<IGameLoopObject> GameLoopObjects => _gameLoopObjects;
+        public IGroup<IGameLoopObject> Objects => _gameLoopObjects;
 
         public async void Start()
         {

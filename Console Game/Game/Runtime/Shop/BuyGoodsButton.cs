@@ -5,11 +5,15 @@ namespace Console_Game.Shop
     public sealed class BuyGoodsButton : IButton
     {
         private readonly IClient _client;
+        private readonly IButton _button;
 
-        public BuyGoodsButton(IClient client)
+        public BuyGoodsButton(IClient client, IButton button)
         {
             _client = client ?? throw new ArgumentNullException(nameof(client));
+            _button = button ?? throw new ArgumentNullException(nameof(button));
         }
+
+        public bool IsEnabled => _button.IsEnabled;
 
         public void Press()
         {
@@ -22,6 +26,18 @@ namespace Console_Game.Shop
             {
                 Console.WriteLine($"Not enough money!");
             }
+            
+            _button.Press();
+        }
+
+        public void Enable()
+        {
+            _button.Enable();
+        }
+
+        public void Disable()
+        {
+            _button.Disable();
         }
     }
 }

@@ -4,9 +4,12 @@ namespace Console_Game.UI
 {
     public sealed class Text : IText
     {
-        public void Visualize(string text)
+        public string Value { get; private set; }
+
+        public void Visualize(string value)
         {
-            Console.WriteLine(text);
+            Value = value;
+            Console.WriteLine(value);
         }
     }
 }

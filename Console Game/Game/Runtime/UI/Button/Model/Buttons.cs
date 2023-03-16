@@ -20,12 +20,34 @@ namespace Console_Game.Shop
         
         public IReadOnlyList<IButton> All => _group.All;
 
+        public bool IsEnabled { get; private set; }
+
         public void Press()
         {
             foreach (IButton button in All)
             {
                 button.Press();
             }
+        }
+
+        public void Enable()
+        {
+            foreach (IButton button in All)
+            {
+                button.Enable();
+            }
+
+            IsEnabled = true;
+        }
+
+        public void Disable()
+        {
+            foreach (IButton button in All)
+            {
+                button.Disable();
+            }
+            
+            IsEnabled = false;
         }
 
         public void Add(IButton instance) => _group.Add(instance);

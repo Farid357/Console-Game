@@ -20,14 +20,17 @@ namespace Console_Game.UI
         
         public IReadOnlyList<IText> All => _group.All;
 
-        public void Visualize(string text)
+        public string Value { get; private set; }
+
+        public void Visualize(string value)
         {
-            foreach (IText instance in All)
+            Value = value;
+            
+            foreach (IText text in All)
             {
-                instance.Visualize(text);
+                text.Visualize(value);
             }
         }
-
 
         public void Add(IText instance) => _group.Add(instance);
 

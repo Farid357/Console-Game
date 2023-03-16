@@ -1,14 +1,14 @@
 using System;
 
-namespace Console_Game.Shop
+namespace Console_Game.UI
 {
     public sealed class Button : IButton
     {
-        private readonly IButtonView _buttonView;
+        private readonly IButtonView _view;
 
         public Button(IButtonView buttonView)
         {
-            _buttonView = buttonView ?? throw new ArgumentNullException(nameof(buttonView));
+            _view = buttonView ?? throw new ArgumentNullException(nameof(buttonView));
         }
 
         public bool IsEnabled { get; private set; }
@@ -17,20 +17,20 @@ namespace Console_Game.Shop
         {
             if (IsEnabled == false)
                 throw new InvalidOperationException($"Buttons isn't enabled, you can't press it!");
-            
-            Console.WriteLine("Pressed");   
+
+            _view.Press();
         }
 
         public void Enable()
         {
             IsEnabled = true;
-            _buttonView.Enable();
+            _view.Enable();
         }
 
         public void Disable()
         {
             IsEnabled = false;
-            _buttonView.Disable();
+            _view.Disable();
         }
     }
 }

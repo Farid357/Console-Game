@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Console_Game.Group;
+using Console_Game;
 using Console_Game.UI;
 using NUnit.Framework;
 
@@ -11,7 +11,7 @@ namespace Console_Game.Tests.UI
         [Test]
         public void OpensAndClosesCorrectly()
         {
-            IWindow window = new Window();
+            IWindow window = new Window(new UiElement(new UiElementView()));
             window.Open();
             Assert.That(window.IsOpen);
             window.Close();
@@ -21,8 +21,8 @@ namespace Console_Game.Tests.UI
         [Test]
         public void GroupOpensAndClosesCorrectly()
         {
-            IWindow window = new Window();
-            IWindow windows = new Windows(new Group<IWindow>(new List<IWindow> { new Window(), window }));
+            IWindow window = new Window(new UiElement(new UiElementView()));
+            IWindow windows = new Windows(new Group<IWindow>(new List<IWindow> { new Window(new UiElement(new UiElementView())), window }));
             windows.Open();
             Assert.That(windows.IsOpen);
             Assert.That(window.IsOpen);

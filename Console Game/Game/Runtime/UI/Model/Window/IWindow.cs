@@ -1,6 +1,6 @@
 namespace Console_Game.UI
 {
-    public interface IWindow
+    public interface IWindow : IUiElement
     {
         bool IsOpen { get; }
 

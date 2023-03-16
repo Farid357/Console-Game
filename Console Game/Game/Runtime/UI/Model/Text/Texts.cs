@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Console_Game.Group;
+using System.Linq;
+using Console_Game;
 using Console_Game.Loop;
 
 namespace Console_Game.UI
@@ -20,21 +21,28 @@ namespace Console_Game.UI
         
         public IReadOnlyList<IText> All => _group.All;
 
+        public bool IsEnabled => All.First().IsEnabled;
+        
         public string Value { get; private set; }
 
         public void Visualize(string value)
         {
             Value = value;
-            
-            foreach (IText text in All)
-            {
-                text.Visualize(value);
-            }
+            All.ToList().ForEach(text => text.Visualize(Value));
         }
 
         public void Add(IText instance) => _group.Add(instance);
 
         public void Remove(IText instance) => _group.Remove(instance);
-        
+
+        public void Enable()
+        {
+            All.ToList().ForEach(text => text.Enable());
+        }
+
+        public void Disable()
+        {
+            All.ToList().ForEach(text => text.Disable());
+        }
     }
 }

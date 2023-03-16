@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Drawing;
-using Console_Game.Group;
-using Console_Game.Shop;
+using Console_Game;
+using Console_Game.UI;
 using NUnit.Framework;
 
 namespace Console_Game.Tests.UI
@@ -14,7 +14,7 @@ namespace Console_Game.Tests.UI
         {
             Color startColor = Color.Azure;
             Color disableColor = Color.Brown;
-            IButtonView buttonView = new ButtonView(startColor, disableColor);
+            IButtonView buttonView = new ButtonView(startColor, disableColor, Color.Aqua);
             IButton button = new Buttons(new Group<IButton>(new List<IButton> { new Button(buttonView) }));
             button.Enable();
             Assert.That(button.IsEnabled);

@@ -1,4 +1,4 @@
-using Console_Game.Group;
+using Console_Game;
 using Console_Game.UI;
 using NUnit.Framework;
 
@@ -10,7 +10,7 @@ namespace Console_Game.Tests.UI
         [Test]
         public void UpdatesValue()
         {
-            IText text = new Text();
+            IText text = new Text(new UiElement(new UiElementView()));
             const string value = "dldld";
             text.Visualize(value);
             Assert.That(text.Value == value);

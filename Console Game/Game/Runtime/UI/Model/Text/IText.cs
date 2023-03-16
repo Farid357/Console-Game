@@ -1,6 +1,6 @@
 namespace Console_Game.UI
 {
-    public interface IText
+    public interface IText : IUiElement
     {
         string Value { get; }
         

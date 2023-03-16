@@ -1,4 +1,5 @@
 using System;
+using Console_Game.UI;
 
 namespace Console_Game.Shop
 {
@@ -30,14 +31,9 @@ namespace Console_Game.Shop
             _button.Press();
         }
 
-        public void Enable()
-        {
-            _button.Enable();
-        }
+        public void Enable() => _button.Enable();
 
-        public void Disable()
-        {
-            _button.Disable();
-        }
+        public void Disable() => _button.Disable();
+        
     }
 }

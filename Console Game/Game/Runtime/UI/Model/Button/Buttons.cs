@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Console_Game.Group;
+using Console_Game;
 using Console_Game.Loop;
 
-namespace Console_Game.Shop
+namespace Console_Game.UI
 {
     public sealed class Buttons : IButton, IGroup<IButton>
     {

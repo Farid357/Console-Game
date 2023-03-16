@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Console_Game.Loop;
 
-namespace Console_Game.Group
+namespace Console_Game
 {
     public sealed class Group<T> : IGroup<T>
     {

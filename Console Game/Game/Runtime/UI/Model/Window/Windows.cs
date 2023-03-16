@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Console_Game.Group;
+using System.Linq;
+using Console_Game;
 using Console_Game.Loop;
 
 namespace Console_Game.UI
@@ -21,29 +22,28 @@ namespace Console_Game.UI
         public IReadOnlyList<IWindow> All => _group.All;
 
         public bool IsOpen { get; private set; }
+        
+        public bool IsEnabled => IsOpen;
 
         public void Open()
         {
-            foreach (IWindow window in All)
-            {
-                window.Open();
-            }
-
+            All.ToList().ForEach(window => window.Open());
             IsOpen = true;
         }
 
         public void Close()
         {
-            foreach (IWindow window in All)
-            {
-                window.Close();
-            }
-
+            All.ToList().ForEach(window => window.Close());
             IsOpen = false;
         }
         
         public void Add(IWindow instance) => _group.Add(instance);
 
         public void Remove(IWindow instance) => _group.Remove(instance);
+        
+        public void Enable() => Open();
+
+        public void Disable() => Close();
+        
     }
 }

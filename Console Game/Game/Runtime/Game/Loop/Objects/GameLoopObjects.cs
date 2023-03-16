@@ -18,23 +18,20 @@ namespace Console_Game.Loop
 
         public IReadOnlyList<IGameLoopObject> All => _loopObjects;
 
-        public void Add(params IGameLoopObject[] objects)
+        public void Add(IGameLoopObject instance)
         {
-            if (objects == null)
-                throw new ArgumentNullException(nameof(objects));
+            if (instance == null)
+                throw new ArgumentNullException(nameof(instance));
 
-            _loopObjects.AddRange(objects);
+            _loopObjects.Add(instance);
         }
 
-        public void Remove(params IGameLoopObject[] objects)
+        public void Remove(IGameLoopObject instance)
         {
-            if (objects == null)
-                throw new ArgumentNullException(nameof(objects));
+            if (instance == null)
+                throw new ArgumentNullException(nameof(instance));
 
-            foreach (var updateable in objects)
-            {
-                _loopObjects.Remove(updateable);
-            }
+            _loopObjects.Remove(instance);
         }
 
         public void Update(float deltaTime)

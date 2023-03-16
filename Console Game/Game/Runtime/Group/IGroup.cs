@@ -6,8 +6,8 @@ namespace Console_Game.Loop
     {
         IReadOnlyList<TObject> All { get; }
 
-        void Add(params TObject[] objects);
+        void Add(TObject instance);
 
-        void Remove(params TObject[] objects);
+        void Remove(TObject instance);
     }
 }

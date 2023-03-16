@@ -11,7 +11,7 @@ namespace Console_Game
             _playersSimulation = playersSimulation ?? throw new ArgumentNullException(nameof(playersSimulation));
         }
 
-        public IPlayer Create(IWeaponInput weaponInput, IWeapon weapon)
+        public IReadOnlyPlayer Create(IWeaponInput weaponInput, IWeapon weapon)
         {
             IPlayer player = new Player(weaponInput, weapon);
             _playersSimulation.Add(player);

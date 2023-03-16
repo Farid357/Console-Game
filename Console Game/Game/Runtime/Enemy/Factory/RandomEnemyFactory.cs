@@ -3,14 +3,14 @@ using System.Numerics;
 
 namespace Console_Game
 {
-    public sealed class RandomEnemiesFactory : IFactory<IEnemy>
+    public sealed class RandomEnemyFactory : IFactory<IEnemy>
     {
         private readonly IEnemyFactory[] _enemyFactories;
         private readonly Vector2[] _positions;
         private readonly Random _random = new Random();
         private int _positionIndex;
 
-        public RandomEnemiesFactory(Vector2[] positions, IEnemyFactory[] enemyFactories)
+        public RandomEnemyFactory(Vector2[] positions, IEnemyFactory[] enemyFactories)
         {
             _positions = positions ?? throw new ArgumentNullException(nameof(positions));
             _enemyFactories = enemyFactories ?? throw new ArgumentNullException(nameof(enemyFactories));

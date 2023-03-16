@@ -4,11 +4,4 @@ namespace Console_Game.Shop
     {
         void Press();
     }
-
-    public sealed class Button : IButton
-    {
-        public void Press()
-        {
-        }
-    }
 }

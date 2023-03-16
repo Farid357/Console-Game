@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 using Console_Game.Loop;
 using Console_Game.Tools;
@@ -26,7 +27,8 @@ namespace Console_Game
             var reloadTimer = new Timer(_reloadTime);
             IWeapon weapon = new Weapon(_bulletsFactory);
             IWeapon weaponWithShootWaiting = new WeaponWithShootWaiting(shootCooldownTimer, weapon);
-            _gameLoopObjects.Add(shootCooldownTimer, reloadTimer);
+            _gameLoopObjects.Add(shootCooldownTimer);
+            _gameLoopObjects.Add(reloadTimer);
             IWeaponWithMagazineView view = new WeaponWithMagazineView(reloadTimer);
             return new WeaponWithMagazine(magazine, weaponWithShootWaiting, view);
         }

@@ -1,4 +1,3 @@
-using Console_Game;
 using Console_Game.UI;
 using NUnit.Framework;
 

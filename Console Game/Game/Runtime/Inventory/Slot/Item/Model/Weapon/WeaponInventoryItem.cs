@@ -31,4 +31,28 @@ namespace Console_Game
             _item.Select();
         }
     }
+
+    public sealed class TwoWeaponsInventoryItem<TFirstInput, TSecondInput, TFirstWeapon, TSecondWeapon> : IInventoryItem
+    {
+        private readonly IInventoryItem _inventoryItem;
+
+        public TwoWeaponsInventoryItem(IInventoryItem inventoryItem)
+        {
+            _inventoryItem = inventoryItem ?? throw new ArgumentNullException(nameof(inventoryItem));
+        }
+
+        public IInventoryItemViewData ViewData => _inventoryItem.ViewData;
+
+        public bool IsSelected => _inventoryItem.IsSelected;
+
+        public void Unselect()
+        {
+            _inventoryItem.Unselect();
+        }
+
+        public void Select()
+        {
+            _inventoryItem.Select();
+        }
+    }
 }

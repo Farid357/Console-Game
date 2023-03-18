@@ -21,7 +21,7 @@ namespace Console_Game
                 throw new InvalidOperationException($"Weapon can't shoot!");
             
             _weapon.Shoot();
-            _cooldownTimer.Play();
+            _cooldownTimer.ResetTime();
         }
     }
 }

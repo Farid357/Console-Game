@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Console_Game.Weapons;
 
 namespace Console_Game
@@ -26,25 +27,29 @@ namespace Console_Game
 
         public void Update(float deltaTime) => TryShoot();
 
-        private void TryReload()
+        private async Task TryReload()
         {
             if (!_weapon.Magazine.IsEmpty)
                 return;
 
-            if (_reloadTimer.IsActive == false)
-                _reloadTimer.Play();
+            if (_reloadTimer.Time > 0f)
+                _reloadTimer.ResetTime();
 
-            if (_reloadTimer.IsEnded)
-                _weapon.Reload();
+
+            while (!_reloadTimer.IsEnded)
+                await Task.Yield();
+
+            await _weapon.Reload();
         }
 
-        private void TryShoot()
+        private async void TryShoot()
         {
             if (_weaponInput.IsUsing && _weapon.CanShoot)
             {
                 _weapon.Shoot();
-                TryReload();
             }
+
+            await TryReload();
         }
     }
 }

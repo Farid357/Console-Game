@@ -4,6 +4,6 @@ namespace Console_Game.UI
     {
         string Value { get; }
         
-        void Visualize(string value);
+        void Visualize(string line);
     }
 }

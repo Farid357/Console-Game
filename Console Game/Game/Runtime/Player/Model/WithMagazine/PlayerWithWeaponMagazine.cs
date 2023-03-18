@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Console_Game.Weapons;
 
 namespace Console_Game
@@ -19,19 +20,20 @@ namespace Console_Game
 
         public IWeaponMagazine Magazine => _weapon.Magazine;
 
-        public void Update(float deltaTime)
+        public async void Update(float deltaTime)
         {
             if (WeaponInput.IsUsing && Weapon.CanShoot)
             {
                 Weapon.Shoot();
-                TryReload();
             }
+
+            await TryReload();
         }
 
-        private void TryReload()
+        private async Task TryReload()
         {
             if (Magazine.IsEmpty)
-                _weapon.Reload();
+                await _weapon.Reload();
         }
     }
 }

@@ -1,7 +1,7 @@
 using System;
-using Console_Game.Inventory.Factory;
 using Console_Game.Loop;
 using Console_Game.Save_Storages;
+using Console_Game.UI;
 using Console_Game.Weapons;
 
 namespace Console_Game
@@ -19,13 +19,19 @@ namespace Console_Game
             ISaveStorages saveStorages = new SaveStorages();
             IFactory<IWallet> walletFactory = new WalletFactory(saveStorages);
             IWeaponInput weaponInput = new WeaponInput(new Key(ConsoleKey.F));
-            IFactory<IWeaponWithMagazine> weaponFactory = new StartPlayerWeaponFactory(gameLoopObjects, 0.2f);
+            ICanvas canvas = new Canvas();
+            ITextFactory textFactory = new TextFactory(canvas);
+            IGameObjectsFactory gameObjectsFactory = new GameObjectsFactory();
+            IBulletsFactory bulletsFactory = new BulletsFactory(new Transform(), gameLoopObjects, gameObjectsFactory);
+            IText bulletsText = textFactory.Create();
+            IFactory<IWeaponWithMagazine> weaponFactory = new StartPlayerWeaponFactory(gameLoopObjects, bulletsText, bulletsFactory);
             IWeaponWithMagazine weapon = weaponFactory.Create();
             IPlayerSimulationFactory playerSimulationFactory = new PlayerSimulationFactory(_gameLoop.Objects);
             IPlayersSimulation<IPlayer> playersSimulation = playerSimulationFactory.Create<IPlayer>();
             IWeaponInventoryFactory weaponInventoryFactory = new WeaponInventoryFactory();
             var playerFactory = new PlayerFactory(playersSimulation);
-            IWeaponSlotFactory weaponSlotFactory = new WeaponSlotFactory(playerFactory);
+            IGameObject weaponGameObject = gameObjectsFactory.Create(new Transform());
+            IWeaponSlotFactory weaponSlotFactory = new WeaponSlotFactory(playerFactory, new WeaponGameObject(weaponGameObject, bulletsText));
             var weaponInventory = weaponInventoryFactory.CreateStandard();
             weaponInventory.Add(weaponSlotFactory.Create("Pistol", weapon, weaponInput));
            // var enemyData = new JsonFilesStorage().LoadFile<EnemyData>(JsonFilesPaths.Zombie);

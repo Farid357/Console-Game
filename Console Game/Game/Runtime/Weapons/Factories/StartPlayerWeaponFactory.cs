@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Numerics;
-using Console_Game.Loop;
-using Console_Game.Tools;
+using Console_Game.UI;
 using Console_Game.Weapons;
 
 namespace Console_Game
@@ -10,26 +7,25 @@ namespace Console_Game
     public sealed class StartPlayerWeaponFactory : IFactory<IWeaponWithMagazine>
     {
         private readonly IGroup<IGameLoopObject> _gameLoopObjects;
+        private readonly IText _text;
         private readonly IBulletsFactory _bulletsFactory;
-        private readonly float _reloadTime;
 
-        public StartPlayerWeaponFactory(IGroup<IGameLoopObject> gameLoopObjects, float reloadTime)
+        public StartPlayerWeaponFactory(IGroup<IGameLoopObject> gameLoopObjects, IText text, IBulletsFactory bulletsFactory)
         {
             _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
-            _reloadTime = reloadTime.ThrowIfLessOrEqualsToZeroException();
-            _bulletsFactory = new BulletsFactory(new Transform(new ReadOnlyTransform(Vector2.UnitX)), _gameLoopObjects);
+            _text = text ?? throw new ArgumentNullException(nameof(text));
+            _bulletsFactory = bulletsFactory ?? throw new ArgumentNullException(nameof(bulletsFactory));
         }
 
         public IWeaponWithMagazine Create()
         {
-            IWeaponMagazine magazine = new WeaponMagazine(30, new WeaponMagazineView());
+            IWeaponMagazineView magazineView = new WeaponMagazineView(_text);
+            IWeaponMagazine magazine = new WeaponMagazine(30, magazineView);
             var shootCooldownTimer = new Timer(0.2f);
-            var reloadTimer = new Timer(_reloadTime);
             IWeapon weapon = new Weapon(_bulletsFactory);
             IWeapon weaponWithShootWaiting = new WeaponWithShootWaiting(shootCooldownTimer, weapon);
             _gameLoopObjects.Add(shootCooldownTimer);
-            _gameLoopObjects.Add(reloadTimer);
-            IWeaponWithMagazineView view = new WeaponWithMagazineView(reloadTimer);
+            IWeaponWithMagazineView view = new WeaponWithMagazineView();
             return new WeaponWithMagazine(magazine, weaponWithShootWaiting, view);
         }
     }

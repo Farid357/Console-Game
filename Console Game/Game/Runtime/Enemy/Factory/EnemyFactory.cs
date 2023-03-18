@@ -17,10 +17,10 @@ namespace Console_Game
             _healthCount = healthCount.ThrowIfLessThanOrEqualsToZeroException();
         }
 
-        public IEnemy Create(IReadOnlyTransform transform)
+        public IEnemy Create(ITransform transform)
         {
             IHealth health = new Health(new HealthView(), _healthCount);
-            var movement = new SmoothMovement(0.1f, 0.1f, new Transform(transform));
+            var movement = new SmoothMovement(0.1f, 0.1f, transform);
             _gameLoopObjects.Add(movement);
             return new Enemy(health, movement, _data);
         }

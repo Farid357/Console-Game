@@ -13,7 +13,7 @@ namespace Console_Game
             _view = view ?? throw new ArgumentNullException(nameof(view));
         }
 
-        public IEnumerable<IInventorySlot<TItem>> Slots => _slots;
+        public IReadOnlyList<IInventorySlot<TItem>> Slots => _slots;
 
         public bool CanDrop(IInventorySlot<TItem> slot) => slot.ItemsCount == 0 && _slots.Contains(slot);
 

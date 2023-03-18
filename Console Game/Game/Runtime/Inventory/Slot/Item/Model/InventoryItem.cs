@@ -4,8 +4,11 @@ namespace Console_Game
 {
     public sealed class InventoryItem : IInventoryItem
     {
-        public InventoryItem(IInventoryItemViewData viewData)
+        private readonly IGameObject _gameObject;
+
+        public InventoryItem(IInventoryItemViewData viewData, IGameObject gameObject)
         {
+            _gameObject = gameObject ?? throw new ArgumentNullException(nameof(gameObject));
             ViewData = viewData ?? throw new ArgumentNullException(nameof(viewData));
         }
 
@@ -19,6 +22,7 @@ namespace Console_Game
                 throw new InvalidOperationException($"Already unselected!");
 
             IsSelected = false;
+            _gameObject.Disable();
         }
 
         public void Select()
@@ -27,6 +31,7 @@ namespace Console_Game
                 throw new InvalidOperationException($"Already selected!");
 
             IsSelected = true;
+            _gameObject.Enable();
         }
     }
 }

@@ -2,7 +2,7 @@ using System;
 
 namespace Console_Game
 {
-    public sealed class EnemyWeaponInput : IWeaponInput, IGameLoopObject
+    public sealed class EnemyWeaponInput : IWeaponInput
     {
         private readonly ITimer _cooldownTimer;
 
@@ -12,11 +12,5 @@ namespace Console_Game
         }
 
         public bool IsUsing => _cooldownTimer.IsEnded;
-
-        public void Update(float deltaTime)
-        {
-            if (IsUsing)
-                _cooldownTimer.Play();
-        }
     }
 }

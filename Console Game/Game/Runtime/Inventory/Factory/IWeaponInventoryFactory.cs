@@ -1,6 +1,6 @@
 using Console_Game.Weapons;
 
-namespace Console_Game.Inventory.Factory
+namespace Console_Game
 {
     public interface IWeaponInventoryFactory
     {

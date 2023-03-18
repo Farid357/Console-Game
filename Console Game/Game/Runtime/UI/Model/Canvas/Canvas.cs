@@ -1,49 +1,40 @@
 using System;
 using System.Collections.Generic;
-using Console_Game.Loop;
 
 namespace Console_Game.UI
 {
     public sealed class Canvas : ICanvas
     {
-        private readonly IGroup<IUiElement> _group;
+        private readonly List<IUiElement> _uiElements;
 
-        public Canvas(IGroup<IUiElement> group)
+        public Canvas(List<IUiElement> uiElements)
         {
-            _group = group ?? throw new ArgumentNullException(nameof(group));
+            _uiElements = uiElements ?? throw new ArgumentNullException(nameof(uiElements));
         }
 
-        public Canvas() : this(new Group<IUiElement>())
+        public Canvas() : this(new List<IUiElement>())
         {
             
         }
         
         public bool IsEnabled { get; private set; }
-        
-        public IReadOnlyList<IUiElement> All => _group.All;
 
-        public void Add(IUiElement instance) => _group.Add(instance);
+        public IReadOnlyList<IUiElement> All => _uiElements;
 
-        public void Remove(IUiElement instance) => _group.Remove(instance);
+        public void Add(IUiElement instance) => _uiElements.Add(instance);
+
+        public void Remove(IUiElement instance) => _uiElements.Remove(instance);
 
         public void Enable()
         {
             IsEnabled = true;
-            
-            foreach (IUiElement uiElement in All)
-            {
-                uiElement.Enable();
-            }
+            _uiElements.ForEach(element => element.Enable());
         }
 
         public void Disable()
         {
             IsEnabled = false;
-            
-            foreach (IUiElement uiElement in All)
-            {
-                uiElement.Disable();
-            }
+            _uiElements.ForEach(element => element.Disable());
         }
     }
 }

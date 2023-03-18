@@ -12,7 +12,7 @@ namespace Console_Game
             _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
         }
 
-        public IEnumerable<IInventorySlot<TItem>> Slots => _inventory.Slots;
+        public IReadOnlyList<IInventorySlot<TItem>> Slots => _inventory.Slots;
 
         public bool CanDrop(IInventorySlot<TItem> slot) => _inventory.CanDrop(slot);
 

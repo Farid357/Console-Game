@@ -9,5 +9,9 @@ namespace Console_Game
         bool IsActive { get; }
 
         void Play();
+
+        void Stop();
+        
+        void ResetTime();
     }
 }

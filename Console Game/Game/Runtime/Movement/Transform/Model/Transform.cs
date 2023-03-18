@@ -5,10 +5,22 @@ namespace Console_Game
 {
     public sealed class Transform : ITransform
     {
-        public Transform(IReadOnlyTransform transform)
+        public Transform(Vector2 position, Quaternion rotation)
         {
-            Position = transform.Position;
-            Rotation = transform.Rotation;
+            Position = position;
+            Rotation = rotation;
+        }
+
+        public Transform(Vector2 position) : this(position, Quaternion.Identity)
+        {
+        }
+
+        public Transform(Quaternion rotation) : this(Vector2.Zero, rotation)
+        {
+        }
+
+        public Transform() : this(Vector2.Zero, Quaternion.Identity)
+        {
         }
 
         public Vector2 Position { get; private set; }

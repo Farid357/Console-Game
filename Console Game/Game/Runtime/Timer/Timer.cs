@@ -12,35 +12,27 @@ namespace Console_Game
             _cooldown = cooldown.ThrowIfLessOrEqualsToZeroException();
         }
 
-        public bool IsActive { get; private set; }
+        public bool IsActive { get; private set; } = true;
         
         public float Time { get; private set; }
         
         public bool IsEnded => !IsActive || Time >= _cooldown;
 
-        public void Play()
-        {
-            if (IsActive)
-                throw new InvalidOperationException($"Timer is already playing!");
+        public void Play() => IsActive = true;
 
-            IsActive = true;
+        public void Stop() => IsActive = false;
+
+        public void ResetTime()
+        {
+            Time = 0;
         }
 
         public void Update(float deltaTime)
         {
             if (IsActive)
             {
-                Time += deltaTime;
-
-                if (IsEnded)
-                    Reset();
+                Time = Math.Min(Time + _cooldown, _cooldown);
             }
-        }
-
-        private void Reset()
-        {
-            IsActive = false;
-            Time = 0;
         }
     }
 }

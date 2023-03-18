@@ -25,7 +25,7 @@ namespace Console_Game.Weapons
 
         public void Throw()
         {
-            _lifeTime.Play();
+            _lifeTime.ResetTime();
             _bullet.Throw();
         }
 

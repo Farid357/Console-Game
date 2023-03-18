@@ -17,12 +17,12 @@ namespace Console_Game.Tests.UI
             window.Close();
             Assert.That(window.IsOpen == false);
         }
-        
+
         [Test]
         public void GroupOpensAndClosesCorrectly()
         {
             IWindow window = new Window(new UiElement(new UiElementView()));
-            IWindow windows = new Windows(new Group<IWindow>(new List<IWindow> { new Window(new UiElement(new UiElementView())), window }));
+            IWindow windows = new Windows(new List<IWindow> { new Window(new UiElement(new UiElementView())), window });
             windows.Open();
             Assert.That(windows.IsOpen);
             Assert.That(window.IsOpen);

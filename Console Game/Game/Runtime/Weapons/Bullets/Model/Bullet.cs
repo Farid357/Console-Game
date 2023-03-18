@@ -1,18 +1,19 @@
 using System;
 using System.Numerics;
+using Console_Game;
 
 namespace Console_Game.Weapons
 {
     public sealed class Bullet : IGameLoopObject, IBullet
     {
         private readonly IMovement _movement;
-        private readonly IGameObjectView _view;
+        private readonly IGameObject _gameObject;
         private bool _isThrowing;
         
-        public Bullet(IMovement movement, IGameObjectView view)
+        public Bullet(IMovement movement, IGameObject gameObject)
         {
             _movement = movement ?? throw new ArgumentNullException(nameof(movement));
-            _view = view ?? throw new ArgumentNullException(nameof(view));
+            _gameObject = gameObject ?? throw new ArgumentNullException(nameof(gameObject));
         }
 
         public bool IsDestroyed { get; private set; }
@@ -28,7 +29,7 @@ namespace Console_Game.Weapons
         public void Destroy()
         {
             IsDestroyed = true;
-            _view.Destroy();
+            _gameObject.Destroy();
         }
 
         public void Update(float deltaTime)

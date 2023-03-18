@@ -1,58 +1,45 @@
 using System;
 using System.Collections.Generic;
-using Console_Game;
-using Console_Game.Loop;
 
 namespace Console_Game.UI
 {
     public sealed class Buttons : IButton, IGroup<IButton>
     {
-        private readonly IGroup<IButton> _group;
+        private readonly List<IButton> _buttons;
 
-        public Buttons(IGroup<IButton> group)
+        public Buttons(List<IButton> buttons)
         {
-            _group = group ?? throw new ArgumentNullException(nameof(group));
+            _buttons = buttons ?? throw new ArgumentNullException(nameof(buttons));
         }
 
-        public Buttons() : this(new Group<IButton>())
+        public Buttons() : this(new List<IButton>())
         {
         }
-        
-        public IReadOnlyList<IButton> All => _group.All;
+
+        public IReadOnlyList<IButton> All => _buttons;
 
         public bool IsEnabled { get; private set; }
 
         public void Press()
         {
-            foreach (IButton button in All)
-            {
-                button.Press();
-            }
+            _buttons.ForEach(button => button.Press());
         }
 
         public void Enable()
         {
-            foreach (IButton button in All)
-            {
-                button.Enable();
-            }
-
+            _buttons.ForEach(button => button.Enable());
             IsEnabled = true;
         }
 
         public void Disable()
         {
-            foreach (IButton button in All)
-            {
-                button.Disable();
-            }
-            
+            _buttons.ForEach(button => button.Disable());
             IsEnabled = false;
         }
 
-        public void Add(IButton instance) => _group.Add(instance);
+        public void Add(IButton instance) => _buttons.Add(instance);
 
-        public void Remove(IButton instance) => _group.Remove(instance);
+        public void Remove(IButton instance) => _buttons.Remove(instance);
         
     }
 }

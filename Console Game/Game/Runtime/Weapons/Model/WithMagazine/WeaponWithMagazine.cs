@@ -16,7 +16,7 @@ namespace Console_Game.Weapons
         }
 
         public IWeaponMagazine Magazine { get; }
-        
+
         public bool CanShoot => _weapon.CanShoot && !_view.IsReloading && !Magazine.IsEmpty;
 
         public bool CanReload() => Magazine.Bullets < Magazine.MaxBullets;
@@ -25,7 +25,7 @@ namespace Console_Game.Weapons
         {
             if (CanReload() == false)
                 throw new InvalidOperationException($"Can't reload, it's full!");
-
+            
             await _view.Reload();
             Magazine.Add(Magazine.MaxBullets - Magazine.Bullets);
         }

@@ -15,13 +15,12 @@ namespace Console_Game.UI
 
         public string Value { get; private set; }
 
-        public void Visualize(string value)
+        public void Visualize(string line)
         {
-            Value = value;
-            Console.WriteLine(value);
+            Value = line;
+            Console.WriteLine(Value);
         }
-
-
+        
         public void Enable() => _uiElement.Enable();
 
         public void Disable() => _uiElement.Disable();

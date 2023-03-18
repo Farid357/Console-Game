@@ -16,7 +16,7 @@ namespace Console_Game
             _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
         }
         
-        public IEnemy Create(IReadOnlyTransform transform)
+        public IEnemy Create(ITransform transform)
         {
             var enemy = new EnemyWithReward(_reward, _enemyFactory.Create(transform));
             _gameLoopObjects.Add(enemy);

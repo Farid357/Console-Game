@@ -25,7 +25,7 @@ namespace Console_Game
 
             Vector2 position = _positions[_positionIndex];
             IEnemyFactory enemyFactory = _enemyFactories[_random.Next(0, _enemyFactories.Length)];
-            return enemyFactory.Create(new ReadOnlyTransform(position));
+            return enemyFactory.Create(new Transform(position));
         }
     }
 }

@@ -1,5 +1,5 @@
 using System;
-using System.Threading.Tasks;
+using Console_Game.Tools;
 
 namespace Console_Game
 {
@@ -7,9 +7,9 @@ namespace Console_Game
     {
         private readonly ITimer _explosionTimer;
         private readonly IGrenadeMovement _movement;
-        private readonly IGameObjectView _view;
+        private readonly IGameObject _view;
 
-        public Grenade(ITimer explosionTimer, IGrenadeMovement movement, IGameObjectView view)
+        public Grenade(ITimer explosionTimer, IGrenadeMovement movement, IGameObject view)
         {
             _explosionTimer = explosionTimer ?? throw new ArgumentNullException(nameof(explosionTimer));
             _movement = movement ?? throw new ArgumentNullException(nameof(movement));
@@ -25,11 +25,8 @@ namespace Console_Game
             
             CanShoot = false;
             _movement.Throw();
-            _explosionTimer.Play();
-            
-            while (_explosionTimer.IsEnded == false)
-                await Task.Yield();
-
+            _explosionTimer.ResetTime();
+            await _explosionTimer.End();
             _view.Destroy();
         }
     }

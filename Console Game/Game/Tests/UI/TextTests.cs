@@ -18,7 +18,7 @@ namespace Console_Game.Tests.UI
         [Test]
         public void GroupUpdatesValue()
         {
-            IText texts = new Texts(new Group<IText>());
+            IText texts = new Texts();
             const string value = "dldld";
             texts.Visualize(value);
             Assert.That(texts.Value == value);

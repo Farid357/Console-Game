@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Console_Game.Loop;
 using Console_Game.Tools;
 
 namespace Console_Game

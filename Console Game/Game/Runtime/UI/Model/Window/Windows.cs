@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Console_Game.UI
 {
-    public sealed class Windows : IWindow, IGroup<IWindow>
+    public sealed class Windows : IWindows
     {
         private readonly List<IWindow> _windows;
 

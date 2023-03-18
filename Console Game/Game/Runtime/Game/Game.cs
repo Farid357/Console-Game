@@ -14,7 +14,7 @@ namespace Console_Game
         public Game()
         {
             _gameTimer = new GameTimer();
-            _gameLoop = new GameLoop(_gameTimer, 0.01f, new GamePause(new GameGamePauseView()));
+            _gameLoop = new GameLoop(_gameTimer, 0.01f, new GamePause(new GamePauseView()));
             IGroup<IGameLoopObject> gameLoopObjects = _gameLoop.Objects;
             ISaveStorages saveStorages = new SaveStorages();
             IFactory<IWallet> walletFactory = new WalletFactory(saveStorages);

@@ -2,7 +2,7 @@ using System;
 
 namespace Console_Game
 {
-    public sealed class GameGamePauseView : IGamePauseView
+    public sealed class GamePauseView : IGamePauseView
     {
         public void Enable()
         {

@@ -27,12 +27,13 @@ namespace Console_Game.LoadSystem
                 LoadingProgress = time;
             }
             
-            await _scene.Load();
+            _scene.Load();
         }
 
         public async Task Unload()
         {
-            await _scene.Unload();
+            _scene.Unload();
+            await Task.Yield();
         }
     }
 }

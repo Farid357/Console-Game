@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Console_Game.UI
 {
-    public sealed class Texts : IText, IGroup<IText>
+    public sealed class Texts : ITexts
     {
         private readonly List<IText> _texts;
 

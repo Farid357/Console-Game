@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Console_Game.LoadSystem
 {
-    public sealed class SceneWithLoadingView : IScene
+    public sealed class SceneWithLoadingView : IAsyncScene
     {
         private readonly IAsyncScene _scene;
         private readonly ISceneLoadingView _loadingView;
@@ -14,6 +14,8 @@ namespace Console_Game.LoadSystem
             _loadingView = loadingView ?? throw new ArgumentNullException(nameof(loadingView));
         }
 
+        public float LoadingProgress => _scene.LoadingProgress;
+        
         public bool IsLoaded => _scene.IsLoaded;
 
         public async Task Load()
@@ -23,7 +25,7 @@ namespace Console_Game.LoadSystem
 
             while (!_scene.IsLoaded)
             {
-                _loadingView.Visualize(_scene.LoadingProgress);
+                _loadingView.Visualize(LoadingProgress);
                 await Task.Yield();
             }
             

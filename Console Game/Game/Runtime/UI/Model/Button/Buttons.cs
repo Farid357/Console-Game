@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Console_Game.UI
 {
-    public sealed class Buttons : IButton, IGroup<IButton>
+    public sealed class Buttons : IButtons
     {
         private readonly List<IButton> _buttons;
 

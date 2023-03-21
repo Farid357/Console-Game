@@ -1,6 +1,6 @@
 namespace Console_Game
 {
-    public interface IInventory<TItem> : IReadOnlyInventory<TItem> where TItem : IInventoryItem
+    public interface IInventory<TItem> : IReadOnlyInventory<TItem>
     {
         void Add(IInventorySlot<TItem> slot);
 

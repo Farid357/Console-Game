@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Console_Game
 {
-    public sealed class SelfCleaningInventory<TItem> : IGameLoopObject, IInventory<TItem> where TItem : IInventoryItem
+    public sealed class SelfCleaningInventory<TItem> : IGameLoopObject, IInventory<TItem>
     {
         private readonly IInventory<TItem> _inventory;
 

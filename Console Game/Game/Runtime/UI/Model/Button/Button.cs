@@ -5,13 +5,17 @@ namespace Console_Game.UI
     public sealed class Button : IButton
     {
         private readonly IButtonView _view;
+        private readonly IUiElement _uiElement;
 
-        public Button(IButtonView buttonView)
+        public Button(IButtonView buttonView, IUiElement uiElement)
         {
             _view = buttonView ?? throw new ArgumentNullException(nameof(buttonView));
+            _uiElement = uiElement ?? throw new ArgumentNullException(nameof(uiElement));
         }
+        
+        public ITransform Transform => _uiElement.Transform;
 
-        public bool IsEnabled { get; private set; }
+        public bool IsEnabled => _uiElement.IsEnabled;
 
         public void Press()
         {
@@ -23,14 +27,14 @@ namespace Console_Game.UI
 
         public void Enable()
         {
-            IsEnabled = true;
             _view.Enable();
+            _uiElement.Enable();
         }
 
         public void Disable()
         {
-            IsEnabled = false;
             _view.Disable();
+            _uiElement.Disable();
         }
     }
 }

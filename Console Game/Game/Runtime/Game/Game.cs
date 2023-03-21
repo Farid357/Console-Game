@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using Console_Game.Loop;
 using Console_Game.Save_Storages;
 using Console_Game.UI;
@@ -19,21 +20,20 @@ namespace Console_Game
             ISaveStorages saveStorages = new SaveStorages();
             IFactory<IWallet> walletFactory = new WalletFactory(saveStorages);
             IWeaponInput weaponInput = new WeaponInput(new Key(ConsoleKey.F));
-            ICanvas canvas = new Canvas();
-            ITextFactory textFactory = new TextFactory(canvas);
-            IGameObjectsFactory gameObjectsFactory = new GameObjectsFactory();
-            IBulletsFactory bulletsFactory = new BulletsFactory(new Transform(), gameLoopObjects, gameObjectsFactory);
-            IText bulletsText = textFactory.Create();
+            ICanvas canvas = new Canvas(new Transform());
+            IUiElementFactory uiElementFactory = new UiElementFactory(canvas);
+            ITextFactory textFactory = new TextFactory(uiElementFactory);
+            IBulletsFactory bulletsFactory = new BulletsFactory(new Transform(), gameLoopObjects);
+            IText bulletsText = textFactory.Create(new Transform(new Vector2(1.5f, 1.3f)));
             IFactory<IWeaponWithMagazine> weaponFactory = new StartPlayerWeaponFactory(gameLoopObjects, bulletsText, bulletsFactory);
             IWeaponWithMagazine weapon = weaponFactory.Create();
             IPlayerSimulationFactory playerSimulationFactory = new PlayerSimulationFactory(_gameLoop.Objects);
             IPlayersSimulation<IPlayer> playersSimulation = playerSimulationFactory.Create<IPlayer>();
             IWeaponInventoryFactory weaponInventoryFactory = new WeaponInventoryFactory();
             var playerFactory = new PlayerFactory(playersSimulation);
-            IGameObject weaponGameObject = gameObjectsFactory.Create(new Transform());
-            IWeaponSlotFactory weaponSlotFactory = new WeaponSlotFactory(playerFactory, new WeaponGameObject(weaponGameObject, bulletsText));
+            IWeaponSlotFactory<IWeapon, IWeaponInput> weaponSlotFactory = new WeaponSlotFactory<IWeapon, IWeaponInput>(playerFactory, playersSimulation);
             var weaponInventory = weaponInventoryFactory.CreateStandard();
-            weaponInventory.Add(weaponSlotFactory.Create("Pistol", weapon, weaponInput));
+           // weaponInventory.Add(weaponSlotFactory.Create("Pistol", weapon, weaponInput));
            // var enemyData = new JsonFilesStorage().LoadFile<EnemyData>(JsonFilesPaths.Zombie);
            // Console.WriteLine(enemyData.Name);
             playerFactory.Create(weaponInput, weapon);
@@ -42,6 +42,8 @@ namespace Console_Game
 
         public void Play()
         {
+            Image image = new Image(new UiElement(new Transform(Vector2.One)), ImagePaths.Logo);
+            image.Draw();
             _gameTimer.Play();
             _gameLoop.Start();
         }

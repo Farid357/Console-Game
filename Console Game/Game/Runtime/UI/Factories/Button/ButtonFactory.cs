@@ -5,24 +5,23 @@ namespace Console_Game.UI
 {
     public sealed class ButtonFactory : IButtonFactory
     {
-        private readonly ICanvas _canvas;
+        private readonly IUiElementFactory _uiElementFactory;
         private readonly ButtonViewData _viewData;
 
-        public ButtonFactory(ICanvas canvas) : this(canvas, new ButtonViewData(Color.White, Color.Gray, Color.Bisque))
+        public ButtonFactory(IUiElementFactory uiElementFactory) : this(uiElementFactory, new ButtonViewData(Color.White, Color.Gray, Color.Bisque))
         {
         }
 
-        public ButtonFactory(ICanvas canvas, ButtonViewData viewData)
+        public ButtonFactory(IUiElementFactory uiElementFactory, ButtonViewData viewData)
         {
-            _canvas = canvas ?? throw new ArgumentNullException(nameof(canvas));
+            _uiElementFactory = uiElementFactory ?? throw new ArgumentNullException(nameof(uiElementFactory));
             _viewData = viewData;
         }
 
-        public IButton Create()
+        public IButton Create(ITransform transform)
         {
             IButtonView view = new ButtonView(_viewData.StartColor, _viewData.DisableColor, _viewData.PressedColor);
-            IButton button = new Button(view);
-            _canvas.Add(button);
+            IButton button = new Button(view, _uiElementFactory.Create(transform));
             return button;
         }
     }

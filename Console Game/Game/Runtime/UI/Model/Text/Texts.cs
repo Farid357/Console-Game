@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace Console_Game.UI
@@ -17,16 +18,25 @@ namespace Console_Game.UI
         {
         }
 
+        public ITransform Transform { get; } = new Transform();
+
         public bool IsEnabled => _texts.First().IsEnabled;
 
         public IReadOnlyList<IText> All => _texts;
-        
-        public string Value { get; private set; }
+
+        public Color Color => _texts.First().Color;
+
+        public string Line { get; private set; }
 
         public void Visualize(string line)
         {
-            Value = line;
-            _texts.ForEach(text => text.Visualize(Value));
+            Line = line;
+            _texts.ForEach(text => text.Visualize(Line));
+        }
+
+        public void SwitchColor(Color color)
+        {
+            _texts.ForEach(text => text.SwitchColor(color));
         }
 
         public void Add(IText instance) => _texts.Add(instance);

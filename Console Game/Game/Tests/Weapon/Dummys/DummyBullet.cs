@@ -1,3 +1,4 @@
+using System.Numerics;
 using Console_Game.Weapons;
 
 namespace Console_Game.Tests
@@ -11,6 +12,11 @@ namespace Console_Game.Tests
         public void Throw()
         {
             WasThrew = true;
+        }
+
+        public void Throw(Vector2 direction)
+        {
+            
         }
 
         public void Destroy()

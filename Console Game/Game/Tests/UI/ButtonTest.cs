@@ -14,7 +14,7 @@ namespace Console_Game.Tests.UI
             Color startColor = Color.Azure;
             Color disableColor = Color.Brown;
             IButtonView buttonView = new ButtonView(startColor, disableColor, Color.Aqua);
-            IButton button = new Buttons(new List<IButton> { new Button(buttonView) });
+            IButton button = new Buttons(new List<IButton> { new Button(buttonView, new UiElement(new Transform())) });
             button.Enable();
             Assert.That(button.IsEnabled);
             Assert.That(buttonView.Color == startColor);

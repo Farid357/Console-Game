@@ -18,6 +18,8 @@ namespace Console_Game.UI
 
         public IReadOnlyList<IButton> All => _buttons;
 
+        public ITransform Transform { get; } = new Transform();
+        
         public bool IsEnabled { get; private set; }
 
         public void Press()
@@ -36,6 +38,7 @@ namespace Console_Game.UI
             _buttons.ForEach(button => button.Disable());
             IsEnabled = false;
         }
+
 
         public void Add(IButton instance) => _buttons.Add(instance);
 

@@ -1,20 +1,28 @@
 using System;
+using System.Drawing;
 
 namespace Console_Game.UI
 {
     public sealed class TextFactory : ITextFactory
     {
-        private readonly ICanvas _canvas;
+        private readonly IUiElementFactory _uiElementFactory;
+        private readonly Color _color;
+        private readonly Font _font = new Font("Arial", 16);
 
-        public TextFactory(ICanvas canvas)
+        public TextFactory(IUiElementFactory uiElementFactory) : this(uiElementFactory, Color.Black)
         {
-            _canvas = canvas ?? throw new ArgumentNullException(nameof(canvas));
         }
 
-        public IText Create()
+        public TextFactory(IUiElementFactory uiElementFactory, Color color)
         {
-            IText text = new Text(new UiElement(new UiElementView()));
-            _canvas.Add(text);
+            _uiElementFactory = uiElementFactory ?? throw new ArgumentNullException(nameof(uiElementFactory));
+            _color = color;
+        }
+
+        public IText Create(ITransform transform)
+        {
+            IText text = new Text(_uiElementFactory.Create(transform), _font);
+            text.SwitchColor(_color);
             return text;
         }
     }

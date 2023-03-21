@@ -1,26 +1,19 @@
-using Console_Game.Weapons;
-
 namespace Console_Game
 {
     public sealed class WeaponInventoryFactory : IWeaponInventoryFactory
     {
-        private readonly IInventoryView<IWeaponInventoryItem<IWeaponInput, IWeapon>> _view;
-
-        public WeaponInventoryFactory()
+        public IInventory<IWeaponInventoryItem> CreateStandard()
         {
-            _view = new InventoryView<IWeaponInventoryItem<IWeaponInput, IWeapon>>();
+            var inventoryView = new InventoryView<IWeaponInventoryItem>();
+            var inventory = new Inventory<IWeaponInventoryItem>(inventoryView);
+            return new SelfCleaningInventory<IWeaponInventoryItem>(inventory);
         }
 
-        public IInventory<IWeaponInventoryItem<IWeaponInput, IWeapon>> CreateStandard()
+        public IInventory<IWeaponInventoryItem> CreateWithMagazine()
         {
-            var inventory = new Inventory<IWeaponInventoryItem<IWeaponInput, IWeapon>>(_view);
-            return new SelfCleaningInventory<IWeaponInventoryItem<IWeaponInput, IWeapon>>(inventory);
-        }
-
-        public IInventory<IWeaponInventoryItem<IWeaponInput, IWeaponWithMagazine>> CreateWithMagazine()
-        {
-            var inventory = new Inventory<IWeaponInventoryItem<IWeaponInput, IWeaponWithMagazine>>(_view);
-            return new SelfCleaningInventory<IWeaponInventoryItem<IWeaponInput, IWeaponWithMagazine>>(inventory);
+            var inventoryView = new InventoryView<IWeaponInventoryItem>();
+            var inventory = new Inventory<IWeaponInventoryItem>(inventoryView);
+            return new SelfCleaningInventory<IWeaponInventoryItem>(inventory);
         }
     }
 }

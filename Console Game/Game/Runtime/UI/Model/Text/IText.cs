@@ -1,9 +1,15 @@
+using System.Drawing;
+
 namespace Console_Game.UI
 {
     public interface IText : IUiElement
     {
-        string Value { get; }
+        Color Color { get; }
+        
+        string Line { get; }
         
         void Visualize(string line);
+
+        void SwitchColor(Color color);
     }
 }

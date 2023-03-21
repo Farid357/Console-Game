@@ -6,19 +6,21 @@ namespace Console_Game.Tests.Inventory
     [TestFixture]
     public sealed class InventoryTest
     {
+        private readonly IInventoryView<InventoryItem> _inventoryView = new DummyInventoryView<InventoryItem>();
+
         [Test]
         public void AddsCorrectly()
         {
-            IInventory<IInventoryItem> inventory = new Inventory<IInventoryItem>(new DummyInventoryView<IInventoryItem>());
-            inventory.Add(new DummySlot<IInventoryItem>());
+            IInventory<InventoryItem> inventory = new Inventory<InventoryItem>(_inventoryView);
+            inventory.Add(new DummySlot<InventoryItem>());
             Assert.That(inventory.Slots.Count() == 1);
         }
         
         [Test]
         public void RemovesCorrectly()
         {
-            IInventory<IInventoryItem> inventory = new Inventory<IInventoryItem>(new DummyInventoryView<IInventoryItem>());
-            IInventorySlot<IInventoryItem> slot = new DummySlot<IInventoryItem>();
+            IInventory<InventoryItem> inventory = new Inventory<InventoryItem>(_inventoryView);
+            IInventorySlot<InventoryItem> slot = new DummySlot<InventoryItem>();
             inventory.Add(slot);
             Assert.That(inventory.CanDrop(slot));
             inventory.Drop(slot);

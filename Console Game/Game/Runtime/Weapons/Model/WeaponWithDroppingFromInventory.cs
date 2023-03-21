@@ -5,10 +5,10 @@ namespace Console_Game
 {
     public sealed class WeaponWithDroppingFromInventory : IWeapon
     {
-        private readonly IInventory<IWeaponInventoryItem<IWeaponInput, IWeapon>> _inventory;
+        private readonly IInventory<IWeaponInventoryItem> _inventory;
         private readonly IWeapon _weapon;
 
-        public WeaponWithDroppingFromInventory(IWeapon weapon, IInventory<IWeaponInventoryItem<IWeaponInput, IWeapon>> inventory)
+        public WeaponWithDroppingFromInventory(IWeapon weapon, IInventory<IWeaponInventoryItem> inventory)
         {
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
             _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));

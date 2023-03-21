@@ -7,5 +7,8 @@ namespace Console_Game.UI
         void Enable();
 
         void Disable();
+        
+        ITransform Transform { get; }
+        
     }
 }

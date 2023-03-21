@@ -5,10 +5,10 @@ namespace Console_Game
 {
     public sealed class InventorySlot<TItem> : IInventorySlot<TItem> where TItem : IInventoryItem
     {
-        private readonly IInventorySlotView<TItem> _view;
+        private readonly IInventorySlotView _view;
         private readonly int _maxItemsCount;
 
-        public InventorySlot(TItem item, IInventorySlotView<TItem> view, int itemsCount = 1)
+        public InventorySlot(TItem item, IInventorySlotView view, int itemsCount = 1)
         {
             _view = view ?? throw new ArgumentNullException(nameof(view));
             Item = item;
@@ -30,7 +30,7 @@ namespace Console_Game
                 throw new InvalidOperationException($"Can't add {itemsCount}");
 
             ItemsCount += itemsCount.ThrowIfLessThanZeroException();
-            _view.Visualize(Item, ItemsCount);
+            _view.Visualize(Item.ViewData, ItemsCount);
         }
 
         public void Take(int itemsCount)
@@ -39,7 +39,7 @@ namespace Console_Game
                 throw new InvalidOperationException();
             
             ItemsCount -= itemsCount.ThrowIfLessThanZeroException();
-            _view.Visualize(Item, ItemsCount);
+            _view.Visualize(Item.ViewData, ItemsCount);
         }
     }
 }

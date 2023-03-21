@@ -1,6 +1,6 @@
 namespace Console_Game.Tests.Inventory
 {
-    public sealed class DummySlot<T> : IInventorySlot<T> where T : IInventoryItem
+    public sealed class DummySlot<T> : IInventorySlot<T>
     {
         public T Item { get; }
         

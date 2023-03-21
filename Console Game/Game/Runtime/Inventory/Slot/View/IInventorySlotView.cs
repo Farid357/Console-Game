@@ -1,7 +1,7 @@
 namespace Console_Game
 {
-    public interface IInventorySlotView<in TItem> where TItem : IInventoryItem
+    public interface IInventorySlotView
     {
-        void Visualize(TItem item, int count);
+        void Visualize(IInventoryItemViewData viewData, int count);
     }
 }

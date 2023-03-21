@@ -11,7 +11,7 @@ namespace Console_Game.Tests.UI
         [Test]
         public void OpensAndClosesCorrectly()
         {
-            IWindow window = new Window(new UiElement(new UiElementView()));
+            IWindow window = new Window(new UiElement(new Transform()));
             window.Open();
             Assert.That(window.IsOpen);
             window.Close();
@@ -21,8 +21,8 @@ namespace Console_Game.Tests.UI
         [Test]
         public void GroupOpensAndClosesCorrectly()
         {
-            IWindow window = new Window(new UiElement(new UiElementView()));
-            IWindow windows = new Windows(new List<IWindow> { new Window(new UiElement(new UiElementView())), window });
+            IWindow window = new Window(new UiElement(new Transform()));
+            IWindow windows = new Windows(new List<IWindow> { new Window(new UiElement(new Transform())), window });
             windows.Open();
             Assert.That(windows.IsOpen);
             Assert.That(window.IsOpen);

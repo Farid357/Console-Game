@@ -12,13 +12,15 @@ namespace Console_Game.UI
         }
 
         public bool IsOpen => IsEnabled;
-        
+
         public bool IsEnabled => _uiElement.IsEnabled;
+
+        public ITransform Transform => _uiElement.Transform;
 
         public void Open() => Enable();
 
         public void Close() => Disable();
-        
+
         public void Enable()
         {
             _uiElement.Enable();

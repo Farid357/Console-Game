@@ -2,18 +2,18 @@ using System;
 
 namespace Console_Game
 {
-    public sealed class InventorySlotView<TItem> : IInventorySlotView<TItem> where TItem : IInventoryItem
+    public sealed class InventorySlotView : IInventorySlotView
     {
-        public void Visualize(TItem item, int count)
+        public void Visualize(IInventoryItemViewData viewData, int count)
         {
             if (count > 1)
             {
-                Console.WriteLine($"item: {item.ViewData.Name}  has count: {count}");
+                Console.WriteLine($"item: {viewData.Name}  has count: {count}");
             }
             
             else
             {
-                Console.WriteLine($"item: {item.ViewData.Name}");
+                Console.WriteLine($"item: {viewData.Name}");
             }
         }
     }

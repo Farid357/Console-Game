@@ -3,22 +3,24 @@ using System.Drawing;
 
 namespace Console_Game
 {
-    public sealed class WeaponSlotFactory : IWeaponSlotFactory
+    public sealed class WeaponSlotFactory<TWeapon, TWeaponInput> : IWeaponSlotFactory<TWeapon, TWeaponInput> where TWeaponInput : IWeaponInput where TWeapon : IWeapon
     {
-        private readonly IPlayerFactory<IWeapon, IWeaponInput> _playerFactory;
+        private readonly IPlayerFactory<TWeapon, TWeaponInput> _playerFactory;
+        private readonly IPlayersSimulation<IPlayer> _simulation;
 
-        public WeaponSlotFactory(IPlayerFactory<IWeapon, IWeaponInput> playerFactory, IGameObject gameObject)
+        public WeaponSlotFactory(IPlayerFactory<TWeapon, TWeaponInput> playerFactory, IPlayersSimulation<IPlayer> simulation)
         {
             _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));
+            _simulation = simulation ?? throw new ArgumentNullException(nameof(simulation));
         }
-
-        public IInventorySlot<IWeaponInventoryItem<IWeaponInput, IWeapon>> Create(string name, IWeapon weapon, IWeaponInput weaponInput)
+        
+        public IInventorySlot<IWeaponInventoryItem> Create(string name, TWeapon weapon, TWeaponInput weaponInput)
         {
             IInventoryItemViewData viewData = new InventoryItemViewData(name, Graphics.FromHdc(IntPtr.Zero));
-            IInventoryItem inventoryItem = new InventoryItem(viewData, new GameObject());
-            var weaponInventoryItem = new WeaponInventoryItem<IWeaponInput, IWeapon>(inventoryItem, weapon, weaponInput, _playerFactory);
-            var slotView = new InventorySlotView<IWeaponInventoryItem<IWeaponInput, IWeapon>>();
-            return new InventorySlot<IWeaponInventoryItem<IWeaponInput, IWeapon>>(weaponInventoryItem, slotView);
+            IInventoryItem item = new InventoryItem(viewData);
+            var weaponItem = new WeaponInventoryItem<IPlayer>(_simulation, item, _playerFactory.Create(weaponInput, weapon));
+            var slotView = new InventorySlotView();
+            return new InventorySlot<IWeaponInventoryItem>(weaponItem, slotView);
         }
     }
 }

@@ -1,5 +1,3 @@
-using Console_Game.Loop;
-
 namespace Console_Game
 {
     public sealed class PlayerSimulationFactory : IPlayerSimulationFactory

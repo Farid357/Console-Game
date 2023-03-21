@@ -6,8 +6,8 @@ namespace Console_Game
 
         bool IsSelected { get; }
         
-        void Unselect();
-        
         void Select();
+
+        void Unselect();
     }
 }

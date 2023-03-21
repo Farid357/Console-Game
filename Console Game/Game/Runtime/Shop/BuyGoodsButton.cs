@@ -13,6 +13,8 @@ namespace Console_Game.Shop
             _client = client ?? throw new ArgumentNullException(nameof(client));
             _button = button ?? throw new ArgumentNullException(nameof(button));
         }
+        
+        public ITransform Transform => _button.Transform;
 
         public bool IsEnabled => _button.IsEnabled;
 
@@ -34,6 +36,5 @@ namespace Console_Game.Shop
         public void Enable() => _button.Enable();
 
         public void Disable() => _button.Disable();
-        
     }
 }

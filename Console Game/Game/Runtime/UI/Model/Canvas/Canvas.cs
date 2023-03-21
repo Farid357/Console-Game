@@ -7,17 +7,19 @@ namespace Console_Game.UI
     {
         private readonly List<IUiElement> _uiElements;
 
-        public Canvas(List<IUiElement> uiElements)
+        public Canvas(List<IUiElement> uiElements, ITransform transform)
         {
             _uiElements = uiElements ?? throw new ArgumentNullException(nameof(uiElements));
+            Transform = transform ?? throw new ArgumentNullException(nameof(transform));
         }
 
-        public Canvas() : this(new List<IUiElement>())
+        public Canvas(ITransform transform) : this(new List<IUiElement>(), transform)
         {
-            
         }
-        
+
         public bool IsEnabled { get; private set; }
+
+        public ITransform Transform { get; }
 
         public IReadOnlyList<IUiElement> All => _uiElements;
 

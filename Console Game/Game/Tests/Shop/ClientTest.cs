@@ -11,7 +11,7 @@ namespace Console_Game.Tests.Shop
         public void BuyGoodsCorrectly()
         {
             const int money = 1000000;
-            IWallet wallet = new Wallet(money, new WalletView());
+            IWallet wallet = new Wallet(money, new WalletView(new DummyText()));
             IShoppingCart shoppingCart = new ShoppingCart(new ShoppingCartView());
             IClient client = new Client(wallet, shoppingCart);
             const int goodCost = 10;

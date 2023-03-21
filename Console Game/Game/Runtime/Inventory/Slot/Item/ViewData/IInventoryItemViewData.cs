@@ -1,4 +1,4 @@
-using System.Drawing;
+using Console_Game.UI;
 
 namespace Console_Game
 {
@@ -6,6 +6,6 @@ namespace Console_Game
     {
         string Name { get; }
 
-        Graphics Icon { get; }
+        IImage Icon { get; }
     }
 }

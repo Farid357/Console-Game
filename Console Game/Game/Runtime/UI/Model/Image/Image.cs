@@ -4,6 +4,7 @@ using Console_Game.Tools;
 
 namespace Console_Game.UI
 {
+    [Serializable]
     public sealed class Image : IImage
     {
         private readonly IUiElement _uiElement;
@@ -44,6 +45,7 @@ namespace Console_Game.UI
         {
             Color = color;
             _bitmap.SwitchColor(color);
+            Draw();
         }
     }
 }

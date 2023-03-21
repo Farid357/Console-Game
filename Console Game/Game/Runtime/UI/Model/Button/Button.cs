@@ -2,6 +2,7 @@ using System;
 
 namespace Console_Game.UI
 {
+    [Serializable]
     public sealed class Button : IButton
     {
         private readonly IButtonView _view;

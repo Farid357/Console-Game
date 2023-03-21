@@ -22,6 +22,7 @@ namespace Console_Game.UI
         public IText Create(ITransform transform)
         {
             IText text = new Text(_uiElementFactory.Create(transform), _font);
+            text.Enable();
             text.SwitchColor(_color);
             return text;
         }

@@ -3,6 +3,7 @@ using System.Drawing;
 
 namespace Console_Game.UI
 {
+    [Serializable]
     public sealed class Text : IText
     {
         private readonly IUiElement _uiElement;

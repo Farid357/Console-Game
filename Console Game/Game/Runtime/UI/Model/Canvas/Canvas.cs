@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Console_Game.UI
 {
+    [Serializable]
     public sealed class Canvas : ICanvas
     {
         private readonly List<IUiElement> _uiElements;

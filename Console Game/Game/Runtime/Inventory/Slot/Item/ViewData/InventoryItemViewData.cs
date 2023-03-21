@@ -1,11 +1,11 @@
 using System;
-using System.Drawing;
+using Console_Game.UI;
 
 namespace Console_Game
 {
     public class InventoryItemViewData : IInventoryItemViewData
     {
-        public InventoryItemViewData(string name, Graphics icon)
+        public InventoryItemViewData(string name, IImage icon)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Icon = icon ?? throw new ArgumentNullException(nameof(icon));
@@ -13,6 +13,6 @@ namespace Console_Game
 
         public string Name { get; }
 
-        public Graphics Icon { get; }
+        public IImage Icon { get; }
     }
 }

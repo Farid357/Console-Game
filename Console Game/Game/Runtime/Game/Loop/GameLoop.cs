@@ -8,7 +8,7 @@ namespace Console_Game.Loop
     {
         private readonly IReadOnlyGameTimer _gameTimer;
         private readonly IReadOnlyGamePause _gamePause;
-        private readonly IGameLoopObjects _gameLoopObjects = new GameLoopObjects();
+        private readonly IGameLoopObjects _gameLoopObjects;
         
         private readonly float _timeStep;
         private float _lastUpdateTime;
@@ -17,6 +17,7 @@ namespace Console_Game.Loop
         {
             _gameTimer = gameTimer ?? throw new ArgumentNullException(nameof(gameTimer));
             _gamePause = gamePause ?? throw new ArgumentNullException(nameof(gamePause));
+            _gameLoopObjects = new GameLoopObjects();
             _timeStep = timeStep.ThrowIfLessOrEqualsToZeroException();
         }
 

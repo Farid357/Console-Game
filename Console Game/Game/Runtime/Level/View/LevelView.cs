@@ -1,4 +1,5 @@
 using System;
+using Console_Game.UI;
 
 namespace Console_Game.Stats
 {
@@ -6,15 +7,17 @@ namespace Console_Game.Stats
     public sealed class LevelView : ILevelView
     {
         private readonly string _levelOwnerName;
-
-        public LevelView(string levelOwnerName)
+        private readonly IText _text;
+        
+        public LevelView(string levelOwnerName, IText text)
         {
             _levelOwnerName = levelOwnerName ?? throw new ArgumentNullException(nameof(levelOwnerName));
+            _text = text ?? throw new ArgumentNullException(nameof(text));
         }
 
         public void Visualize(int xp, int maxXp)
         {
-            Console.WriteLine($"{_levelOwnerName} Xp: {xp}, MaxXp: {maxXp}");
+            _text.Visualize($"{_levelOwnerName} Xp: {xp}, MaxXp: {maxXp}");
         }
     }
 }

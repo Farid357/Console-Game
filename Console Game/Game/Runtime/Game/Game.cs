@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Numerics;
 using Console_Game.Loop;
+using Console_Game.Physics;
 using Console_Game.Save_Storages;
 using Console_Game.UI;
 using Console_Game.Weapons;
@@ -24,7 +25,8 @@ namespace Console_Game
             ITextFactory textFactory = new TextFactory(uiElementFactory);
             IFactory<IWallet> walletFactory = new WalletFactory(saveStorages, textFactory);
             IWeaponInput weaponInput = new WeaponInput(new Key(ConsoleKey.F));
-            IBulletsFactory bulletsFactory = new BulletsFactory(new Transform(), gameLoopObjects);
+            IReadOnlyCollidersWorld<IEnemy> enemyWorld = new CollidersWorld<IEnemy>();
+            IBulletsFactory bulletsFactory = new RaycastBulletsFactory(enemyWorld, new Transform(), gameLoopObjects);
             IText bulletsText = textFactory.Create(new Transform(new Vector2(1.5f, 1.3f)));
             IFactory<IWeaponWithMagazine> weaponFactory = new StartPlayerWeaponFactory(gameLoopObjects, bulletsText, bulletsFactory);
             IWeaponWithMagazine weapon = weaponFactory.Create();

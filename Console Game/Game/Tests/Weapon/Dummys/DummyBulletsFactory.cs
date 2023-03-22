@@ -6,7 +6,7 @@ namespace Console_Game.Tests
     {
         public DummyBullet CreatedBullet { get; private set; }
 
-        public IBullet Create()
+        public IBullet Create(int damage)
         {
             CreatedBullet = new DummyBullet();
             return CreatedBullet;

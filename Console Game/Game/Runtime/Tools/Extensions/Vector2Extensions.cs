@@ -9,5 +9,10 @@ namespace Console_Game.Tools
         {
             return new Point((int)vector.X, (int)vector.Y);
         }
+
+        public static Vector3 To3D(this Vector2 vector)
+        {
+            return new Vector3(vector.X, vector.Y, 0);
+        }
     }
 }

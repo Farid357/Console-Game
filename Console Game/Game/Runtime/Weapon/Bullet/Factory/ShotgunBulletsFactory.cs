@@ -15,13 +15,13 @@ namespace Console_Game.Weapons
             _bulletsCount = bulletsCount.ThrowIfLessThanOrEqualsToZeroException();
         }
 
-        public IBullet Create()
+        public IBullet Create(int damage)
         {
             var bullets = new List<IBullet>(_bulletsCount);
             
             for (var i = 0; i < _bulletsCount; i++)
             {
-                IBullet bullet = _bulletsFactory.Create();
+                IBullet bullet = _bulletsFactory.Create(damage);
                 bullets.Add(bullet);
             }
 

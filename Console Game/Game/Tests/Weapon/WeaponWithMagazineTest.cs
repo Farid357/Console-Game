@@ -12,7 +12,7 @@ namespace Console_Game.Tests
         {
             var bulletsFactory = new DummyBulletsFactory();
             IWeaponMagazine weaponMagazine = new WeaponMagazine(10, new DummyMagazineView());
-            IWeapon weapon = new WeaponWithMagazine(weaponMagazine, new Weapon(bulletsFactory), new DummyWeaponWithMagazineView());
+            IWeapon weapon = new WeaponWithMagazine(weaponMagazine, new Weapon(bulletsFactory, 10), new DummyWeaponWithMagazineView());
             weapon.Shoot();
             Assert.That(weaponMagazine.Bullets == 9);
         }
@@ -22,7 +22,7 @@ namespace Console_Game.Tests
         {
             var bulletsFactory = new DummyBulletsFactory();
             IWeaponMagazine weaponMagazine = new WeaponMagazine(10, new DummyMagazineView());
-            IWeaponWithMagazine weapon = new WeaponWithMagazine(weaponMagazine, new Weapon(bulletsFactory), new DummyWeaponWithMagazineView());
+            IWeaponWithMagazine weapon = new WeaponWithMagazine(weaponMagazine, new Weapon(bulletsFactory, 10), new DummyWeaponWithMagazineView());
             
             for (var i = 0; i < 9; i++)
             {

@@ -22,7 +22,7 @@ namespace Console_Game
             IWeaponMagazineView magazineView = new WeaponMagazineView(_text);
             IWeaponMagazine magazine = new WeaponMagazine(30, magazineView);
             var shootCooldownTimer = new Timer(0.2f);
-            IWeapon weapon = new Weapon(_bulletsFactory);
+            IWeapon weapon = new Weapon(_bulletsFactory, 10);
             IWeapon weaponWithShootWaiting = new WeaponWithShootWaiting(shootCooldownTimer, weapon);
             _gameLoopObjects.Add(shootCooldownTimer);
             IWeaponWithMagazineView view = new WeaponWithMagazineView();

@@ -22,7 +22,7 @@ namespace Console_Game
             var cooldownTimer = new Timer(0.2f);
             _gameLoopObjects.Add(cooldownTimer);
             IInfiniteBulletsView infiniteBulletsView = new InfiniteBulletsView(_text);
-            return new WeaponWithInfiniteBullets(new WeaponWithShootWaiting(cooldownTimer, new Weapon(_bulletsFactory)),
+            return new WeaponWithInfiniteBullets(new WeaponWithShootWaiting(cooldownTimer, new Weapon(_bulletsFactory, 10)),
                 infiniteBulletsView);
         }
     }

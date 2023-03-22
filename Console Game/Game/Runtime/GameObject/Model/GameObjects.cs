@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Console_Game
 {
@@ -13,34 +12,37 @@ namespace Console_Game
             _gameObjects = gameObjects ?? throw new ArgumentNullException(nameof(gameObjects));
         }
 
-        public GameObjects() : this(new List<IGameObject>())
-        {
-            
-        }
-        
-        public bool IsActive => _gameObjects.All(gameObject => gameObject.IsActive);
+        public bool IsActive { get; private set; }
 
         public IReadOnlyList<IGameObject> All => _gameObjects;
      
-        public void Enable()
-        {
-            _gameObjects.ForEach(gameObject => gameObject.Enable());
-        }
-
-        public void Disable()
-        {
-            _gameObjects.ForEach(gameObject => gameObject.Disable());
-        }
+        // public void Enable()
+        // {
+        //     _gameObjects.ForEach(gameObject => gameObject.Enable());
+        // }
+        //
+        // public void Disable()
+        // {
+        //     _gameObjects.ForEach(gameObject => gameObject.Disable());
+        // }
 
         public void Destroy()
         {
+            IsActive = false;
             _gameObjects.ForEach(gameObject => gameObject.Destroy());
         }
-
         
         public void Add(IGameObject instance) => _gameObjects.Add(instance);
 
         public void Remove(IGameObject instance) => _gameObjects.Remove(instance);
-        
+
+        public void Update(float deltaTime)
+        {
+            foreach (var gameObject in _gameObjects)
+            {
+                if (gameObject.IsActive)
+                    gameObject.Update(deltaTime);
+            }
+        }
     }
 }

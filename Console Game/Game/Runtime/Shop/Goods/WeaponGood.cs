@@ -2,7 +2,7 @@ using System;
 
 namespace Console_Game.Shop
 {
-    public sealed class WeaponGood<TInput, TModel> : IGood where TInput : IWeaponInput where TModel : IWeapon
+    public sealed class WeaponGood : IGood
     {
         private readonly ICollectionSaveStorage<IWeaponInventoryItem> _weaponsStorage;
         private readonly IWeaponInventoryItem _item;

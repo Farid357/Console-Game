@@ -15,9 +15,9 @@ namespace Console_Game.Weapons
 
         public bool IsActive => _gameObject.IsActive;
 
-        public void Enable() => _gameObject.Enable();
-
-        public void Disable() => _gameObject.Disable();
+        // public void Enable() => _gameObject.Enable();
+        //
+        // public void Disable() => _gameObject.Disable();
 
         public void Destroy() => _gameObject.Destroy();
 

@@ -6,8 +6,8 @@ namespace Console_Game
 {
     public sealed class SmoothMovement : IMovement, IGameLoopObject
     {
-        private readonly float _rotateSpeed;
         private readonly ITransform _transform;
+        private readonly float _rotateSpeed;
         private readonly float _moveSpeed;
         private float _deltaTime;
 

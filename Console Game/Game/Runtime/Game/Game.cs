@@ -36,9 +36,9 @@ namespace Console_Game
             IPlayerSimulationFactory playerSimulationFactory = new PlayerSimulationFactory(_gameLoop.Objects);
             IPlayersSimulation<IPlayer> playersSimulation = playerSimulationFactory.Create<IPlayer>();
             IWeaponInventoryFactory weaponInventoryFactory = new WeaponInventoryFactory();
-            var playerFactory = new PlayerFactory(playersSimulation);
+            var playerFactory = new PlayerWithWeaponMagazineFactory(playersSimulation);
             IInventorySlotViewFactory slotViewFactory = new InventorySlotViewFactory(textFactory);
-            IWeaponSlotFactory<IWeapon, IWeaponInput> weaponSlotFactory = new WeaponSlotFactory<IWeapon, IWeaponInput>(playerFactory, playersSimulation, slotViewFactory);
+            var weaponSlotFactory = new WeaponSlotFactory<IWeaponWithMagazine, IWeaponInput, IPlayerWithWeaponMagazine>(playerFactory, playersSimulation, slotViewFactory);
             var weaponInventory = weaponInventoryFactory.CreateStandard();
             weaponInventory.Add(weaponSlotFactory.Create(new InventoryItemViewData("Pistol", new DummyImage()), weapon, weaponInput));
             playerFactory.Create(weaponInput, weapon);

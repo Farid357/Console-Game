@@ -20,8 +20,6 @@ namespace Console_Game
 
         public bool IsAlive => Value > 0;
         
-        public bool CanTakeDamage(int damage) => Value - damage >= 0 && IsAlive;
-
         public bool CanHeal(int value) => MaxValue >= Value + value;
 
         public void Heal(int value)
@@ -35,9 +33,6 @@ namespace Console_Game
 
         public void TakeDamage(int damage)
         {
-            if (CanTakeDamage(damage) == false)
-                throw new ArgumentOutOfRangeException($"Can't take damage: {damage}");
-            
             Value -= damage.ThrowIfLessThanZeroException();
             _view.Visualize(MaxValue, Value);
 

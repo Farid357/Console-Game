@@ -8,9 +8,9 @@ namespace Console_Game.UI
         private readonly IButtonView _view;
         private readonly IUiElement _uiElement;
 
-        public Button(IButtonView buttonView, IUiElement uiElement)
+        public Button(IButtonView view, IUiElement uiElement)
         {
-            _view = buttonView ?? throw new ArgumentNullException(nameof(buttonView));
+            _view = view ?? throw new ArgumentNullException(nameof(view));
             _uiElement = uiElement ?? throw new ArgumentNullException(nameof(uiElement));
         }
         

@@ -9,8 +9,6 @@ namespace Console_Game
         bool IsAlive { get; }
 
         bool CanHeal(int value);
-        
-        bool CanTakeDamage(int damage);
 
     }
 }

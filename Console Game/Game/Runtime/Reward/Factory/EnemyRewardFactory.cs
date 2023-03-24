@@ -18,16 +18,10 @@ namespace Console_Game
             IReward scoreReward = new ScoreReward(_score, 20);
             IReward moneyReward = new MoneyReward(_wallet, 10);
             
-            return new Rewards(new IReward[]
+            return new Rewards(new[]
             {
                 moneyReward,
                 scoreReward,
-                
-                new Rewards(new IReward[]
-                {
-                    moneyReward,
-                    scoreReward,
-                })
             });
         }
     }

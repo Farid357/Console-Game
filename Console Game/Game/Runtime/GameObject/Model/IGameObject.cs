@@ -1,13 +1,7 @@
 namespace Console_Game
 {
-    public interface IGameObject : IGameLoopObject
+    public interface IGameObject : IGameLoopObject, IReadOnlyGameObject
     {
-        bool IsActive { get; }
-        
-        // void Enable();
-        //
-        // void Disable();
 
-        void Destroy();
     }
 }

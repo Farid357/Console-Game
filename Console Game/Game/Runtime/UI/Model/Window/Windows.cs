@@ -22,8 +22,6 @@ namespace Console_Game.UI
 
         public bool IsEnabled => IsOpen;
 
-        public ITransform Transform { get; } = new Transform();
-        
         public void Open()
         {
             _windows.ForEach(window => window.Open());

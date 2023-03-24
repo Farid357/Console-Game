@@ -7,13 +7,13 @@ namespace Console_Game
     {
         private readonly ITransform _transform;
 
-        public PhysicsMovement(PhysicsBody body, ITransform transform)
+        public PhysicsMovement(Rigidbody body, ITransform transform)
         {
             _transform = transform ?? throw new ArgumentNullException(nameof(transform));
             Body = body;
         }
 
-        public PhysicsBody Body { get; }
+        public Rigidbody Body { get; }
 
         public IReadOnlyTransform Transform => _transform;
 

@@ -24,8 +24,6 @@ namespace Console_Game
 
         public bool CanHeal(int value) => false;
 
-        public bool CanTakeDamage(int damage) => _health.CanTakeDamage(damage);
-
         public void TakeDamage(int damage)
         {
             damage.ThrowIfLessThanOrEqualsToZeroException();

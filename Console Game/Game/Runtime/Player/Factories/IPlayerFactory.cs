@@ -1,7 +1,7 @@
 namespace Console_Game
 {
-    public interface IPlayerFactory<in TWeapon, in TWeaponInput> where TWeapon : IWeapon where TWeaponInput : IWeaponInput
+    public interface IPlayerFactory<in TWeapon, in TWeaponInput, out TPlayer> where TWeapon : IWeapon where TWeaponInput : IWeaponInput
     {
-        IPlayer Create(TWeaponInput weaponInput, TWeapon weapon);
+        TPlayer Create(TWeaponInput weaponInput, TWeapon weapon);
     }
 }

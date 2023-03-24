@@ -1,5 +1,4 @@
 using System;
-using Console_Game.Loop;
 using Console_Game.Physics;
 
 namespace Console_Game.Weapons
@@ -25,7 +24,6 @@ namespace Console_Game.Weapons
             var raycastBullet = new RaycastBullet(bullet, enemyRaycast, damage);
             _gameLoopObjects.Add(enemyRaycast);
             _gameLoopObjects.Add(movement);
-            _gameLoopObjects.Add(bullet);
             _gameLoopObjects.Add(raycastBullet);
             return raycastBullet;
         }

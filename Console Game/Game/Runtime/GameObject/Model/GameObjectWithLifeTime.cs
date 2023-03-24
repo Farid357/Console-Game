@@ -2,7 +2,7 @@ using System;
 
 namespace Console_Game.Weapons
 {
-    public sealed class GameObjectWithLifeTime : IGameLoopObject, IGameObject
+    public sealed class GameObjectWithLifeTime : IGameObject
     {
         private readonly IGameObject _gameObject;
         private readonly ITimer _lifeTime;
@@ -13,20 +13,11 @@ namespace Console_Game.Weapons
             _lifeTime = lifeTime ?? throw new ArgumentNullException(nameof(lifeTime));
         }
 
-        public bool IsActive => _gameObject.IsActive;
-
-        // public void Enable() => _gameObject.Enable();
-        //
-        // public void Disable() => _gameObject.Disable();
-
-        public void Destroy() => _gameObject.Destroy();
-
+        public bool IsActive => _lifeTime.IsEnded == false;
+        
         public void Update(float deltaTime)
         {
-            if (_lifeTime.IsEnded && _gameObject.IsActive)
-            {
-                _gameObject.Destroy();
-            }
+            _gameObject.Update(deltaTime);
         }
     }
 }

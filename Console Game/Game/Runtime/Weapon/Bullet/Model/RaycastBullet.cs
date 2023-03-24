@@ -36,6 +36,7 @@ namespace Console_Game.Weapons
             if (!IsActive)
                 throw new InvalidOperationException($"You mustn't update not active bullet!");
 
+            _bullet.Update(deltaTime);
             _raycast.Throw(Position, _direction);
 
             if (_raycast.HasHit)
@@ -45,10 +46,10 @@ namespace Console_Game.Weapons
             }
         }
 
-        private void Attack(IHealth enemy)
+        private void Attack(IHealth enemyHealth)
         {
-            if (enemy.IsAlive)
-                enemy.TakeDamage(_damage);
+            if (enemyHealth.IsAlive)
+                enemyHealth.TakeDamage(_damage);
         }
     }
 }

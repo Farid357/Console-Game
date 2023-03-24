@@ -2,7 +2,7 @@ using System;
 
 namespace Console_Game
 {
-    public sealed class PlayerFactory : IPlayerFactory<IWeapon, IWeaponInput>
+    public sealed class PlayerFactory : IPlayerFactory<IWeapon, IWeaponInput, IPlayer>
     {
         private readonly IPlayersSimulation<IPlayer> _playersSimulation;
 

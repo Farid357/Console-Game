@@ -15,23 +15,7 @@ namespace Console_Game
         public bool IsActive { get; private set; }
 
         public IReadOnlyList<IGameObject> All => _gameObjects;
-     
-        // public void Enable()
-        // {
-        //     _gameObjects.ForEach(gameObject => gameObject.Enable());
-        // }
-        //
-        // public void Disable()
-        // {
-        //     _gameObjects.ForEach(gameObject => gameObject.Disable());
-        // }
 
-        public void Destroy()
-        {
-            IsActive = false;
-            _gameObjects.ForEach(gameObject => gameObject.Destroy());
-        }
-        
         public void Add(IGameObject instance) => _gameObjects.Add(instance);
 
         public void Remove(IGameObject instance) => _gameObjects.Remove(instance);

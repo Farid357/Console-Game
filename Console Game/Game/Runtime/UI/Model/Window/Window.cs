@@ -2,7 +2,7 @@ using System;
 
 namespace Console_Game.UI
 {
-    public sealed class Window : IWindow
+    public sealed class Window : IWindow, IUiElement
     {
         private readonly IUiElement _uiElement;
 

@@ -16,7 +16,7 @@ namespace Console_Game.Weapons
             _view = view ?? throw new ArgumentNullException(nameof(view));
         }
 
-        public bool IsActive { get; private set; }
+        public bool IsActive { get; private set; } = true;
 
         public Vector2 Position => _movement.Transform.Position;
 

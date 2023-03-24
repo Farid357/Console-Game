@@ -15,8 +15,8 @@ namespace Console_Game.Weapons
             
             _bullets = all ?? throw new ArgumentNullException(nameof(all));
         }
-        
-        public bool IsActive { get; private set; }
+
+        public bool IsActive { get; private set; } = true;
 
         public Vector2 Position => _bullets[0].Position;
 

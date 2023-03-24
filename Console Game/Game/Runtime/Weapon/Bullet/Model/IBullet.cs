@@ -7,5 +7,7 @@ namespace Console_Game.Weapons
         Vector2 Position { get; }
         
         void Throw(Vector2 direction);
+
+        void Destroy();
     }
 }

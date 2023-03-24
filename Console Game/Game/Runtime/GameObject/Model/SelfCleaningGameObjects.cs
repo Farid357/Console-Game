@@ -40,10 +40,5 @@ namespace Console_Game
                     _gameObjects.Remove(gameObject);
             }
         }
-
-        public void Destroy()
-        {
-            _gameObjects.Destroy();
-        }
     }
 }

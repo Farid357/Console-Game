@@ -38,8 +38,6 @@ namespace Console_Game
             IWeaponSlotFactory<IWeapon, IWeaponInput> weaponSlotFactory = new WeaponSlotFactory<IWeapon, IWeaponInput>(playerFactory, playersSimulation, textFactory, imageFactory);
             var weaponInventory = weaponInventoryFactory.CreateStandard();
             weaponInventory.Add(weaponSlotFactory.Create("Pistol", weapon, weaponInput));
-           // var enemyData = new JsonFilesStorage().LoadFile<EnemyData>(JsonFilesPaths.Zombie);
-           // Console.WriteLine(enemyData.Name);
             playerFactory.Create(weaponInput, weapon);
             walletFactory.Create();
         }

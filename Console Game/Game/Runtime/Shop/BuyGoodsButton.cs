@@ -3,38 +3,31 @@ using Console_Game.UI;
 
 namespace Console_Game.Shop
 {
-    public sealed class BuyGoodsButton : IButton
+    public sealed class BuyGoodsButton : IPressOnlyButton
     {
+        private readonly IPressOnlyButton _button;
+        private readonly INotEnoughMoneyView _notEnoughMoneyView;
         private readonly IClient _client;
-        private readonly IButton _button;
 
-        public BuyGoodsButton(IClient client, IButton button)
+        public BuyGoodsButton(IClient client, IPressOnlyButton button, INotEnoughMoneyView notEnoughMoneyView)
         {
             _client = client ?? throw new ArgumentNullException(nameof(client));
             _button = button ?? throw new ArgumentNullException(nameof(button));
+            _notEnoughMoneyView = notEnoughMoneyView ?? throw new ArgumentNullException(nameof(notEnoughMoneyView));
         }
-        
-        public ITransform Transform => _button.Transform;
-
-        public bool IsEnabled => _button.IsEnabled;
 
         public void Press()
         {
             if (_client.HasGoods && _client.EnoughMoney)
             {
                 _client.BuyGoods();
+                _button.Press();
             }
-            
+
             else
             {
-                Console.WriteLine($"Not enough money!");
+                _notEnoughMoneyView.Enable();
             }
-            
-            _button.Press();
         }
-
-        public void Enable() => _button.Enable();
-
-        public void Disable() => _button.Disable();
     }
 }

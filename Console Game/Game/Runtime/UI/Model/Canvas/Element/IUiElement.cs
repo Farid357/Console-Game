@@ -1,14 +1,10 @@
 namespace Console_Game.UI
 {
-    public interface IUiElement
+    public interface IUiElement : IReadOnlyUiElement
     {
-        bool IsEnabled { get; }
-       
         void Enable();
 
         void Disable();
-        
-        ITransform Transform { get; }
-        
+
     }
 }

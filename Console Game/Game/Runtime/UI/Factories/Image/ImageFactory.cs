@@ -18,7 +18,8 @@ namespace Console_Game.UI
 
         public IImage Create(ITransform transform)
         {
-            IImage image = new Image(_uiElementFactory.Create(transform), _fileName);
+            var bitmap = new Bitmap(_fileName);
+            IImage image = new Image(_uiElementFactory.Create(transform), bitmap);
             image.Draw();
             image.Enable();
             image.SwitchColor(_color);

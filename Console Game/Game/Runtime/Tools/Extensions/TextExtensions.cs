@@ -24,5 +24,10 @@ namespace Console_Game.Tools
         {
             text.Visualize(count.ToString(formatProvider));
         }
+
+        public static void Clear(this IText text)
+        {
+            text.Visualize(string.Empty);
+        }
     }
 }

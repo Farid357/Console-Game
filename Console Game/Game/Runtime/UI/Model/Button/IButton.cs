@@ -1,7 +1,6 @@
 namespace Console_Game.UI
 {
-    public interface IButton : IUiElement
+    public interface IButton : IUiElement, IPressOnlyButton
     {
-        void Press();
     }
 }

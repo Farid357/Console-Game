@@ -11,10 +11,10 @@ namespace Console_Game.UI
         private readonly Graphics _graphics;
         private readonly Bitmap _bitmap;
 
-        public Image(IUiElement uiElement, string fileName)
+        public Image(IUiElement uiElement, Bitmap bitmap)
         {
             _uiElement = uiElement ?? throw new ArgumentNullException(nameof(uiElement));
-            _bitmap = new Bitmap(fileName);
+            _bitmap = bitmap ?? throw new ArgumentNullException(nameof(bitmap));
             _graphics = Graphics.FromImage(_bitmap);
         }
         

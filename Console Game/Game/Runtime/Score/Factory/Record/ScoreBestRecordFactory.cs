@@ -1,8 +1,6 @@
 using System;
-using System.Numerics;
 using Console_Game.Save_Storages;
 using Console_Game.Save_Storages.Paths;
-using Console_Game.UI;
 
 namespace Console_Game
 {
@@ -10,13 +8,13 @@ namespace Console_Game
     {
         private readonly ISaveStorages _saveStorages;
         private readonly IGroup<IGameLoopObject> _gameLoopObjects;
-        private readonly ITextFactory _textFactory;
-        
-        public ScoreBestRecordFactory(ISaveStorages saveStorages, IGroup<IGameLoopObject> gameLoopObjects, ITextFactory textFactory)
+        private readonly IScoreBestRecordViewFactory _viewFactory;
+
+        public ScoreBestRecordFactory(ISaveStorages saveStorages, IGroup<IGameLoopObject> gameLoopObjects, IScoreBestRecordViewFactory viewFactory)
         {
             _saveStorages = saveStorages ?? throw new ArgumentNullException(nameof(saveStorages));
             _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
-            _textFactory = textFactory ?? throw new ArgumentNullException(nameof(textFactory));
+            _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
         }
 
         public IScoreBestRecord Create(IScore score)
@@ -25,9 +23,8 @@ namespace Console_Game
                 throw new ArgumentNullException(nameof(score));
 
             ISaveStorage<int> recordStorage = new BinaryStorage<int>(new Path(nameof(IScoreBestRecord)));
-            IText text = _textFactory.Create(new Transform(new Vector2(200, 100)));
-            IScoreBestRecordView bestRecordView = new ScoreBestRecordView(text);
-            var scoreBestRecord = new ScoreBestRecord(score, recordStorage, bestRecordView);
+            IScoreBestRecordView view = _viewFactory.Create();
+            var scoreBestRecord = new ScoreBestRecord(score, recordStorage, view);
             _gameLoopObjects.Add(scoreBestRecord);
             _saveStorages.Add(recordStorage);
             return scoreBestRecord;

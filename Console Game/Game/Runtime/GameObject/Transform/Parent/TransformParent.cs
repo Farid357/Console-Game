@@ -15,21 +15,15 @@ namespace Console_Game
             _transform = transform ?? throw new ArgumentNullException(nameof(transform));
         }
 
-        public IReadOnlyList<ITransform> All => _children;
+        public IReadOnlyList<ITransform> Children => _children;
 
         public Vector2 Position => _transform.Position;
 
         public Quaternion Rotation => _transform.Rotation;
        
-        public void Add(ITransform instance)
-        {
-            _children.Add(instance);
-        }
+        public void Add(ITransform child) => _children.Add(child);
 
-        public void Remove(ITransform instance)
-        {
-            _children.Remove(instance);
-        }
+        public void Remove(ITransform child) => _children.Remove(child);
 
         public void Teleport(Vector2 position)
         {

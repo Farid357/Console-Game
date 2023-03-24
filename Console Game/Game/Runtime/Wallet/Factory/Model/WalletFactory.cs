@@ -1,27 +1,24 @@
 using System;
-using System.Numerics;
 using Console_Game.Save_Storages;
 using Console_Game.Save_Storages.Paths;
-using Console_Game.UI;
 
 namespace Console_Game
 {
-    public sealed class WalletFactory : IFactory<IWallet>
+    public sealed class WalletFactory : IWalletFactory
     {
         private readonly ISaveStorages _saveStorages;
-        private readonly ITextFactory _textFactory;
+        private readonly IWalletViewFactory _viewFactory;
 
-        public WalletFactory(ISaveStorages saveStorages, ITextFactory textFactory)
+        public WalletFactory(ISaveStorages saveStorages, IWalletViewFactory viewFactory)
         {
             _saveStorages = saveStorages ?? throw new ArgumentNullException(nameof(saveStorages));
-            _textFactory = textFactory ?? throw new ArgumentNullException(nameof(textFactory));
+            _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
         }
 
         public IWallet Create()
         {
             ISaveStorage<IWallet> saveStorage = new BinaryStorage<IWallet>(new Path(nameof(IWallet)));
-            IText moneyText = _textFactory.Create(new Transform(new Vector2(75, 120)));
-            IWalletView walletView = new WalletView(moneyText);
+            IWalletView walletView = _viewFactory.Create();
             IWallet defaultWallet = new Wallet(100, walletView);
             _saveStorages.Add(saveStorage);
             IWallet wallet = saveStorage.HasSave() ? new WalletWithSave(saveStorage.Load(), saveStorage) : new WalletWithSave(defaultWallet, saveStorage);

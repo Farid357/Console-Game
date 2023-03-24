@@ -1,5 +1,7 @@
 using System;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Numerics;
 
 namespace Console_Game.UI
 {
@@ -9,7 +11,7 @@ namespace Console_Game.UI
         private readonly IUiElement _uiElement;
         private readonly Font _font;
         private readonly Graphics _graphics;
-        
+
         public Text(IUiElement uiElement, Font font)
         {
             _uiElement = uiElement ?? throw new ArgumentNullException(nameof(uiElement));
@@ -28,7 +30,8 @@ namespace Console_Game.UI
         {
             Line = line;
             var solidBrush = new SolidBrush(Color);
-            _graphics.DrawString(Line, _font, solidBrush, 1, 2);
+            Vector2 position = Transform.Position;
+            _graphics.DrawString(Line, _font, solidBrush, position.X, position.Y);
         }
 
         public void SwitchColor(Color color)

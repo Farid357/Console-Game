@@ -1,6 +1,6 @@
 namespace Console_Game
 {
-    public interface IInventorySlot<TItem> : IReadOnlyInventorySlot<TItem>
+    public interface IInventorySlot<out TItem> : IReadOnlyInventorySlot<TItem>
     {
         void Add(int itemsCount);
 

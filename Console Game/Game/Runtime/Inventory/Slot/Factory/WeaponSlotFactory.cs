@@ -1,0 +1,28 @@
+using System;
+
+namespace Console_Game
+{
+    public sealed class WeaponSlotFactory<TWeapon, TWeaponInput> : IWeaponSlotFactory<TWeapon, TWeaponInput> where TWeaponInput : IWeaponInput where TWeapon : IWeapon
+    {
+        private readonly IPlayerFactory<TWeapon, TWeaponInput> _playerFactory;
+        private readonly IPlayersSimulation<IPlayer> _simulation;
+        private readonly IInventorySlotViewFactory _viewFactory;
+
+
+        public WeaponSlotFactory(IPlayerFactory<TWeapon, TWeaponInput> playerFactory, IPlayersSimulation<IPlayer> simulation, IInventorySlotViewFactory viewFactory)
+        {
+            _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));
+            _simulation = simulation ?? throw new ArgumentNullException(nameof(simulation));
+            _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
+        }
+        
+        public IInventorySlot<IWeaponInventoryItem> Create(IInventoryItemViewData viewData, TWeapon weapon, TWeaponInput weaponInput)
+        {
+            IInventoryItem item = new InventoryItem(viewData);
+            IPlayer player = _playerFactory.Create(weaponInput, weapon);
+            var weaponItem = new WeaponInventoryItem<IPlayer>(_simulation, item, player);
+            IInventorySlotView slotView = _viewFactory.Create();
+            return new InventorySlot<IWeaponInventoryItem>(weaponItem, slotView);
+        }
+    }
+}

@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-
 namespace Console_Game
 {
-    public interface IInventoryView<TItem>
+    public interface IInventoryView<in TItem>
     {
-        void Visualize(IEnumerable<IInventorySlot<TItem>> slots);
+        void Add(IInventorySlot<TItem> slot);
+        
+        void Drop(IInventorySlot<TItem> slot);
     }
 }

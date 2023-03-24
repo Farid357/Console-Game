@@ -1,17 +1,20 @@
 using System;
-using System.Collections.Generic;
+using Console_Game.UI;
 
 namespace Console_Game
 {
     public sealed class InventoryView<TItem> : IInventoryView<TItem> where TItem : IInventoryItem
     {
-        public void Visualize(IEnumerable<IInventorySlot<TItem>> slots)
+        private readonly IScrollView _scrollView;
+
+        public void Add(IInventorySlot<TItem> slot)
         {
-            foreach (var slot in slots)
-            {
-                Console.WriteLine($"Slot - {slot.Item.ViewData.Name}, has items - {slot.ItemsCount}");
-                Console.WriteLine();
-            }
+            throw new NotImplementedException();
+        }
+
+        public void Drop(IInventorySlot<TItem> slot)
+        {
+            throw new NotImplementedException();
         }
     }
 }

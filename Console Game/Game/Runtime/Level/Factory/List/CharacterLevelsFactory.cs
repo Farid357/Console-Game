@@ -1,26 +1,22 @@
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 using Console_Game.Stats;
-using Console_Game.UI;
 
 namespace Console_Game
 {
     public sealed class CharacterLevelsFactory : ILevelsFactory
     {
-        private readonly ITextFactory _textFactory;
+        private readonly ILevelViewFactory _viewFactory;
 
-        public CharacterLevelsFactory(ITextFactory textFactory)
+        public CharacterLevelsFactory(ILevelViewFactory viewFactory)
         {
-            _textFactory = textFactory ?? throw new ArgumentNullException(nameof(textFactory));
+            _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
         }
 
         public List<ILevel> Create()
         {
-            ITransform textTransform = new Transform(new Vector2(100, 250));
-            IText text = _textFactory.Create(textTransform);
-            ILevelView levelView = new LevelView("Player", text);
-
+            ILevelView levelView = _viewFactory.Create();
+            
             return new List<ILevel>
             {
                 new Level(levelView, startXp: 0, maxXp: 10),

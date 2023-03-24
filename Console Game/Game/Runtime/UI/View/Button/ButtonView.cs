@@ -7,33 +7,29 @@ namespace Console_Game.UI
     public sealed class ButtonView : IButtonView
     {
         private readonly IImage _image;
-        private readonly Color _startColor;
-        private readonly Color _disabledColor;
-        private readonly Color _pressedColor;
+        private readonly IButtonViewData _viewData;
 
-        public ButtonView(IImage image, Color color, Color disabledColor, Color pressedColor)
+        public ButtonView(IImage image, IButtonViewData viewData)
         {
             _image = image ?? throw new ArgumentNullException(nameof(image));
-            _startColor = color;
-            _disabledColor = disabledColor;
-            _pressedColor = pressedColor;
+            _viewData = viewData ?? throw new ArgumentNullException(nameof(viewData));
         }
 
         public Color Color => _image.Color;
         
         public void Press()
         {
-            _image.SwitchColor(_pressedColor);
+            _image.SwitchColor(_viewData.PressedColor);
         }
 
         public void Enable()
         {
-            _image.SwitchColor(_startColor);
+            _image.SwitchColor(_viewData.StartColor);
         }
 
         public void Disable()
         {
-            _image.SwitchColor(_disabledColor);
+            _image.SwitchColor(_viewData.DisabledColor);
         }
     }
 }

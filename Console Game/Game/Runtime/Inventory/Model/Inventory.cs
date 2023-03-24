@@ -23,7 +23,7 @@ namespace Console_Game
                 throw new ArgumentNullException(nameof(slot));
             
             _slots.Add(slot);
-            _view.Visualize(_slots);
+            _view.Add(slot);
         }
 
         public void Drop(IInventorySlot<TItem> slot)
@@ -35,7 +35,7 @@ namespace Console_Game
                 throw new InvalidOperationException($"Can't remove {slot}");
 
             _slots.Remove(slot);
-            _view.Visualize(_slots);
+            _view.Drop(slot);
         }
     }
 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace Console_Game.UI
+namespace ConsoleGame.UI
 {
     public sealed class UiElementFactory : IUiElementFactory
     {

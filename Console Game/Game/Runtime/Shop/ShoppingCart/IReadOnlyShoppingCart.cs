@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Console_Game.Shop
+namespace ConsoleGame.Shop
 {
     public interface IReadOnlyShoppingCart
     {

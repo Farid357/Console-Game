@@ -1,4 +1,4 @@
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
     //TODO Bullet View
     public sealed class BulletView : IBulletView

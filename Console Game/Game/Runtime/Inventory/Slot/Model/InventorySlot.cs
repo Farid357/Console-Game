@@ -1,7 +1,7 @@
 using System;
-using Console_Game.Tools;
+using ConsoleGame.Tools;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class InventorySlot<TItem> : IInventorySlot<TItem> where TItem : IInventoryItem
     {

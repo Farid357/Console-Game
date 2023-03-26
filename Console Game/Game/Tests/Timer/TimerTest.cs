@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using Console_Game.Tools;
+using ConsoleGame.Tools;
 using NUnit.Framework;
 
-namespace Console_Game.Tests
+namespace ConsoleGame.Tests
 {
     [TestFixture]
     public sealed class TimerTest

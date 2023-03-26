@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-namespace Console_Game.UI
+namespace ConsoleGame.UI
 {
     [Serializable]
     public sealed class ButtonView : IButtonView

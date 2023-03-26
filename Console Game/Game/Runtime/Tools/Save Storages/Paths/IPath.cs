@@ -1,4 +1,4 @@
-﻿namespace Console_Game.Save_Storages.Paths
+﻿namespace ConsoleGame.Save_Storages.Paths
 {
     public interface IPath
     {

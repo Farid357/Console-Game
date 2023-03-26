@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Console_Game.LoadSystem
+namespace ConsoleGame.LoadSystem
 {
     public sealed class AsyncScenes : IAsyncScenes
     {
@@ -17,8 +17,6 @@ namespace Console_Game.LoadSystem
         public AsyncScenes() : this(new List<IAsyncScene>())
         {
         }
-
-        public IReadOnlyList<IAsyncScene> All => _scenes;
 
         public float LoadingProgress => _scenes.Sum(scene => scene.LoadingProgress) / _scenes.Count;
 

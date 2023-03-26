@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Numerics;
 
-namespace Console_Game.UI
+namespace ConsoleGame.UI
 {
     [Serializable]
     public sealed class Text : IText

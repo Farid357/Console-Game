@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
     public interface ILaserWeaponView
     {

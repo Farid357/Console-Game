@@ -1,8 +1,8 @@
 using System;
 using System.Numerics;
-using Console_Game.Tools;
+using ConsoleGame.Tools;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class Rigidbody : IRigidbody
     {

@@ -1,11 +1,7 @@
-using System.Collections.Generic;
-
-namespace Console_Game
+namespace ConsoleGame
 {
-    public interface IGroup<T>
+    public interface IGroup<in T>
     {
-        IReadOnlyList<T> All { get; }
-        
         void Add(T instance);
      
         void Remove(T instance);

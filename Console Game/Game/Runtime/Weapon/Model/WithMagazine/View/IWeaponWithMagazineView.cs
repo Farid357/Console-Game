@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
     public interface IWeaponWithMagazineView
     {

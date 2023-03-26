@@ -1,17 +1,20 @@
-namespace Console_Game
+using System;
+using ConsoleGame.Loop;
+
+namespace ConsoleGame
 {
     public sealed class PlayerSimulationFactory : IPlayerSimulationFactory
     {
-        private readonly IGroup<IGameLoopObject> _gameLoopObjects;
+        private readonly IGameLoopObjectsGroup _gameLoop;
 
-        public PlayerSimulationFactory(IGroup<IGameLoopObject> gameLoopObjects)
+        public PlayerSimulationFactory(IGameLoopObjectsGroup gameLoop)
         {
-            _gameLoopObjects = gameLoopObjects;
+            _gameLoop = gameLoop ?? throw new ArgumentNullException(nameof(gameLoop));
         }
 
         public IPlayersSimulation<TPlayer> Create<TPlayer>() where TPlayer : IPlayer
         {
-            IPlayersSimulation<TPlayer> simulation = new PlayersSimulation<TPlayer>(_gameLoopObjects);
+            IPlayersSimulation<TPlayer> simulation = new PlayersSimulation<TPlayer>(_gameLoop);
             return new SelfCleaningPlayerSimulation<TPlayer>(simulation);
         }
     }

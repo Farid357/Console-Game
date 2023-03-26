@@ -1,7 +1,7 @@
 using System;
-using Console_Game.Tools;
+using ConsoleGame.Tools;
 
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
     public sealed class WeaponMagazine : IWeaponMagazine
     {
@@ -13,14 +13,12 @@ namespace Console_Game.Weapons
             Bullets = bullets.ThrowIfLessThanOrEqualsToZeroException();
             MaxBullets = Bullets;
         }
+        
+        public int MaxBullets { get; }
 
         public int Bullets { get; private set; }
 
-        public int MaxBullets { get; }
-
         public bool IsEmpty => Bullets == 0;
-
-        public bool CanAdd(int bullets) => Bullets + bullets <= MaxBullets;
 
         public void Take(int bullets)
         {
@@ -36,7 +34,7 @@ namespace Console_Game.Weapons
 
         public void Add(int bullets)
         {
-            if (CanAdd(bullets) == false)
+            if (Bullets + bullets > MaxBullets)
                 throw new InvalidOperationException(nameof(Add));
 
             Bullets += bullets.ThrowIfLessThanOrEqualsToZeroException();

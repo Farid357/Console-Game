@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Console_Game.Save_Storages;
+using ConsoleGame.Save_Storages;
 
-namespace Console_Game.Shop
+namespace ConsoleGame.Shop
 {
     public sealed class CollectionSaveStorage<T> : ICollectionSaveStorage<T>
     {

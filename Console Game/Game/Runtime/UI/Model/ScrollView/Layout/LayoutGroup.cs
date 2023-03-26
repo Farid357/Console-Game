@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
-namespace Console_Game.UI
+namespace ConsoleGame.UI
 {
     public sealed class LayoutGroup : ILayoutGroup
     {

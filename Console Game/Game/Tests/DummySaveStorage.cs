@@ -1,6 +1,6 @@
-using Console_Game.Save_Storages;
+using ConsoleGame.Save_Storages;
 
-namespace Console_Game.Tests
+namespace ConsoleGame.Tests
 {
     public sealed class DummySaveStorage<T> : ISaveStorage<T>
     {

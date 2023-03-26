@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Console_Game.Tests
+namespace ConsoleGame.Tests
 {
     [TestFixture]
     public sealed class WeaponWithShootWaitingTest

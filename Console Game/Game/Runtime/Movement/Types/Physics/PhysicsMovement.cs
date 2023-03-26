@@ -1,9 +1,9 @@
 using System;
 using System.Numerics;
 
-namespace Console_Game
+namespace ConsoleGame
 {
-    public sealed class PhysicsMovement : IPhysicsMovement, IGameLoopObject
+    public sealed class PhysicsMovement : IMovement, IGameLoopObject
     {
         private readonly ITransform _transform;
 

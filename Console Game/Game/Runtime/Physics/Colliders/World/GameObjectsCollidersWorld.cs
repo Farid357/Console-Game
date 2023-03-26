@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Console_Game.Physics
+namespace ConsoleGame.Physics
 {
     public sealed class GameObjectsCollidersWorld<TModel> : IGameLoopObject, ICollidersWorld<TModel> where TModel : IGameObject
     {

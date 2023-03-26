@@ -1,7 +1,7 @@
 using System.Drawing;
-using Console_Game.UI;
+using ConsoleGame.UI;
 
-namespace Console_Game.Tests.UI
+namespace ConsoleGame.Tests.UI
 {
     public sealed class DummyButtonViewData : IButtonViewData
     {

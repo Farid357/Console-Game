@@ -1,7 +1,7 @@
 using System;
-using Console_Game.Weapons;
+using ConsoleGame.Weapons;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class PlayerWithWeaponMagazineFactory : IPlayerFactory<IWeaponWithMagazine, IWeaponInput, IPlayerWithWeaponMagazine>
     {

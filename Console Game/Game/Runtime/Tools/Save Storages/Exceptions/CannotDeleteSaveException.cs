@@ -1,6 +1,6 @@
 using System;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     [Serializable]
     public sealed class CannotDeleteSaveException : Exception

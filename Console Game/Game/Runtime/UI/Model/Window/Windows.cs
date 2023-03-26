@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Console_Game.UI
+namespace ConsoleGame.UI
 {
     public sealed class Windows : IWindows
     {
@@ -16,11 +16,8 @@ namespace Console_Game.UI
         {
         }
 
-        public IReadOnlyList<IWindow> All => _windows;
-
+        
         public bool IsOpen { get; private set; }
-
-        public bool IsEnabled => IsOpen;
 
         public void Open()
         {
@@ -37,9 +34,6 @@ namespace Console_Game.UI
         public void Add(IWindow instance) => _windows.Add(instance);
 
         public void Remove(IWindow instance) => _windows.Remove(instance);
-
-        public void Enable() => Open();
-
-        public void Disable() => Close();
+        
     }
 }

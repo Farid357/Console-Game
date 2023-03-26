@@ -1,7 +1,7 @@
 using System;
 using System.Numerics;
 
-namespace Console_Game.Physics
+namespace ConsoleGame.Physics
 {
     //TODO Raycast
     public sealed class Raycast<TTarget> : IGameLoopObject, IRaycast<TTarget>

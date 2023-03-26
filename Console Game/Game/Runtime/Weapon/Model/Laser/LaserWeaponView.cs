@@ -1,7 +1,7 @@
 using System;
 using System.Numerics;
 
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
     public sealed class LaserWeaponView : ILaserWeaponView
     {

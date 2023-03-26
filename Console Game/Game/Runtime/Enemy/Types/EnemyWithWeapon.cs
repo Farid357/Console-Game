@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using Console_Game.Weapons;
+using ConsoleGame.Weapons;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class EnemyWithWeapon : IEnemy, IGameLoopObject
     {
@@ -21,15 +21,11 @@ namespace Console_Game
 
         public IHealth Health => _enemy.Health;
 
-        public IMovement Movement => _enemy.Movement;
-
-        public IEnemyData Data => _enemy.Data;
-
         public void Update(float deltaTime) => TryShoot();
 
         private async Task TryReload()
         {
-            if (!_weapon.Magazine.IsEmpty)
+            if (_weapon.Magazine.Bullets > 0)
                 return;
 
             if (_reloadTimer.Time > 0f)

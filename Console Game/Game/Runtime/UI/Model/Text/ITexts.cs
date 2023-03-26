@@ -1,4 +1,4 @@
-namespace Console_Game.UI
+namespace ConsoleGame.UI
 {
     public interface ITexts : IText, IGroup<IText>
     {

@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace Console_Game.Tools
+namespace ConsoleGame.Tools
 {
     public static class BitmapExtensions
     {

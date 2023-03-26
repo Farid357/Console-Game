@@ -1,4 +1,4 @@
-namespace Console_Game.Inventory
+namespace ConsoleGame.Inventory
 {
     public interface IInventoryItemSelectingInput<out TItem>
     {

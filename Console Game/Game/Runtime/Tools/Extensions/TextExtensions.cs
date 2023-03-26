@@ -1,7 +1,7 @@
 using System;
-using Console_Game.UI;
+using ConsoleGame.UI;
 
-namespace Console_Game.Tools
+namespace ConsoleGame.Tools
 {
     public static class TextExtensions
     {

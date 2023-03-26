@@ -1,4 +1,4 @@
-namespace Console_Game
+namespace ConsoleGame
 {
     public interface IPlayersSimulation<in TPlayer> : IReadOnlyPlayersSimulation where TPlayer : IPlayer
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Console_Game.Shop
+namespace ConsoleGame.Shop
 {
     public sealed class ShoppingCart : IShoppingCart
     {

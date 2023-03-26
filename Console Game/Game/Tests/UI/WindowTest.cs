@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Console_Game;
-using Console_Game.UI;
+using ConsoleGame;
+using ConsoleGame.UI;
 using NUnit.Framework;
 
-namespace Console_Game.Tests.UI
+namespace ConsoleGame.Tests.UI
 {
     [TestFixture]
     public sealed class WindowTest

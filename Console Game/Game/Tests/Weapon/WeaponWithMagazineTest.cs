@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using Console_Game.Weapons;
+using ConsoleGame.Weapons;
 using NUnit.Framework;
 
-namespace Console_Game.Tests
+namespace ConsoleGame.Tests
 {
     [TestFixture]
     public sealed class WeaponWithMagazineTest
@@ -10,7 +10,7 @@ namespace Console_Game.Tests
         [Test]
         public void TakesBulletFromMagazine()
         {
-            var bulletsFactory = new DummyBulletsFactory();
+            var bulletsFactory = new DummyBulletFactory();
             IWeaponMagazine weaponMagazine = new WeaponMagazine(10, new DummyMagazineView());
             IWeapon weapon = new WeaponWithMagazine(weaponMagazine, new Weapon(bulletsFactory, 10), new DummyWeaponWithMagazineView());
             weapon.Shoot();
@@ -20,7 +20,7 @@ namespace Console_Game.Tests
         [Test]
         public async Task ReloadsCorrectly()
         {
-            var bulletsFactory = new DummyBulletsFactory();
+            var bulletsFactory = new DummyBulletFactory();
             IWeaponMagazine weaponMagazine = new WeaponMagazine(10, new DummyMagazineView());
             IWeaponWithMagazine weapon = new WeaponWithMagazine(weaponMagazine, new Weapon(bulletsFactory, 10), new DummyWeaponWithMagazineView());
             

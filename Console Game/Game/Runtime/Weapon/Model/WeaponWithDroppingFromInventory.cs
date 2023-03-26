@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class WeaponWithDroppingFromInventory : IWeapon
     {

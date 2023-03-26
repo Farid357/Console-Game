@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Console_Game.LoadSystem
+namespace ConsoleGame.LoadSystem
 {
     public sealed class SceneWithLoadingView : IAsyncScene
     {

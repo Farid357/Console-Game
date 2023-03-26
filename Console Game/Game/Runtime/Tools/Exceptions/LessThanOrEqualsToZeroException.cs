@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Console_Game.Tools
+namespace ConsoleGame.Tools
 {
     [Serializable]
     public sealed class LessThanOrEqualsToZeroException : Exception

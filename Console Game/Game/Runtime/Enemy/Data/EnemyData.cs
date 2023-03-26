@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     [Serializable]
     public class EnemyData

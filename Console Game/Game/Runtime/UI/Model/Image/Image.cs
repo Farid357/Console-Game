@@ -1,8 +1,8 @@
 using System;
 using System.Drawing;
-using Console_Game.Tools;
+using ConsoleGame.Tools;
 
-namespace Console_Game.UI
+namespace ConsoleGame.UI
 {
     [Serializable]
     public sealed class Image : IImage

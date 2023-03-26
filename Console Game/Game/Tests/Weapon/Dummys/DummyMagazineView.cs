@@ -1,6 +1,6 @@
-using Console_Game.Weapons;
+using ConsoleGame.Weapons;
 
-namespace Console_Game.Tests
+namespace ConsoleGame.Tests
 {
     public sealed class DummyMagazineView : IWeaponMagazineView
     {

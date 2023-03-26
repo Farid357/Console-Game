@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class Inventory<TItem> : IInventory<TItem> where TItem : IInventoryItem
     {

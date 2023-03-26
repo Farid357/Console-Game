@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Console_Game.Physics
+namespace ConsoleGame.Physics
 {
     public sealed class CollidersWorld<TModel> : ICollidersWorld<TModel>
     {

@@ -1,4 +1,4 @@
-namespace Console_Game.Tests.Inventory
+namespace ConsoleGame.Tests.Inventory
 {
     public sealed class DummySlot<T> : IInventorySlot<T>
     {

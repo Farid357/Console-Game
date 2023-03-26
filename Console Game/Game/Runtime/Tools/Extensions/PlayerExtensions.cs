@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Console_Game.Tools
+namespace ConsoleGame.Tools
 {
     public static class PlayerExtensions
     {

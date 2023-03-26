@@ -1,6 +1,6 @@
 using System;
 
-namespace Console_Game.UI
+namespace ConsoleGame.UI
 {
     [Serializable]
     public sealed class Button : IButton

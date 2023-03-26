@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace Console_Game.Physics
+namespace ConsoleGame.Physics
 {
     public sealed class BoxCollider : ICollider
     {

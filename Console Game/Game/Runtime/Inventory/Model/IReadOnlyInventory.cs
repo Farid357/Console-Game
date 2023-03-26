@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public interface IReadOnlyInventory<TItem>
     {

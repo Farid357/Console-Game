@@ -1,4 +1,4 @@
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
     public interface IWeaponMagazine : IReadOnlyWeaponMagazine
     {
@@ -6,5 +6,4 @@ namespace Console_Game.Weapons
 
         void Add(int bullets);
     }
-
 }

@@ -1,4 +1,4 @@
-namespace Console_Game
+namespace ConsoleGame
 {
     public interface IWeaponSlotFactory<in TWeapon, in TWeaponInput>
     {

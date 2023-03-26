@@ -1,4 +1,4 @@
-namespace Console_Game.Shop
+namespace ConsoleGame.Shop
 {
     public interface IClient
     {

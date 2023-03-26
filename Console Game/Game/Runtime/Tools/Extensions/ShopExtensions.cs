@@ -1,7 +1,7 @@
 using System;
-using Console_Game.Shop;
+using ConsoleGame.Shop;
 
-namespace Console_Game.Tools
+namespace ConsoleGame.Tools
 {
     public static class ShopExtensions
     {

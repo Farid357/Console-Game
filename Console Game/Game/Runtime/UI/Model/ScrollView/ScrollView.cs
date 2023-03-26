@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Console_Game.UI
+namespace ConsoleGame.UI
 {
     public sealed class ScrollView : IScrollView
     {

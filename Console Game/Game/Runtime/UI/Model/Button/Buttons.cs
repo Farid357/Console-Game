@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Console_Game.UI
+namespace ConsoleGame.UI
 {
     public sealed class Buttons : IButtons
     {
@@ -15,8 +15,6 @@ namespace Console_Game.UI
         public Buttons() : this(new List<IButton>())
         {
         }
-
-        public IReadOnlyList<IButton> All => _buttons;
 
         public ITransform Transform { get; } = new Transform();
         

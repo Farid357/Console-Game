@@ -1,6 +1,6 @@
-using Console_Game.Save_Storages;
+using ConsoleGame.Save_Storages;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public static class SaveStorageExtensions
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Console_Game.UI
+namespace ConsoleGame.UI
 {
     [Serializable]
     public sealed class Canvas : ICanvas
@@ -21,8 +21,6 @@ namespace Console_Game.UI
         public bool IsEnabled { get; private set; }
 
         public ITransform Transform { get; }
-
-        public IReadOnlyList<IUiElement> All => _uiElements;
 
         public void Add(IUiElement instance) => _uiElements.Add(instance);
 

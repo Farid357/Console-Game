@@ -1,7 +1,7 @@
 using System;
-using Console_Game.Loop;
+using ConsoleGame.Loop;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class EnemyWithRewardFactory : IEnemyFactory
     {

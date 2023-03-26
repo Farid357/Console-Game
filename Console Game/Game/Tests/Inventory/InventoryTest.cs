@@ -1,7 +1,7 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace Console_Game.Tests.Inventory
+namespace ConsoleGame.Tests.Inventory
 {
     [TestFixture]
     public sealed class InventoryTest

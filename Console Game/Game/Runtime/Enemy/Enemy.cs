@@ -1,20 +1,23 @@
 using System;
 
-namespace Console_Game
+namespace ConsoleGame
 {
-    public sealed class Enemy : IEnemy
+    public sealed class Enemy : IEnemy, IGameObject
     {
-        public Enemy(IHealth health, IMovement movement, IEnemyData data)
+        public Enemy(IHealth health)
         {
             Health = health ?? throw new ArgumentNullException(nameof(health));
-            Movement = movement ?? throw new ArgumentNullException(nameof(movement));
-            Data = data ?? throw new ArgumentNullException(nameof(data));
         }
 
         public IHealth Health { get; }
 
-        public IMovement Movement { get; }
+        public bool IsActive => Health.IsAlive;
 
-        public IEnemyData Data { get; }
+        public void Update(float deltaTime)
+        {
+            if (!IsActive)
+                throw new InvalidOperationException($"Enemy isn't active1");
+            
+        }
     }
 }

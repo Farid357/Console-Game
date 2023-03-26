@@ -1,13 +1,10 @@
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
     public interface IReadOnlyWeaponMagazine
     {
         int Bullets { get; }
-
+        
         int MaxBullets { get; }
 
-        bool IsEmpty { get; }
-
-        bool CanAdd(int bullets);
     }
 }

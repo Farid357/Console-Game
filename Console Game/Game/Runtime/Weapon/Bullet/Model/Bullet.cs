@@ -1,9 +1,9 @@
 using System;
 using System.Numerics;
 
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
-    public sealed class Bullet : IBullet
+    public sealed class Bullet : IBullet, IGameObject
     {
         private readonly IMovement _movement;
         private readonly IBulletView _view;

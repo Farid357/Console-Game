@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Console_Game.Tools
+namespace ConsoleGame.Tools
 {
     public static class TimerExtensions
     {

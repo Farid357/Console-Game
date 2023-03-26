@@ -1,7 +1,7 @@
-using Console_Game.Weapons;
+using ConsoleGame.Weapons;
 using NUnit.Framework;
 
-namespace Console_Game.Tests
+namespace ConsoleGame.Tests
 {
     [TestFixture]
     public sealed class WeaponTest
@@ -9,7 +9,7 @@ namespace Console_Game.Tests
         [Test]
         public void ThrowsBullet()
         {
-            var bulletsFactory = new DummyBulletsFactory();
+            var bulletsFactory = new DummyBulletFactory();
             IWeapon weapon = new Weapon(bulletsFactory, 10);
             weapon.Shoot();
             Assert.That(bulletsFactory.CreatedBullet.WasThrew);

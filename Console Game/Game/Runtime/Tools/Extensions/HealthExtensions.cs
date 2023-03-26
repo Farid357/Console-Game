@@ -1,4 +1,4 @@
-namespace Console_Game.Tools
+namespace ConsoleGame.Tools
 {
     public static class HealthExtensions
     {
@@ -8,7 +8,9 @@ namespace Console_Game.Tools
         }
 
 
-        public static void VisualizeCurrentValue(this IHealth health) => health.TakeDamage(0);
-        
+        public static void Kill(this IHealth health)
+        {
+            health.TakeDamage(health.Value);
+        }
     }
 }

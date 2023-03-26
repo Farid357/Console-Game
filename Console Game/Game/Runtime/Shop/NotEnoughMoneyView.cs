@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using Console_Game.Tools;
-using Console_Game.UI;
+using ConsoleGame.Tools;
+using ConsoleGame.UI;
 
-namespace Console_Game.Shop
+namespace ConsoleGame.Shop
 {
     public sealed class NotEnoughMoneyView : INotEnoughMoneyView
     {

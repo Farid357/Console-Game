@@ -1,18 +1,18 @@
 using System;
 using System.Numerics;
-using Console_Game.Tools;
+using ConsoleGame.Tools;
 
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
     public sealed class Weapon : IWeapon
     {
-        private readonly IBulletsFactory _bulletsFactory;
+        private readonly IBulletFactory _bulletFactory;
         private readonly int _bulletDamage;
         private readonly Vector2 _shootDirection = new Vector2(1, 0);
         
-        public Weapon(IBulletsFactory bulletsFactory, int bulletDamage)
+        public Weapon(IBulletFactory bulletFactory, int bulletDamage)
         {
-            _bulletsFactory = bulletsFactory ?? throw new ArgumentNullException(nameof(bulletsFactory));
+            _bulletFactory = bulletFactory ?? throw new ArgumentNullException(nameof(bulletFactory));
             _bulletDamage = bulletDamage.ThrowIfLessThanOrEqualsToZeroException();
         }
 
@@ -20,7 +20,7 @@ namespace Console_Game.Weapons
 
         public void Shoot()
         {
-            IBullet bullet = _bulletsFactory.Create(_bulletDamage);
+            IBullet bullet = _bulletFactory.Create(_bulletDamage);
             bullet.Throw(_shootDirection);
         }
     }

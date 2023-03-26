@@ -1,7 +1,7 @@
 using System;
-using Console_Game.Tools;
+using ConsoleGame.Tools;
 
-namespace Console_Game.Shop
+namespace ConsoleGame.Shop
 {
     public sealed class Good : IGood
     {

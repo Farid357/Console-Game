@@ -1,4 +1,4 @@
-namespace Console_Game.Tests
+namespace ConsoleGame.Tests
 {
     public sealed class DummyHealthView : IHealthView
     {

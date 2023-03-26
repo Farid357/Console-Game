@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
     public sealed class Bullets : IBullet
     {
@@ -22,6 +22,9 @@ namespace Console_Game.Weapons
 
         public void Throw(Vector2 direction)
         {
+            if (!IsActive)
+                throw new InvalidOperationException($"Bullets are not active!");
+            
             foreach (IBullet bullet in _bullets)
             {
                 bullet.Throw(direction);
@@ -32,11 +35,6 @@ namespace Console_Game.Weapons
         {
             IsActive = false;
             _bullets.ForEach(bullet => bullet.Destroy());
-        }
-
-        public void Update(float deltaTime)
-        {
-            _bullets.ForEach(bullet => bullet.Update(deltaTime));
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace Console_Game.Physics
+namespace ConsoleGame.Physics
 {
     public interface ICollidersWorld<TModel> : IReadOnlyCollidersWorld<TModel>
     {

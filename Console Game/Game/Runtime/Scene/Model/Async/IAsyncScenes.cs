@@ -1,4 +1,4 @@
-namespace Console_Game.LoadSystem
+namespace ConsoleGame.LoadSystem
 {
     public interface IAsyncScenes : IAsyncScene, IGroup<IAsyncScene>
     {

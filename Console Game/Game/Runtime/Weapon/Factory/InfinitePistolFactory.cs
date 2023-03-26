@@ -1,29 +1,28 @@
 using System;
-using Console_Game.UI;
-using Console_Game.Weapons;
+using ConsoleGame.Weapons;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class InfinitePistolFactory : IFactory<IWeapon>
     {
         private readonly IGroup<IGameLoopObject> _gameLoopObjects;
-        private readonly IText _text;
-        private readonly IBulletsFactory _bulletsFactory;
+        private readonly IInfiniteBulletsViewFactory _viewFactory;
+        private readonly IBulletFactory _bulletFactory;
 
-        public InfinitePistolFactory(IGroup<IGameLoopObject> gameLoopObjects, IText text, IBulletsFactory bulletsFactory)
+        public InfinitePistolFactory(IGroup<IGameLoopObject> gameLoopObjects, IInfiniteBulletsViewFactory viewFactory, IBulletFactory bulletFactory)
         {
             _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
-            _text = text ?? throw new ArgumentNullException(nameof(text));
-            _bulletsFactory = bulletsFactory ?? throw new ArgumentNullException(nameof(bulletsFactory));
+            _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
+            _bulletFactory = bulletFactory ?? throw new ArgumentNullException(nameof(bulletFactory));
         }
 
         public IWeapon Create()
         {
             var cooldownTimer = new Timer(0.2f);
             _gameLoopObjects.Add(cooldownTimer);
-            IInfiniteBulletsView infiniteBulletsView = new InfiniteBulletsView(_text);
-            return new WeaponWithInfiniteBullets(new WeaponWithShootWaiting(cooldownTimer, new Weapon(_bulletsFactory, 10)),
-                infiniteBulletsView);
+            IInfiniteBulletsView view = _viewFactory.Create();
+            return new WeaponWithInfiniteBullets(
+                new WeaponWithShootWaiting(cooldownTimer, new Weapon(_bulletFactory, 10)), view);
         }
     }
 }

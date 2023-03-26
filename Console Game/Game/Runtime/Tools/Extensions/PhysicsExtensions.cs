@@ -1,7 +1,7 @@
 using System.Numerics;
-using Console_Game.Physics;
+using ConsoleGame.Physics;
 
-namespace Console_Game.Tools
+namespace ConsoleGame.Tools
 {
     public static class PhysicsExtensions
     {

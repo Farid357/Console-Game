@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
     public sealed class WeaponWithMagazine : IWeaponWithMagazine
     {
@@ -17,7 +17,7 @@ namespace Console_Game.Weapons
 
         public IWeaponMagazine Magazine { get; }
 
-        public bool CanShoot => _weapon.CanShoot && !_view.IsReloading && !Magazine.IsEmpty;
+        public bool CanShoot => _weapon.CanShoot && !_view.IsReloading && Magazine.Bullets > 0;
 
         public bool CanReload() => Magazine.Bullets < Magazine.MaxBullets;
 

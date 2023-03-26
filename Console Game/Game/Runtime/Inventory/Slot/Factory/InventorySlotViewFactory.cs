@@ -1,8 +1,8 @@
 using System;
 using System.Drawing;
-using Console_Game.UI;
+using ConsoleGame.UI;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class InventorySlotViewFactory : IInventorySlotViewFactory
     {

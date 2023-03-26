@@ -1,7 +1,7 @@
 using System;
-using Console_Game.UI;
+using ConsoleGame.UI;
 
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
     public sealed class WeaponMagazineView : IWeaponMagazineView
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Console_Game.Shop
+namespace ConsoleGame.Shop
 {
     public sealed class WeaponGood : IGood
     {

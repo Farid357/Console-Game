@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace Console_Game.UI
+namespace ConsoleGame.UI
 {
     public interface IImage : IRenderer, IUiElement
     {

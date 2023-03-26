@@ -1,8 +1,8 @@
 using System;
-using Console_Game.Tools;
-using Console_Game.UI;
+using ConsoleGame.Tools;
+using ConsoleGame.UI;
 
-namespace Console_Game.LoadSystem
+namespace ConsoleGame.LoadSystem
 {
     public sealed class SceneLoadingView : ISceneLoadingView
     {

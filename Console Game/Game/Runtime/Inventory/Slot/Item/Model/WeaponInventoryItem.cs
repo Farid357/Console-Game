@@ -1,6 +1,6 @@
 using System;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class WeaponInventoryItem<TPlayer> : IWeaponInventoryItem where TPlayer : IPlayer
     {

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml.Serialization;
 
-namespace Console_Game.Save_Storages
+namespace ConsoleGame.Save_Storages
 {
     public sealed class XmlStorage<TStoreValue> : ISaveStorage<TStoreValue>
     {

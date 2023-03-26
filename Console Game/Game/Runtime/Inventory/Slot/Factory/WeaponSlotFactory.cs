@@ -1,6 +1,6 @@
 using System;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class WeaponSlotFactory<TWeapon, TWeaponInput, TPlayer> : IWeaponSlotFactory<TWeapon, TWeaponInput>
         where TWeaponInput : IWeaponInput where TWeapon : IWeapon where TPlayer : IPlayer

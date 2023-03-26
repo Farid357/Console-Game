@@ -1,4 +1,4 @@
-namespace Console_Game.Tools
+namespace ConsoleGame.Tools
 {
     public interface IPool<TItem>
     {

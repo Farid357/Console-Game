@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
     public sealed class WeaponWithMagazineView : IWeaponWithMagazineView
     {

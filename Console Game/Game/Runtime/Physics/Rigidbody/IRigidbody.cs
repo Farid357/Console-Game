@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public interface IRigidbody : IReadOnlyTransform
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Console_Game.Tools
+namespace ConsoleGame.Tools
 {
     public sealed class Pool<TItem> : IPool<TItem>
     {

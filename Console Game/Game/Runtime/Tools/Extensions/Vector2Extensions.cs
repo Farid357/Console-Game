@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Numerics;
 
-namespace Console_Game.Tools
+namespace ConsoleGame.Tools
 {
     public static class Vector2Extensions
     {

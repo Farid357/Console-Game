@@ -1,7 +1,7 @@
 using System;
 using System.Numerics;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class RandomEnemyFactory : IFactory<IEnemy>
     {

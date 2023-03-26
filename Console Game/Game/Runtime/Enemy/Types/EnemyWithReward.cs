@@ -1,7 +1,7 @@
 using System;
-using Console_Game.Tools;
+using ConsoleGame.Tools;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class EnemyWithReward : IEnemy, IGameLoopObject
     {
@@ -15,10 +15,6 @@ namespace Console_Game
         }
 
         public IHealth Health => _enemy.Health;
-
-        public IMovement Movement => _enemy.Movement;
-
-        public IEnemyData Data => _enemy.Data;
 
         public void Update(float deltaTime)
         {

@@ -1,9 +1,9 @@
 using System;
 using System.Numerics;
-using Console_Game.Physics;
-using Console_Game.Tools;
+using ConsoleGame.Tools;
+using ConsoleGame.Physics;
 
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
     public sealed class LaserWeapon : IWeapon
     {

@@ -1,11 +1,7 @@
-namespace Console_Game
+namespace ConsoleGame
 {
     public interface IEnemy
     {
         IHealth Health { get; }
-        
-        IMovement Movement { get; }
-        
-        IEnemyData Data { get; }
     }
 }

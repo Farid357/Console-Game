@@ -1,8 +1,8 @@
 using System.Numerics;
 
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
-    public interface IBullet : IGameObject
+    public interface IBullet
     {
         Vector2 Position { get; }
         

@@ -1,4 +1,4 @@
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class WeaponInventoryFactory : IWeaponInventoryFactory
     {

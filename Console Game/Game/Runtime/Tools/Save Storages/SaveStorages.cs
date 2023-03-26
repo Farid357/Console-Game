@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Console_Game.Save_Storages
+namespace ConsoleGame.Save_Storages
 {
     public sealed class SaveStorages : ISaveStorages
     {

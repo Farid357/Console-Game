@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Console_Game.Tools;
+using ConsoleGame.Loop;
+using ConsoleGame.Tools;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class PlayersSimulation<TPlayer> : IPlayersSimulation<TPlayer> where TPlayer : IPlayer
     {
-        private readonly IGroup<IGameLoopObject> _gameLoopObjects;
+        private readonly IGameLoopObjectsGroup _gameLoopObjects;
         private readonly List<TPlayer> _players = new List<TPlayer>();
         private TPlayer _currentPlayer;
 
-        public PlayersSimulation(IGroup<IGameLoopObject> gameLoopObjects)
+        public PlayersSimulation(IGameLoopObjectsGroup gameLoop)
         {
-            _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
+            _gameLoopObjects = gameLoop ?? throw new ArgumentNullException(nameof(gameLoop));
         }
 
         public IReadOnlyList<IReadOnlyPlayer> Players => _players.ToReadOnly();

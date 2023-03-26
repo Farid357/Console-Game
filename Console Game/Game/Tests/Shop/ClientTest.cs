@@ -1,8 +1,8 @@
-using Console_Game.Shop;
-using Console_Game.Tools;
+using ConsoleGame.Tools;
+using ConsoleGame.Shop;
 using NUnit.Framework;
 
-namespace Console_Game.Tests.Shop
+namespace ConsoleGame.Tests.Shop
 {
     [TestFixture]
     public sealed class ClientTest

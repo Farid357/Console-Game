@@ -1,6 +1,6 @@
-using Console_Game.Weapons;
+using ConsoleGame.Weapons;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public interface IPlayerWithWeaponMagazine : IPlayer
     {

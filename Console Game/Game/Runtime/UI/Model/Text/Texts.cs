@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace Console_Game.UI
+namespace ConsoleGame.UI
 {
     public sealed class Texts : ITexts
     {
@@ -21,8 +21,6 @@ namespace Console_Game.UI
         public ITransform Transform { get; } = new Transform();
 
         public bool IsEnabled => _texts.First().IsEnabled;
-
-        public IReadOnlyList<IText> All => _texts;
 
         public Color Color => _texts.First().Color;
 

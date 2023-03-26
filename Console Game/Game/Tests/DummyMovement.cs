@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace Console_Game.Tests
+namespace ConsoleGame.Tests
 {
     public sealed class DummyMovement : IMovement
     {

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Console_Game.Tools;
+using ConsoleGame.Tools;
 
-namespace Console_Game.Inventory
+namespace ConsoleGame.Inventory
 {
     public sealed class InventoryItemSelectingInput<TItem> : IGameLoopObject, IInventoryItemSelectingInput<TItem> where TItem : IInventoryItem
     {

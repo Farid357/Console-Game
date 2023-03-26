@@ -1,9 +1,9 @@
 using System;
 using System.Numerics;
-using Console_Game.Physics;
-using Console_Game.Tools;
+using ConsoleGame.Tools;
+using ConsoleGame.Physics;
 
-namespace Console_Game.Weapons
+namespace ConsoleGame.Weapons
 {
     public sealed class RaycastBullet : IBullet
     {
@@ -19,8 +19,6 @@ namespace Console_Game.Weapons
             _damage = damage;
         }
 
-        public bool IsActive => _bullet.IsActive;
-
         public Vector2 Position => _bullet.Position;
 
         public void Throw(Vector2 direction)
@@ -33,10 +31,6 @@ namespace Console_Game.Weapons
 
         public void Update(float deltaTime)
         {
-            if (!IsActive)
-                throw new InvalidOperationException($"You mustn't update not active bullet!");
-
-            _bullet.Update(deltaTime);
             _raycast.Throw(Position, _direction);
 
             if (_raycast.HasHit)

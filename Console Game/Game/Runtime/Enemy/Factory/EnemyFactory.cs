@@ -1,28 +1,25 @@
 using System;
-using Console_Game.Loop;
-using Console_Game.Tools;
+using ConsoleGame.Tools;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class EnemyFactory : IEnemyFactory
     {
         private readonly int _healthCount;
-        private readonly IEnemyData _data;
-        private readonly IGroup<IGameLoopObject> _gameLoopObjects;
+        private readonly IGroup<IGameObject> _gameObjects;
 
-        public EnemyFactory(int healthCount, IEnemyData data, IGroup<IGameLoopObject> gameLoopObjects)
+        public EnemyFactory(int healthCount, IGroup<IGameObject> gameObjects)
         {
-            _data = data ?? throw new ArgumentNullException(nameof(data));
-            _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
+            _gameObjects = gameObjects ?? throw new ArgumentNullException(nameof(gameObjects));
             _healthCount = healthCount.ThrowIfLessThanOrEqualsToZeroException();
         }
 
         public IEnemy Create(ITransform transform)
         {
             IHealth health = new Health(new HealthView(), _healthCount);
-            var movement = new SmoothMovement(0.1f, 0.1f, transform);
-            _gameLoopObjects.Add(movement);
-            return new Enemy(health, movement, _data);
+            var enemy = new Enemy(health);
+            _gameObjects.Add(enemy);
+            return enemy;
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class PlayerWithTwoWeapons<TFirstPlayer, TSecondPlayer> : IPlayerWithTwoWeapon where TFirstPlayer : IPlayer where TSecondPlayer : IPlayer
     {

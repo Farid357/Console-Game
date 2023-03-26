@@ -1,20 +1,21 @@
 using System;
-using Console_Game.UI;
-using Console_Game.Weapons;
+using ConsoleGame.Loop;
+using ConsoleGame.UI;
+using ConsoleGame.Weapons;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class StartPlayerWeaponFactory : IFactory<IWeaponWithMagazine>
     {
-        private readonly IGroup<IGameLoopObject> _gameLoopObjects;
+        private readonly IGameLoopObjectsGroup _gameLoop;
         private readonly IText _text;
-        private readonly IBulletsFactory _bulletsFactory;
+        private readonly IBulletFactory _bulletFactory;
 
-        public StartPlayerWeaponFactory(IGroup<IGameLoopObject> gameLoopObjects, IText text, IBulletsFactory bulletsFactory)
+        public StartPlayerWeaponFactory(IGameLoopObjectsGroup gameLoop, IText text, IBulletFactory bulletFactory)
         {
-            _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
+            _gameLoop = gameLoop ?? throw new ArgumentNullException(nameof(gameLoop));
             _text = text ?? throw new ArgumentNullException(nameof(text));
-            _bulletsFactory = bulletsFactory ?? throw new ArgumentNullException(nameof(bulletsFactory));
+            _bulletFactory = bulletFactory ?? throw new ArgumentNullException(nameof(bulletFactory));
         }
 
         public IWeaponWithMagazine Create()
@@ -22,9 +23,9 @@ namespace Console_Game
             IWeaponMagazineView magazineView = new WeaponMagazineView(_text);
             IWeaponMagazine magazine = new WeaponMagazine(30, magazineView);
             var shootCooldownTimer = new Timer(0.2f);
-            IWeapon weapon = new Weapon(_bulletsFactory, 10);
+            IWeapon weapon = new Weapon(_bulletFactory, 10);
             IWeapon weaponWithShootWaiting = new WeaponWithShootWaiting(shootCooldownTimer, weapon);
-            _gameLoopObjects.Add(shootCooldownTimer);
+            _gameLoop.Add(shootCooldownTimer);
             IWeaponWithMagazineView view = new WeaponWithMagazineView();
             return new WeaponWithMagazine(magazine, weaponWithShootWaiting, view);
         }

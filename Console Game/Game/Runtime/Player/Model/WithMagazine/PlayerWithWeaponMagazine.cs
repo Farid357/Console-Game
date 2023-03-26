@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using Console_Game.Weapons;
+using ConsoleGame.Weapons;
 
-namespace Console_Game
+namespace ConsoleGame
 {
     public sealed class PlayerWithWeaponMagazine : IPlayerWithWeaponMagazine
     {
@@ -32,7 +32,7 @@ namespace Console_Game
 
         private async Task TryReload()
         {
-            if (Magazine.IsEmpty)
+            if (Magazine.Bullets == 0)
                 await _weapon.Reload();
         }
     }

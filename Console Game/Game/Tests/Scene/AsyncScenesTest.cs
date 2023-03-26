@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Console_Game.LoadSystem;
+using ConsoleGame.LoadSystem;
 using NUnit.Framework;
 
-namespace Console_Game.Tests
+namespace ConsoleGame.Tests
 {
     [TestFixture]
     public sealed class AsyncScenesTest

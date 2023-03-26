@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Drawing;
-using Console_Game.UI;
+using ConsoleGame.UI;
 using NUnit.Framework;
 
-namespace Console_Game.Tests.UI
+namespace ConsoleGame.Tests.UI
 {
     [TestFixture]
     public sealed class ButtonTest

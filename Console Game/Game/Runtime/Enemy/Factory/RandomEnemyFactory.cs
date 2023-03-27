@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace ConsoleGame
 {
-    public sealed class RandomEnemyFactory : IFactory<IEnemy>
+    public sealed class RandomEnemyFactory : IEnemyFactory
     {
         private readonly IEnemyFactory[] _enemyFactories;
         private readonly Vector2[] _positions;
@@ -25,7 +25,7 @@ namespace ConsoleGame
 
             Vector2 position = _positions[_positionIndex];
             IEnemyFactory enemyFactory = _enemyFactories[_random.Next(0, _enemyFactories.Length)];
-            return enemyFactory.Create(new Transform(position));
+            return enemyFactory.Create();
         }
     }
 }

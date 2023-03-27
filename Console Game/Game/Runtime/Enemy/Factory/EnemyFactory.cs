@@ -1,24 +1,27 @@
 using System;
+using System.Numerics;
+using ConsoleGame.Physics;
 using ConsoleGame.Tools;
 
 namespace ConsoleGame
 {
     public sealed class EnemyFactory : IEnemyFactory
     {
-        private readonly int _healthCount;
-        private readonly IGroup<IGameObject> _gameObjects;
+        private readonly int _health;
+        private readonly ICollidersWorld<IEnemy> _collidersWorld;
 
-        public EnemyFactory(int healthCount, IGroup<IGameObject> gameObjects)
+        public EnemyFactory(int health, ICollidersWorld<IEnemy> collidersWorld)
         {
-            _gameObjects = gameObjects ?? throw new ArgumentNullException(nameof(gameObjects));
-            _healthCount = healthCount.ThrowIfLessThanOrEqualsToZeroException();
+            _collidersWorld = collidersWorld ?? throw new ArgumentNullException(nameof(collidersWorld));
+            _health = health.ThrowIfLessThanOrEqualsToZeroException();
         }
 
-        public IEnemy Create(ITransform transform)
+        public IEnemy Create()
         {
-            IHealth health = new Health(new HealthView(), _healthCount);
+            IHealth health = new Health(_health);
             var enemy = new Enemy(health);
-            _gameObjects.Add(enemy);
+            ICollider collider = new BoxCollider(new Box(new Vector3(1.5f, 1.5f, 1.5f)), Vector3.One);
+            _collidersWorld.Add(collider, enemy);
             return enemy;
         }
     }

@@ -16,25 +16,12 @@ namespace ConsoleGame.Weapons
             _bullets = all ?? throw new ArgumentNullException(nameof(all));
         }
 
-        public bool IsActive { get; private set; } = true;
-
-        public Vector2 Position => _bullets[0].Position;
-
-        public void Throw(Vector2 direction)
+        public void Throw(Vector3 direction)
         {
-            if (!IsActive)
-                throw new InvalidOperationException($"Bullets are not active!");
-            
             foreach (IBullet bullet in _bullets)
             {
                 bullet.Throw(direction);
             }
-        }
-
-        public void Destroy()
-        {
-            IsActive = false;
-            _bullets.ForEach(bullet => bullet.Destroy());
         }
     }
 }

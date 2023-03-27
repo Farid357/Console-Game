@@ -30,7 +30,7 @@ namespace ConsoleGame.UI
         {
             Line = line;
             var solidBrush = new SolidBrush(Color);
-            Vector2 position = Transform.Position;
+            Vector3 position = Transform.Position;
             _graphics.DrawString(Line, _font, solidBrush, position.X, position.Y);
         }
 

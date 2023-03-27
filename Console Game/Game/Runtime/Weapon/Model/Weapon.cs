@@ -8,7 +8,7 @@ namespace ConsoleGame.Weapons
     {
         private readonly IBulletFactory _bulletFactory;
         private readonly int _bulletDamage;
-        private readonly Vector2 _shootDirection = new Vector2(1, 0);
+        private readonly Vector3 _shootDirection = new Vector3(1, 0, 0);
         
         public Weapon(IBulletFactory bulletFactory, int bulletDamage)
         {

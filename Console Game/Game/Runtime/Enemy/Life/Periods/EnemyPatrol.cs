@@ -5,12 +5,12 @@ namespace ConsoleGame
 {
     public sealed class EnemyPatrol : IGameLoopObject, IEnemyLifePeriod
     {
-        private readonly ICircleMovement _enemyMovement;
+        private readonly ICircleMovement _movement;
         private readonly IReadOnlyTransform _character;
 
-        public EnemyPatrol(ICircleMovement enemyMovement, IReadOnlyTransform character)
+        public EnemyPatrol(ICircleMovement movement, IReadOnlyTransform character)
         {
-            _enemyMovement = enemyMovement ?? throw new ArgumentNullException(nameof(enemyMovement));
+            _movement = movement ?? throw new ArgumentNullException(nameof(movement));
             _character = character ?? throw new ArgumentNullException(nameof(character));
         }
         
@@ -18,11 +18,17 @@ namespace ConsoleGame
 
         public void Update(float deltaTime)
         {
-            float distance = Vector2.Distance(_enemyMovement.Transform.Position, _character.Position);
+            if(IsCompleted)
+                return;
+            
+            _movement.Continue();
+            _movement.Move();
+            
+            float distance = Vector3.Distance(_movement.Transform.Position, _character.Position);
 
             if (distance <= 2.5f)
             {
-                _enemyMovement.Stop();
+                _movement.Stop();
                 IsCompleted = true;
             }
         }

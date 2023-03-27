@@ -21,7 +21,8 @@ namespace ConsoleGame
         public float Gravity { get; }
 
         public float MoveSpeed { get; }
-        public Vector2 Position => _transform.Position;
+        
+        public Vector3 Position => _transform.Position;
         
         public Quaternion Rotation => _transform.Rotation;
        

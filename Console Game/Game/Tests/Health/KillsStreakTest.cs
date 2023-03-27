@@ -10,9 +10,9 @@ namespace ConsoleGame.Tests
         [Test]
         public void CountsCorrectly()
         {
-            IHealth enemyHealth = new Health(new DummyHealthView(), 100);
+            IHealth enemyHealth = new Health( 100);
             IReadOnlyList<IEnemy> enemies = new []{new DummyEnemy(enemyHealth)};
-            var killsStreak = new KillsStreak(enemies, new KillsStreakView(new DummyText()), new Health(new DummyHealthView(), 50));
+            var killsStreak = new KillsStreak(enemies, new KillsStreakView(new DummyText()), new Health( 50));
             enemyHealth.Kill();
             killsStreak.Update(0.01f);
             Assert.That(killsStreak.Factor == 1);
@@ -21,9 +21,9 @@ namespace ConsoleGame.Tests
         [Test]
         public void ResetsCorrectly()
         {
-            IHealth enemyHealth = new Health(new DummyHealthView(), 100);
+            IHealth enemyHealth = new Health(100);
             IReadOnlyList<IEnemy> enemies = new []{new DummyEnemy(enemyHealth)};
-            IHealth characterHealth = new Health(new DummyHealthView(), 50);
+            IHealth characterHealth = new Health( 50);
             var killsStreak = new KillsStreak(enemies, new KillsStreakView(new DummyText()), characterHealth);
             enemyHealth.Kill();
             killsStreak.Update(0.01f);

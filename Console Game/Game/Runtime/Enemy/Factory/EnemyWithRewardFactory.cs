@@ -1,25 +1,21 @@
 using System;
-using ConsoleGame.Loop;
 
 namespace ConsoleGame
 {
     public sealed class EnemyWithRewardFactory : IEnemyFactory
     {
-        private readonly IReward _reward;
+        private readonly IRewardFactory _rewardFactory;
         private readonly IEnemyFactory _enemyFactory;
-        private readonly IGroup<IGameLoopObject> _gameLoopObjects;
 
-        public EnemyWithRewardFactory(IReward reward, IEnemyFactory enemyFactory, IGroup<IGameLoopObject> gameLoopObjects)
+        public EnemyWithRewardFactory(IRewardFactory rewardFactory, IEnemyFactory enemyFactory)
         {
-            _reward = reward ?? throw new ArgumentNullException(nameof(reward));
+            _rewardFactory = rewardFactory ?? throw new ArgumentNullException(nameof(rewardFactory));
             _enemyFactory = enemyFactory ?? throw new ArgumentNullException(nameof(enemyFactory));
-            _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
         }
         
-        public IEnemy Create(ITransform transform)
+        public IEnemy Create()
         {
-            var enemy = new EnemyWithReward(_reward, _enemyFactory.Create(transform));
-            _gameLoopObjects.Add(enemy);
+            var enemy = new EnemyWithReward(_rewardFactory.Create(), _enemyFactory.Create());
             return enemy;
         }
     }

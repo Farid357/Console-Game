@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ConsoleGame.Physics
 {
-    public sealed class GameObjectsCollidersWorld<TModel> : IGameLoopObject, ICollidersWorld<TModel> where TModel : IGameObject
+    public sealed class GameObjectsCollidersWorld<TModel> : IGameLoopObject, ICollidersWorld<TModel> where TModel : IAlive
     {
         private readonly ICollidersWorld<TModel> _world;
 
@@ -23,9 +23,9 @@ namespace ConsoleGame.Physics
             foreach (var keyPair in _world.Models)
             {
                 ICollider collider = keyPair.Key;
-                IGameObject gameObject = keyPair.Value;
+                IAlive gameObject = keyPair.Value;
 
-                if (gameObject.IsActive == false)
+                if (gameObject.IsAlive == false)
                     Remove(collider);
             }
         }

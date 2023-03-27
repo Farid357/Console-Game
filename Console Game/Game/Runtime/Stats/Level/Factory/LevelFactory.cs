@@ -16,7 +16,7 @@ namespace ConsoleGame
 
         public ILevel Create()
         {
-            return new ConsecutiveLevels(_allReachableLevels, _allReachableLevels.First());
+            return new ChainOfLevels(_allReachableLevels, _allReachableLevels.First());
         }
     }
 }

@@ -6,31 +6,25 @@ namespace ConsoleGame
     public sealed class PhysicsMovement : IMovement, IGameLoopObject
     {
         private readonly ITransform _transform;
+        private readonly IRigidbody _body;
 
-        public PhysicsMovement(Rigidbody body, ITransform transform)
+        public PhysicsMovement(IRigidbody body, ITransform transform)
         {
             _transform = transform ?? throw new ArgumentNullException(nameof(transform));
-            Body = body;
+            _body = body;
         }
-
-        public Rigidbody Body { get; }
 
         public IReadOnlyTransform Transform => _transform;
 
-        public void Move(Vector2 direction)
+        public void Move(Vector3 direction)
         {
-            Vector2 position = _transform.Position + direction * (Body.MoveSpeed - Body.Mass);
+            Vector3 position = _transform.Position + direction * (_body.MoveSpeed - _body.Mass);
             _transform.Teleport(position);
-        }
-
-        public void Rotate(Quaternion rotation)
-        {
-            _transform.Rotate(rotation);
         }
 
         public void Update(float deltaTime)
         {
-            Vector2 position = _transform.Position - new Vector2(0, Body.Gravity);
+            Vector3 position = _transform.Position - new Vector3(0, _body.Gravity, 0);
             _transform.Teleport(position);
         }
     }

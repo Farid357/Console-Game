@@ -9,7 +9,7 @@ namespace ConsoleGame.Tests
         [Test]
         public void TakesDamageCorrectly()
         {
-            IHealth health = new Health(new HealthView(), 10);
+            IHealth health = new Health(10);
             IHealth armor = new Armor(health, new ArmorView(), 10);
             armor.TakeDamage(10);
             Assert.That(health.Value == 10);

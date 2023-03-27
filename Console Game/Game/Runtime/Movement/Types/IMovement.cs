@@ -6,8 +6,6 @@ namespace ConsoleGame
     {
         IReadOnlyTransform Transform { get; }
         
-        void Move(Vector2 direction);
-
-        void Rotate(Quaternion rotation);
+        void Move(Vector3 direction);
     }
 }

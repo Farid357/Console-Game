@@ -3,7 +3,7 @@ using ConsoleGame.Tools;
 
 namespace ConsoleGame
 {
-    public sealed class EnemyWithReward : IEnemy, IGameLoopObject
+    public sealed class EnemyWithReward : IEnemy
     {
         private readonly IReward _reward;
         private readonly IEnemy _enemy;
@@ -15,6 +15,8 @@ namespace ConsoleGame
         }
 
         public IHealth Health => _enemy.Health;
+        
+        public bool IsAlive => _enemy.IsAlive;
 
         public void Update(float deltaTime)
         {

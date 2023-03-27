@@ -6,13 +6,10 @@ namespace ConsoleGame.Tests
     {
         public IReadOnlyTransform Transform { get; } = new Transform();
         
-        public void Move(Vector2 direction)
+        public void Move(Vector3 direction)
         {
             
         }
 
-        public void Rotate(Quaternion rotation)
-        {
-        }
     }
 }

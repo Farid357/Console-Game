@@ -17,7 +17,7 @@ namespace ConsoleGame.Tests
         }
 
 
-        public void Throw(Vector2 direction)
+        public void Throw(Vector3 direction)
         {
             
         }

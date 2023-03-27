@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using ConsoleGame.Tools;
 
 namespace ConsoleGame.UI
 {
@@ -28,13 +29,13 @@ namespace ConsoleGame.UI
                 elementPosition = new Vector2(_elementsPositions.First().X, LastElementPosition.Y - _offset.Y);
             }
 
-            uiElement.Transform.Teleport(elementPosition);
-            _elementsPositions.Add(uiElement.Transform.Position);
+            uiElement.Transform.Teleport(elementPosition.To3D());
+            _elementsPositions.Add(uiElement.Transform.Position.To2D());
         }
 
         public void Remove(IReadOnlyUiElement element)
         {
-            _elementsPositions.Remove(element.Transform.Position);
+            _elementsPositions.Remove(element.Transform.Position.To2D());
         }
     }
 }

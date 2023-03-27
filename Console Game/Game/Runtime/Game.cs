@@ -30,11 +30,11 @@ namespace ConsoleGame
             IWalletViewFactory walletViewFactory = new WalletViewFactory(textFactory);
             IWalletFactory walletFactory = new WalletFactory(saveStorages, walletViewFactory);
             IWeaponInput weaponInput = new WeaponInput(new Key(ConsoleKey.F));
-            IReadOnlyCollidersWorld<IEnemy> enemiesWorld = new CollidersWorld<IEnemy>();
+            var enemiesWorld = new GameObjectsCollidersWorld<IEnemy>(new CollidersWorld<IEnemy>());
             IRaycastFactory<IEnemy> enemyRaycastFactory = new RaycastFactory<IEnemy>(gameLoopObjects, enemiesWorld);
             IMovementFactory enemyMovementFactory = new PhysicsMovementFactory(gameLoopObjects);
             IBulletFactory bulletFactory = new RaycastBulletFactory(enemyRaycastFactory, enemyMovementFactory, gameObjects);
-            IText bulletsText = textFactory.Create(new Transform(new Vector2(1.5f, 1.3f)), new Font("Arial", 14), Color.Chocolate);
+            IText bulletsText = textFactory.Create(new Transform(new Vector3(1.5f, 1.3f, 0)), new Font("Arial", 14), Color.Chocolate);
             IFactory<IWeaponWithMagazine> weaponFactory = new StartPlayerWeaponFactory(gameLoopObjects, bulletsText, bulletFactory);
             IWeaponWithMagazine weapon = weaponFactory.Create();
             IPlayerSimulationFactory playerSimulationFactory = new PlayerSimulationFactory(_gameLoop.Objects);
@@ -51,6 +51,7 @@ namespace ConsoleGame
             walletFactory.Create();
         //    gameLoopObjects.Add(killsStreak);
             gameLoopObjects.Add(gameObjects);
+            gameLoopObjects.Add(enemiesWorld);
         }
 
         public void Play()

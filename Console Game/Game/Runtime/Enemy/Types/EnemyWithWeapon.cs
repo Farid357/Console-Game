@@ -21,6 +21,8 @@ namespace ConsoleGame
 
         public IHealth Health => _enemy.Health;
 
+        public bool IsAlive => _enemy.IsAlive;
+        
         public void Update(float deltaTime) => TryShoot();
 
         private async Task TryReload()
@@ -47,5 +49,6 @@ namespace ConsoleGame
 
             await TryReload();
         }
+
     }
 }

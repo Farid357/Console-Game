@@ -10,5 +10,13 @@ namespace ConsoleGame.Tests
         }
 
         public IHealth Health { get; }
+        
+        public bool IsAlive { get; }
+
+        public void Update(float deltaTime)
+        {
+            
+        }
+
     }
 }

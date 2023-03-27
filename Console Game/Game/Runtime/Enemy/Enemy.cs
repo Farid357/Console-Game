@@ -2,7 +2,7 @@ using System;
 
 namespace ConsoleGame
 {
-    public sealed class Enemy : IEnemy, IGameObject
+    public sealed class Enemy : IEnemy
     {
         public Enemy(IHealth health)
         {
@@ -11,13 +11,7 @@ namespace ConsoleGame
 
         public IHealth Health { get; }
 
-        public bool IsActive => Health.IsAlive;
+        public bool IsAlive => Health.IsAlive;
 
-        public void Update(float deltaTime)
-        {
-            if (!IsActive)
-                throw new InvalidOperationException($"Enemy isn't active1");
-            
-        }
     }
 }

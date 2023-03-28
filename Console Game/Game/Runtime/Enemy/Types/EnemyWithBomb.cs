@@ -1,5 +1,4 @@
 using System;
-using ConsoleGame.Explosion;
 using ConsoleGame.Tools;
 
 namespace ConsoleGame
@@ -7,17 +6,13 @@ namespace ConsoleGame
     public sealed class EnemyWithBomb : IEnemy, IGameObject
     {
         private readonly IEnemy _enemy;
-        private readonly IBombFactory _bombFactory;
-        private readonly ITransform _transform;
-        private readonly ITimer _blowUpTimer;
+        private readonly IBomb _bomb;
         private bool _isAlive = true;
         
-        public EnemyWithBomb(IEnemy enemy, IBombFactory bombFactory, ITransform transform, ITimer blowUpTimer)
+        public EnemyWithBomb(IEnemy enemy, IBomb bomb)
         {
             _enemy = enemy ?? throw new ArgumentNullException(nameof(enemy));
-            _bombFactory = bombFactory ?? throw new ArgumentNullException(nameof(bombFactory));
-            _transform = transform ?? throw new ArgumentNullException(nameof(transform));
-            _blowUpTimer = blowUpTimer ?? throw new ArgumentNullException(nameof(blowUpTimer));
+            _bomb = bomb ?? throw new ArgumentNullException(nameof(bomb));
         }
 
         public bool IsAlive => _enemy.IsAlive && _isAlive;
@@ -26,11 +21,12 @@ namespace ConsoleGame
         
         public void Update(float deltaTime)
         {
-            if (_blowUpTimer.IsEnded)
+            if (!IsAlive)
+                throw new Exception($"Enemy is not alive!");
+            
+            if (_bomb.IsBlownUp)
             {
                 Health.Kill();
-                IBomb bomb = _bombFactory.Create(_transform.Position);
-                bomb.BlowUp();
                 _isAlive = false;
             }
         }

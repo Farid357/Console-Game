@@ -32,6 +32,5 @@ namespace ConsoleGame
             _playersSimulation.DeleteCurrentPlayer();
             _item.Unselect();
         }
-
     }
 }

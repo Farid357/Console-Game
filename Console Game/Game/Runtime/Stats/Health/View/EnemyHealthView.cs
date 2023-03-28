@@ -4,14 +4,7 @@ namespace ConsoleGame
 {
     public sealed class EnemyHealthView : IHealthView
     {
-        private readonly IGameObjectView _gameObjectView;
-
-        public EnemyHealthView(IGameObjectView gameObjectView)
-        {
-            _gameObjectView = gameObjectView ?? throw new ArgumentNullException(nameof(gameObjectView));
-        }
-
-        public void Visualize(int maxValue, int value)
+        public void Visualize(int value, int maxValue)
         {
             Console.WriteLine($"Enemy Health {value}");
         }
@@ -19,7 +12,6 @@ namespace ConsoleGame
         public void Die()
         {
             Console.WriteLine($"Enemy died!");
-            _gameObjectView.Destroy();
         }
     }
 }

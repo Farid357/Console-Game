@@ -1,6 +1,6 @@
 namespace ConsoleGame.UI
 {
-    public interface IButtons : IButton, IGroup<IButton>
+    public interface IButtons : IPressOnlyButton, IGroup<IButton>
     {
     }
 }

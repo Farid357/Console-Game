@@ -1,6 +1,6 @@
 namespace ConsoleGame
 {
-    public interface IGameObject : IAlive, IGameLoopObject
+    public interface IGameObject : IReadOnlyGameObject, IGameLoopObject
     {
     }
 }

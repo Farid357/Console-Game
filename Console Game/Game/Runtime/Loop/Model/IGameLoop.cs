@@ -2,8 +2,7 @@
 {
     public interface IGameLoop
     {
-        IGameLoopObjectsGroup Objects { get; }
-
         void Start();
+        
     }
 }

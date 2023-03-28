@@ -8,13 +8,13 @@ namespace ConsoleGame
 {
     public sealed class PlayersSimulation<TPlayer> : IPlayersSimulation<TPlayer> where TPlayer : IPlayer
     {
-        private readonly IGameLoopObjectsGroup _gameLoopObjects;
+        private readonly IGameLoopObjectsGroup _gameLoop;
         private readonly List<TPlayer> _players = new List<TPlayer>();
         private TPlayer _currentPlayer;
 
         public PlayersSimulation(IGameLoopObjectsGroup gameLoop)
         {
-            _gameLoopObjects = gameLoop ?? throw new ArgumentNullException(nameof(gameLoop));
+            _gameLoop = gameLoop ?? throw new ArgumentNullException(nameof(gameLoop));
         }
 
         public IReadOnlyList<IReadOnlyPlayer> Players => _players.ToReadOnly();
@@ -26,7 +26,7 @@ namespace ConsoleGame
         public void Add(TPlayer player)
         {
             _players.Add(player);
-            _gameLoopObjects.Add(player);
+            _gameLoop.Add(player);
             _currentPlayer = player;
         }
 
@@ -36,8 +36,10 @@ namespace ConsoleGame
                 throw new InvalidOperationException($"Simulation doesn't have player!");
 
             _players.Remove(_currentPlayer);
-            _gameLoopObjects.Remove(_currentPlayer);
-            _currentPlayer = _players.Last();
+            _gameLoop.Remove(_currentPlayer);
+
+            if (_players.Count > 0)
+                _currentPlayer = _players.Last();
         }
     }
 }

@@ -1,7 +1,7 @@
 namespace ConsoleGame.Physics
 {
-    public interface IRaycastFactory<T>
+    public interface IRaycastFactory<TTarget>
     {
-        IRaycast<T> Create();
+        IRaycast<TTarget> Create();
     }
 }

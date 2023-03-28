@@ -1,4 +1,3 @@
-using System;
 using ConsoleGame.UI;
 
 namespace ConsoleGame
@@ -9,12 +8,11 @@ namespace ConsoleGame
 
         public void Add(IInventorySlot<TItem> slot)
         {
-            throw new NotImplementedException();
         }
 
         public void Drop(IInventorySlot<TItem> slot)
         {
-            throw new NotImplementedException();
+          
         }
     }
 }

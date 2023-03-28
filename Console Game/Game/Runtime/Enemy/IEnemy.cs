@@ -1,6 +1,6 @@
 namespace ConsoleGame
 {
-    public interface IEnemy : IAlive
+    public interface IEnemy : IReadOnlyGameObject
     {
         IHealth Health { get; }
     }

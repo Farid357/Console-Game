@@ -3,24 +3,23 @@ using ConsoleGame.Weapons;
 
 namespace ConsoleGame
 {
-    public sealed class InfinitePistolFactory : IFactory<IWeapon>
+    public sealed class InfinitePistolFactory : IWeaponFactory
     {
-        private readonly IGroup<IGameLoopObject> _gameLoopObjects;
         private readonly IInfiniteBulletsViewFactory _viewFactory;
         private readonly IBulletFactory _bulletFactory;
-
-        public InfinitePistolFactory(IGroup<IGameLoopObject> gameLoopObjects, IInfiniteBulletsViewFactory viewFactory, IBulletFactory bulletFactory)
+        private readonly ITimerFactory _timerFactory;
+        
+        public InfinitePistolFactory(ITimerFactory timerFactory, IInfiniteBulletsViewFactory viewFactory, IBulletFactory bulletFactory)
         {
-            _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
             _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
             _bulletFactory = bulletFactory ?? throw new ArgumentNullException(nameof(bulletFactory));
+            _timerFactory = timerFactory ?? throw new ArgumentNullException(nameof(timerFactory));
         }
 
         public IWeapon Create()
         {
-            var cooldownTimer = new Timer(0.2f);
-            _gameLoopObjects.Add(cooldownTimer);
             IInfiniteBulletsView view = _viewFactory.Create();
+            ITimer cooldownTimer = _timerFactory.Create(0.4f);
             return new WeaponWithInfiniteBullets(
                 new WeaponWithShootWaiting(cooldownTimer, new Weapon(_bulletFactory, 10)), view);
         }

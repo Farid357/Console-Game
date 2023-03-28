@@ -27,10 +27,10 @@ namespace ConsoleGame
             {
                 var loadedXp = levelStorage.Load().Xp;
                 ILevel savedLevel = _allLevels.Last(level => loadedXp >= level.Xp);
-                return new LevelWithSave(new ChainOfLevels(_allLevels, savedLevel), levelStorage);
+                return new LevelWithSave(new ChainOfLevel(_allLevels, savedLevel), levelStorage);
             }
 
-            return new LevelWithSave(new ChainOfLevels(_allLevels, _allLevels.First()), levelStorage);
+            return new LevelWithSave(new ChainOfLevel(_allLevels, _allLevels.First()), levelStorage);
         }
     }
 }

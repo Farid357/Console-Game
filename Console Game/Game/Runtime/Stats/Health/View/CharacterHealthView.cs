@@ -7,15 +7,13 @@ namespace ConsoleGame
     public sealed class CharacterHealthView : IHealthView
     {
         private readonly IText _text;
-        private readonly IGameObjectView _gameObjectView;
 
-        public CharacterHealthView(IText text, IGameObjectView gameObjectView)
+        public CharacterHealthView(IText text)
         {
             _text = text ?? throw new ArgumentNullException(nameof(text));
-            _gameObjectView = gameObjectView ?? throw new ArgumentNullException(nameof(gameObjectView));
         }
 
-        public void Visualize(int maxValue, int value)
+        public void Visualize(int value, int maxValue)
         {
             _text.Visualize($"Health: {maxValue}/{value}");
         }
@@ -23,7 +21,7 @@ namespace ConsoleGame
         public void Die()
         {
             _text.Clear();
-            _gameObjectView.Destroy();
+           //Destroy gameObject
         }
     }
 }

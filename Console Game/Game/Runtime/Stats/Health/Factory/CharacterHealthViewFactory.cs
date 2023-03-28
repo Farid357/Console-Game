@@ -17,7 +17,7 @@ namespace ConsoleGame
         public IHealthView Create()
         {
             IText text = _textFactory.Create(new Vector2(70, 300));
-            return new CharacterHealthView(text, new FakeGameObjectView());
+            return new CharacterHealthView(text);
         }
     }
 }

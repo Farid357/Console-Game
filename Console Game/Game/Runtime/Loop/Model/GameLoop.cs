@@ -1,52 +1,40 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
-using ConsoleGame.Tools;
 
 namespace ConsoleGame.Loop
 {
     public sealed class GameLoop : IGameLoop
     {
-        private readonly Stopwatch _stopwatch;
         private readonly IReadOnlyGamePause _gamePause;
-        private readonly IGameLoopObjects _gameObjects;
+        private readonly IGameLoopObject _loopObject;
+        private readonly Stopwatch _stopwatch;
         
-        private readonly float _timeStep;
-        private float _lastUpdateTime;
-
-        public GameLoop(float timeStep, IReadOnlyGamePause gamePause)
+        public GameLoop(IReadOnlyGamePause gamePause, IGameLoopObject loopObject)
         {
             _gamePause = gamePause ?? throw new ArgumentNullException(nameof(gamePause));
-            _timeStep = timeStep.ThrowIfLessOrEqualsToZeroException();
-            _gameObjects = new GameLoopObjects();
+            _loopObject = loopObject ?? throw new ArgumentNullException(nameof(loopObject));
             _stopwatch = new Stopwatch();
         }
 
-        public IGameLoopObjectsGroup Objects => _gameObjects;
-
-        public async void Start()
+        public void Start()
         {
-            if (_stopwatch.IsRunning == false)
-                throw new InvalidOperationException($"You have to play game timer!");
-            
             _stopwatch.Start();
+            TimeSpan lastUpdateTime = _stopwatch.Elapsed;
+            float elapsedTime = 0;
             
             while (true)
             {
                 if (_gamePause.IsActive)
                     continue;
-                
-              //  _deltaTime = _gameTimer.ElapsedMilliseconds - _lastUpdateTime;
-            //    var fpsCount = _fps.Calculate(_deltaTime, _gameTimer.ElapsedMilliseconds);
 
-                for (var frame = 0; frame < 30; frame++)
-                {
-                    _gameObjects.Update(_lastUpdateTime + _timeStep * (frame + 1));
-                    Console.WriteLine(_lastUpdateTime + _timeStep * (frame + 1));
-                }
-
-                _lastUpdateTime += _timeStep * 30;
-                await Task.Yield();
+                TimeSpan deltaTime = _stopwatch.Elapsed - lastUpdateTime;
+                lastUpdateTime += deltaTime;
+                var deltaTimeInSeconds = (float)deltaTime.TotalSeconds;
+                _loopObject.Update(deltaTimeInSeconds);
+                Console.WriteLine($"Delta Time: {deltaTimeInSeconds}");
+                elapsedTime += deltaTimeInSeconds;
+                Console.WriteLine($"Elapsed Time: {elapsedTime}");
+                Console.WriteLine($"Real Elapsed Time: {(float)_stopwatch.Elapsed.TotalSeconds}");
             }
         }
     }

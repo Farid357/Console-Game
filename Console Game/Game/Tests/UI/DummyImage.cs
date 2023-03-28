@@ -9,7 +9,7 @@ namespace ConsoleGame.Tests.UI
        
         public ITransform Transform { get; }
        
-        public Color Color { get; }
+        public Color Color { get; private set; }
         
         public void Enable()
         {
@@ -26,6 +26,7 @@ namespace ConsoleGame.Tests.UI
 
         public void SwitchColor(Color color)
         {
+            Color = color;
         }
     }
 }

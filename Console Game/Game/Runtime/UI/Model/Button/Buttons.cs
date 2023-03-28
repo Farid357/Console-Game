@@ -16,7 +16,6 @@ namespace ConsoleGame.UI
         {
         }
 
-        public ITransform Transform { get; } = new Transform();
         
         public bool IsEnabled { get; private set; }
 

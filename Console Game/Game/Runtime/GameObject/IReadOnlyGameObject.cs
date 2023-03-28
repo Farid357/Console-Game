@@ -1,6 +1,6 @@
 namespace ConsoleGame
 {
-    public interface IAlive
+    public interface IReadOnlyGameObject
     {
         bool IsAlive { get; }
 

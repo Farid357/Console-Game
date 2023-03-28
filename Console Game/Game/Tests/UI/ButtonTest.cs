@@ -11,16 +11,13 @@ namespace ConsoleGame.Tests.UI
         [Test]
         public void GroupPressesCorrectly()
         {
-            Color startColor = Color.Azure;
-            Color disableColor = Color.Brown;
-            IButtonView buttonView = new ButtonView(new DummyImage(), new DummyButtonViewData());
-            IButton button = new Buttons(new List<IButton> { new Button(buttonView, new UiElement(new Transform())) });
+            IButtonViewData buttonViewData = new DummyButtonViewData();
+            IButtonView buttonView = new ButtonView(new DummyImage(), buttonViewData);
+            IButton button = new Button(buttonView, new UiElement(new Transform()));
             button.Enable();
-            Assert.That(button.IsEnabled);
-            Assert.That(buttonView.Color == startColor);
-            button.Disable();
-            Assert.That(button.IsEnabled == false);
-            Assert.That(buttonView.Color == disableColor);
+            IButtons buttons = new Buttons(new List<IButton> { button });
+            buttons.Press();
+            Assert.That(buttonView.Color == buttonViewData.PressedColor);
         }
     }
 }

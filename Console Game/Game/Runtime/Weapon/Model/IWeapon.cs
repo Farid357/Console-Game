@@ -6,4 +6,9 @@ namespace ConsoleGame
 
         void Shoot();
     }
+
+    public interface IThrowingWeapon
+    {
+        void Throw();
+    }
 }

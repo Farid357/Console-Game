@@ -2,7 +2,7 @@ namespace ConsoleGame.Tests
 {
     public sealed class DummyHealthView : IHealthView
     {
-        public void Visualize(int maxValue, int value)
+        public void Visualize(int value, int maxValue)
         {
             
         }

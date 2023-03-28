@@ -14,8 +14,6 @@ namespace ConsoleGame.Loop
             _gameObjects = new List<IGameObject>();
         }
 
-        public bool IsAlive => _gameObjectsGroup.IsAlive;
-
         public void Add(IGameObject gameObject)
         {
             _gameObjectsGroup.Add(gameObject);

@@ -1,6 +1,6 @@
 namespace ConsoleGame.Loop
 {
-    public interface IGameObjects : IGameObjectsGroup, IGameObject
+    public interface IGameObjects : IGameObjectsGroup, IGameLoopObject
     {
     }
 }

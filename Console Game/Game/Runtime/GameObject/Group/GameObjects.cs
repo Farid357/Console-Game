@@ -17,8 +17,6 @@ namespace ConsoleGame.Loop
             
         }
 
-        public bool IsAlive => true;
-
         public void Add(IGameObject gameObject) => _gameObjects.Add(gameObject);
 
         public void Remove(IGameObject gameObject) => _gameObjects.Remove(gameObject);

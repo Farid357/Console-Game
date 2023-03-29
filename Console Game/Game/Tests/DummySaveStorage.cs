@@ -1,4 +1,4 @@
-using ConsoleGame.Save_Storages;
+using ConsoleGame.SaveSystem;
 
 namespace ConsoleGame.Tests
 {

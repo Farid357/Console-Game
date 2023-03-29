@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+
 namespace ConsoleGame
 {
     public interface IChainOfAchievement
     {
-        IAchievement CurrentAchievement { get; }
+        IReadOnlyList<IAchievement> Achievements { get; }
+        
     }
 }

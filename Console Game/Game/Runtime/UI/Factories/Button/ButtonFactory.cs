@@ -1,23 +1,21 @@
 using System;
-using System.Drawing;
 
 namespace ConsoleGame.UI
 {
     public sealed class ButtonFactory : IButtonFactory
     {
-        private readonly IUiElementFactory _uiElementFactory;
         private readonly IImageFactory _imageFactory;
 
-        public ButtonFactory(IUiElementFactory uiElementFactory, IImageFactory imageFactory)
+        public ButtonFactory(IImageFactory imageFactory)
         {
-            _uiElementFactory = uiElementFactory ?? throw new ArgumentNullException(nameof(uiElementFactory));
             _imageFactory = imageFactory ?? throw new ArgumentNullException(nameof(imageFactory));
         }
 
-        public IButton Create(IImage image, IButtonViewData viewData)
+        public IButton Create(ITransform transform, IButtonViewData viewData, string imageFileName)
         {
+            IImage image = _imageFactory.Create(transform, imageFileName);
             IButtonView view = new ButtonView(image, viewData);
-            IButton button = new Button(view, _uiElementFactory.Create(image.Transform));
+            IButton button = new Button(view, image);
             button.Enable();
             return button;
         }

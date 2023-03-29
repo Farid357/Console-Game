@@ -2,6 +2,6 @@ namespace ConsoleGame.UI
 {
     public interface IButtonFactory
     {
-        IButton Create(IImage image, IButtonViewData viewData);
+        IButton Create(ITransform transform, IButtonViewData viewData, string imageFileName);
     }
 }

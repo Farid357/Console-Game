@@ -1,6 +1,6 @@
 namespace ConsoleGame.LoadSystem
 {
-    public interface IAsyncScenes : IAsyncScene, IGroup<IAsyncScene>
+    public interface IAsyncScenes : IAsyncScene, IAsyncScenesGroup
     {
     }
 }

@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using ConsoleGame.Loop;
-using ConsoleGame.Save_Storages;
-using ConsoleGame.Save_Storages.Paths;
+using ConsoleGame.GameLoop;
+using ConsoleGame.SaveSystem;
 
 namespace ConsoleGame
 {
@@ -44,11 +43,15 @@ namespace ConsoleGame
         private IAchievement Create(int moneyForReward, int needMoney)
         {
             IReward moneyReward = new MoneyReward(_wallet, moneyForReward);
-            string congratulationText = $"Great! You earned money: {moneyReward} and received money: {moneyReward}";
-            ISaveStorage<bool> wasReceivedStorage = new BinaryStorage<bool>(new Path(congratulationText));
+            ISaveStorage<bool> wasReceivedStorage = new BinaryStorage<bool>(new Path($"Achievement {moneyForReward} {needMoney}"));
             _saveStorages.Add(wasReceivedStorage);
-            IAchievementView view = _viewFactory.Create(congratulationText);
-            return new MoneyAchievement(new Achievement(view, wasReceivedStorage), _wallet, needMoney);
+            IMoneyAchievementView view = new MoneyAchievementView(_viewFactory.Create());
+            IAchievement achievement = new Achievement(wasReceivedStorage, moneyReward);
+            
+            if(wasReceivedStorage.HasSave() && wasReceivedStorage.Load())
+                view.Receive();
+            
+            return new MoneyAchievement(achievement, view, _wallet, needMoney);
         }
     }
 }

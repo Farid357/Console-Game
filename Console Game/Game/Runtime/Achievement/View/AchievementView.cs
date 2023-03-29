@@ -1,23 +1,17 @@
 using System;
-using System.Threading.Tasks;
-using ConsoleGame.Tools;
 using ConsoleGame.UI;
 
 namespace ConsoleGame
 {
     public sealed class AchievementView : IAchievementView
     {
-        private readonly IWindow _congratulationWindow;
-        private readonly IText _congratulationsText;
         private readonly IImage _checkmark;
-        private readonly string _congratulationText;
+        private readonly IAchievementReceiveWindow _receiveWindow;
 
-        public AchievementView(IWindow congratulationWindow, IText congratulationsText, IImage checkmark, string congratulationText)
+        public AchievementView(IImage checkmark, IAchievementReceiveWindow receiveWindow)
         {
-            _congratulationWindow = congratulationWindow ?? throw new ArgumentNullException(nameof(congratulationWindow));
-            _congratulationsText = congratulationsText ?? throw new ArgumentNullException(nameof(congratulationsText));
             _checkmark = checkmark ?? throw new ArgumentNullException(nameof(checkmark));
-            _congratulationText = congratulationText ?? throw new ArgumentNullException(nameof(congratulationText));
+            _receiveWindow = receiveWindow ?? throw new ArgumentNullException(nameof(receiveWindow));
         }
 
         public void Receive()
@@ -25,14 +19,9 @@ namespace ConsoleGame
             _checkmark.Enable();
         }
 
-        public async void ReceiveWithCongratulations()
+        public void ReceiveWithCongratulation(string congratulation)
         {
-            Receive();
-            _congratulationWindow.Open();
-            _congratulationsText.Visualize(_congratulationText);
-            await Task.Delay(TimeSpan.FromSeconds(2.5f));
-            _congratulationWindow.Close();
-            _congratulationsText.Clear();
+            _receiveWindow.Show(congratulation);
         }
     }
 }

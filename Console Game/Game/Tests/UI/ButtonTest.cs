@@ -15,7 +15,7 @@ namespace ConsoleGame.Tests.UI
             IButtonView buttonView = new ButtonView(new DummyImage(), buttonViewData);
             IButton button = new Button(buttonView, new UiElement(new Transform()));
             button.Enable();
-            IButtons buttons = new Buttons(new List<IButton> { button });
+            IPressOnlyButton buttons = new Buttons(new List<IButton> { button });
             buttons.Press();
             Assert.That(buttonView.Color == buttonViewData.PressedColor);
         }

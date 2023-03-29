@@ -2,14 +2,14 @@ using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace ConsoleGame.Save_Storages
+namespace ConsoleGame.SaveSystem
 {
     public sealed class BinaryStorage<TStoreValue> : ISaveStorage<TStoreValue>
     {
         private readonly BinaryFormatter _formatter = new BinaryFormatter();
         private readonly string _pathName;
 
-        public BinaryStorage(Paths.IPath path)
+        public BinaryStorage(SaveSystem.IPath path)
         {
             if (path is null)
                 throw new ArgumentNullException(nameof(path));

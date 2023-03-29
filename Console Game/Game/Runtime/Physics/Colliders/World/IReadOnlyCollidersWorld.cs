@@ -4,6 +4,6 @@ namespace ConsoleGame.Physics
 {
     public interface IReadOnlyCollidersWorld<TModel>
     {
-        IReadOnlyDictionary<ICollider, TModel> Models { get; }
+        IReadOnlyDictionary<TModel, ICollider> Colliders { get; }
     }
 }

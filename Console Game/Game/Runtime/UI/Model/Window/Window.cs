@@ -4,18 +4,18 @@ namespace ConsoleGame.UI
 {
     public sealed class Window : IWindow, IUiElement
     {
-        private readonly IUiElement _uiElement;
+        private readonly IImage _image;
 
-        public Window(IUiElement uiElement)
+        public Window(IImage image)
         {
-            _uiElement = uiElement ?? throw new ArgumentNullException(nameof(uiElement));
+            _image = image ?? throw new ArgumentNullException(nameof(image));
         }
 
         public bool IsOpen => IsEnabled;
 
-        public bool IsEnabled => _uiElement.IsEnabled;
+        public bool IsEnabled => _image.IsEnabled;
 
-        public ITransform Transform => _uiElement.Transform;
+        public ITransform Transform => _image.Transform;
 
         public void Open() => Enable();
 
@@ -23,12 +23,12 @@ namespace ConsoleGame.UI
 
         public void Enable()
         {
-            _uiElement.Enable();
+            _image.Enable();
         }
 
         public void Disable()
         {
-            _uiElement.Disable();
+            _image.Disable();
         }
     }
 }

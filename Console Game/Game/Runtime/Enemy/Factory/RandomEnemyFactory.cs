@@ -16,7 +16,7 @@ namespace ConsoleGame
             _enemyFactories = enemyFactories ?? throw new ArgumentNullException(nameof(enemyFactories));
         }
 
-        public IEnemy Create()
+        public IEnemy Create(ITransform transform)
         {
             _positionIndex++;
 
@@ -25,7 +25,7 @@ namespace ConsoleGame
 
             Vector2 position = _positions[_positionIndex];
             IEnemyFactory enemyFactory = _enemyFactories[_random.Next(0, _enemyFactories.Length)];
-            return enemyFactory.Create();
+            return enemyFactory.Create(transform);
         }
     }
 }

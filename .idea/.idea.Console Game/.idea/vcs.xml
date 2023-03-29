@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Console Game/Game/Runtime/Tools/Other" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Console Game/Game/Runtime/Tools/com.bananaparty.behaviortree" vcs="Git" />
   </component>
 </project>

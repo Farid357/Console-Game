@@ -1,10 +1,9 @@
 using System;
-using ConsoleGame.Save_Storages;
-using ConsoleGame.Save_Storages.Paths;
+using ConsoleGame.SaveSystem;
 
 namespace ConsoleGame
 {
-    public sealed class ScoreFactory : IFactory<IScore>
+    public sealed class ScoreFactory : IScoreFactory
     {
         private readonly ISaveStorages _saveStorages;
         private readonly IScoreViewFactory _viewFactory;

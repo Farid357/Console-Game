@@ -2,13 +2,9 @@ using System.Drawing;
 
 namespace ConsoleGame.UI
 {
-    public interface IText : IUiElement
+    public interface IText : IOnlyVisualizeText, IUiElement
     {
         Color Color { get; }
-        
-        string Line { get; }
-        
-        void Visualize(string line);
 
         void SwitchColor(Color color);
     }

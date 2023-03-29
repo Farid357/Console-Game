@@ -3,20 +3,18 @@ using System.Collections.Generic;
 
 namespace ConsoleGame.UI
 {
-    public sealed class Windows : IWindows
+    public sealed class Windows : IWindow
     {
         private readonly List<IWindow> _windows;
 
         public Windows(List<IWindow> windows)
         {
+            if (windows == null) 
+                throw new ArgumentNullException(nameof(windows));
+            
             _windows = windows ?? throw new ArgumentNullException(nameof(windows));
         }
 
-        public Windows() : this(new List<IWindow>())
-        {
-        }
-
-        
         public bool IsOpen { get; private set; }
 
         public void Open()
@@ -30,10 +28,5 @@ namespace ConsoleGame.UI
             _windows.ForEach(window => window.Close());
             IsOpen = false;
         }
-
-        public void Add(IWindow instance) => _windows.Add(instance);
-
-        public void Remove(IWindow instance) => _windows.Remove(instance);
-        
     }
 }

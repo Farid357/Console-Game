@@ -1,4 +1,4 @@
-namespace ConsoleGame.Save_Storages
+namespace ConsoleGame.SaveSystem
 {
     public interface ISaveStorage<TStoreValue> : ISaveStorage
     {

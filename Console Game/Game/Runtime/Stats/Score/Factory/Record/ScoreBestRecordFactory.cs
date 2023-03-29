@@ -1,19 +1,19 @@
 using System;
-using ConsoleGame.Save_Storages;
-using ConsoleGame.Save_Storages.Paths;
+using ConsoleGame.GameLoop;
+using ConsoleGame.SaveSystem;
 
 namespace ConsoleGame
 {
     public sealed class ScoreBestRecordFactory : IScoreBestRecordFactory
     {
         private readonly ISaveStorages _saveStorages;
-        private readonly IGroup<IGameLoopObject> _gameLoopObjects;
+        private readonly IGameLoopObjectsGroup _gameLoop;
         private readonly IScoreBestRecordViewFactory _viewFactory;
 
-        public ScoreBestRecordFactory(ISaveStorages saveStorages, IGroup<IGameLoopObject> gameLoopObjects, IScoreBestRecordViewFactory viewFactory)
+        public ScoreBestRecordFactory(ISaveStorages saveStorages, IGameLoopObjectsGroup gameLoop, IScoreBestRecordViewFactory viewFactory)
         {
             _saveStorages = saveStorages ?? throw new ArgumentNullException(nameof(saveStorages));
-            _gameLoopObjects = gameLoopObjects ?? throw new ArgumentNullException(nameof(gameLoopObjects));
+            _gameLoop = gameLoop ?? throw new ArgumentNullException(nameof(gameLoop));
             _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
         }
 
@@ -25,7 +25,7 @@ namespace ConsoleGame
             ISaveStorage<int> recordStorage = new BinaryStorage<int>(new Path(nameof(IScoreBestRecord)));
             IScoreBestRecordView view = _viewFactory.Create();
             var scoreBestRecord = new ScoreBestRecord(score, recordStorage, view);
-            _gameLoopObjects.Add(scoreBestRecord);
+            _gameLoop.Add(scoreBestRecord);
             _saveStorages.Add(recordStorage);
             return scoreBestRecord;
         }

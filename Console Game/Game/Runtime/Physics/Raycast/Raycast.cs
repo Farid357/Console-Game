@@ -32,10 +32,10 @@ namespace ConsoleGame.Physics
         {
             _position = CalculateNextPosition(origin, direction);
 
-            foreach (var models in _collidersWorld.Models)
+            foreach (var models in _collidersWorld.Colliders)
             {
-                ICollider collider = models.Key;
-                TTarget target = models.Value;
+                ICollider collider = models.Value;
+                TTarget target = models.Key;
 
                 if (collider.Contains(_position))
                 {

@@ -4,23 +4,23 @@ namespace ConsoleGame.Physics
 {
     public sealed class CollidersWorld<TModel> : ICollidersWorld<TModel>
     {
-        private readonly Dictionary<ICollider, TModel> _models;
+        private readonly Dictionary<TModel, ICollider> _colliders;
 
         public CollidersWorld()
         {
-            _models = new Dictionary<ICollider, TModel>();
+            _colliders = new Dictionary<TModel, ICollider>();
         }
         
-        public IReadOnlyDictionary<ICollider, TModel> Models => _models;
+        public IReadOnlyDictionary<TModel, ICollider> Colliders => _colliders;
 
-        public void Add(ICollider collider, TModel model)
+        public void Add(TModel model, ICollider collider)
         {
-            _models.Add(collider, model);
+            _colliders.Add(model, collider);
         }
 
-        public void Remove(ICollider collider)
+        public void Remove(TModel model)
         {
-            _models.Remove(collider);
+            _colliders.Remove(model);
         }
     }
 }

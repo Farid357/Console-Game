@@ -2,8 +2,8 @@ namespace ConsoleGame.Physics
 {
     public interface ICollidersWorld<TModel> : IReadOnlyCollidersWorld<TModel>
     {
-        void Add(ICollider collider, TModel model);
+        void Add(TModel model, ICollider collider);
 
-        void Remove(ICollider collider);
+        void Remove(TModel model);
     }
 }

@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+
+namespace ConsoleGame
+{
+    public sealed class CharacterMovementInput : ICharacterMovementInput, IGameLoopObject
+    {
+        private readonly Dictionary<IKey, Vector3> _keys;
+        private Vector3 _moveDirection;
+
+        public CharacterMovementInput()
+        {
+            _keys = new Dictionary<IKey, Vector3>
+            {
+                { new Key(ConsoleKey.A), new Vector3(-1, 0, 0) },
+                { new Key(ConsoleKey.W), new Vector3(0, 0, 1) },
+                { new Key(ConsoleKey.D), new Vector3(1, 0, 0) },
+                { new Key(ConsoleKey.S), new Vector3(0, 0, -1) }
+            };
+
+            _moveDirection = Vector3.Zero;
+        }
+
+        public bool IsUsing => _moveDirection != Vector3.Zero;
+
+        public Vector3 Direction()
+        {
+            if (!IsUsing)
+                throw new Exception($"Input isn't using! You can't get move direction!");
+
+            return _moveDirection;
+        }
+
+        public void Update(float deltaTime)
+        {
+            var usingValuePair = _keys.ToList().Find(pair => pair.Key.IsPressed());
+
+            if (usingValuePair.Key != null)
+            {
+                Vector3 moveDirection = usingValuePair.Value;
+                _moveDirection = moveDirection;
+            }
+
+            else
+            {
+                _moveDirection = Vector3.Zero;
+            }
+        }
+    }
+}

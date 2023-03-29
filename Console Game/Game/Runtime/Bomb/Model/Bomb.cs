@@ -36,6 +36,7 @@ namespace ConsoleGame
                     health.TakeDamage(_damage);
                 }
             }
+            
             _view.BlowUp();
             IsBlownUp = true;
         }

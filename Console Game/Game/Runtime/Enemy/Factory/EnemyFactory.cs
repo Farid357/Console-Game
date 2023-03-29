@@ -1,29 +1,26 @@
 using System;
-using System.Numerics;
-using ConsoleGame.Physics;
-using ConsoleGame.Tools;
+using BananaParty.BehaviorTree;
 
 namespace ConsoleGame
 {
     public sealed class EnemyFactory : IEnemyFactory
     {
-        private readonly IHealthViewFactory _viewFactory;
-        private readonly ICollidersWorld<IEnemy> _collidersWorld;
-        private readonly int _health;
+        private readonly IHealthFactory _healthFactory;
+        private readonly IEnemyBehaviourTreeFactory _behaviourTreeFactory;
+        private readonly IMovementFactory _movementFactory;
 
-        public EnemyFactory(int health, IHealthViewFactory viewFactory, ICollidersWorld<IEnemy> collidersWorld)
+        public EnemyFactory(IHealthFactory healthFactory, IEnemyBehaviourTreeFactory behaviourTreeFactory, IMovementFactory movementFactory)
         {
-            _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
-            _collidersWorld = collidersWorld ?? throw new ArgumentNullException(nameof(collidersWorld));
-            _health = health.ThrowIfLessThanOrEqualsToZeroException();
+            _healthFactory = healthFactory ?? throw new ArgumentNullException(nameof(healthFactory));
+            _behaviourTreeFactory = behaviourTreeFactory ?? throw new ArgumentNullException(nameof(behaviourTreeFactory));
+            _movementFactory = movementFactory ?? throw new ArgumentNullException(nameof(movementFactory));
         }
 
-        public IEnemy Create()
+        public IEnemy Create(ITransform transform)
         {
-            IHealth health = new Health(_viewFactory.Create(), _health);
-            var enemy = new Enemy(health);
-            ICollider collider = new BoxCollider(new Box(new Vector3(1.5f, 1.5f, 1.5f)), Vector3.One);
-            _collidersWorld.Add(collider, enemy);
+            IHealth health = _healthFactory.Create();
+            IAdjustableMovement movement = _movementFactory.Create(transform);
+            var enemy = new Enemy(health, _behaviourTreeFactory.Create(movement), movement);
             return enemy;
         }
     }

@@ -3,7 +3,7 @@ using ConsoleGame.Tools;
 
 namespace ConsoleGame
 {
-    public sealed class EnemyWithReward : IEnemy
+    public sealed class EnemyWithReward : IEnemy, IGameObject
     {
         private readonly IReward _reward;
         private readonly IEnemy _enemy;
@@ -16,10 +16,15 @@ namespace ConsoleGame
 
         public IHealth Health => _enemy.Health;
         
-        public bool IsAlive => _enemy.IsAlive;
+        public IAdjustableMovement Movement => _enemy.Movement;
+
+        public bool IsAlive => _enemy.Health.IsAlive;
 
         public void Update(float deltaTime)
         {
+            if (!IsAlive)
+                throw new Exception();
+            
             if (_enemy.Health.IsDied() && _reward.IsApplied == false)
                 _reward.Apply();
         }

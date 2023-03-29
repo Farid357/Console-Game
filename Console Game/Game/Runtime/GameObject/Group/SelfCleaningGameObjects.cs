@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ConsoleGame.Loop
+namespace ConsoleGame.GameLoop
 {
     public sealed class SelfCleaningGameObjects : IGameObjects
     {

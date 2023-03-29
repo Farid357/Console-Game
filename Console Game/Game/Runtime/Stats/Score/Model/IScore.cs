@@ -1,9 +1,7 @@
 namespace ConsoleGame
 {
-    public interface IScore
+    public interface IScore : IReadOnlyScore
     {
-        int Count { get; }
-
         void Raise(int count);
     }
 }

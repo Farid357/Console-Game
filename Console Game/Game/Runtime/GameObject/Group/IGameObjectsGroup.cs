@@ -1,4 +1,4 @@
-namespace ConsoleGame.Loop
+namespace ConsoleGame.GameLoop
 {
     public interface IGameObjectsGroup
     {

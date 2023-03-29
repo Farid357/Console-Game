@@ -1,5 +1,5 @@
 using System;
-using ConsoleGame.Loop;
+using ConsoleGame.GameLoop;
 using ConsoleGame.Physics;
 
 namespace ConsoleGame.Weapons

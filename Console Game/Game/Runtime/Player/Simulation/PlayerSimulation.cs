@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConsoleGame.Loop;
+using ConsoleGame.GameLoop;
 using ConsoleGame.Tools;
 
 namespace ConsoleGame

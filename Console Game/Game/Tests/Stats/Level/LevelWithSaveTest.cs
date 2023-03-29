@@ -1,5 +1,4 @@
-using ConsoleGame.Save_Storages;
-using ConsoleGame.Save_Storages.Paths;
+using ConsoleGame.SaveSystem;
 using ConsoleGame.Stats;
 using NUnit.Framework;
 

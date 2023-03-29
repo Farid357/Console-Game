@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConsoleGame.Save_Storages;
-using ConsoleGame.Save_Storages.Paths;
+using ConsoleGame.SaveSystem;
 using ConsoleGame.Stats;
 
 namespace ConsoleGame

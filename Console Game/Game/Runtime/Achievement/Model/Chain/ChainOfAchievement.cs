@@ -1,30 +1,30 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ConsoleGame
 {
     public sealed class ChainOfAchievement : IGameLoopObject, IChainOfAchievement
     {
         private readonly List<IAchievement> _achievements;
+        private readonly List<IAchievement> _notReceivedAchievements;
 
         public ChainOfAchievement(List<IAchievement> achievements)
         {
             _achievements = achievements ?? throw new ArgumentNullException(nameof(achievements));
-            CurrentAchievement = _achievements.First(achievement => achievement.CanReceive);
+            _notReceivedAchievements = _achievements;
         }
 
-        public IAchievement CurrentAchievement { get; private set; }
+        public IReadOnlyList<IAchievement> Achievements => _achievements;
 
         public void Update(float deltaTime)
         {
-            if (CurrentAchievement.CanReceive)
+            foreach (IAchievement achievement in _notReceivedAchievements)
             {
-                int nextAchievementIndex = _achievements.IndexOf(CurrentAchievement) + 1;
-                CurrentAchievement.Receive();
-                
-                if (_achievements.Count > nextAchievementIndex)
-                    CurrentAchievement = _achievements[nextAchievementIndex];
+                if (achievement.CanReceive)
+                {
+                    achievement.Receive();
+                    _notReceivedAchievements.Remove(achievement);
+                }
             }
         }
     }

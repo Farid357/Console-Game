@@ -15,7 +15,7 @@ namespace ConsoleGame
             Movement = movement ?? throw new ArgumentNullException(nameof(movement));
         }
 
-        public bool IsAlive => _enemy.IsAlive;
+        public bool IsAlive => _enemy.Health.IsAlive;
 
         public IHealth Health => _enemy.Health;
 

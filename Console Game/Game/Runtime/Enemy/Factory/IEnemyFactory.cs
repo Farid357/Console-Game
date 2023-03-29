@@ -2,6 +2,6 @@ namespace ConsoleGame
 {
     public interface IEnemyFactory
     {
-        IEnemy Create();
+        IEnemy Create(ITransform transform);
     }
 }

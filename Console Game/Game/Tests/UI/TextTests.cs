@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Drawing;
 using ConsoleGame.UI;
 using NUnit.Framework;
@@ -19,7 +20,7 @@ namespace ConsoleGame.Tests.UI
         [Test]
         public void GroupUpdatesValue()
         {
-            IText texts = new Texts();
+            IOnlyVisualizeText texts = new Texts(new List<IText>{new DummyText()});
             const string value = "dldld";
             texts.Visualize(value);
             Assert.That(texts.Line == value);

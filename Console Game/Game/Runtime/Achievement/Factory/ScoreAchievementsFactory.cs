@@ -1,22 +1,27 @@
 using System;
 using System.Collections.Generic;
-using ConsoleGame.Loop;
+using ConsoleGame.GameLoop;
+using ConsoleGame.SaveSystem;
 
 namespace ConsoleGame
 {
     public sealed class ScoreAchievementsFactory : IAchievementFactory
     {
-        private readonly IScore _score;
+        private readonly IReadOnlyScore _score;
+        private readonly IAchievementViewFactory _viewFactory;
         private readonly IGameLoopObjectsGroup _gameLoop;
         private readonly IWallet _wallet;
+        private readonly ISaveStorages _saveStorages;
         private readonly List<int> _needScoreList;
-        
-        public ScoreAchievementsFactory(IScore score, IGameLoopObjectsGroup gameLoop, IWallet wallet)
+
+        public ScoreAchievementsFactory(IReadOnlyScore score, IAchievementViewFactory viewFactory, IGameLoopObjectsGroup gameLoop, IWallet wallet, ISaveStorages saveStorages)
         {
             _score = score ?? throw new ArgumentNullException(nameof(score));
+            _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
             _gameLoop = gameLoop ?? throw new ArgumentNullException(nameof(gameLoop));
             _wallet = wallet ?? throw new ArgumentNullException(nameof(wallet));
-            
+            _saveStorages = saveStorages;
+
             _needScoreList = new List<int>
             {
                 100,
@@ -37,11 +42,14 @@ namespace ConsoleGame
             
             for (int i = 1; i < _needScoreList.Count; i++)
             {
-           //      int needScore = _needScoreList[i];
-           //      IAchievement scoreAchievement = new ScoreAchievement(_score, needScore);
-           //      IReward moneyReward = new MoneyReward(_wallet, needScore / 5);
-           // //     IAchievement achievement = new AchievementWithReward(scoreAchievement, moneyReward);
-           //      achievements.Add(achievement);
+                int needScore = _needScoreList[i];
+                int moneyForReward = needScore / 5;
+                IReward moneyReward = new MoneyReward(_wallet, moneyForReward);
+                ISaveStorage<bool> wasReceivedStorage = new BinaryStorage<bool>(new Path($"Score Achievement {moneyForReward} {needScore}"));
+                _saveStorages.Add(wasReceivedStorage);
+                IScoreAchievementView view = new ScoreAchievementView(_viewFactory.Create());
+                IAchievement scoreAchievement = new ScoreAchievement(new Achievement(wasReceivedStorage, moneyReward), view,_score, needScore);
+                achievements.Add(scoreAchievement);
             }
 
             var chainOfAchievement = new ChainOfAchievement(achievements);

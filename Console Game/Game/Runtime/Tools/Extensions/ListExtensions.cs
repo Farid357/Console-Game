@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ConsoleGame.Physics;
 
 namespace ConsoleGame.Tools
 {
@@ -19,6 +20,15 @@ namespace ConsoleGame.Tools
             return list[randomIndex];
         }
 
+        public static void Clear<T>(this ICollidersWorld<T> collidersWorld)
+        {
+            for (var i = 0; i < collidersWorld.Colliders.Count; i++)
+            {
+                T model = collidersWorld.Colliders.Keys.ElementAt(i);
+                collidersWorld.Remove(model);
+            }
+        }
+        
         public static T GetRandom<T>(this IReadOnlyList<(T Element, float Chance)> list)
         {
             var sum = list.Sum(element => element.Chance);

@@ -2,13 +2,13 @@
 using System.IO;
 using System.Xml.Serialization;
 
-namespace ConsoleGame.Save_Storages
+namespace ConsoleGame.SaveSystem
 {
     public sealed class XmlStorage<TStoreValue> : ISaveStorage<TStoreValue>
     {
         private readonly string _pathName;
 
-        public XmlStorage(Paths.IPath path)
+        public XmlStorage(SaveSystem.IPath path)
         {
             if (path is null)
                 throw new ArgumentNullException(nameof(path));

@@ -6,11 +6,11 @@ namespace ConsoleGame.UI
     [Serializable]
     public sealed class Canvas : ICanvas
     {
-        private readonly List<IUiElement> _uiElements;
+        private readonly List<IUiElement> _elements;
 
-        public Canvas(List<IUiElement> uiElements, ITransform transform)
+        public Canvas(List<IUiElement> elements, ITransform transform)
         {
-            _uiElements = uiElements ?? throw new ArgumentNullException(nameof(uiElements));
+            _elements = elements ?? throw new ArgumentNullException(nameof(elements));
             Transform = transform ?? throw new ArgumentNullException(nameof(transform));
         }
 
@@ -22,20 +22,20 @@ namespace ConsoleGame.UI
 
         public ITransform Transform { get; }
 
-        public void Add(IUiElement instance) => _uiElements.Add(instance);
+        public void Add(IUiElement element) => _elements.Add(element);
 
-        public void Remove(IUiElement instance) => _uiElements.Remove(instance);
+        public void Remove(IUiElement element) => _elements.Remove(element);
 
         public void Enable()
         {
             IsEnabled = true;
-            _uiElements.ForEach(element => element.Enable());
+            _elements.ForEach(element => element.Enable());
         }
 
         public void Disable()
         {
             IsEnabled = false;
-            _uiElements.ForEach(element => element.Disable());
+            _elements.ForEach(element => element.Disable());
         }
     }
 }

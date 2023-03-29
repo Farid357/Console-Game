@@ -25,7 +25,12 @@ namespace ConsoleGame.Tools
         
         public static IText Create(this ITextFactory textFactory, Vector2 position)
         {
-            return textFactory.Create(new Transform(position), _standardFont, Color.Azure);
+            return Create(textFactory, position, _standardFont);
+        }
+        
+        public static IText Create(this ITextFactory textFactory, Vector2 position, Color color)
+        {
+            return Create(textFactory, position, _standardFont, color);
         }
         
         public static IText Create(this ITextFactory textFactory, Vector2 position, Font font)

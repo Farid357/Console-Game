@@ -13,9 +13,9 @@ namespace ConsoleGame
             _enemyFactory = enemyFactory ?? throw new ArgumentNullException(nameof(enemyFactory));
         }
         
-        public IEnemy Create()
+        public IEnemy Create(ITransform transform)
         {
-            var enemy = new EnemyWithReward(_rewardFactory.Create(), _enemyFactory.Create());
+            var enemy = new EnemyWithReward(_rewardFactory.Create(), _enemyFactory.Create(transform));
             return enemy;
         }
     }

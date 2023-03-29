@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleGame.Save_Storages.Paths
+namespace ConsoleGame.SaveSystem
 {
     public sealed class Path : IPath
     {

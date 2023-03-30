@@ -1,6 +1,5 @@
+using System;
 using System.Collections.Generic;
-using ConsoleGame.GameLoop;
-using ConsoleGame.SaveSystem;
 
 namespace ConsoleGame
 {
@@ -8,13 +7,12 @@ namespace ConsoleGame
     {
         private readonly List<IAchievementFactory> _factories;
 
-        public AchievementsFactory(IAchievementViewFactory viewFactory, IGameLoopObjectsGroup gameLoop, ISaveStorages saveStorages, IWallet wallet, IReadOnlyScore score)
+        public AchievementsFactory(List<IAchievementFactory> factories)
         {
-            _factories = new List<IAchievementFactory>()
-            {
-                new MoneyAchievementsFactory(gameLoop, viewFactory, saveStorages, wallet),
-                new ScoreAchievementsFactory(score, viewFactory, gameLoop, wallet, saveStorages)
-            };
+            if (factories.Count == 0)
+                throw new ArgumentException("Value cannot be an empty collection.", nameof(factories));
+            
+            _factories = factories ?? throw new ArgumentNullException(nameof(factories));
         }
 
         public void Create()

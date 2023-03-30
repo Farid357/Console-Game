@@ -5,9 +5,9 @@ namespace ConsoleGame.Tools
 {
     public static class PlayerExtensions
     {
-        public static IReadOnlyList<IReadOnlyPlayer> ToReadOnly<TPlayer>(this IReadOnlyList<TPlayer> players) where TPlayer : IPlayer
+        public static IReadOnlyList<IReadOnlyShooter<TWeapon>> ToReadOnly<TShooter, TWeapon>(this IReadOnlyList<TShooter> players)
         {
-            return players.Cast<IReadOnlyPlayer>().ToList();
+            return players.Cast<IReadOnlyShooter<TWeapon>>().ToList();
         }
     }
 }

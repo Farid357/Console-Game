@@ -11,6 +11,11 @@ namespace ConsoleGame
             _key = key ?? throw new ArgumentNullException(nameof(key));
         }
 
+        public WeaponInput() : this(new Key(ConsoleKey.P))
+        {
+            
+        }
+
         public bool IsUsing => _key.IsPressed();
     }
 }

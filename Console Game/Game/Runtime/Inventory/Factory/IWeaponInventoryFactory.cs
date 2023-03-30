@@ -1,9 +1,11 @@
+using ConsoleGame.Weapons;
+
 namespace ConsoleGame
 {
     public interface IWeaponInventoryFactory
     {
-        IInventory<IWeaponInventoryItem> CreateStandard();
+        IInventory<IWeaponInventoryItem<IWeapon>> CreateStandard();
 
-        IInventory<IWeaponInventoryItem> CreateWithMagazine();
+        IInventory<IWeaponInventoryItem<IWeaponWithMagazine>> CreateWithMagazine();
     }
 }

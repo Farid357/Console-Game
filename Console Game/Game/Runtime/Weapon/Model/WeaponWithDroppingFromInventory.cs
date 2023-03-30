@@ -1,14 +1,15 @@
 using System;
 using System.Linq;
+using ConsoleGame.Weapons;
 
 namespace ConsoleGame
 {
     public sealed class WeaponWithDroppingFromInventory : IWeapon
     {
-        private readonly IInventory<IWeaponInventoryItem> _inventory;
+        private readonly IInventory<IWeaponInventoryItem<IWeapon>> _inventory;
         private readonly IWeapon _weapon;
 
-        public WeaponWithDroppingFromInventory(IWeapon weapon, IInventory<IWeaponInventoryItem> inventory)
+        public WeaponWithDroppingFromInventory(IWeapon weapon, IInventory<IWeaponInventoryItem<IWeapon>> inventory)
         {
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
             _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));

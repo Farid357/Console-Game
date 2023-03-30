@@ -1,7 +1,7 @@
 namespace ConsoleGame
 {
-    public interface IWeaponInventoryItem : IInventoryItem
+    public interface IWeaponInventoryItem<out TWeapon> : IInventoryItem
     {
-        IWeapon Weapon { get; }
+        TWeapon Weapon { get; }
     }
 }

@@ -1,27 +1,25 @@
 using System;
 using ConsoleGame.GameLoop;
-using ConsoleGame.UI;
 using ConsoleGame.Weapons;
 
 namespace ConsoleGame
 {
-    public sealed class StartPlayerWeaponFactory : IFactory<IWeaponWithMagazine>
+    public sealed class StartPlayerWeaponFactory : IWeaponWithMagazineFactory
     {
         private readonly IGameLoopObjectsGroup _gameLoop;
-        private readonly IText _text;
+        private readonly IWeaponMagazineFactory _magazineFactory;
         private readonly IBulletFactory _bulletFactory;
 
-        public StartPlayerWeaponFactory(IGameLoopObjectsGroup gameLoop, IText text, IBulletFactory bulletFactory)
+        public StartPlayerWeaponFactory(IGameLoopObjectsGroup gameLoop, IWeaponMagazineFactory magazineFactory, IBulletFactory bulletFactory)
         {
             _gameLoop = gameLoop ?? throw new ArgumentNullException(nameof(gameLoop));
-            _text = text ?? throw new ArgumentNullException(nameof(text));
+            _magazineFactory = magazineFactory ?? throw new ArgumentNullException(nameof(magazineFactory));
             _bulletFactory = bulletFactory ?? throw new ArgumentNullException(nameof(bulletFactory));
         }
 
         public IWeaponWithMagazine Create()
         {
-            IWeaponMagazineView magazineView = new WeaponMagazineView(_text);
-            IWeaponMagazine magazine = new WeaponMagazine(30, magazineView);
+            IWeaponMagazine magazine = _magazineFactory.Create();
             var shootCooldownTimer = new Timer(0.2f);
             IWeapon weapon = new Weapon(_bulletFactory, 10);
             IWeapon weaponWithShootWaiting = new WeaponWithShootWaiting(shootCooldownTimer, weapon);

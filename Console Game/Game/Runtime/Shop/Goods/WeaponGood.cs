@@ -2,18 +2,19 @@ using System;
 
 namespace ConsoleGame.Shop
 {
-    public sealed class WeaponGood : IGood
+    public sealed class WeaponGood<TWeapon> : IGood
     {
-        private readonly ICollectionSaveStorage<IWeaponInventoryItem> _weaponsStorage;
-        private readonly IWeaponInventoryItem _item;
+        private readonly ICollectionSaveStorage<IWeaponInventoryItem<TWeapon>> _weaponsStorage;
+        private readonly IWeaponInventoryItem<TWeapon> _item;
         private readonly IGood _good;
 
-        public WeaponGood(IGood good, IWeaponInventoryItem item, ICollectionSaveStorage<IWeaponInventoryItem> saveStorage)
+        public WeaponGood(IGood good, ICollectionSaveStorage<IWeaponInventoryItem<TWeapon>> weaponsStorage, IWeaponInventoryItem<TWeapon> item)
         {
             _good = good ?? throw new ArgumentNullException(nameof(good));
+            _weaponsStorage = weaponsStorage ?? throw new ArgumentNullException(nameof(weaponsStorage));
             _item = item ?? throw new ArgumentNullException(nameof(item));
-            _weaponsStorage = saveStorage ?? throw new ArgumentNullException(nameof(saveStorage));
         }
+
 
         public string Name => _good.Name;
 

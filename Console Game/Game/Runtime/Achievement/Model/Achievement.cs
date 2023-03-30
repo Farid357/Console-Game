@@ -23,7 +23,7 @@ namespace ConsoleGame
                 throw new Exception($"Achievement is already received!");
             
             CanReceive = false;
-            _wasReceivedStorage.Save(CanReceive);
+            _wasReceivedStorage.Save(true);
             _reward.Apply();
         }
     }

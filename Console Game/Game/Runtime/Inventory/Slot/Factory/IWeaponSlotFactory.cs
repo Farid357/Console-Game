@@ -1,8 +1,7 @@
 namespace ConsoleGame
 {
-    public interface IWeaponSlotFactory<in TWeapon, in TWeaponInput>
+    public interface IWeaponSlotFactory<out TWeapon, in TShooter>
     {
-        IInventorySlot<IWeaponInventoryItem> Create(IInventoryItemViewData viewData, TWeapon weapon,
-            TWeaponInput weaponInput);
+        IInventorySlot<IWeaponInventoryItem<TWeapon>> Create(IInventoryItemViewData viewData, TShooter shooter);
     }
 }

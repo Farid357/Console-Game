@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Numerics;
 using ConsoleGame.GameLoop;
 using ConsoleGame.Physics;
 using ConsoleGame.SaveSystem;
@@ -54,22 +52,29 @@ namespace ConsoleGame
             IRaycastFactory<IEnemy> enemyRaycastFactory = new RaycastFactory<IEnemy>(loopObjects, enemyCollidersWorld);
             IMovementFactory enemyMovementFactory = new EnemyMovementFactory(loopObjects);
             IBulletFactory bulletFactory = new RaycastBulletFactory(enemyRaycastFactory, enemyMovementFactory, gameObjects);
-            IText bulletsText = textFactory.Create(new Transform(new Vector3(1.5f, 1.3f, 0)), new Font("Arial", 14), Color.Chocolate);
-            IFactory<IWeaponWithMagazine> weaponFactory = new StartPlayerWeaponFactory(loopObjects, bulletsText, bulletFactory);
+            IWeaponMagazineViewFactory weaponMagazineViewFactory = new WeaponMagazineViewFactory(textFactory);
+            IWeaponMagazineFactory weaponMagazineFactory = new WeaponMagazineFactory(weaponMagazineViewFactory, 100);
+            var weaponFactory = new StartPlayerWeaponFactory(loopObjects, weaponMagazineFactory, bulletFactory);
             IWeaponWithMagazine weapon = weaponFactory.Create();
-            IPlayerSimulationFactory playerSimulationFactory = new PlayerSimulationFactory(loopObjects);
-            IPlayersSimulation<IPlayer> playersSimulation = playerSimulationFactory.Create<IPlayer>();
+            IShootersSimulationFactory shootersSimulationFactory = new ShootersSimulationFactory(loopObjects);
+            var shootersSimulation = shootersSimulationFactory.Create<IShooterWithWeaponMagazine, IWeaponWithMagazine>();
             IWeaponInventoryFactory weaponInventoryFactory = new WeaponInventoryFactory();
-            var playerFactory = new PlayerWithWeaponMagazineFactory(playersSimulation);
+            var shooterFactory = new ShooterWithWeaponMagazineFactory();
             IInventorySlotViewFactory slotViewFactory = new InventorySlotViewFactory(textFactory);
             IReadOnlyList<IEnemy> allEnemies = enemiesWorld.Enemies.Keys.ToList();
            var killsStreak = new KillsStreak(allEnemies, new KillsStreakViewFactory(textFactory).Create(), character.Health);
-            var weaponSlotFactory = new WeaponSlotFactory<IWeaponWithMagazine, IWeaponInput, IPlayerWithWeaponMagazine>(playerFactory, playersSimulation, slotViewFactory);
+            var weaponSlotFactory = new WeaponSlotFactory<IWeaponWithMagazine, IShooterWithWeaponMagazine>(shootersSimulation, slotViewFactory);
             var weaponInventory = weaponInventoryFactory.CreateStandard();
-            weaponInventory.Add(weaponSlotFactory.Create(new InventoryItemViewData("Pistol", new DummyImage()), weapon, weaponInput));
-            playerFactory.Create(weaponInput, weapon);
+            IInventoryItemViewData itemViewData = new InventoryItemViewData("Pistol", new DummyImage());
+            var startPlayer = shooterFactory.Create(new WeaponInput(), weapon);
+            weaponInventory.Add(weaponSlotFactory.Create(itemViewData, startPlayer));
+            shooterFactory.Create(weaponInput, weapon);
             IAchievementViewFactory achievementViewFactory = new AchievementViewFactory(imageFactory, windowFactory, textFactory);
-            IAchievementFactory achievementFactory = new AchievementsFactory(achievementViewFactory, loopObjects, saveStorages, wallet, score);
+            IAchievementFactory achievementFactory = new AchievementsFactory(new List<IAchievementFactory>
+            {
+                new MoneyAchievementsFactory(loopObjects, achievementViewFactory, saveStorages, wallet),
+                new ScoreAchievementsFactory(score, achievementViewFactory, loopObjects, wallet, saveStorages)
+            });
             loopObjects.Add(killsStreak);
             loopObjects.Add(gameObjects);
             achievementFactory.Create();

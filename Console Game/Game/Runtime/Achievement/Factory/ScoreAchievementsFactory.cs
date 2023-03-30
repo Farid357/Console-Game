@@ -20,7 +20,7 @@ namespace ConsoleGame
             _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
             _gameLoop = gameLoop ?? throw new ArgumentNullException(nameof(gameLoop));
             _wallet = wallet ?? throw new ArgumentNullException(nameof(wallet));
-            _saveStorages = saveStorages;
+            _saveStorages = saveStorages ?? throw new ArgumentNullException(nameof(saveStorages));
 
             _needScoreList = new List<int>
             {
@@ -40,16 +40,24 @@ namespace ConsoleGame
         {
             var achievements = new List<IAchievement>();
             
-            for (int i = 1; i < _needScoreList.Count; i++)
+            foreach (var needScore in _needScoreList)
             {
-                int needScore = _needScoreList[i];
                 int moneyForReward = needScore / 5;
                 IReward moneyReward = new MoneyReward(_wallet, moneyForReward);
                 ISaveStorage<bool> wasReceivedStorage = new BinaryStorage<bool>(new Path($"Score Achievement {moneyForReward} {needScore}"));
                 _saveStorages.Add(wasReceivedStorage);
                 IScoreAchievementView view = new ScoreAchievementView(_viewFactory.Create());
-                IAchievement scoreAchievement = new ScoreAchievement(new Achievement(wasReceivedStorage, moneyReward), view,_score, needScore);
-                achievements.Add(scoreAchievement);
+
+                if (wasReceivedStorage.HasSave() && wasReceivedStorage.Load())
+                {
+                    view.Receive();
+                }
+
+                else
+                {
+                    IAchievement scoreAchievement = new ScoreAchievement(new Achievement(wasReceivedStorage, moneyReward), view, _score, needScore);
+                    achievements.Add(scoreAchievement);
+                }
             }
 
             var chainOfAchievement = new ChainOfAchievement(achievements);

@@ -17,7 +17,7 @@ namespace ConsoleGame
 
         public IAdjustableMovement Create(ITransform transform)
         {
-            ISaveStorage<float> movementSpeedStorage = new BinaryStorage<float>(new Path(nameof(IPlayer) + nameof(IMovement)));
+            ISaveStorage<float> movementSpeedStorage = new BinaryStorage<float>(Paths.CharacterMovementSpeed);
             float speed = movementSpeedStorage.HasSave() ? movementSpeedStorage.Load() : 1.5f;
             _saveStorages.Add(movementSpeedStorage);
             var smoothMovement = new SmoothMovement(transform);

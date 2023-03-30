@@ -8,5 +8,15 @@ namespace ConsoleGame.Tools
         {
             return weapon.Magazine.Bullets == 0;
         }
+        
+        public static bool IsNotFull(this IWeaponMagazine weaponMagazine)
+        {
+            return weaponMagazine.Bullets < weaponMagazine.MaxBullets;
+        }
+        
+        public static void Fill(this IWeaponMagazine weaponMagazine)
+        {
+            weaponMagazine.Add(weaponMagazine.MaxBullets - weaponMagazine.Bullets);
+        }
     }
 }

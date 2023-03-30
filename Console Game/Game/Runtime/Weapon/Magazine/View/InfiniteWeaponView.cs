@@ -3,11 +3,11 @@ using ConsoleGame.UI;
 
 namespace ConsoleGame
 {
-    public sealed class InfiniteBulletsView : IInfiniteBulletsView
+    public sealed class InfiniteWeaponView : IInfiniteWeaponView
     {
         private readonly IText _text;
 
-        public InfiniteBulletsView(IText text)
+        public InfiniteWeaponView(IText text)
         {
             _text = text ?? throw new ArgumentNullException(nameof(text));
         }

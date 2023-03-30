@@ -56,20 +56,20 @@ namespace ConsoleGame
             IBulletFactory bulletFactory = new RaycastBulletFactory(enemyRaycastFactory, enemyMovementFactory, gameObjects);
             IWeaponMagazineViewFactory weaponMagazineViewFactory = new WeaponMagazineViewFactory(textFactory);
             IWeaponMagazineFactory weaponMagazineFactory = new WeaponMagazineFactory(weaponMagazineViewFactory, 100);
-            var weaponFactory = new StartPlayerWeaponFactory(loopObjects, weaponMagazineFactory, bulletFactory);
+            var weaponFactory = new StartCharacterWeaponFactory(loopObjects, weaponMagazineFactory, bulletFactory, character);
             IWeaponWithMagazine weapon = weaponFactory.Create();
-            IShootersSimulationFactory shootersSimulationFactory = new ShootersSimulationFactory(loopObjects);
-            var shootersSimulation = shootersSimulationFactory.Create<IShooterWithWeaponMagazine, IWeaponWithMagazine>();
+           // IShootersSimulationFactory shootersSimulationFactory = new ShootersSimulationFactory(loopObjects);
+         //   var shootersSimulation = shootersSimulationFactory.Create<IShooterWithWeaponMagazine, IWeaponWithMagazine>();
             IWeaponInventoryFactory weaponInventoryFactory = new WeaponInventoryFactory();
             var shooterFactory = new ShooterWithWeaponMagazineFactory();
             IInventorySlotViewFactory slotViewFactory = new InventorySlotViewFactory(textFactory);
             IReadOnlyList<IEnemy> allEnemies = enemiesWorld.Enemies.Keys.ToList();
            var killsStreak = new KillsStreak(allEnemies, new KillsStreakViewFactory(textFactory).Create(), character.Health);
-            var weaponSlotFactory = new WeaponSlotFactory<IWeaponWithMagazine, IShooterWithWeaponMagazine>(shootersSimulation, slotViewFactory);
+           // var weaponSlotFactory = new WeaponSlotFactory<IWeaponWithMagazine, IShooterWithWeaponMagazine>(shootersSimulation, slotViewFactory);
             var weaponInventory = weaponInventoryFactory.CreateStandard();
             IInventoryItemViewData itemViewData = new InventoryItemViewData("Pistol", new DummyImage());
             var startPlayer = shooterFactory.Create(new WeaponInput(), weapon);
-            weaponInventory.Add(weaponSlotFactory.Create(itemViewData, startPlayer));
+        //    weaponInventory.Add(weaponSlotFactory.Create(itemViewData, startPlayer));
             shooterFactory.Create(weaponInput, weapon);
             IAchievementViewFactory achievementViewFactory = new AchievementViewFactory(imageFactory, windowFactory, textFactory);
             IAchievementFactory achievementFactory = new AchievementsFactory(new List<IAchievementFactory>

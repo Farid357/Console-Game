@@ -12,7 +12,7 @@ namespace ConsoleGame.Tests
         {
             var bulletsFactory = new DummyBulletFactory();
             IWeaponMagazine weaponMagazine = new WeaponMagazine(10, new DummyMagazineView());
-            IWeapon weapon = new WeaponWithMagazine(weaponMagazine, new Weapon(bulletsFactory, 10), new DummyWeaponWithMagazineView());
+            IWeapon weapon = new WeaponWithMagazine(weaponMagazine, new CharacterWeapon(bulletsFactory, new DummyMovement(),10), new DummyWeaponWithReloadingView());
             weapon.Shoot();
             Assert.That(weaponMagazine.Bullets == 9);
         }
@@ -21,8 +21,8 @@ namespace ConsoleGame.Tests
         public async Task ReloadsCorrectly()
         {
             var bulletsFactory = new DummyBulletFactory();
-            IWeaponMagazine weaponMagazine = new WeaponMagazine(10, new DummyMagazineView());
-            IWeaponWithMagazine weapon = new WeaponWithMagazine(weaponMagazine, new Weapon(bulletsFactory, 10), new DummyWeaponWithMagazineView());
+            IWeaponMagazine magazine = new WeaponMagazine(10, new DummyMagazineView());
+            var weapon = new WeaponWithReloading(new WeaponWithMagazine(magazine, new DummyWeapon(), new DummyWeaponWithReloadingView()), new DummyWeaponWithReloadingView());
             
             for (var i = 0; i < 9; i++)
             {
@@ -30,7 +30,7 @@ namespace ConsoleGame.Tests
             }
 
             await weapon.Reload();
-            Assert.That(weaponMagazine.Bullets == weaponMagazine.MaxBullets);
+            Assert.That(magazine.Bullets == magazine.MaxBullets);
         }
     }
 }

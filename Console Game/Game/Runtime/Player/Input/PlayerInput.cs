@@ -8,6 +8,8 @@ namespace ConsoleGame
     public sealed class PlayerInput : IPlayerInput, IGameLoopObject
     {
         private readonly Dictionary<IKey, Vector3> _keys;
+        private readonly IKey _shootKey;
+        private readonly IKey _reloadingKey;
         private Vector3 _moveDirection;
 
         public PlayerInput()
@@ -21,13 +23,19 @@ namespace ConsoleGame
             };
 
             _moveDirection = Vector3.Zero;
+            _shootKey = new Key(ConsoleKey.P);
+            _reloadingKey = new Key(ConsoleKey.R);
         }
 
-        public bool IsUsing => _moveDirection != Vector3.Zero;
+        public bool IsMoving => _moveDirection != Vector3.Zero;
+
+        public bool IsReloading => _reloadingKey.IsPressed();
+        
+        public bool IsShooting => _shootKey.IsPressed();
 
         public Vector3 Direction()
         {
-            if (!IsUsing)
+            if (!IsMoving)
                 throw new Exception($"Input isn't using! You can't get move direction!");
 
             return _moveDirection;

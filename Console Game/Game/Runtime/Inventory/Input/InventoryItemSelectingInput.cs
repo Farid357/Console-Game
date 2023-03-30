@@ -7,8 +7,8 @@ namespace ConsoleGame.Inventory
 {
     public sealed class InventoryItemSelectingInput<TItem> : IGameLoopObject, IInventoryItemSelectingInput<TItem> where TItem : IInventoryItem
     {
-        private readonly List<INumpadKey> _keys;
         private readonly IReadOnlyInventory<TItem> _inventory;
+        private readonly List<INumpadKey> _keys;
         private INumpadKey _pressedKey;
         
         public InventoryItemSelectingInput(IEnumerable<INumpadKey> keys, IReadOnlyInventory<TItem> inventory)

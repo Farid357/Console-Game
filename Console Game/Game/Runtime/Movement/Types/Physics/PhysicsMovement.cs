@@ -15,9 +15,12 @@ namespace ConsoleGame
         }
 
         public IReadOnlyTransform Transform => _transform;
+        
+        public Vector3 LookDirection { get; private set; }
 
         public void Move(Vector3 direction)
         {
+            LookDirection = direction;
             Vector3 position = _transform.Position + direction * (_body.MoveSpeed - _body.Mass);
             _transform.Teleport(position);
         }

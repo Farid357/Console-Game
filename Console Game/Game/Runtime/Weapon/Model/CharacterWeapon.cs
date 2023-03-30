@@ -4,15 +4,16 @@ using ConsoleGame.Tools;
 
 namespace ConsoleGame.Weapons
 {
-    public sealed class Weapon : IWeapon
+    public sealed class CharacterWeapon : IWeapon
     {
         private readonly IBulletFactory _bulletFactory;
+        private readonly IReadOnlyMovement _movement;
         private readonly int _bulletDamage;
-        private readonly Vector3 _shootDirection = new Vector3(1, 0, 0);
         
-        public Weapon(IBulletFactory bulletFactory, int bulletDamage)
+        public CharacterWeapon(IBulletFactory bulletFactory, IReadOnlyMovement movement, int bulletDamage)
         {
             _bulletFactory = bulletFactory ?? throw new ArgumentNullException(nameof(bulletFactory));
+            _movement = movement ?? throw new ArgumentNullException(nameof(movement));
             _bulletDamage = bulletDamage.ThrowIfLessThanOrEqualsToZeroException();
         }
 
@@ -21,7 +22,7 @@ namespace ConsoleGame.Weapons
         public void Shoot()
         {
             IBullet bullet = _bulletFactory.Create(_bulletDamage);
-            bullet.Throw(_shootDirection);
+            bullet.Throw(_movement.LookDirection);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace ConsoleGame
         private IAchievement Create(int moneyForReward, int needMoney)
         {
             IReward moneyReward = new MoneyReward(_wallet, moneyForReward);
-            ISaveStorage<bool> wasReceivedStorage = new BinaryStorage<bool>(new Path($"Achievement {moneyForReward} {needMoney}"));
+            ISaveStorage<bool> wasReceivedStorage = new BinaryStorage<bool>(new Path($"MoneyAchievement {moneyForReward} {needMoney}"));
             _saveStorages.Add(wasReceivedStorage);
             IMoneyAchievementView view = new MoneyAchievementView(_viewFactory.Create());
             IAchievement achievement = new Achievement(wasReceivedStorage, moneyReward);

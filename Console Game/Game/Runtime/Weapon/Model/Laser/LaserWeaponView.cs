@@ -5,7 +5,7 @@ namespace ConsoleGame.Weapons
 {
     public sealed class LaserWeaponView : ILaserWeaponView
     {
-        public void ShowLaser(Vector2 origin, Vector2 direction)
+        public void ShowLaser(Vector3 origin, Vector3 direction)
         {
             Console.WriteLine($"Laser from origin: {origin}, to direction: {direction}");
         }

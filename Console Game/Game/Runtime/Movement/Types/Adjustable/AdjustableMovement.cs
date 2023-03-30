@@ -17,9 +17,12 @@ namespace ConsoleGame
         public float Speed { get; private set; }
 
         public IReadOnlyTransform Transform => _movement.Transform;
+        
+        public Vector3 LookDirection { get; private set; }
 
         public void Move(Vector3 direction)
         {
+            LookDirection = direction;
             _movement.Move(direction * Speed);
         }
 

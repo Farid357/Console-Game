@@ -16,10 +16,10 @@ namespace ConsoleGame
 
         public IBehaviorNode Create(IMovement enemyMovement)
         {
-            IBehaviorNode isNearCharacterNode = new IsNearNode(_character.Movement.Transform, enemyMovement.Transform, 20);
+            IBehaviorNode isNearCharacterNode =
+                new IsNearNode(_character.Movement.Transform, enemyMovement.Transform, 20);
 
-            return new RepeatNode(new SelectorNode(new IBehaviorNode[]
-            {
+            return new RepeatNode(
                 new SequenceNode(new IBehaviorNode[]
                 {
                     new ParallelSequenceNode(new IBehaviorNode[]
@@ -33,11 +33,11 @@ namespace ConsoleGame
 
                         new RepeatNode(new SelectorNode(new IBehaviorNode[]
                         {
-                            new MoveNode(new MovementToTarget(enemyMovement, _character.Movement.Transform), nodeForComplete: isNearCharacterNode),
+                            new MoveNode(new MovementToTarget(enemyMovement, _character.Movement.Transform),
+                                nodeForComplete: isNearCharacterNode),
                         }))
                     })
-                })
-            }));
+                }));
         }
     }
 }

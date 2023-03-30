@@ -3,7 +3,7 @@ using ConsoleGame.Weapons;
 
 namespace ConsoleGame.Tests
 {
-    public class DummyWeaponWithMagazineView : IWeaponWithMagazineView
+    public class DummyWeaponWithReloadingView : IWeaponWithReloadingView
     {
         public bool IsReloading => false;
         

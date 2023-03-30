@@ -10,7 +10,7 @@ namespace ConsoleGame.Tests
         public void ThrowsBullet()
         {
             var bulletsFactory = new DummyBulletFactory();
-            IWeapon weapon = new Weapon(bulletsFactory, 10);
+            IWeapon weapon = new CharacterWeapon(bulletsFactory,  new DummyMovement(), 10);
             weapon.Shoot();
             Assert.That(bulletsFactory.CreatedBullet.WasThrew);
         }

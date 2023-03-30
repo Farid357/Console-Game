@@ -5,19 +5,19 @@ using ConsoleGame.UI;
 
 namespace ConsoleGame
 {
-    public sealed class InfiniteBulletsViewFactory : IInfiniteBulletsViewFactory
+    public sealed class InfiniteWeaponViewFactory : IInfiniteWeaponViewFactory
     {
         private readonly ITextFactory _textFactory;
 
-        public InfiniteBulletsViewFactory(ITextFactory textFactory)
+        public InfiniteWeaponViewFactory(ITextFactory textFactory)
         {
             _textFactory = textFactory ?? throw new ArgumentNullException(nameof(textFactory));
         }
 
-        public IInfiniteBulletsView Create()
+        public IInfiniteWeaponView Create()
         {
             IText text = _textFactory.Create(new Vector2(100, 200));
-            return new InfiniteBulletsView(text);
+            return new InfiniteWeaponView(text);
         }
     }
 }

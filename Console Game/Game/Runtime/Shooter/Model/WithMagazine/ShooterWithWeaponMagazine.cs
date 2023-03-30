@@ -28,8 +28,8 @@ namespace ConsoleGame
 
         private async Task TryReload()
         {
-            if (Weapon.MagazineIsEmpty())
-                await Weapon.Reload();
+          //  if (Weapon.MagazineIsEmpty())
+              //  await Weapon.Reload();
         }
     }
 }

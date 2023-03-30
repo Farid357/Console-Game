@@ -5,12 +5,12 @@ using System.Numerics;
 
 namespace ConsoleGame
 {
-    public sealed class CharacterMovementInput : ICharacterMovementInput, IGameLoopObject
+    public sealed class PlayerInput : IPlayerInput, IGameLoopObject
     {
         private readonly Dictionary<IKey, Vector3> _keys;
         private Vector3 _moveDirection;
 
-        public CharacterMovementInput()
+        public PlayerInput()
         {
             _keys = new Dictionary<IKey, Vector3>
             {

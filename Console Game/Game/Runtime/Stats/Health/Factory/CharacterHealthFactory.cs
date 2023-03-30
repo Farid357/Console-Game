@@ -16,7 +16,7 @@ namespace ConsoleGame
 
         public IHealth Create()
         {
-            IPath healthPath = new Path(nameof(ICharacter) + nameof(IHealth));
+            IPath healthPath = new Path(nameof(IPlayer) + nameof(IHealth));
             ISaveStorage<IHealth> healthStorage = new BinaryStorage<IHealth>(healthPath);
             IHealth defaultHealth = new Health(_viewFactory.Create(), 100);
             _saveStorages.Add(healthStorage);

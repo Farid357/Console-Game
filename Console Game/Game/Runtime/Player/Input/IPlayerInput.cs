@@ -2,7 +2,7 @@ using System.Numerics;
 
 namespace ConsoleGame
 {
-    public interface ICharacterMovementInput
+    public interface IPlayerInput
     {
         bool IsUsing { get; }
 

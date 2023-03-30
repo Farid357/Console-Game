@@ -37,8 +37,10 @@ namespace ConsoleGame
             IBarFactory barFactory = new BarFactory(imageFactory);
             IHealthViewFactory characterHealthViewFactory = new CharacterHealthViewFactory(textFactory, barFactory);
             IHealthFactory characterHealthFactory = new CharacterHealthFactory(characterHealthViewFactory, saveStorages);
-            ICharacterFactory characterFactory = new CharacterFactory(characterMovementFactory, loopObjects, characterHealthFactory);
+            ICharacterFactory characterFactory = new CharacterFactory(characterMovementFactory, characterHealthFactory);
             ICharacter character = characterFactory.Create();
+            IPlayerFactory playerFactory = new PlayerFactory(loopObjects, character);
+            IPlayer player = playerFactory.Create();
             ICollidersWorld<IEnemy> enemyCollidersWorld = new CollidersWorld<IEnemy>();
             IEnemiesWorld enemiesWorld = new EnemiesWorld(enemyCollidersWorld);
             IGameObjects gameObjects = new SelfCleaningGameObjects(new GameObjects());

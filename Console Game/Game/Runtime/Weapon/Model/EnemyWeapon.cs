@@ -23,7 +23,7 @@ namespace ConsoleGame.Weapons
         public void Shoot()
         {
             IBullet bullet = _bulletFactory.Create(_damage);
-            Vector3 shootDirection = Vector3.Normalize(_character.Transform.Position - _transform.Position);
+            Vector3 shootDirection = Vector3.Normalize(_character.Movement.Transform.Position - _transform.Position);
             bullet.Throw(shootDirection);
         }
     }

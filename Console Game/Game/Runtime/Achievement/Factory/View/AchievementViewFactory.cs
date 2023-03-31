@@ -21,10 +21,10 @@ namespace ConsoleGame
 
         public IAchievementView Create()
         {
-            IWindow achievementWindow = _windowFactory.Create(new Transform(new Vector2(70, 100)), "");
+            IWindow achievementWindow = _windowFactory.Create(new Transform(new Vector2(70, 100)), @"D:\Farid\Downloads\Console Game\Console Game\Game\TIger.jpg");
             IText congratulationText = _textFactory.Create(new Vector2(65, 100), Color.Purple);
             IAchievementReceiveWindow achievementReceiveWindow = new AchievementReceiveWindow(achievementWindow, congratulationText);
-            IImage checkmark = _imageFactory.Create(new Transform(), "");
+            IImage checkmark = _imageFactory.Create(new Transform(), @"D:\Farid\Downloads\Console Game\Console Game\Game\TIger.jpg");
             return new AchievementView(checkmark, achievementReceiveWindow);
         }
     }

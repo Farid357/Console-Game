@@ -22,13 +22,13 @@ namespace ConsoleGame.GameLoop
         {
             _stopwatch.Start();
             TimeSpan lastUpdateTime = _stopwatch.Elapsed;
-            
+
             while (true)
             {
-                if(_gamePause.IsActive)
+                if (_gamePause.IsActive)
                     continue;
 
-                await Task.Delay(TimeSpan.FromSeconds(_fixedTimeStep * 1000));
+                await Task.Delay(TimeSpan.FromSeconds(_fixedTimeStep));
                 float deltaTime = (float)(_stopwatch.Elapsed - lastUpdateTime).TotalSeconds;
                 _gameLoopObject.Update(deltaTime);
                 lastUpdateTime = _stopwatch.Elapsed;

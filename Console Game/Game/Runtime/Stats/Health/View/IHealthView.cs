@@ -2,7 +2,7 @@ namespace ConsoleGame
 {
     public interface IHealthView
     {
-        void Visualize(int value, int maxValue);
+        void Visualize(int health, int maxHealth);
 
         void Die();
     }

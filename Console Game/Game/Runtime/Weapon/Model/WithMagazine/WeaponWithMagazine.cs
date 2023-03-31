@@ -1,23 +1,22 @@
 using System;
-using System.Threading.Tasks;
 
 namespace ConsoleGame.Weapons
 {
-    public sealed class WeaponWithMagazine : IWeaponWithMagazine
+    public sealed class WeaponWithMagazine : IWeapon
     {
         private readonly IWeapon _weapon;
 
-        public WeaponWithMagazine(IWeaponMagazine magazine, IWeapon weapon, IWeaponWithReloadingView view)
+        public WeaponWithMagazine(IWeapon weapon)
         {
-            Magazine = magazine ?? throw new ArgumentNullException(nameof(magazine));
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
         }
 
-        public IWeaponMagazine Magazine { get; }
+        public IWeaponData Data => _weapon.Data;
+
+        private IWeaponMagazine Magazine => Data.Magazine;
 
         public bool CanShoot => _weapon.CanShoot && Magazine.Bullets > 0;
 
-        
         public void Shoot()
         {
             if (CanShoot == false)
@@ -26,12 +25,5 @@ namespace ConsoleGame.Weapons
             Magazine.Take(1);
             _weapon.Shoot();
         }
-    }
-
-    public interface IWeaponWithReloading : IWeapon
-    {
-        bool CanReload { get; }
-        
-        Task Reload();
     }
 }

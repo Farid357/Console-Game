@@ -5,24 +5,28 @@ namespace ConsoleGame.Weapons
 {
     public sealed class EnemyWeapon : IWeapon
     {
-        private readonly ICharacter _character;
+        private readonly IReadOnlyCharacter _character;
         private readonly IReadOnlyTransform _transform;
         private readonly IBulletFactory _bulletFactory;
-        private readonly int _damage;
 
-        public EnemyWeapon(ICharacter character, IReadOnlyTransform transform, IBulletFactory bulletFactory, int damage)
+        public EnemyWeapon(IReadOnlyCharacter character, IReadOnlyTransform transform, IBulletFactory bulletFactory, IWeaponData data)
         {
             _character = character ?? throw new ArgumentNullException(nameof(character));
             _transform = transform ?? throw new ArgumentNullException(nameof(transform));
             _bulletFactory = bulletFactory ?? throw new ArgumentNullException(nameof(bulletFactory));
-            _damage = damage;
+            Data = data ?? throw new ArgumentNullException(nameof(data));
         }
+
+        public bool CanShoot => Data.View.IsActive;
         
-        public bool CanShoot => true;
-        
+        public IWeaponData Data { get; }
+
         public void Shoot()
         {
-            IBullet bullet = _bulletFactory.Create(_damage);
+            if (CanShoot == false)
+                throw new Exception($"Weapon can't shoot! View is not active!");
+            
+            IBullet bullet = _bulletFactory.Create(Data.Damage);
             Vector3 shootDirection = Vector3.Normalize(_character.Movement.Transform.Position - _transform.Position);
             bullet.Throw(shootDirection);
         }

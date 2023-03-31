@@ -14,11 +14,11 @@ namespace ConsoleGame
             _money = money.ThrowIfLessThanOrEqualsToZeroException();
         }
 
-        public bool IsApplied { get; private set; }
+        public bool WasReceived { get; private set; }
 
-        public void Apply()
+        public void Receive()
         {
-            IsApplied = true;
+            WasReceived = true;
             _wallet.Put(_money);
         }
     }

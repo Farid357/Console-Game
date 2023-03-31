@@ -6,12 +6,12 @@ namespace ConsoleGame
     public sealed class WalletWithSave : IWallet
     {
         private readonly IWallet _wallet;
-        private readonly ISaveStorage<IWallet> _saveStorage;
+        private readonly ISaveStorage<int> _moneyStorage;
 
-        public WalletWithSave(IWallet wallet, ISaveStorage<IWallet> saveStorage)
+        public WalletWithSave(IWallet wallet, ISaveStorage<int> moneyStorage)
         {
             _wallet = wallet ?? throw new ArgumentNullException(nameof(wallet));
-            _saveStorage = saveStorage ?? throw new ArgumentNullException(nameof(saveStorage));
+            _moneyStorage = moneyStorage ?? throw new ArgumentNullException(nameof(moneyStorage));
         }
 
         public int Money => _wallet.Money;
@@ -21,13 +21,13 @@ namespace ConsoleGame
         public void Put(int money)
         {
             _wallet.Put(money);
-            _saveStorage.Save(_wallet);
+            _moneyStorage.Save(_wallet.Money);
         }
 
         public void Take(int money)
         {
             _wallet.Take(money);
-            _saveStorage.Save(_wallet);
+            _moneyStorage.Save(_wallet.Money);
         }
     }
 }

@@ -4,18 +4,21 @@ using ConsoleGame.Weapons;
 
 namespace ConsoleGame
 {
-    public sealed class WeaponWithDroppingFromInventory<TWeapon> : IWeapon where TWeapon : IWeapon
+    public sealed class WeaponWithDroppingFromInventory : IWeapon
     {
-        private readonly IInventory<IWeaponInventoryItem<TWeapon>> _inventory;
-        private readonly TWeapon _weapon;
-
-        public WeaponWithDroppingFromInventory(TWeapon weapon, IInventory<IWeaponInventoryItem<TWeapon>> inventory)
+        private readonly IInventory<IWeaponInventoryItem> _inventory;
+        private readonly IWeapon _weapon;
+        private bool _canShoot = true;
+        
+        public WeaponWithDroppingFromInventory(IWeapon weapon, IInventory<IWeaponInventoryItem> inventory)
         {
             _weapon = weapon;
             _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
         }
 
-        public bool CanShoot { get; private set; }
+        public bool CanShoot => _weapon.CanShoot && _canShoot;
+        
+        public IWeaponData Data => _weapon.Data;
 
         public void Shoot()
         {
@@ -25,7 +28,7 @@ namespace ConsoleGame
             _weapon.Shoot();
             var slotWithWeapon = _inventory.Slots.First(slot => slot.Item.Weapon.Equals(_weapon));
             slotWithWeapon.Take(itemsCount: 1);
-            CanShoot = false;
+            _canShoot = false;
         }
     }
 }

@@ -15,17 +15,11 @@ namespace ConsoleGame.UI
 
         public void Enable()
         {
-            if (IsEnabled)
-                throw new InvalidOperationException($"Window is already open!");
-
             IsEnabled = true;
         }
 
         public void Disable()
         {
-            if (IsEnabled == false)
-                throw new InvalidOperationException($"Window is already closed!");
-
             IsEnabled = false;
         }
     }

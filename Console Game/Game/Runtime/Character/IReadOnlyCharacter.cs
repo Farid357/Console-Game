@@ -4,9 +4,7 @@ namespace ConsoleGame
     {
         bool CanShoot { get; }
         
-        IWeapon FirstWeapon { get; }
-        
-        IWeapon SecondWeapon { get; }
+        IWeaponData WeaponData { get; }
         
         IHealth Health { get; }
         

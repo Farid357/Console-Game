@@ -8,17 +8,4 @@ namespace ConsoleGame.UI
 
         void Close();
     }
-
-    public class FakeWindow : IWindow
-    {
-        public bool IsOpen { get; }
-        public void Open()
-        {
-            
-        }
-
-        public void Close()
-        {
-        }
-    }
 }

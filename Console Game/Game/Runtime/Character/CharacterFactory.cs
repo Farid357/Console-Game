@@ -5,21 +5,22 @@ namespace ConsoleGame
 {
     public sealed class CharacterFactory : ICharacterFactory
     {
-        private readonly IMovementFactory _movementFactory;
+        private readonly IAdjustableMovement _movement;
         private readonly IHealthFactory _healthFactory;
+        private readonly IWeapon _weapon;
 
-        public CharacterFactory(IMovementFactory movementFactory, IHealthFactory healthFactory)
+        public CharacterFactory(IAdjustableMovement movement, IHealthFactory healthFactory, IWeapon weapon)
         {
-            _movementFactory = movementFactory ?? throw new ArgumentNullException(nameof(movementFactory));
+            _movement = movement ?? throw new ArgumentNullException(nameof(movement));
             _healthFactory = healthFactory ?? throw new ArgumentNullException(nameof(healthFactory));
+            _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
         }
 
         public ICharacter Create()
         {
             ITransform transform = new Transform(Vector3.Zero);
-            IAdjustableMovement movement = _movementFactory.Create(transform);
             IHealth health = _healthFactory.Create();
-            return new Character(health, movement);
+            return new Character(health, _movement, _weapon);
         }
     }
 }

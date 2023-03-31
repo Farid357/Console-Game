@@ -8,16 +8,17 @@ namespace ConsoleGame.Tests
         [Test]
         public void NeedWaitShoot()
         {
-            IWeapon weapon = new WeaponWithShootWaiting(new Timer(10), new DummyWeapon());
-            weapon.Shoot();
+            IWeapon weapon = new WeaponWithShootWaiting(new DummyWeapon());
             Assert.That(weapon.CanShoot == false);
         }
         
         [Test]
         public void WaitsShoot()
         {
-            var cooldownTimer = new Timer(3);
-            IWeapon weapon = new WeaponWithShootWaiting(cooldownTimer, new DummyWeapon());
+            IWeapon weaponDummy = new DummyWeapon();
+            var cooldownTimer = (Timer)weaponDummy.Data.CooldownTimer;
+            IWeapon weapon = new WeaponWithShootWaiting(weaponDummy);
+            cooldownTimer.Update(3);
             weapon.Shoot();
             cooldownTimer.Update(3);
             Assert.That(weapon.CanShoot);

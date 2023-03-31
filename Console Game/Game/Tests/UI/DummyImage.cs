@@ -5,7 +5,7 @@ namespace ConsoleGame.Tests.UI
 {
     public sealed class DummyImage : IImage
     {
-        public bool IsEnabled { get; }
+        public bool IsEnabled { get; private set; }
        
         public ITransform Transform { get; }
        
@@ -13,11 +13,12 @@ namespace ConsoleGame.Tests.UI
         
         public void Enable()
         {
-            
+            IsEnabled = true;
         }
 
         public void Disable()
         {
+            IsEnabled = false;
         }
 
         public void Draw()

@@ -4,9 +4,14 @@ namespace ConsoleGame.Tools
 {
     public static class WeaponExtensions
     {
-        public static bool MagazineIsEmpty(this IWeaponWithMagazine weapon)
+        public static bool IsEmpty(this IWeaponMagazine magazine)
         {
-            return weapon.Magazine.Bullets == 0;
+            return magazine.Bullets == 0;
+        }
+        
+        public static bool IsNotEmpty(this IWeaponMagazine magazine)
+        {
+            return !IsEmpty(magazine);
         }
         
         public static bool IsNotFull(this IWeaponMagazine weaponMagazine)
@@ -17,6 +22,16 @@ namespace ConsoleGame.Tools
         public static void Fill(this IWeaponMagazine weaponMagazine)
         {
             weaponMagazine.Add(weaponMagazine.MaxBullets - weaponMagazine.Bullets);
+        }
+
+        public static void Enable(this IWeapon weapon)
+        {
+            weapon.Data.View.Enable();
+        }
+        
+        public static void Disable(this IWeapon weapon)
+        {
+            weapon.Data.View.Disable();
         }
     }
 }

@@ -2,26 +2,23 @@ using System;
 
 namespace ConsoleGame
 {
-    public sealed class WeaponSlotFactory<TWeapon> : IWeaponSlotFactory<TWeapon> where TWeapon : IWeapon
+    public sealed class WeaponSlotFactory : IWeaponSlotFactory
     {
-        private readonly IWeaponViewFactory _weaponViewFactory;
         private readonly IInventorySlotViewFactory _slotViewFactory;
         private readonly ICharacter _character;
 
-        public WeaponSlotFactory(IWeaponViewFactory weaponViewFactory, IInventorySlotViewFactory slotViewFactory, ICharacter character)
+        public WeaponSlotFactory(IInventorySlotViewFactory slotViewFactory, ICharacter character)
         {
-            _weaponViewFactory = weaponViewFactory ?? throw new ArgumentNullException(nameof(weaponViewFactory));
             _slotViewFactory = slotViewFactory ?? throw new ArgumentNullException(nameof(slotViewFactory));
             _character = character ?? throw new ArgumentNullException(nameof(character));
         }
         
-        public IInventorySlot<IWeaponInventoryItem<TWeapon>> Create(IInventoryItemViewData viewData, TWeapon weapon)
+        public IInventorySlot<IWeaponInventoryItem> Create(IInventoryItemViewData viewData, IWeapon weapon)
         {
             IInventoryItem item = new InventoryItem(viewData);
-            IWeaponView weaponView = _weaponViewFactory.Create(viewData.Icon);
-            var weaponItem = new WeaponInventoryItem<TWeapon>(item, _character, weapon, weaponView);
+            IWeaponInventoryItem weaponItem = new WeaponInventoryItem(item, _character, weapon);
             IInventorySlotView slotView = _slotViewFactory.Create();
-            return new InventorySlot<IWeaponInventoryItem<TWeapon>>(weaponItem, slotView);
+            return new InventorySlot<IWeaponInventoryItem>(weaponItem, slotView);
         }
     }
 }

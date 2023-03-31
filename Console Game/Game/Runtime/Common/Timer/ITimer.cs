@@ -1,17 +1,12 @@
 namespace ConsoleGame
 {
-    public interface ITimer
+    public interface ITimer : IReadOnlyTimer
     {
-        float Time { get; }
-        
-        bool IsEnded { get; }
-        
-        bool IsActive { get; }
-
-        void Play();
-
-        void Stop();
-        
         void ResetTime();
+
+        void IncreaseCooldown(float amount);
+        
+        void DecreaseCooldown(float amount);
+        
     }
 }

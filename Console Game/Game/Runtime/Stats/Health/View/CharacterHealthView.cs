@@ -15,10 +15,10 @@ namespace ConsoleGame
             _bar = bar ?? throw new ArgumentNullException(nameof(bar));
         }
 
-        public void Visualize(int value, int maxValue)
+        public void Visualize(int health, int maxHealth)
         {
-            _text.Visualize($"Health: {maxValue}/{value}");
-            _bar.SetSize(value / (float)maxValue);
+            _text.Visualize($"Health: {maxHealth}/{health}");
+            _bar.SetSize(health / (float)maxHealth);
         }
 
         public void Die()

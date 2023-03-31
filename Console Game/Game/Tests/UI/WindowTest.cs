@@ -21,14 +21,14 @@ namespace ConsoleGame.Tests.UI
         [Test]
         public void GroupOpensAndClosesCorrectly()
         {
-            IWindow window = new Window(new DummyImage());
-            IWindow windows = new Windows(new List<IWindow> { new Window(new DummyImage()), window });
+            IWindow childWindow = new Window(new DummyImage());
+            IWindow windows = new Windows(new List<IWindow> { new Window(new DummyImage()), childWindow });
             windows.Open();
             Assert.That(windows.IsOpen);
-            Assert.That(window.IsOpen);
+            Assert.That(childWindow.IsOpen);
             windows.Close();
             Assert.That(windows.IsOpen == false);
-            Assert.That(window.IsOpen == false);
+            Assert.That(childWindow.IsOpen == false);
         }
     }
 }

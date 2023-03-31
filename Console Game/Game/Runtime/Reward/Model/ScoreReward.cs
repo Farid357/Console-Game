@@ -14,11 +14,11 @@ namespace ConsoleGame
             _addScoreCount = addScoreCount.ThrowIfLessThanOrEqualsToZeroException();
         }
 
-        public bool IsApplied { get; private set; }
+        public bool WasReceived { get; private set; }
 
-        public void Apply()
+        public void Receive()
         {
-            IsApplied = true;
+            WasReceived = true;
             _score.Raise(_addScoreCount);
         }
     }

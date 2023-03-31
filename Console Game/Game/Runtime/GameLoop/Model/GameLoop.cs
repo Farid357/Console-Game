@@ -8,7 +8,7 @@ namespace ConsoleGame.GameLoop
         private readonly IReadOnlyGamePause _gamePause;
         private readonly IGameLoopObject _loopObject;
         private readonly Stopwatch _stopwatch;
-        
+
         public GameLoop(IReadOnlyGamePause gamePause, IGameLoopObject loopObject)
         {
             _gamePause = gamePause ?? throw new ArgumentNullException(nameof(gamePause));
@@ -21,7 +21,7 @@ namespace ConsoleGame.GameLoop
             _stopwatch.Start();
             TimeSpan lastUpdateTime = _stopwatch.Elapsed;
             float elapsedTime = 0;
-            
+
             while (true)
             {
                 if (_gamePause.IsActive)

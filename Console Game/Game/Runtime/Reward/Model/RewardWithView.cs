@@ -11,11 +11,11 @@ namespace ConsoleGame
             _rewardView = rewardView ?? throw new ArgumentNullException(nameof(rewardView));
         }
 
-        public bool IsApplied { get; private set; }
+        public bool WasReceived { get; private set; }
 
-        public void Apply()
+        public void Receive()
         {
-            IsApplied = true;
+            WasReceived = true;
             _rewardView.Apply();
         }
     }

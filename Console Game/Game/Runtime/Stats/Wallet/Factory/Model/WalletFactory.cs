@@ -16,11 +16,11 @@ namespace ConsoleGame
 
         public IWallet Create()
         {
-            ISaveStorage<IWallet> saveStorage = new BinaryStorage<IWallet>(new Path(nameof(IWallet)));
+            ISaveStorage<int> moneyStorage = new BinaryStorage<int>(new Path(nameof(IWallet) + "M"));
             IWalletView walletView = _viewFactory.Create();
-            IWallet defaultWallet = new Wallet(100, walletView);
-            _saveStorages.Add(saveStorage);
-            IWallet wallet = saveStorage.HasSave() ? new WalletWithSave(saveStorage.Load(), saveStorage) : new WalletWithSave(defaultWallet, saveStorage);
+            _saveStorages.Add(moneyStorage);
+            int money = moneyStorage.HasSave() ? moneyStorage.Load() : 100;
+            IWallet wallet = new WalletWithSave(new Wallet(money, walletView), moneyStorage);
             walletView.Visualize(wallet.Money);
             return wallet;
         }

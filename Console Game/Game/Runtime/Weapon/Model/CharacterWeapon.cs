@@ -1,5 +1,4 @@
 using System;
-using System.Numerics;
 using ConsoleGame.Tools;
 
 namespace ConsoleGame.Weapons
@@ -8,20 +7,24 @@ namespace ConsoleGame.Weapons
     {
         private readonly IBulletFactory _bulletFactory;
         private readonly IReadOnlyMovement _movement;
-        private readonly int _bulletDamage;
         
-        public CharacterWeapon(IBulletFactory bulletFactory, IReadOnlyMovement movement, int bulletDamage)
+        public CharacterWeapon(IBulletFactory bulletFactory, IReadOnlyMovement movement, IWeaponData data)
         {
             _bulletFactory = bulletFactory ?? throw new ArgumentNullException(nameof(bulletFactory));
             _movement = movement ?? throw new ArgumentNullException(nameof(movement));
-            _bulletDamage = bulletDamage.ThrowIfLessThanOrEqualsToZeroException();
+            Data = data ?? throw new ArgumentNullException(nameof(data));
         }
 
-        public bool CanShoot => true;
+        public bool CanShoot => Data.View.IsActive;
+        
+        public IWeaponData Data { get; }
 
         public void Shoot()
         {
-            IBullet bullet = _bulletFactory.Create(_bulletDamage);
+            if (CanShoot == false)
+                throw new Exception($"Weapon can't shoot! View is not active!");
+            
+            IBullet bullet = _bulletFactory.Create(Data.Damage);
             bullet.Throw(_movement.LookDirection);
         }
     }

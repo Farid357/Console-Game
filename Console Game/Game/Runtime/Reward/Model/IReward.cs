@@ -2,8 +2,8 @@ namespace ConsoleGame
 {
     public interface IReward
     {
-        bool IsApplied { get; }
+        bool WasReceived { get; }
 
-        void Apply();
+        void Receive();
     }
 }

@@ -16,10 +16,13 @@ namespace Console_Game
 
         public bool CanShoot => _weapon.CanShoot;
         
+        public IWeaponData Data => _weapon.Data;
+
         public void Shoot()
         {
             _weapon.Shoot();
-            _view.Visualize();
+            _view.Shoot();
+            _view.VisualizeBullets();
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using ConsoleGame.GameLoop;
 
 namespace ConsoleGame
 {
@@ -10,20 +11,21 @@ namespace ConsoleGame
     public sealed class TimeBombFactory : IBombFactory
     {
         private readonly IBombFactory _bombFactory;
-        private readonly ITimerFactory _timerFactory;
+        private readonly IGameLoopObjectsGroup _gameLoop;
         private readonly float _secondsToBlowUp;
 
-        public TimeBombFactory(float secondsToBlowUp, ITimerFactory timerFactory, IBombFactory bombFactory)
+        public TimeBombFactory(IGameLoopObjectsGroup gameLoop, float secondsToBlowUp, IBombFactory bombFactory)
         {
+            _gameLoop = gameLoop ?? throw new ArgumentNullException(nameof(gameLoop));
             _secondsToBlowUp = secondsToBlowUp;
-            _timerFactory = timerFactory ?? throw new ArgumentNullException(nameof(timerFactory));
             _bombFactory = bombFactory ?? throw new ArgumentNullException(nameof(bombFactory));
         }
 
         public IBomb Create(IReadOnlyTransform transform)
         {
             IBomb bomb = _bombFactory.Create(transform);
-            ITimer blowUpTimer = _timerFactory.Create(_secondsToBlowUp);
+            var blowUpTimer = new Timer(_secondsToBlowUp);
+            _gameLoop.Add(blowUpTimer);
             return new TimeBomb(blowUpTimer, bomb);
         }
     }

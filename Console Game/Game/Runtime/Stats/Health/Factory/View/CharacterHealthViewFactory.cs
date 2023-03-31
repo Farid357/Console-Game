@@ -20,7 +20,7 @@ namespace ConsoleGame
         {
             IText text = _textFactory.Create(new Vector2(70, 300));
             ITransform barTransform = new Transform(new Vector2(90, 300));
-            IBar bar = _barFactory.Create(barTransform, "");
+            IBar bar = _barFactory.Create(barTransform, @"D:\Farid\Downloads\Console Game\Console Game\Game\TIger.jpg");
             return new CharacterHealthView(text, bar);
         }
     }

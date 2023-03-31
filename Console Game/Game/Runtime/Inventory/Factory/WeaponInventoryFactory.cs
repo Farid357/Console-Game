@@ -1,21 +1,21 @@
-using ConsoleGame.Weapons;
+using System;
 
 namespace ConsoleGame
 {
     public sealed class WeaponInventoryFactory : IWeaponInventoryFactory
     {
-        public IInventory<IWeaponInventoryItem<IWeapon>> CreateStandard()
+        private readonly IInventoryViewFactory<IWeaponInventoryItem> _viewFactory;
+
+        public WeaponInventoryFactory(IInventoryViewFactory<IWeaponInventoryItem> viewFactory)
         {
-            var inventoryView = new InventoryView<IWeaponInventoryItem<IWeapon>>();
-            var inventory = new Inventory<IWeaponInventoryItem<IWeapon>>(inventoryView);
-            return new SelfCleaningInventory<IWeaponInventoryItem<IWeapon>>(inventory);
+            _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
         }
 
-        public IInventory<IWeaponInventoryItem<IWeaponWithMagazine>> CreateWithMagazine()
+        public IInventory<IWeaponInventoryItem> Create()
         {
-            var inventoryView = new InventoryView<IWeaponInventoryItem<IWeaponWithMagazine>>();
-            var inventory = new Inventory<IWeaponInventoryItem<IWeaponWithMagazine>>(inventoryView);
-            return new SelfCleaningInventory<IWeaponInventoryItem<IWeaponWithMagazine>>(inventory);
+            IInventoryView<IWeaponInventoryItem> view = _viewFactory.Create();
+            var inventory = new Inventory<IWeaponInventoryItem>(view);
+            return new SelfCleaningInventory<IWeaponInventoryItem>(inventory);
         }
     }
 }

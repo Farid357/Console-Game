@@ -24,7 +24,7 @@ namespace ConsoleGame
             
             CanReceive = false;
             _wasReceivedStorage.Save(true);
-            _reward.Apply();
+            _reward.Receive();
         }
     }
 }

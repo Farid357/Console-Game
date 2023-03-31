@@ -5,34 +5,38 @@ namespace ConsoleGame
 {
     public sealed class Timer : ITimer, IGameLoopObject
     {
-        private readonly float _cooldown;
+        private float _cooldown;
 
         public Timer(float cooldown)
         {
             _cooldown = cooldown.ThrowIfLessOrEqualsToZeroException();
         }
 
-        public bool IsActive { get; private set; } = true;
-        
         public float Time { get; private set; }
-        
-        public bool IsEnded => !IsActive || Time >= _cooldown;
 
-        public void Play() => IsActive = true;
-
-        public void Stop() => IsActive = false;
+        public bool IsEnded => Time >= _cooldown;
 
         public void ResetTime()
         {
             Time = 0;
         }
 
+        public void IncreaseCooldown(float amount)
+        {
+            _cooldown += amount.ThrowIfLessThanZeroException();
+        }
+
+        public void DecreaseCooldown(float amount)
+        {
+            if (_cooldown - amount <= 0)
+                throw new ArgumentOutOfRangeException(nameof(amount));
+
+            _cooldown -= amount.ThrowIfLessThanZeroException();
+        }
+
         public void Update(float deltaTime)
         {
-            if (IsActive)
-            {
-                Time = Math.Min(Time + _cooldown, _cooldown);
-            }
+            Time += deltaTime;
         }
     }
 }

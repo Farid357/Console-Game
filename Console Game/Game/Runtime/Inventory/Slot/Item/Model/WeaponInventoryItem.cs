@@ -4,23 +4,19 @@ using ConsoleGame.Tools;
 
 namespace ConsoleGame
 {
-    public sealed class WeaponInventoryItem<TWeapon> : IWeaponInventoryItem<TWeapon> where TWeapon : IWeapon
+    public sealed class WeaponInventoryItem : IWeaponInventoryItem
     {
         private readonly IInventoryItem _item;
         private readonly ICharacter _character;
-        private readonly IWeaponView _weaponView;
-        private readonly IWeapon _fakeWeapon;
 
-        public WeaponInventoryItem(IInventoryItem item, ICharacter character, TWeapon weapon, IWeaponView weaponView)
+        public WeaponInventoryItem(IInventoryItem item, ICharacter character, IWeapon weapon)
         {
             _item = item ?? throw new ArgumentNullException(nameof(item));
             _character = character ?? throw new ArgumentNullException(nameof(character));
-            _weaponView = weaponView ?? throw new ArgumentNullException(nameof(weaponView));
-            Weapon = weapon;
-            _fakeWeapon = new DummyWeapon();
+            Weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
         }
 
-        public TWeapon Weapon { get; }
+        public IWeapon Weapon { get; }
 
         public IInventoryItemViewData ViewData => _item.ViewData;
 
@@ -28,15 +24,15 @@ namespace ConsoleGame
 
         public void Select()
         {
-            _character.SwitchWeapons(_fakeWeapon, Weapon);
-            _weaponView.Enable();
+            Weapon.Enable();
+            _character.SwitchWeapon(Weapon);
             _item.Select();
         }
 
         public void Unselect()
         {
+            Weapon.Disable();
             _character.TakeAwayWeapons();
-            _weaponView.Disable();
             _item.Unselect();
         }
     }

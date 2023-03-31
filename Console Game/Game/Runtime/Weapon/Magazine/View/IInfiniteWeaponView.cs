@@ -1,7 +1,7 @@
 namespace ConsoleGame
 {
-    public interface IInfiniteWeaponView
+    public interface IInfiniteWeaponView : IWeaponView
     {
-        void Visualize();
+        void VisualizeBullets();
     }
 }

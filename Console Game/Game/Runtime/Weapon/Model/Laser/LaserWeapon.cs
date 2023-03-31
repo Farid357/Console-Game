@@ -13,16 +13,19 @@ namespace ConsoleGame.Weapons
         private readonly Vector3 _shootDirection = new Vector3(1, 0, 1);
         private readonly int _damage;
 
-        public LaserWeapon(IRaycast<IEnemy> raycast, ITransform transform, ILaserWeaponView view, int damage)
+        public LaserWeapon(IRaycast<IEnemy> raycast, ITransform transform, ILaserWeaponView view, int damage, IWeaponData data)
         {
             _raycast = raycast ?? throw new ArgumentNullException(nameof(raycast));
             _transform = transform ?? throw new ArgumentNullException(nameof(transform));
             _view = view ?? throw new ArgumentNullException(nameof(view));
+            Data = data ?? throw new ArgumentNullException(nameof(data));
             _damage = damage.ThrowIfLessThanZeroException();
         }
 
         public bool CanShoot => true;
         
+        public IWeaponData Data { get; }
+
         public void Shoot()
         {
             _raycast.Throw(_transform.Position, _shootDirection);

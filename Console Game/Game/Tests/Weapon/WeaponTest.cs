@@ -1,3 +1,4 @@
+using Console_Game;
 using ConsoleGame.Weapons;
 using NUnit.Framework;
 
@@ -10,7 +11,9 @@ namespace ConsoleGame.Tests
         public void ThrowsBullet()
         {
             var bulletsFactory = new DummyBulletFactory();
-            IWeapon weapon = new CharacterWeapon(bulletsFactory,  new DummyMovement(), 10);
+            ITimer cooldownTimer = new Timer(0.2f);
+            IWeapon weapon = new CharacterWeapon(bulletsFactory, new DummyMovement(),
+                new WeaponData(false, 10, cooldownTimer, new NullWeaponMagazine(), new NullWeaponView(), new NullBattery()));
             weapon.Shoot();
             Assert.That(bulletsFactory.CreatedBullet.WasThrew);
         }

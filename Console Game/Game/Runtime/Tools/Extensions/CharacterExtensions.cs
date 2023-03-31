@@ -8,7 +8,7 @@ namespace ConsoleGame.Tools
 
         public static void TakeAwayWeapons(this ICharacter character)
         {
-            character.SwitchWeapons(_fakeWeapon, _fakeWeapon);
+            character.SwitchWeapon(_fakeWeapon);
         }
     }
 }

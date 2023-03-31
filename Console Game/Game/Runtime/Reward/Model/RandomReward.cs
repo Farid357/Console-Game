@@ -13,13 +13,13 @@ namespace ConsoleGame
             _rewards = rewards ?? throw new ArgumentNullException(nameof(rewards));
         }
 
-        public bool IsApplied { get; private set; }
+        public bool WasReceived { get; private set; }
 
-        public void Apply()
+        public void Receive()
         {
-            IsApplied = true;
+            WasReceived = true;
             IReward reward = _rewards.GetRandom();
-            reward.Apply();
+            reward.Receive();
         }
     }
 }

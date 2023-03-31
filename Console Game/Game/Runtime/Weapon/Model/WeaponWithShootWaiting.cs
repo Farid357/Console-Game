@@ -4,24 +4,33 @@ namespace ConsoleGame
 {
     public sealed class WeaponWithShootWaiting : IWeapon
     {
-        private readonly ITimer _cooldownTimer;
         private readonly IWeapon _weapon;
 
-        public WeaponWithShootWaiting(ITimer cooldownTimer, IWeapon weapon)
+        public WeaponWithShootWaiting(IWeapon weapon)
         {
-            _cooldownTimer = cooldownTimer ?? throw new ArgumentNullException(nameof(cooldownTimer));
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
         }
-
-        public bool CanShoot => _cooldownTimer.IsEnded && _weapon.CanShoot;
         
+        public IWeaponData Data => _weapon.Data;
+        
+        public bool CanShoot
+        {
+            get
+            {
+                Console.WriteLine($"{CooldownTimer.IsEnded}  {_weapon.CanShoot}");
+                return CooldownTimer.IsEnded && _weapon.CanShoot;
+            }
+        }
+
+        private ITimer CooldownTimer => Data.CooldownTimer;
+
         public void Shoot()
         {
             if (CanShoot == false)
                 throw new InvalidOperationException($"Weapon can't shoot!");
             
             _weapon.Shoot();
-            _cooldownTimer.ResetTime();
+            CooldownTimer.ResetTime();
         }
     }
 }

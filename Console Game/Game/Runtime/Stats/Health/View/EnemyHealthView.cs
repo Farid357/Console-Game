@@ -4,9 +4,9 @@ namespace ConsoleGame
 {
     public sealed class EnemyHealthView : IHealthView
     {
-        public void Visualize(int value, int maxValue)
+        public void Visualize(int health, int maxHealth)
         {
-            Console.WriteLine($"Enemy Health {value}");
+            Console.WriteLine($"Enemy Health {health}");
         }
 
         public void Die()

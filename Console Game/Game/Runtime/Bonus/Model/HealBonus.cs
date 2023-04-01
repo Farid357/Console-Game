@@ -3,12 +3,12 @@ using ConsoleGame.Tools;
 
 namespace ConsoleGame.Bonus
 {
-    public sealed class HealthBonus : IBonus
+    public sealed class HealBonus : IBonus
     {
         private readonly IHealth _health;
         private readonly int _healAmount;
 
-        public HealthBonus(IHealth health, int healAmount = 10)
+        public HealBonus(IHealth health, int healAmount = 10)
         {
             _health = health ?? throw new ArgumentNullException(nameof(health));
             _healAmount = healAmount.ThrowIfLessThanOrEqualsToZeroException();

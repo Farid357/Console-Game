@@ -7,9 +7,9 @@ namespace ConsoleGame
     public sealed class EnemyWithWeaponBehaviourTreeFactory : IEnemyBehaviourTreeFactory
     {
         private readonly IWeaponFactory _weaponFactory;
-        private readonly ICharacter _character;
+        private readonly IReadOnlyTransform _character;
 
-        public EnemyWithWeaponBehaviourTreeFactory(IWeaponFactory weaponFactory, ICharacter character)
+        public EnemyWithWeaponBehaviourTreeFactory(IWeaponFactory weaponFactory, IReadOnlyTransform character)
         {
             _weaponFactory = weaponFactory ?? throw new ArgumentNullException(nameof(weaponFactory));
             _character = character ?? throw new ArgumentNullException(nameof(character));
@@ -18,7 +18,7 @@ namespace ConsoleGame
         public IBehaviorNode Create(IMovement enemyMovement)
         {
             IBehaviorNode isNearCharacterNode =
-                new IsNearNode(_character.Movement.Transform, enemyMovement.Transform, 20);
+                new IsNearNode(_character, enemyMovement.Transform, 20);
 
             return new RepeatNode(
                 new SequenceNode(new IBehaviorNode[]
@@ -34,7 +34,7 @@ namespace ConsoleGame
 
                         new RepeatNode(new SelectorNode(new IBehaviorNode[]
                         {
-                            new MoveNode(new MovementToTarget(enemyMovement, _character.Movement.Transform),
+                            new MoveNode(new MovementToTarget(enemyMovement, _character),
                                 nodeForComplete: isNearCharacterNode),
                         }))
                     })

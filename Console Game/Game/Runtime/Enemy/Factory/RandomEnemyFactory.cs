@@ -1,29 +1,19 @@
 using System;
-using System.Numerics;
 
 namespace ConsoleGame
 {
     public sealed class RandomEnemyFactory : IEnemyFactory
     {
         private readonly IEnemyFactory[] _enemyFactories;
-        private readonly Vector2[] _positions;
         private readonly Random _random = new Random();
-        private int _positionIndex;
 
-        public RandomEnemyFactory(Vector2[] positions, IEnemyFactory[] enemyFactories)
+        public RandomEnemyFactory(IEnemyFactory[] enemyFactories)
         {
-            _positions = positions ?? throw new ArgumentNullException(nameof(positions));
             _enemyFactories = enemyFactories ?? throw new ArgumentNullException(nameof(enemyFactories));
         }
 
         public IEnemy Create(ITransform transform)
         {
-            _positionIndex++;
-
-            if (_positionIndex > _positions.Length)
-                _positionIndex = 0;
-
-            Vector2 position = _positions[_positionIndex];
             IEnemyFactory enemyFactory = _enemyFactories[_random.Next(0, _enemyFactories.Length)];
             return enemyFactory.Create(transform);
         }

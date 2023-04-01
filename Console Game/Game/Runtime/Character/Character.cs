@@ -6,24 +6,22 @@ namespace ConsoleGame
 {
     public sealed class Character : ICharacter
     {
+        private readonly IAdjustableMovement _movement;
         private readonly IWeaponsData _weaponsData;
+        private readonly IHealth _health;
         private IWeapon _weapon;
 
         public Character(IHealth health, IAdjustableMovement movement, IWeapon weapon, IWeaponsData weaponsData)
         {
-            Health = health ?? throw new ArgumentNullException(nameof(health));
-            Movement = movement ?? throw new ArgumentNullException(nameof(movement));
+            _health = health ?? throw new ArgumentNullException(nameof(health));
+            _movement = movement ?? throw new ArgumentNullException(nameof(movement));
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
             _weaponsData = weaponsData ?? throw new ArgumentNullException(nameof(weaponsData));
         }
 
         public IWeaponData WeaponData => _weaponsData.DataFor(_weapon);
-        
-        public IHealth Health { get; }
 
-        public IAdjustableMovement Movement { get; }
-        
-        public bool IsAlive => Health.IsAlive;
+        public bool IsAlive => _health.IsAlive;
         
         public bool CanShoot => _weapon.CanShoot;
 
@@ -47,7 +45,7 @@ namespace ConsoleGame
             if (!IsAlive)
                 throw new Exception($"Character isn't alive! You can't move it!");
 
-            Movement.Move(direction);
+            _movement.Move(direction);
         }
     }
 }

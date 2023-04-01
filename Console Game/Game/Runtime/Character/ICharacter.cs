@@ -2,7 +2,7 @@ using System.Numerics;
 
 namespace ConsoleGame
 {
-    public interface ICharacter : IReadOnlyGameObject, IReadOnlyCharacter
+    public interface ICharacter : IReadOnlyCharacter
     {
         void SwitchWeapon(IWeapon weapon);
 

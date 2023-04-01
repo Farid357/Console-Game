@@ -6,9 +6,9 @@ namespace ConsoleGame
     public sealed class EnemyAim : IAim
     {
         private readonly IReadOnlyTransform _transform;
-        private readonly IReadOnlyCharacter _character;
+        private readonly IReadOnlyTransform _character;
 
-        public EnemyAim(IReadOnlyTransform transform, IReadOnlyCharacter character)
+        public EnemyAim(IReadOnlyTransform transform, IReadOnlyTransform character)
         {
             _transform = transform ?? throw new ArgumentNullException(nameof(transform));
             _character = character ?? throw new ArgumentNullException(nameof(character));
@@ -16,6 +16,6 @@ namespace ConsoleGame
 
         public Vector3 Position => _transform.Position;
         
-        public Vector3 Target => _character.Movement.Transform.Position - _transform.Position;
+        public Vector3 Target => _character.Position - _transform.Position;
     }
 }

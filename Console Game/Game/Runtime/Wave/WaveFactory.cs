@@ -42,9 +42,4 @@ namespace ConsoleGame.Wave
             _waveIndex++;
         }
     }
-
-    public interface IWaveData
-    {
-        IReadOnlyList<(EnemyType EnemyType, int EnemiesCount)> Enemies { get; }
-    }
 }

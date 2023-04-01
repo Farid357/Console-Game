@@ -6,7 +6,7 @@ using ConsoleGame.Stats;
 
 namespace ConsoleGame
 {
-    public sealed class LevelWithSaveFactory : IFactory<ILevel>
+    public sealed class LevelWithSaveFactory : ILevelFactory
     {
         private readonly ISaveStorages _saveStorages;
         private readonly List<ILevel> _allLevels;

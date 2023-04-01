@@ -3,8 +3,8 @@ using ConsoleGame.Stats;
 
 namespace ConsoleGame
 {
-    public interface ILevelsFactory : IFactory<List<ILevel>>
+    public interface ILevelsFactory
     {
-        
+        List<ILevel> Create();
     }
 }

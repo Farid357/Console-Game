@@ -19,18 +19,21 @@ namespace ConsoleGame.Weapons
             _damage = damage.ThrowIfLessThanZeroException();
         }
 
-        public bool CanShoot => true;
+        public bool CanShoot => View.IsActive;
         
         public IWeaponActivityView View => _view;
 
         public void Shoot()
         {
-            _raycast.Throw(_aim.Position, _aim.Target);
+            if (CanShoot == false)
+                throw new Exception($"Weapon can't shoot! View is not active!");
+            
+            RaycastHit<IEnemy> hit = _raycast.Throw(_aim.Position, _aim.Target);
             _view.ShowLaser(_aim.Position, _aim.Target);
             
-            if (_raycast.HasHit)
+            if (hit.Occurred)
             {
-                IHealth enemy = _raycast.HitTarget().Health;
+                IHealth enemy = hit.Target.Health;
                 enemy.TakeDamage(_damage);
             }
         }

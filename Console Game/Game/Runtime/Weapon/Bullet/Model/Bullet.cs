@@ -42,10 +42,10 @@ namespace ConsoleGame.Weapons
                 return;
 
             _movement.Move(_direction);
-            _raycast.Throw(_movement.Transform.Position, _direction);
+            RaycastHit<IEnemy> hit = _raycast.Throw(_movement.Transform.Position, _direction);
 
-            if (_raycast.HasHit)
-                Attack(_raycast.HitTarget().Health);
+            if (hit.Occurred)
+                Attack(hit.Target.Health);
         }
 
         private void Attack(IHealth enemyHealth)
@@ -54,8 +54,9 @@ namespace ConsoleGame.Weapons
             {
                 enemyHealth.TakeDamage(_damage);
                 IsAlive = false;
-                _view.Destroy();
             }
+
+            _view.Destroy();
         }
     }
 }

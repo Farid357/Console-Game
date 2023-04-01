@@ -5,7 +5,7 @@ using ConsoleGame.Stats;
 
 namespace ConsoleGame
 {
-    public sealed class LevelFactory : IFactory<ILevel>
+    public sealed class LevelFactory : ILevelFactory
     {
         private readonly List<ILevel> _allReachableLevels;
 

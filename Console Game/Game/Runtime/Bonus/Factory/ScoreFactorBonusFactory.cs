@@ -1,24 +1,24 @@
 using System;
-using System.Collections.Generic;
 using System.Numerics;
 using ConsoleGame.Physics;
+using ConsoleGame.Stats;
 
 namespace ConsoleGame.Bonus
 {
-    public sealed class EnemiesKillBonusFactory : IBonusFactory
+    public sealed class ScoreFactorBonusFactory : IBonusFactory
     {
-        private readonly IReadOnlyList<IEnemy> _enemies;
         private readonly ICollidersWorld<IBonus> _bonusesWorld;
+        private readonly IScoreWithFactor _score;
 
-        public EnemiesKillBonusFactory(IReadOnlyList<IEnemy> enemies, ICollidersWorld<IBonus> bonusesWorld)
+        public ScoreFactorBonusFactory(ICollidersWorld<IBonus> bonusesWorld, IScoreWithFactor score)
         {
-            _enemies = enemies ?? throw new ArgumentNullException(nameof(enemies));
             _bonusesWorld = bonusesWorld ?? throw new ArgumentNullException(nameof(bonusesWorld));
+            _score = score ?? throw new ArgumentNullException(nameof(score));
         }
 
         public IBonus Create(IReadOnlyTransform transform)
         {
-            IBonus bonus = new EnemiesKillBonus(_enemies);
+            IBonus bonus = new ScoreFactorBonus(_score, 30);
             ICollider collider = new BoxCollider(Vector3.One, transform.Position);
             _bonusesWorld.Add(bonus, collider);
             return bonus;

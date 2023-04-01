@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace ConsoleGame.Wave
 {
-    public interface IWaveData
+    public interface IWave
     {
         IReadOnlyList<(EnemyType EnemyType, int EnemiesCount)> Enemies { get; }
     }

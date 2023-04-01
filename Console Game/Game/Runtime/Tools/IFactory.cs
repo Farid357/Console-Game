@@ -1,4 +1,4 @@
-namespace ConsoleGame
+namespace ConsoleGame.Tools
 {
     public interface IFactory<out T>
     {

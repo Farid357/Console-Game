@@ -16,11 +16,12 @@ namespace ConsoleGame.Bonus
             _bonusesWorld = bonusesWorld ?? throw new ArgumentNullException(nameof(bonusesWorld));
             _random = new Random();
         }
+        
         public IBonus Create(IReadOnlyTransform transform)
         {
             int healAmount = _random.Next(10, 25);
             IBonus bonus = new HealBonus(_health, healAmount);
-            ICollider bonusCollider = new BoxCollider(new Box(Vector3.One), transform.Position);
+            ICollider bonusCollider = new BoxCollider(Vector3.One, transform.Position);
             _bonusesWorld.Add(bonus, bonusCollider);
             return bonus;
         }

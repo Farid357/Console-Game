@@ -9,6 +9,7 @@ using ConsoleGame.Stats;
 using ConsoleGame.Tests;
 using ConsoleGame.Tests.UI;
 using ConsoleGame.UI;
+using ConsoleGame.Wave;
 using ConsoleGame.Weapon;
 using ConsoleGame.Weapons;
 
@@ -44,12 +45,11 @@ namespace ConsoleGame
             IWeaponMagazineViewFactory magazineViewFactory = new WeaponMagazineViewFactory(textFactory);
             IWeaponMagazineFactory magazineFactory = new WeaponMagazineFactory(magazineViewFactory, 100);
             ICollidersWorld<IEnemy> enemyCollidersWorld = new CollidersWorld<IEnemy>();
-            IRaycastFactory<IEnemy> enemyRaycastFactory = new RaycastFactory<IEnemy>(loopObjects, enemyCollidersWorld);
-            IMovementFactory enemyMovementFactory = new EnemyMovementFactory(loopObjects);
-            IBulletFactory bulletFactory = new RaycastBulletFactory(enemyRaycastFactory, enemyMovementFactory, gameObjects);
+            IMovementFactory enemyMovementFactory = new EnemyMovementFactory();
+            IBulletFactory bulletFactory = new RaycastBulletFactory(new Raycast<IEnemy>(enemyCollidersWorld, 0.2f), enemyMovementFactory, gameObjects);
             IWeaponViewFactory weaponViewFactory = new WeaponViewFactory(new DummyText(), new EffectFactory());
             IAdjustableMovement characterMovement = characterMovementFactory.Create(new Transform());
-            var weaponFactory = new StartWeaponFactory(loopObjects, magazineFactory, bulletFactory, weaponViewFactory);
+            IWeaponFactory weaponFactory = new StartWeaponFactory(loopObjects, magazineFactory, bulletFactory, weaponViewFactory);
             IAim characterAim = new CharacterAim(characterMovement.Transform);
             IWeaponsData weaponsData = new WeaponsData();
             IWeapon weapon = weaponFactory.Create(characterAim, weaponsData);
@@ -60,7 +60,7 @@ namespace ConsoleGame
             IEnemiesWorld enemiesWorld = new EnemiesWorld();
             IScoreViewFactory scoreViewFactory = new ScoreViewFactory(textFactory);
             IScoreFactory scoreFactory = new ScoreFactory(saveStorages, scoreViewFactory);
-            IScore score = new ScoreWithFactor(scoreFactory.Create());
+            IScoreWithFactor score = new ScoreWithFactor(scoreFactory.Create());
             IWalletViewFactory walletViewFactory = new WalletViewFactory(textFactory);
             IWalletFactory walletFactory = new WalletFactory(saveStorages, walletViewFactory);
             IWallet wallet = walletFactory.Create();
@@ -86,16 +86,28 @@ namespace ConsoleGame
             IBonusLoopFactory bonusLoopFactory = new BonusLoopFactory(new List<IBonusFactory>()
             {
                 new HealBonusFactory(characterHealth, bonusesWorld),
-                new EnemiesKillBonusFactory(allEnemies, bonusesWorld)
+                new EnemiesKillBonusFactory(allEnemies, bonusesWorld),
+                new ScoreFactorBonusFactory(bonusesWorld, score)
             }, 
                 new List<Vector3>
             {
                 new Vector3(100, 0, 300)
             });
+
+            var zombieBehaviourTreeFactory = new ZombieBehaviourTreeFactory(characterHealth, characterMovement.Transform);
             
+            IEnemyFactory zombieFactory = new EnemyFactory(new HealthFactory(new EnemyHealthViewFactory(), 100), zombieBehaviourTreeFactory, enemyMovementFactory);
+            IReadOnlyList<IWave> waves = new WavesFactory().Create();
+
+            var waveFactory = new WaveFactory(enemiesWorld, new Dictionary<EnemyType, IEnemyFactory>
+            {
+                { EnemyType.Zombie, zombieFactory }
+            }, waves);
+
             achievementFactory.Create();
             bonusLoopFactory.StartCreate(minCreateDelay: 30, maxCreateDelay: 120);
             loopObjects.Add(killsStreak);
+            loopObjects.Add(waveFactory);
             loopObjects.Add(gameObjects);
         }
 

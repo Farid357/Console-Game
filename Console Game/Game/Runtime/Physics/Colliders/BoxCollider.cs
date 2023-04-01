@@ -4,11 +4,11 @@ namespace ConsoleGame.Physics
 {
     public sealed class BoxCollider : ICollider
     {
-        private readonly Box _box;
+        private readonly Vector3 _size;
 
-        public BoxCollider(Box box, Vector3 center)
+        public BoxCollider(Vector3 size, Vector3 center)
         {
-            _box = box;
+            _size = size;
             Center = center;
         }
 
@@ -16,7 +16,7 @@ namespace ConsoleGame.Physics
 
         public bool Contains(Vector3 point)
         {
-            return Vector3.Distance(Center, point) <= Vector3.Distance(Center, _box.Size);
+            return Vector3.Distance(Center, point) <= Vector3.Distance(Center, _size);
         }
     }
 }

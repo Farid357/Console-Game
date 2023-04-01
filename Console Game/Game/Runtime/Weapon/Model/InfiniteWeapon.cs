@@ -16,7 +16,7 @@ namespace Console_Game
 
         public bool CanShoot => _weapon.CanShoot;
         
-        public IWeaponData Data => _weapon.Data;
+        public IWeaponActivityView View => _weapon.View;
 
         public void Shoot()
         {

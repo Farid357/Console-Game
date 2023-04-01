@@ -17,7 +17,7 @@ namespace ConsoleGame
             _needMoney = needMoney;
         }
 
-        public bool CanReceive => _wallet.Money >= _needMoney;
+        public bool CanReceive => _wallet.Money >= _needMoney && _achievement.CanReceive;
 
         public void Receive()
         {

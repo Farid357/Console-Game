@@ -1,20 +1,23 @@
 using System;
 using System.Numerics;
+using ConsoleGame.Weapon;
 
 namespace ConsoleGame
 {
     public sealed class Character : ICharacter
     {
+        private readonly IWeaponsData _weaponsData;
         private IWeapon _weapon;
-        
-        public Character(IHealth health, IAdjustableMovement movement, IWeapon weapon)
+
+        public Character(IHealth health, IAdjustableMovement movement, IWeapon weapon, IWeaponsData weaponsData)
         {
             Health = health ?? throw new ArgumentNullException(nameof(health));
             Movement = movement ?? throw new ArgumentNullException(nameof(movement));
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
+            _weaponsData = weaponsData ?? throw new ArgumentNullException(nameof(weaponsData));
         }
 
-        public IWeaponData WeaponData => _weapon.Data;
+        public IWeaponData WeaponData => _weaponsData.DataFor(_weapon);
         
         public IHealth Health { get; }
 

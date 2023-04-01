@@ -25,7 +25,12 @@ namespace ConsoleGame
                 _character.Move(moveDirection);
             }
 
-            if (_input.IsShooting && _character.CanShoot)
+            if (_input.IsShooting && _character.CanShoot && _character.WeaponData.IsBurst == false)
+            {
+                _character.Shoot();
+            }
+            
+            if (_input.IsShootingBurst && _character.CanShoot && _character.WeaponData.IsBurst)
             {
                 _character.Shoot();
             }

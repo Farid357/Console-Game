@@ -10,6 +10,8 @@ namespace ConsoleGame
        
         bool IsShooting { get; }
 
+        bool IsShootingBurst { get; }
+
         Vector3 Direction();
     }
 }

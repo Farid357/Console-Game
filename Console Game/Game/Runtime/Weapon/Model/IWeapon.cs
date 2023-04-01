@@ -4,13 +4,8 @@ namespace ConsoleGame
     {
         bool CanShoot { get; }
         
-        IWeaponData Data { get; }
-
+        IWeaponActivityView View { get; }
+        
         void Shoot();
-    }
-
-    public interface IThrowingWeapon
-    {
-        void Throw();
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using BananaParty.BehaviorTree;
+using ConsoleGame.Weapon;
 
 namespace ConsoleGame
 {
@@ -28,7 +29,7 @@ namespace ConsoleGame
                         {
                             isNearCharacterNode,
                             new WaitNode(1.5f),
-                            new WeaponAttackNode(_weaponFactory.Create()),
+                            new WeaponAttackNode(_weaponFactory.Create(new EnemyAim(enemyMovement.Transform, _character), new WeaponsData())),
                         })),
 
                         new RepeatNode(new SelectorNode(new IBehaviorNode[]

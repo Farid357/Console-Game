@@ -15,7 +15,7 @@ namespace ConsoleGame
             _needFactor = needFactor;
         }
 
-        public bool CanReceive => _killsStreak.Factor >= _needFactor;
+        public bool CanReceive => _killsStreak.Factor >= _needFactor && _achievement.CanReceive;
 
         public void Receive()
         {

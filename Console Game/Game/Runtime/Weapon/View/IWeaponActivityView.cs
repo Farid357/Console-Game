@@ -1,6 +1,6 @@
 namespace ConsoleGame
 {
-    public interface IWeaponActiveView
+    public interface IWeaponActivityView
     {
         bool IsActive { get; }
         

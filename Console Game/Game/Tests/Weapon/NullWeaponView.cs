@@ -1,6 +1,6 @@
 namespace ConsoleGame.Tests
 {
-    public class NullWeaponView : IWeaponActiveView
+    public class NullWeaponView : IWeaponView
     {
         public bool IsActive { get; private set; } = true;
         
@@ -12,6 +12,11 @@ namespace ConsoleGame.Tests
         public void Disable()
         {
             IsActive = false;
+        }
+
+        public void Shoot()
+        {
+            
         }
     }
 }

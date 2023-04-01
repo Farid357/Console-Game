@@ -32,6 +32,8 @@ namespace ConsoleGame
         public bool IsReloading => _reloadingKey.IsPressed();
         
         public bool IsShooting => _shootKey.IsPressed();
+        public bool IsShootingBurst => false;
+        
 
         public Vector3 Direction()
         {

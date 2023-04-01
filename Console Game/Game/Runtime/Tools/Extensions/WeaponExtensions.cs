@@ -23,15 +23,5 @@ namespace ConsoleGame.Tools
         {
             weaponMagazine.Add(weaponMagazine.MaxBullets - weaponMagazine.Bullets);
         }
-
-        public static void Enable(this IWeapon weapon)
-        {
-            weapon.Data.View.Enable();
-        }
-        
-        public static void Disable(this IWeapon weapon)
-        {
-            weapon.Data.View.Disable();
-        }
     }
 }

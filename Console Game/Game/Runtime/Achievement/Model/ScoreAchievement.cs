@@ -17,7 +17,7 @@ namespace ConsoleGame
             _needScore = needScore;
         }
 
-        public bool CanReceive => _score.Count >= _needScore;
+        public bool CanReceive => _score.Count >= _needScore && _achievement.CanReceive;
         
         public void Receive()
         {

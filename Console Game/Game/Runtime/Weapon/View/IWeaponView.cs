@@ -1,6 +1,6 @@
 namespace ConsoleGame
 {
-    public interface IWeaponView : IWeaponActiveView
+    public interface IWeaponView : IWeaponActivityView
     {
         void Shoot();
         

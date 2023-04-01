@@ -29,10 +29,10 @@ namespace ConsoleGame.GameLoop
                     continue;
 
                 await Task.Delay(TimeSpan.FromSeconds(_fixedTimeStep));
-                float deltaTime = (float)(_stopwatch.Elapsed - lastUpdateTime).TotalSeconds;
-                _gameLoopObject.Update(deltaTime);
+                float fixedDeltaTime = (float)(_stopwatch.Elapsed - lastUpdateTime).TotalSeconds;
+                _gameLoopObject.Update(fixedDeltaTime);
                 lastUpdateTime = _stopwatch.Elapsed;
-                Console.WriteLine($"Delta Time: {deltaTime}");
+                Console.WriteLine($"Fixed Delta Time: {fixedDeltaTime}");
                 Console.WriteLine($"Real Elapsed Time: {(float)_stopwatch.Elapsed.TotalSeconds}");
             }
         }

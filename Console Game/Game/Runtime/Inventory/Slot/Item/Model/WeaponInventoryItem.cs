@@ -24,14 +24,14 @@ namespace ConsoleGame
 
         public void Select()
         {
-            Weapon.Enable();
+            Weapon.View.Enable();
             _character.SwitchWeapon(Weapon);
             _item.Select();
         }
 
         public void Unselect()
         {
-            Weapon.Disable();
+            Weapon.View.Disable();
             _character.TakeAwayWeapons();
             _item.Unselect();
         }

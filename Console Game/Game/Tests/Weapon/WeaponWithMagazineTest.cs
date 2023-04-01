@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-using Console_Game;
 using ConsoleGame.Weapons;
 using NUnit.Framework;
 
@@ -13,8 +11,7 @@ namespace ConsoleGame.Tests
         {
             var bulletsFactory = new DummyBulletFactory();
             IWeaponMagazine weaponMagazine = new WeaponMagazine(10, new DummyMagazineView());
-            WeaponData weaponData = new WeaponData(false, 1, new Timer(1.2f), weaponMagazine, new NullWeaponView(), new NullBattery());
-            IWeapon weapon = new WeaponWithMagazine(new CharacterWeapon(bulletsFactory, new DummyMovement(), weaponData));
+            IWeapon weapon = new WeaponWithMagazine(new Weapons.Weapon(bulletsFactory, new DummyAim(), new NullWeaponView(), 10), weaponMagazine);
             weapon.Shoot();
             Assert.That(weaponMagazine.Bullets == 9);
         }

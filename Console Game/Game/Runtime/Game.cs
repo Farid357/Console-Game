@@ -1,12 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using ConsoleGame.GameLoop;
 using ConsoleGame.Physics;
 using ConsoleGame.SaveSystem;
+using ConsoleGame.Stats;
 using ConsoleGame.Tests;
 using ConsoleGame.Tests.UI;
 using ConsoleGame.UI;
+using ConsoleGame.Weapon;
 using ConsoleGame.Weapons;
 
 namespace ConsoleGame
@@ -46,16 +47,17 @@ namespace ConsoleGame
             IBulletFactory bulletFactory = new RaycastBulletFactory(enemyRaycastFactory, enemyMovementFactory, gameObjects);
             IWeaponViewFactory weaponViewFactory = new WeaponViewFactory(new DummyText(), new EffectFactory());
             IAdjustableMovement characterMovement = characterMovementFactory.Create(new Transform());
-            var weaponFactory = new StartWeaponFactory(loopObjects, magazineFactory, bulletFactory, characterMovement, weaponViewFactory);
-            IWeapon weapon = weaponFactory.Create();
-            ICharacterFactory characterFactory = new CharacterFactory(characterMovement, characterHealthFactory, weapon);
-            ICharacter character = characterFactory.Create();
+            var weaponFactory = new StartWeaponFactory(loopObjects, magazineFactory, bulletFactory, weaponViewFactory);
+            IAim characterAim = new CharacterAim(characterMovement.Transform);
+            IWeaponsData weaponsData = new WeaponsData();
+            IWeapon weapon = weaponFactory.Create(characterAim, weaponsData);
+            ICharacter character = new Character(characterHealthFactory.Create(), characterMovement, weapon, weaponsData);
             IPlayerFactory playerFactory = new PlayerFactory(loopObjects, character, weapon);
             IPlayer player = playerFactory.Create();
             IEnemiesWorld enemiesWorld = new EnemiesWorld(enemyCollidersWorld);
             IScoreViewFactory scoreViewFactory = new ScoreViewFactory(textFactory);
             IScoreFactory scoreFactory = new ScoreFactory(saveStorages, scoreViewFactory);
-            IScore score = scoreFactory.Create();
+            IScore score = new ScoreWithFactor(scoreFactory.Create());
             IWalletViewFactory walletViewFactory = new WalletViewFactory(textFactory);
             IWalletFactory walletFactory = new WalletFactory(saveStorages, walletViewFactory);
             IWallet wallet = walletFactory.Create();

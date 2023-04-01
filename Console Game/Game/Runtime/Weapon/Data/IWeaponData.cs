@@ -7,13 +7,9 @@ namespace ConsoleGame
     {
         bool IsBurst { get; }
         
-        int Damage { get; }
-        
         ITimer CooldownTimer { get; }
         
         IWeaponMagazine Magazine { get; }
-        
-        IWeaponActiveView View { get; }
         
         IBattery Battery { get; }
     }

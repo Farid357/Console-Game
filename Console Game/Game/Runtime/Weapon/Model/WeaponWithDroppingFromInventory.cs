@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using ConsoleGame.Weapons;
 
 namespace ConsoleGame
 {
@@ -12,13 +11,13 @@ namespace ConsoleGame
         
         public WeaponWithDroppingFromInventory(IWeapon weapon, IInventory<IWeaponInventoryItem> inventory)
         {
-            _weapon = weapon;
+            _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
             _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
         }
 
         public bool CanShoot => _weapon.CanShoot && _canShoot;
         
-        public IWeaponData Data => _weapon.Data;
+        public IWeaponActivityView View => _weapon.View;
 
         public void Shoot()
         {

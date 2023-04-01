@@ -1,5 +1,4 @@
 using System;
-using System.Numerics;
 using ConsoleGame.Tools;
 using ConsoleGame.Physics;
 
@@ -8,28 +7,26 @@ namespace ConsoleGame.Weapons
     public sealed class LaserWeapon : IWeapon
     {
         private readonly IRaycast<IEnemy> _raycast;
-        private readonly ITransform _transform;
+        private readonly IAim _aim;
         private readonly ILaserWeaponView _view;
-        private readonly Vector3 _shootDirection = new Vector3(1, 0, 1);
         private readonly int _damage;
 
-        public LaserWeapon(IRaycast<IEnemy> raycast, ITransform transform, ILaserWeaponView view, int damage, IWeaponData data)
+        public LaserWeapon(IRaycast<IEnemy> raycast, IAim aim, ILaserWeaponView view, int damage)
         {
             _raycast = raycast ?? throw new ArgumentNullException(nameof(raycast));
-            _transform = transform ?? throw new ArgumentNullException(nameof(transform));
+            _aim = aim ?? throw new ArgumentNullException(nameof(aim));
             _view = view ?? throw new ArgumentNullException(nameof(view));
-            Data = data ?? throw new ArgumentNullException(nameof(data));
             _damage = damage.ThrowIfLessThanZeroException();
         }
 
         public bool CanShoot => true;
         
-        public IWeaponData Data { get; }
+        public IWeaponActivityView View => _view;
 
         public void Shoot()
         {
-            _raycast.Throw(_transform.Position, _shootDirection);
-            _view.ShowLaser(_transform.Position, _shootDirection);
+            _raycast.Throw(_aim.Position, _aim.Target);
+            _view.ShowLaser(_aim.Position, _aim.Target);
             
             if (_raycast.HasHit)
             {

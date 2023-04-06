@@ -18,10 +18,5 @@ namespace ConsoleGame.Tools
         {
             return weaponMagazine.Bullets < weaponMagazine.MaxBullets;
         }
-        
-        public static void Fill(this IWeaponMagazine weaponMagazine)
-        {
-            weaponMagazine.Add(weaponMagazine.MaxBullets - weaponMagazine.Bullets);
-        }
     }
 }

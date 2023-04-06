@@ -1,4 +1,5 @@
 using System;
+using ConsoleGame.Tools;
 
 namespace ConsoleGame.Weapons
 {
@@ -13,7 +14,7 @@ namespace ConsoleGame.Weapons
             _magazine = magazine;
         }
         
-        public bool CanShoot => _weapon.CanShoot && _magazine.Bullets > 0;
+        public bool CanShoot => _weapon.CanShoot && _magazine.IsNotEmpty();
         
         public IWeaponActivityView View => _weapon.View;
 

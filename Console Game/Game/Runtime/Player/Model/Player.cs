@@ -34,6 +34,11 @@ namespace ConsoleGame
             {
                 _character.Shoot();
             }
+
+            if (_input.IsReloading)
+            {
+                _character.WeaponData.Magazine.Fill();
+            }
         }
     }
 }

@@ -23,21 +23,26 @@ namespace ConsoleGame
 
         public bool IsAlive => _health.IsAlive;
         
-        public bool CanShoot => _weapon.CanShoot;
+        public bool CanShoot => _weapon.CanShoot && IsAlive;
 
         public void SwitchWeapon(IWeapon weapon)
         {
+            if (!IsAlive)
+                throw new Exception($"Character isn't alive! He can't switch weapon!");
+            
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
         }
         
         public void Shoot()
         {
+            if (!IsAlive)
+                throw new Exception($"Character isn't alive! He can't shoot!");
+            
             if (!CanShoot)
                 throw new Exception($"Character can't shoot!");
             
             if (_weapon.CanShoot)
                 _weapon.Shoot();
-            
         }
 
         public void Move(Vector3 direction)

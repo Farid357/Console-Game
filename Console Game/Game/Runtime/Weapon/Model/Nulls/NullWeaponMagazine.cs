@@ -16,5 +16,10 @@ namespace ConsoleGame
         public void Add(int bullets)
         {
         }
+
+        public void Fill()
+        {
+            
+        }
     }
 }

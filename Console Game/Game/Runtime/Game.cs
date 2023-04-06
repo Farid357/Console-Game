@@ -95,11 +95,10 @@ namespace ConsoleGame
             });
 
             var zombieBehaviourTreeFactory = new ZombieBehaviourTreeFactory(characterHealth, characterMovement.Transform);
-            
             IEnemyFactory zombieFactory = new EnemyFactory(new HealthFactory(new EnemyHealthViewFactory(), 100), zombieBehaviourTreeFactory, enemyMovementFactory);
             IReadOnlyList<IWave> waves = new WavesFactory().Create();
 
-            var waveFactory = new WaveFactory(enemiesWorld, new Dictionary<EnemyType, IEnemyFactory>
+            var waveFactory = new WavesLoopFactory(enemiesWorld, new Dictionary<EnemyType, IEnemyFactory>
             {
                 { EnemyType.Zombie, zombieFactory }
             }, waves);

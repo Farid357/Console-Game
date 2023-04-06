@@ -40,5 +40,11 @@ namespace ConsoleGame.Weapons
             Bullets += bullets.ThrowIfLessThanOrEqualsToZeroException();
             _magazineView.Visualize(Bullets, MaxBullets);
         }
+
+        public async void Fill()
+        {
+            await _magazineView.Fill();
+            Add(MaxBullets - Bullets);
+        }
     }
 }

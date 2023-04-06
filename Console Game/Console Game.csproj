@@ -1,0 +1,640 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit.3.13.3\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.13.3\build\NUnit.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9CE6C5FC-EA6A-40C6-8E6E-57C2C49F20F9}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Console_Game</RootNamespace>
+    <AssemblyName>Console_Game</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0-preview.1.23110.8\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.13.3.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.13.3\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0-preview.1.23110.8\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.0-preview.1.23110.8\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Game\Runtime\Achievement\Factory\AchievementsFactory.cs" />
+    <Compile Include="Game\Runtime\Achievement\Factory\IAchievementFactory.cs" />
+    <Compile Include="Game\Runtime\Achievement\Factory\MoneyAchievementsFactory.cs" />
+    <Compile Include="Game\Runtime\Achievement\Factory\ScoreAchievementsFactory.cs" />
+    <Compile Include="Game\Runtime\Achievement\Factory\View\AchievementViewFactory.cs" />
+    <Compile Include="Game\Runtime\Achievement\Factory\View\IAchievementViewFactory.cs" />
+    <Compile Include="Game\Runtime\Achievement\Model\Achievement.cs" />
+    <Compile Include="Game\Runtime\Achievement\Model\Chain\ChainOfAchievement.cs" />
+    <Compile Include="Game\Runtime\Achievement\Model\Chain\IChainOfAchievement.cs" />
+    <Compile Include="Game\Runtime\Achievement\Model\IAchievement.cs" />
+    <Compile Include="Game\Runtime\Achievement\Model\KillsStreakAchievement.cs" />
+    <Compile Include="Game\Runtime\Achievement\Model\MoneyAchievement.cs" />
+    <Compile Include="Game\Runtime\Achievement\Model\ScoreAchievement.cs" />
+    <Compile Include="Game\Runtime\Achievement\View\AchievementView.cs" />
+    <Compile Include="Game\Runtime\Achievement\View\IAchievementView.cs" />
+    <Compile Include="Game\Runtime\Achievement\View\Money\IMoneyAchievementView.cs" />
+    <Compile Include="Game\Runtime\Achievement\View\Money\MoneyAchievementView.cs" />
+    <Compile Include="Game\Runtime\Achievement\View\Score\IScoreAchievementView.cs" />
+    <Compile Include="Game\Runtime\Achievement\View\Score\ScoreAchievementView.cs" />
+    <Compile Include="Game\Runtime\Achievement\View\Window\AchievementReceiveWindow.cs" />
+    <Compile Include="Game\Runtime\Achievement\View\Window\IAchievementReceiveWindow.cs" />
+    <Compile Include="Game\Runtime\Audio\ISound.cs" />
+    <Compile Include="Game\Runtime\Audio\Music\IMusic.cs" />
+    <Compile Include="Game\Runtime\Audio\Sound.cs" />
+    <Compile Include="Game\Runtime\Bomb\Factory\BombFactory.cs" />
+    <Compile Include="Game\Runtime\Bomb\Factory\IBombViewFactory.cs" />
+    <Compile Include="Game\Runtime\Bomb\Model\Bomb.cs" />
+    <Compile Include="Game\Runtime\Bomb\Model\IBomb.cs" />
+    <Compile Include="Game\Runtime\Bomb\Model\TimeBomb.cs" />
+    <Compile Include="Game\Runtime\Bomb\View\BombView.cs" />
+    <Compile Include="Game\Runtime\Bomb\View\IBombView.cs" />
+    <Compile Include="Game\Runtime\Bonus\Factory\EnemiesKillBonusFactory.cs" />
+    <Compile Include="Game\Runtime\Bonus\Factory\HealBonusFactory.cs" />
+    <Compile Include="Game\Runtime\Bonus\Factory\IBonusFactory.cs" />
+    <Compile Include="Game\Runtime\Bonus\Factory\Loop\BonusLoopFactory.cs" />
+    <Compile Include="Game\Runtime\Bonus\Factory\Loop\IBonusLoopFactory.cs" />
+    <Compile Include="Game\Runtime\Bonus\Factory\ScoreFactorBonusFactory.cs" />
+    <Compile Include="Game\Runtime\Bonus\Model\Bonuses.cs" />
+    <Compile Include="Game\Runtime\Bonus\Model\BonusWithView.cs" />
+    <Compile Include="Game\Runtime\Bonus\Model\EnemiesKillBonus.cs" />
+    <Compile Include="Game\Runtime\Bonus\Model\HealBonus.cs" />
+    <Compile Include="Game\Runtime\Bonus\Model\IBonus.cs" />
+    <Compile Include="Game\Runtime\Bonus\Model\ScoreFactorBonus.cs" />
+    <Compile Include="Game\Runtime\Bonus\View\FakeBonusView.cs" />
+    <Compile Include="Game\Runtime\Bonus\View\IBonusView.cs" />
+    <Compile Include="Game\Runtime\Character\Character.cs" />
+    <Compile Include="Game\Runtime\Character\ICharacter.cs" />
+    <Compile Include="Game\Runtime\Character\IReadOnlyCharacter.cs" />
+    <Compile Include="Game\Runtime\Enemy\Factory\Behaviour Tree\EnemyWithWeaponBehaviourTreeFactory.cs" />
+    <Compile Include="Game\Runtime\Enemy\Factory\Behaviour Tree\ZombieBehaviourTreeFactory.cs" />
+    <Compile Include="Game\Runtime\Enemy\Model\EnemyType.cs" />
+    <Compile Include="Game\Runtime\Enemy\Model\IEnemy.cs" />
+    <Compile Include="Game\Runtime\Enemy\Nodes\AttackHealthNode.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Objects\GameObject\Group\GameObjects.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Objects\GameObject\Group\IGameObjects.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Objects\GameObject\Group\IGameObjectsGroup.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Objects\GameObject\Group\SelfCleaningGameObjects.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Objects\GameObject\IGameObject.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Objects\GameObject\IReadOnlyGameObject.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Pause\Model\GamePause.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Pause\Model\IGamePause.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Pause\Model\IReadOnlyGamePause.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Pause\View\GamePauseView.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Pause\View\IGamePauseView.cs" />
+    <Compile Include="Game\Runtime\Inventory\Factory\IInventoryViewFactory.cs" />
+    <Compile Include="Game\Runtime\Inventory\Factory\InventoryViewFactory.cs" />
+    <Compile Include="Game\Runtime\Player\Factory\PlayerFactory.cs" />
+    <Compile Include="Game\Runtime\Player\Factory\IPlayerFactory.cs" />
+    <Compile Include="Game\Runtime\Player\Input\PlayerInput.cs" />
+    <Compile Include="Game\Runtime\Player\Input\IPlayerInput.cs" />
+    <Compile Include="Game\Runtime\Player\Model\Player.cs" />
+    <Compile Include="Game\Runtime\Player\Model\IPlayer.cs" />
+    <Compile Include="Game\Runtime\Effect\Factory\EffectFactory.cs" />
+    <Compile Include="Game\Runtime\Effect\Factory\IEffectFactory.cs" />
+    <Compile Include="Game\Runtime\Effect\Model\FakeEffect.cs" />
+    <Compile Include="Game\Runtime\Effect\Model\IEffect.cs" />
+    <Compile Include="Game\Runtime\Enemy\Factory\EnemyFactory.cs" />
+    <Compile Include="Game\Runtime\Enemy\Factory\IEnemyFactory.cs" />
+    <Compile Include="Game\Runtime\Enemy\Factory\RandomEnemyFactory.cs" />
+    <Compile Include="Game\Runtime\Enemy\Nodes\IsNearNode.cs" />
+    <Compile Include="Game\Runtime\Enemy\Nodes\MoveNode.cs" />
+    <Compile Include="Game\Runtime\Enemy\Nodes\WaitNode.cs" />
+    <Compile Include="Game\Runtime\Enemy\Nodes\WeaponAttackNode.cs" />
+    <Compile Include="Game\Runtime\Enemy\Model\Enemy.cs" />
+    <Compile Include="Game\Runtime\Bomb\Factory\IBombFactory.cs" />
+    <Compile Include="Game\Runtime\Enemy\World\EnemiesWorld.cs" />
+    <Compile Include="Game\Runtime\Enemy\World\IEnemiesWorld.cs" />
+    <Compile Include="Game\Runtime\Game.cs" />
+    <Compile Include="Game\Runtime\IGame.cs" />
+    <Compile Include="Game\Runtime\Input Key\IKey.cs" />
+    <Compile Include="Game\Runtime\Input Key\Key.cs" />
+    <Compile Include="Game\Runtime\Input Key\Numpad\INumpadKey.cs" />
+    <Compile Include="Game\Runtime\Input Key\Numpad\NumpadKey.cs" />
+    <Compile Include="Game\Runtime\Inventory\Factory\IWeaponInventoryFactory.cs" />
+    <Compile Include="Game\Runtime\Inventory\Factory\WeaponInventoryFactory.cs" />
+    <Compile Include="Game\Runtime\Inventory\Input\IInventoryItemSelectingInput.cs" />
+    <Compile Include="Game\Runtime\Inventory\Input\InventoryItemSelectingInput.cs" />
+    <Compile Include="Game\Runtime\Inventory\Model\IInventory.cs" />
+    <Compile Include="Game\Runtime\Inventory\Model\Inventory.cs" />
+    <Compile Include="Game\Runtime\Inventory\Model\IReadOnlyInventory.cs" />
+    <Compile Include="Game\Runtime\Inventory\Model\SelfCleaningInventory.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\Factory\IInventorySlotViewFactory.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\Factory\InventorySlotViewFactory.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\Factory\IWeaponSlotFactory.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\Factory\WeaponSlotFactory.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\Item\Model\IInventoryItem.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\Item\Model\InventoryItem.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\Item\Model\IWeaponInventoryItem.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\Item\Model\WeaponInventoryItem.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\Item\ViewData\IInventoryItemViewData.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\Item\ViewData\InventoryItemViewData.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\Model\IInventorySlot.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\Model\InventorySlot.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\Model\IReadOnlyInventorySlot.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\View\IInventorySlotView.cs" />
+    <Compile Include="Game\Runtime\Inventory\Slot\View\InventorySlotView.cs" />
+    <Compile Include="Game\Runtime\Inventory\View\IInventoryView.cs" />
+    <Compile Include="Game\Runtime\Inventory\View\InventoryView.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Model\GameLoop.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Model\GameLoops.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Model\IGameLoop.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Model\PhysicsGameLoop.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Objects\Group\GameLoopObjects.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Objects\Group\IGameLoopObjects.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Objects\Group\IGameLoopObjectsGroup.cs" />
+    <Compile Include="Game\Runtime\GameLoop\Objects\IGameLoopObject.cs" />
+    <Compile Include="Game\Runtime\Movement\Factory\CharacterMovementFactory.cs" />
+    <Compile Include="Game\Runtime\Movement\Factory\IMovementFactory.cs" />
+    <Compile Include="Game\Runtime\Movement\Factory\EnemyMovementFactory.cs" />
+    <Compile Include="Game\Runtime\Movement\Types\Adjustable\AdjustableMovement.cs" />
+    <Compile Include="Game\Runtime\Movement\Types\Adjustable\IAdjustableMovement.cs" />
+    <Compile Include="Game\Runtime\Movement\Types\Circle\CircleMovement.cs" />
+    <Compile Include="Game\Runtime\Movement\Types\Circle\ICircleMovement.cs" />
+    <Compile Include="Game\Runtime\Movement\Types\IMovement.cs" />
+    <Compile Include="Game\Runtime\Movement\Types\IIndependentMovement.cs" />
+    <Compile Include="Game\Runtime\Movement\Types\MovementToTarget.cs" />
+    <Compile Include="Game\Runtime\Movement\Types\Physics\PhysicsMovement.cs" />
+    <Compile Include="Game\Runtime\Movement\Types\Smooth\SmoothMovement.cs" />
+    <Compile Include="Game\Runtime\Physics\Colliders\Box.cs" />
+    <Compile Include="Game\Runtime\Physics\Colliders\BoxCollider.cs" />
+    <Compile Include="Game\Runtime\Physics\Colliders\ICollider.cs" />
+    <Compile Include="Game\Runtime\Physics\Colliders\World\CollidersWorld.cs" />
+    <Compile Include="Game\Runtime\Physics\Colliders\World\ICollidersWorld.cs" />
+    <Compile Include="Game\Runtime\Physics\Colliders\World\IReadOnlyCollidersWorld.cs" />
+    <Compile Include="Game\Runtime\Physics\Raycast\Area\Factory\IAreaRaycastFactory.cs" />
+    <Compile Include="Game\Runtime\Physics\Raycast\Area\Factory\SphereRaycastFactory.cs" />
+    <Compile Include="Game\Runtime\Physics\Raycast\Area\SphereRaycast.cs" />
+    <Compile Include="Game\Runtime\Physics\Raycast\Area\IAreaRaycast.cs" />
+    <Compile Include="Game\Runtime\Physics\Raycast\IRaycast.cs" />
+    <Compile Include="Game\Runtime\Physics\Raycast\Raycast.cs" />
+    <Compile Include="Game\Runtime\Physics\Raycast\RaycastHit.cs" />
+    <Compile Include="Game\Runtime\Physics\Rigidbody\IRigidbody.cs" />
+    <Compile Include="Game\Runtime\Physics\Rigidbody\Rigidbody.cs" />
+    <Compile Include="Game\Runtime\Program.cs" />
+    <Compile Include="Game\Runtime\Reward\Factory\EnemyRewardFactory.cs" />
+    <Compile Include="Game\Runtime\Reward\Factory\IRewardFactory.cs" />
+    <Compile Include="Game\Runtime\Reward\Model\IReward.cs" />
+    <Compile Include="Game\Runtime\Reward\Model\MoneyReward.cs" />
+    <Compile Include="Game\Runtime\Reward\Model\RandomReward.cs" />
+    <Compile Include="Game\Runtime\Reward\Model\Rewards.cs" />
+    <Compile Include="Game\Runtime\Reward\Model\RewardWithView.cs" />
+    <Compile Include="Game\Runtime\Reward\Model\ScoreReward.cs" />
+    <Compile Include="Game\Runtime\Reward\View\IRewardView.cs" />
+    <Compile Include="Game\Runtime\Reward\View\RewardView.cs" />
+    <Compile Include="Game\Runtime\Scene\IScreen.cs" />
+    <Compile Include="Game\Runtime\Scene\Model\Async\AsyncScene.cs" />
+    <Compile Include="Game\Runtime\Scene\Model\Async\AsyncScenes.cs" />
+    <Compile Include="Game\Runtime\Scene\Model\Async\IAsyncScene.cs" />
+    <Compile Include="Game\Runtime\Scene\Model\Async\IAsyncScenes.cs" />
+    <Compile Include="Game\Runtime\Scene\Model\Async\IAsyncScenesGroup.cs" />
+    <Compile Include="Game\Runtime\Scene\Model\IScene.cs" />
+    <Compile Include="Game\Runtime\Scene\Model\Scene.cs" />
+    <Compile Include="Game\Runtime\Scene\Model\SceneWithScreenFade.cs" />
+    <Compile Include="Game\Runtime\Scene\Model\With Loading View\SceneWithLoadingView.cs" />
+    <Compile Include="Game\Runtime\Scene\Model\With Loading View\View\ISceneLoadingView.cs" />
+    <Compile Include="Game\Runtime\Scene\Model\With Loading View\View\SceneLoadingView.cs" />
+    <Compile Include="Game\Runtime\Shop\BuyGoodsButton.cs" />
+    <Compile Include="Game\Runtime\Shop\Client\Client.cs" />
+    <Compile Include="Game\Runtime\Shop\Client\IClient.cs" />
+    <Compile Include="Game\Runtime\Shop\Goods\Good.cs" />
+    <Compile Include="Game\Runtime\Shop\Goods\IGood.cs" />
+    <Compile Include="Game\Runtime\Shop\Goods\SaveGood.cs" />
+    <Compile Include="Game\Runtime\Shop\Goods\WeaponGood.cs" />
+    <Compile Include="Game\Runtime\Shop\INotEnoughMoneyView.cs" />
+    <Compile Include="Game\Runtime\Shop\NotEnoughMoneyView.cs" />
+    <Compile Include="Game\Runtime\Shop\ShoppingCart\IReadOnlyShoppingCart.cs" />
+    <Compile Include="Game\Runtime\Shop\ShoppingCart\IShoppingCart.cs" />
+    <Compile Include="Game\Runtime\Shop\ShoppingCart\ShoppingCart.cs" />
+    <Compile Include="Game\Runtime\Shop\ShoppingCart\View\IShoppingCartView.cs" />
+    <Compile Include="Game\Runtime\Shop\ShoppingCart\View\ShoppingCartView.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Factory\CharacterHealthFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Factory\HealthFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Factory\IHealthFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Factory\View\CharacterHealthViewFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Factory\View\EnemyHealthViewFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Factory\View\IHealthViewFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Model\Armor\Armor.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Model\Armor\ArmorView.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Model\Armor\IArmorView.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Model\Health.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Model\IHealth.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Model\IReadOnlyHealth.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Model\KillsStreak\Factory\IKillsStreakViewFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Model\KillsStreak\Factory\KillsStreakViewFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Model\KillsStreak\Model\IKillsStreak.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Model\KillsStreak\Model\KillsStreak.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Model\KillsStreak\View\IKillsStreakView.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\Model\KillsStreak\View\KillsStreakView.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\View\EnemyHealthView.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\View\CharacterHealthView.cs" />
+    <Compile Include="Game\Runtime\Stats\Health\View\IHealthView.cs" />
+    <Compile Include="Game\Runtime\Stats\Level\Factory\ILevelFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Level\Factory\ILevelsFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Level\Factory\LevelFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Level\Factory\LevelWithSaveFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Level\Factory\List\CharacterLevelsFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Level\Factory\List\CharacterLevelViewFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Level\Factory\List\ILevelViewFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Level\Model\Chain\ChainOfLevels.cs" />
+    <Compile Include="Game\Runtime\Stats\Level\Model\Chain\IChainOfLevel.cs" />
+    <Compile Include="Game\Runtime\Stats\Level\Model\ILevel.cs" />
+    <Compile Include="Game\Runtime\Stats\Level\Model\Level.cs" />
+    <Compile Include="Game\Runtime\Stats\Level\Model\LevelWithSave.cs" />
+    <Compile Include="Game\Runtime\Stats\Level\View\ILevelView.cs" />
+    <Compile Include="Game\Runtime\Stats\Level\View\LevelView.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Factory\IScoreFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Factory\IScoreViewFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Factory\Record\IScoreBestRecordFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Factory\Record\ScoreBestRecordFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Factory\Record\View\IScoreBestRecordViewFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Factory\Record\View\ScoreBestRecordViewFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Factory\ScoreFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Factory\ScoreViewFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\IScoreWithFactor.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Model\IReadOnlyScore.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Model\IScore.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Model\Record\IScoreBestRecord.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Model\Record\ScoreBestRecord.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Model\Record\View\IScoreBestRecordView.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Model\Record\View\ScoreBestRecordView.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Model\Score.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\Model\ScoreWithSave.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\ScoreWithFactor.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\View\IScoreView.cs" />
+    <Compile Include="Game\Runtime\Stats\Score\View\ScoreView.cs" />
+    <Compile Include="Game\Runtime\Stats\Wallet\Factory\Model\IWalletFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Wallet\Factory\Model\WalletFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Wallet\Factory\View\IWalletViewFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Wallet\Factory\View\WalletViewFactory.cs" />
+    <Compile Include="Game\Runtime\Stats\Wallet\Model\IReadOnlyWallet.cs" />
+    <Compile Include="Game\Runtime\Stats\Wallet\Model\IWallet.cs" />
+    <Compile Include="Game\Runtime\Stats\Wallet\Model\Wallet.cs" />
+    <Compile Include="Game\Runtime\Stats\Wallet\Model\WalletWithSave.cs" />
+    <Compile Include="Game\Runtime\Stats\Wallet\View\IWalletView.cs" />
+    <Compile Include="Game\Runtime\Stats\Wallet\View\WalletView.cs" />
+    <Compile Include="Game\Runtime\Timer\IReadOnlyTimer.cs" />
+    <Compile Include="Game\Runtime\Timer\ITimer.cs" />
+    <Compile Include="Game\Runtime\Timer\Timer.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\IEnemyBehaviourTreeFactory.cs" />
+    <Compile Include="Game\Runtime\Tools\Exceptions\LessThanOrEqualsToZeroException.cs" />
+    <Compile Include="Game\Runtime\Tools\Extensions\BehaviourTreeExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\Extensions\BitmapExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\Extensions\CharacterExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\Extensions\ComparableExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\Extensions\HealthExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\Extensions\InventoryExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\Extensions\ListExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\Extensions\PhysicsExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\Extensions\ShopExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\Extensions\TextExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\Extensions\TextFactoryExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\Extensions\TimerExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\Extensions\VectorExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\Extensions\WeaponExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\IFactory.cs" />
+    <Compile Include="Game\Runtime\Tools\Pool\IPool.cs" />
+    <Compile Include="Game\Runtime\Tools\Pool\Pool.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\BehaviorNodeStatus.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\IReadOnlyBehaviorNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\ITreeGraph.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\ITreeGraphSource.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\BehaviorNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites\ParallelCompositeNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites\ParallelFirstCompleteNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites\ParallelSelectorNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites\ParallelSequenceNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites\SelectorNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites\SequenceNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites\SequentialCompositeNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Decorators\DecoratorNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Decorators\InverterNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Decorators\RepeatNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\IBehaviorNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Leafs\ConstantNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Leafs\TraceErrorNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Leafs\TraceInfoNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Leafs\TraceWarningNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\Composites\SequenceRollbackNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\INodeSnapshot.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\IRollbackNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\ISnapshotTree.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\Leafs\ConstantRollbackNode.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\Snapshots\NodeSnapshot.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\SnapshotTree.cs" />
+    <Compile Include="Game\Runtime\Tools\Behaviour Tree\TextBehaviorTreeGraph.cs" />
+    <Compile Include="Game\Runtime\Tools\Save Storages\BinaryStorage.cs" />
+    <Compile Include="Game\Runtime\Tools\Save Storages\CollectionSaveStorage.cs" />
+    <Compile Include="Game\Runtime\Tools\Save Storages\Exceptions\CannotDeleteSaveException.cs" />
+    <Compile Include="Game\Runtime\Tools\Save Storages\Exceptions\HasNotSaveException.cs" />
+    <Compile Include="Game\Runtime\Tools\Save Storages\Extensions\SaveStorageExtensions.cs" />
+    <Compile Include="Game\Runtime\Tools\Save Storages\ICollectionSaveStorage.cs" />
+    <Compile Include="Game\Runtime\Tools\Save Storages\ISaveStorage.cs" />
+    <Compile Include="Game\Runtime\Tools\Save Storages\ISaveStorages.cs" />
+    <Compile Include="Game\Runtime\Tools\Save Storages\Paths\IPath.cs" />
+    <Compile Include="Game\Runtime\Tools\Save Storages\Paths\Path.cs" />
+    <Compile Include="Game\Runtime\Tools\Save Storages\Paths\Paths.cs" />
+    <Compile Include="Game\Runtime\Tools\Save Storages\SaveStorages.cs" />
+    <Compile Include="Game\Runtime\Tools\Save Storages\XmlStorage.cs" />
+    <Compile Include="Game\Runtime\Transform\IReadOnlyTransform.cs" />
+    <Compile Include="Game\Runtime\Transform\ITransform.cs" />
+    <Compile Include="Game\Runtime\Transform\Parent\ITransformParent.cs" />
+    <Compile Include="Game\Runtime\Transform\Parent\TransformParent.cs" />
+    <Compile Include="Game\Runtime\Transform\Transform.cs" />
+    <Compile Include="Game\Runtime\UI\Data\Button\ButtonViewData.cs" />
+    <Compile Include="Game\Runtime\UI\Data\Button\IButtonViewData.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\Bar\BarFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\Bar\IBarFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\Button\ButtonFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\Button\IButtonFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\Element\IUiElementFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\Element\UiElementFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\Image\IImageFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\Image\ImageFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\ScrollView\IScrollViewFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\ScrollView\ScrollViewFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\ScrollView\WithRendering\IScrollViewWithRenderingFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\ScrollView\WithRendering\ScrollViewWithRenderingFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\Text\ITextFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\Text\TextFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\Window\IWindowFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Factories\Window\WindowFactory.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Bar\Bar.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Bar\IBar.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Button\Button.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Button\Buttons.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Button\IButton.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Button\IPressOnlyButton.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Canvas\Canvas.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Canvas\Element\IReadOnlyUiElement.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Canvas\Element\IUiElement.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Canvas\Element\UiElement.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Canvas\ICanvas.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Image\IImage.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Image\Image.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Image\ImagePaths.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Image\IRenderer.cs" />
+    <Compile Include="Game\Runtime\UI\Model\ScrollView\IInputField.cs" />
+    <Compile Include="Game\Runtime\UI\Model\ScrollView\IScrollView.cs" />
+    <Compile Include="Game\Runtime\UI\Model\ScrollView\Layout\ILayoutGroup.cs" />
+    <Compile Include="Game\Runtime\UI\Model\ScrollView\Layout\LayoutGroup.cs" />
+    <Compile Include="Game\Runtime\UI\Model\ScrollView\ScrollView.cs" />
+    <Compile Include="Game\Runtime\UI\Model\ScrollView\WithRendering\IScrollViewWithRendering.cs" />
+    <Compile Include="Game\Runtime\UI\Model\ScrollView\WithRendering\ScrollViewWithRendering.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Text\IOnlyVisualizeText.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Text\IText.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Text\Text.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Text\Texts.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Window\IWindow.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Window\Window.cs" />
+    <Compile Include="Game\Runtime\UI\Model\Window\Windows.cs" />
+    <Compile Include="Game\Runtime\UI\View\Button\ButtonView.cs" />
+    <Compile Include="Game\Runtime\UI\View\Button\IButtonView.cs" />
+    <Compile Include="Game\Runtime\Wave\Factory\IWavesFactory.cs" />
+    <Compile Include="Game\Runtime\Wave\Factory\WavesLoopFactory.cs" />
+    <Compile Include="Game\Runtime\Wave\Factory\WavesFactory.cs" />
+    <Compile Include="Game\Runtime\Wave\Model\IWave.cs" />
+    <Compile Include="Game\Runtime\Wave\Model\Wave.cs" />
+    <Compile Include="Game\Runtime\Weapon\Aim\CharacterAim.cs" />
+    <Compile Include="Game\Runtime\Weapon\Aim\EnemyAim.cs" />
+    <Compile Include="Game\Runtime\Weapon\Aim\IAim.cs" />
+    <Compile Include="Game\Runtime\Weapon\Bullet\Factory\IBulletFactory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Bullet\Factory\BulletFactory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Bullet\Factory\ShotgunBulletFactory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Bullet\Model\Bullet.cs" />
+    <Compile Include="Game\Runtime\Weapon\Bullet\Model\Bullets.cs" />
+    <Compile Include="Game\Runtime\Weapon\Bullet\Model\IBullet.cs" />
+    <Compile Include="Game\Runtime\Weapon\Bullet\View\BulletView.cs" />
+    <Compile Include="Game\Runtime\Weapon\Bullet\View\IBulletView.cs" />
+    <Compile Include="Game\Runtime\Weapon\Data\Collection\IWeaponsData.cs" />
+    <Compile Include="Game\Runtime\Weapon\Data\Collection\WeaponsData.cs" />
+    <Compile Include="Game\Runtime\Weapon\Data\IWeaponData.cs" />
+    <Compile Include="Game\Runtime\Weapon\Data\WeaponData.cs" />
+    <Compile Include="Game\Runtime\Weapon\Factory\InfinitePistolFactory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Factory\IWeaponFactory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Factory\StartWeaponFactory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Factory\View\Infinite\IInfiniteWeaponViewFactory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Factory\View\Infinite\InfiniteWeaponViewFactory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Factory\View\IWeaponViewFactory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Factory\View\WeaponViewFactory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Magazine\Factory\IWeaponMagazineFactory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Magazine\Factory\View\IWeaponMagazineViewFactory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Magazine\Factory\View\WeaponMagazineViewFactory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Magazine\Factory\WeaponMagazineFactory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Magazine\Model\IReadOnlyWeaponMagazine.cs" />
+    <Compile Include="Game\Runtime\Weapon\Magazine\Model\IWeaponMagazine.cs" />
+    <Compile Include="Game\Runtime\Weapon\Magazine\Model\WeaponMagazine.cs" />
+    <Compile Include="Game\Runtime\Weapon\Magazine\View\IInfiniteWeaponView.cs" />
+    <Compile Include="Game\Runtime\Weapon\Magazine\View\InfiniteWeaponView.cs" />
+    <Compile Include="Game\Runtime\Weapon\Magazine\View\IWeaponMagazineView.cs" />
+    <Compile Include="Game\Runtime\Weapon\Magazine\View\WeaponMagazineView.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\InfiniteWeapon.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\IThrowingWeapon.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\IWeapon.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\Laser\LaserWeapon.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\Laser\LaserWeaponView.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\Laser\View\ILaserWeaponView.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\Weapon.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\Nulls\NullBattery.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\Nulls\NullWeaponMagazine.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\WeaponWithBattery\Battery\Model\Battery.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\WeaponWithBattery\Battery\Model\IBattery.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\WeaponWithBattery\Battery\Model\IReadOnlyBattery.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\WeaponWithBattery\Battery\Model\SelfDischargingBattery.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\WeaponWithBattery\Battery\View\IBatteryView.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\WeaponWithBattery\Battery\View\WeaponBatteryView.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\WeaponWithBattery\WeaponWithBattery.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\WeaponWithDroppingFromInventory.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\WeaponWithRateOfShot.cs" />
+    <Compile Include="Game\Runtime\Weapon\Model\WithMagazine\WeaponWithMagazine.cs" />
+    <Compile Include="Game\Runtime\Weapon\Throwing\Grenade\Grenade.cs" />
+    <Compile Include="Game\Runtime\Weapon\Throwing\Grenade\View\IGrenadeView.cs" />
+    <Compile Include="Game\Runtime\Weapon\View\IWeaponActivityView.cs" />
+    <Compile Include="Game\Runtime\Weapon\View\IWeaponView.cs" />
+    <Compile Include="Game\Runtime\Weapon\View\WeaponView.cs" />
+    <Compile Include="Game\Tests\DummyEnemy.cs" />
+    <Compile Include="Game\Tests\DummyMovement.cs" />
+    <Compile Include="Game\Tests\DummySaveStorage.cs" />
+    <Compile Include="Game\Tests\Health\ArmorTest.cs" />
+    <Compile Include="Game\Tests\Health\DummyHealthView.cs" />
+    <Compile Include="Game\Tests\Health\HealthTest.cs" />
+    <Compile Include="Game\Tests\Health\KillsStreakTest.cs" />
+    <Compile Include="Game\Tests\Inventory\DummyInventoryView.cs" />
+    <Compile Include="Game\Tests\Inventory\DummySlot.cs" />
+    <Compile Include="Game\Tests\Inventory\InventoryTest.cs" />
+    <Compile Include="Game\Tests\Physics\DummyCharacter.cs" />
+    <Compile Include="Game\Tests\Physics\DummyCollider.cs" />
+    <Compile Include="Game\Tests\Physics\RaycastTest.cs" />
+    <Compile Include="Game\Tests\Scene\AsyncScenesTest.cs" />
+    <Compile Include="Game\Tests\Shop\ClientTest.cs" />
+    <Compile Include="Game\Tests\Shop\ShoppingCartTest.cs" />
+    <Compile Include="Game\Tests\Stats\DummyWallet.cs" />
+    <Compile Include="Game\Tests\Stats\Level\DummyLevelView.cs" />
+    <Compile Include="Game\Tests\Stats\Level\LevelTest.cs" />
+    <Compile Include="Game\Tests\Stats\Level\LevelWithSaveTest.cs" />
+    <Compile Include="Game\Tests\Stats\Score\DummyText.cs" />
+    <Compile Include="Game\Tests\Stats\Score\ScoreBestRecordTest.cs" />
+    <Compile Include="Game\Tests\Stats\Score\ScoreTest.cs" />
+    <Compile Include="Game\Tests\Timer\TimerTest.cs" />
+    <Compile Include="Game\Tests\UI\ButtonTest.cs" />
+    <Compile Include="Game\Tests\UI\DummyButtonViewData.cs" />
+    <Compile Include="Game\Tests\UI\DummyImage.cs" />
+    <Compile Include="Game\Tests\UI\TextTests.cs" />
+    <Compile Include="Game\Tests\UI\WindowTest.cs" />
+    <Compile Include="Game\Tests\Weapon\DummyAim.cs" />
+    <Compile Include="Game\Tests\Weapon\Dummys\DummyBullet.cs" />
+    <Compile Include="Game\Tests\Weapon\Dummys\DummyBulletFactory.cs" />
+    <Compile Include="Game\Tests\Weapon\Dummys\DummyMagazineView.cs" />
+    <Compile Include="Game\Tests\Weapon\Dummys\DummyWeapon.cs" />
+    <Compile Include="Game\Tests\Weapon\NullWeaponView.cs" />
+    <Compile Include="Game\Tests\Weapon\WeaponTest.cs" />
+    <Compile Include="Game\Tests\Weapon\WeaponWithMagazineTest.cs" />
+    <Compile Include="Game\Tests\Weapon\WeaponWithShootWaitingTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Game\Runtime\Data.json" />
+    <Content Include="Game\Runtime\Tools\Exceptions\LessThanOrEqualsToZeroException.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\BananaParty.BehaviorTree.asmdef.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\BehaviorNodeStatus.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\IReadOnlyBehaviorNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\ITreeGraph.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\ITreeGraphSource.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\BehaviorNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites\ParallelCompositeNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites\ParallelFirstCompleteNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites\ParallelSelectorNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites\ParallelSequenceNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites\SelectorNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites\SequenceNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Composites\SequentialCompositeNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Decorators.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Decorators\DecoratorNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Decorators\InverterNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Decorators\RepeatNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Decorators\TimeoutNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\IBehaviorNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Leafs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Leafs\ConstantNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Leafs\TraceErrorNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Leafs\TraceInfoNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Leafs\TraceWarningNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\Nodes\Leafs\WaitNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\Composites.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\Composites\SequenceRollbackNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\Decorators.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\INodeSnapshot.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\IRollbackNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\ISnapshotTree.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\Leafs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\Leafs\ConstantRollbackNode.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\Snapshots.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\Snapshots\NodeSnapshot.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\RollbackNodes\SnapshotTree.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Behaviour Tree\TextBehaviorTreeGraph.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Save Storages\BinaryStorage.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Save Storages\Exceptions.meta" />
+    <Content Include="Game\Runtime\Tools\Save Storages\Exceptions\CannotDeleteSaveException.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Save Storages\Exceptions\HasNotSaveException.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Save Storages\Extensions.meta" />
+    <Content Include="Game\Runtime\Tools\Save Storages\Extensions\SaveStorageExtensions.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Save Storages\ICanDeleteSaveStorage.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Save Storages\ISaveStorage.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Save Storages\ISaveStorages.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Save Storages\Paths.meta" />
+    <Content Include="Game\Runtime\Tools\Save Storages\Paths\IPath.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Save Storages\Paths\Path.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Save Storages\SaveStorages.cs.meta" />
+    <Content Include="Game\Runtime\Tools\Save Storages\XmlStorage.cs.meta" />
+    <Content Include="Game\TIger.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Game\Runtime\Stats" />
+    <Folder Include="Game\Runtime\UI\Model\InputField" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NUnit.3.13.3\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.13.3\build\NUnit.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+</Project>

@@ -27,9 +27,9 @@ namespace ConsoleGame
         {
             IWeaponMagazine magazine = _magazineFactory.Create();
             var shootCooldownTimer = new Timer(0.2f);
-            IWeaponView view = _viewFactory.Create(new DummyImage());
+            IWeaponView weaponView = _viewFactory.Create(new DummyImage());
             IWeaponData weaponData = new WeaponData(false, shootCooldownTimer, new NullBattery(), magazine);
-            IWeapon weapon = new Weapons.Weapon(_bulletFactory, aim, view, 10);
+            IWeapon weapon = new Weapons.Weapon(_bulletFactory, aim, weaponView, 10);
             IWeapon weaponWithShootWaiting = new WeaponWithRateOfShot(weapon, shootCooldownTimer);
             IWeapon weaponWithMagazine = new WeaponWithMagazine(weaponWithShootWaiting, magazine);
             _gameLoop.Add(shootCooldownTimer);

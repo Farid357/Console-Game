@@ -21,12 +21,12 @@ namespace ConsoleGame
 
         public IWeapon Create(IAim aim, IWeaponsData weaponsData)
         {
-            IInfiniteWeaponView view = _viewFactory.Create();
+            IInfiniteWeaponView weaponView = _viewFactory.Create();
             var cooldownTimer = new Timer(0.4f);
             IWeaponData data = new WeaponData(false, cooldownTimer, new NullBattery(), new NullWeaponMagazine());
-            IWeapon characterWeapon = new Weapons.Weapon(_bulletFactory, aim, view, 10);
+            IWeapon characterWeapon = new Weapons.Weapon(_bulletFactory, aim, weaponView, 10);
             IWeapon shootWaiting = new WeaponWithRateOfShot(characterWeapon, cooldownTimer);
-            IWeapon infiniteWeapon = new InfiniteWeapon(shootWaiting, view);
+            IWeapon infiniteWeapon = new InfiniteWeapon(shootWaiting, weaponView);
             _gameLoop.Add(cooldownTimer);
             weaponsData.Add(infiniteWeapon, data);
             return infiniteWeapon;

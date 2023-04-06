@@ -9,7 +9,7 @@ namespace ConsoleGame.Tests
         [Test]
         public void IsFullWorksCorrectly()
         {
-            ILevel level = new Level(new LevelView(string.Empty, new DummyText()), startXp: 0, maxXp: 10);
+            ILevel level = new Level(new LevelView(new DummyText()), startXp: 0, maxXp: 10);
             level.Increase(10);
             Assert.That(level.IsFull);
         }
@@ -17,7 +17,7 @@ namespace ConsoleGame.Tests
         [Test]
         public void IncreaseXpCorrectly()
         {
-            ILevel level = new Level(new LevelView(string.Empty, new DummyText()), startXp: 0, maxXp: 7);
+            ILevel level = new Level(new LevelView(new DummyText()), startXp: 0, maxXp: 7);
             level.Increase(5);
             Assert.That(level.Xp == 5);
         }

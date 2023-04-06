@@ -2,6 +2,6 @@ namespace ConsoleGame
 {
     public interface IScoreView
     {
-        void Visualize(int count);
+        void Visualize(int score);
     }
 }

@@ -4,6 +4,8 @@ namespace ConsoleGame
     {
         bool IsPlaying { get; }
         
+        ITransform Transform { get; }
+        
         void Play();
 
         void Stop();

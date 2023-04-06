@@ -4,7 +4,8 @@ namespace ConsoleGame
     {
         public IHealthView Create()
         {
-            return new EnemyHealthView();
+            IHealthView view = new EnemyHealthView();
+            return view;
         }
     }
 }

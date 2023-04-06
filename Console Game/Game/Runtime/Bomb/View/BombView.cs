@@ -12,11 +12,23 @@ namespace ConsoleGame
             _effectFactory = effectFactory ?? throw new ArgumentNullException(nameof(effectFactory));
             _transform = transform ?? throw new ArgumentNullException(nameof(transform));
         }
+        
+        public bool IsActive { get; private set; }
 
         public void BlowUp()
         {
             IEffect effect = _effectFactory.Create(_transform);
             effect.Play();
+        }
+
+        public void Enable()
+        {
+            IsActive = true;
+        }
+
+        public void Disable()
+        {
+            IsActive = false;
         }
     }
 }

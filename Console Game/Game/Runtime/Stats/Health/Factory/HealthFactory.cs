@@ -1,4 +1,5 @@
 using System;
+using ConsoleGame.Tools;
 
 namespace ConsoleGame
 {
@@ -10,12 +11,14 @@ namespace ConsoleGame
         public HealthFactory(IHealthViewFactory viewFactory, int value)
         {
             _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
-            _value = value;
+            _value = value.ThrowIfLessThanZeroException();
         }
 
         public IHealth Create()
         {
-            return new Health(_viewFactory.Create(), _value);
+            IHealthView view = _viewFactory.Create();
+            view.Visualize(_value, _value);
+            return new Health(view, _value);
         }
     }
 }

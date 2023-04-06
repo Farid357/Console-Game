@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using ConsoleGame.SaveSystem;
+using ConsoleGame.Tools;
 
 namespace ConsoleGame.Stats
 {
@@ -7,14 +10,13 @@ namespace ConsoleGame.Stats
     public sealed class ChainOfLevel : IChainOfLevel
     {
         private readonly List<ILevel> _levels;
+        private readonly ISaveStorage<ILevel> _levelStorage;
 
-        public ChainOfLevel(List<ILevel> levels, ILevel firstLevel)
+        public ChainOfLevel(List<ILevel> levels, ISaveStorage<ILevel> levelStorage)
         {
             _levels = levels ?? throw new ArgumentNullException(nameof(levels));
-            CurrentLevel = firstLevel ?? throw new ArgumentNullException(nameof(firstLevel));
-
-            if (_levels.Contains(firstLevel) == false)
-                throw new ArgumentOutOfRangeException($"Levels list doesn't contains first level!");
+            _levelStorage = levelStorage ?? throw new ArgumentNullException(nameof(levelStorage));
+            CurrentLevel = _levelStorage.LoadOrDefault(levels.First());
         }
 
         public ILevel CurrentLevel { get; private set; }
@@ -36,7 +38,12 @@ namespace ConsoleGame.Stats
             int nextLevelIndex = CurrentLevelIndex + 1;
 
             if (CurrentLevel.IsFull() && _levels.Count > nextLevelIndex)
+            {
                 CurrentLevel = _levels[nextLevelIndex];
+                CurrentLevel.Visualize();
+            }
+
+            _levelStorage.Save(CurrentLevel);
         }
     }
 }

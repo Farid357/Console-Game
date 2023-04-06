@@ -27,8 +27,8 @@ namespace ConsoleGame.Weapons
                 throw new Exception($"Weapon can't shoot! View is not active!");
             
             IBullet bullet = _bulletFactory.Create(_damage);
-            bullet.Throw(_aim.Target);
             _view.Shoot();
+            bullet.Throw(_aim.Target);
         }
     }
 }

@@ -17,12 +17,10 @@ namespace ConsoleGame
         public IWallet Create()
         {
             ISaveStorage<int> moneyStorage = new BinaryStorage<int>(new Path(nameof(IWallet) + "M"));
-            IWalletView walletView = _viewFactory.Create();
-            _saveStorages.Add(moneyStorage);
             int money = moneyStorage.HasSave() ? moneyStorage.Load() : 100;
-            IWallet wallet = new WalletWithSave(new Wallet(money, walletView), moneyStorage);
-            walletView.Visualize(wallet.Money);
-            return wallet;
+            IWalletView walletView = _viewFactory.Create(money);
+            _saveStorages.Add(moneyStorage);
+            return new WalletWithSave(new Wallet(money, walletView), moneyStorage);
         }
     }
 }

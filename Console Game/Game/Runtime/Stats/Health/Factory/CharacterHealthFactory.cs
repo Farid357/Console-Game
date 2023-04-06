@@ -1,5 +1,6 @@
 using System;
 using ConsoleGame.SaveSystem;
+using ConsoleGame.Tools;
 
 namespace ConsoleGame
 {
@@ -16,10 +17,11 @@ namespace ConsoleGame
 
         public IHealth Create()
         {
-            ISaveStorage<IHealth> healthStorage = new BinaryStorage<IHealth>(Paths.CharacterHealthCount);
-            IHealth defaultHealth = new Health(_viewFactory.Create(), 100);
+            ISaveStorage<int> healthStorage = new BinaryStorage<int>(Paths.CharacterMaxHealthCount);
+            int healthCount = healthStorage.LoadOrDefault(100);
+            IHealthFactory healthFactory = new HealthFactory(_viewFactory, healthCount);
             _saveStorages.Add(healthStorage);
-            return healthStorage.HasSave() ? healthStorage.Load() : defaultHealth;
+            return healthFactory.Create();
         }
     }
 }

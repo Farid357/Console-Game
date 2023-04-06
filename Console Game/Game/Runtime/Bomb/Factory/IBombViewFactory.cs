@@ -2,6 +2,6 @@ namespace ConsoleGame
 {
     public interface IBombViewFactory
     {
-        IBombView Create();
+        IBombView Create(ITransform transform);
     }
 }

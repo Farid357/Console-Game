@@ -8,10 +8,10 @@ namespace ConsoleGame.Weapons
     {
         private readonly IRaycast<IEnemy> _raycast;
         private readonly IAim _aim;
-        private readonly ILaserWeaponView _view;
+        private readonly ILaserView _view;
         private readonly int _damage;
 
-        public LaserWeapon(IRaycast<IEnemy> raycast, IAim aim, ILaserWeaponView view, int damage)
+        public LaserWeapon(IRaycast<IEnemy> raycast, IAim aim, ILaserView view, int damage)
         {
             _raycast = raycast ?? throw new ArgumentNullException(nameof(raycast));
             _aim = aim ?? throw new ArgumentNullException(nameof(aim));

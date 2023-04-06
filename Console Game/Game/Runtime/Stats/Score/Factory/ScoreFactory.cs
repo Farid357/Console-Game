@@ -1,5 +1,6 @@
 using System;
 using ConsoleGame.SaveSystem;
+using ConsoleGame.Tools;
 
 namespace ConsoleGame
 {
@@ -17,12 +18,10 @@ namespace ConsoleGame
         public IScore Create()
         {
             ISaveStorage<int> scoreCountStorage = new BinaryStorage<int>(new Path(nameof(IScore)));
-            int startScoreCount = scoreCountStorage.HasSave() ? scoreCountStorage.Load() : 0;
+            int scoreCount = scoreCountStorage.LoadOrDefault();
             _saveStorages.Add(scoreCountStorage);
-            IScoreView scoreView = _viewFactory.Create();
-            IScore score = new ScoreWithSave(new Score(scoreView, startScoreCount), scoreCountStorage);
-            scoreView.Visualize(score.Count);
-            return score;
+            IScoreView scoreView = _viewFactory.Create(scoreCount);
+            return new ScoreWithSave(new Score(scoreView, scoreCount), scoreCountStorage);
         }
     }
 }

@@ -17,9 +17,9 @@ namespace ConsoleGame
             _damage = damage.ThrowIfLessThanOrEqualsToZeroException();
         }
 
-        public IBomb Create(IReadOnlyTransform transform)
+        public IBomb Create(ITransform transform)
         {
-            IBombView view = _viewFactory.Create();
+            IBombView view = _viewFactory.Create(transform);
             return new Bomb<TTarget>(view, _raycast, transform, _damage);
         }
     }

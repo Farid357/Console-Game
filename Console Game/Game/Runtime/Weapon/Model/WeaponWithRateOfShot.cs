@@ -5,15 +5,15 @@ namespace ConsoleGame
     public sealed class WeaponWithRateOfShot : IWeapon
     {
         private readonly IWeapon _weapon;
-        private readonly ITimer _cooldownTimer;
+        private readonly ITimer _rateOfShootTimer;
 
-        public WeaponWithRateOfShot(IWeapon weapon, ITimer cooldownTimer)
+        public WeaponWithRateOfShot(IWeapon weapon, ITimer rateOfShootTimer)
         {
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
-            _cooldownTimer = cooldownTimer;
+            _rateOfShootTimer = rateOfShootTimer;
         }
         
-        public bool CanShoot => _cooldownTimer.IsEnded && _weapon.CanShoot;
+        public bool CanShoot => _rateOfShootTimer.IsEnded && _weapon.CanShoot;
         
         public IWeaponActivityView View => _weapon.View;
 
@@ -23,7 +23,7 @@ namespace ConsoleGame
                 throw new InvalidOperationException($"Weapon can't shoot!");
             
             _weapon.Shoot();
-            _cooldownTimer.ResetTime();
+            _rateOfShootTimer.ResetTime();
         }
     }
 }

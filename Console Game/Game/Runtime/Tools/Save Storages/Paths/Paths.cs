@@ -4,12 +4,12 @@ namespace ConsoleGame.SaveSystem
     {
         public static IPath CharacterMovementSpeed { get; }
         
-        public static IPath CharacterHealthCount { get; }
+        public static IPath CharacterMaxHealthCount { get; }
 
         static Paths()
         {
             CharacterMovementSpeed = new Path(nameof(ICharacter) + nameof(IAdjustableMovement));
-            CharacterHealthCount = new Path(nameof(ICharacter) + nameof(IHealth));
+            CharacterMaxHealthCount = new Path(nameof(ICharacter) + nameof(IHealth));
         }
 
     }

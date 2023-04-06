@@ -1,23 +1,22 @@
 using System;
 using Console_Game;
-using ConsoleGame.Tools;
 using ConsoleGame.Weapons;
 
 namespace ConsoleGame
 {
     public struct WeaponData : IWeaponData
     {
-        public WeaponData(bool isBurst, ITimer cooldownTimer, IBattery battery = null, IWeaponMagazine magazine = null)
+        public WeaponData(bool isBurst, ITimer rateOfShootTimer = null, IBattery battery = null, IWeaponMagazine magazine = null)
         {
             IsBurst = isBurst;
-            CooldownTimer = cooldownTimer ?? throw new ArgumentNullException(nameof(cooldownTimer));
+            RateOfShootTimer = rateOfShootTimer ?? new Timer(0.3f);
             Magazine = magazine ?? new NullWeaponMagazine();
             Battery = battery ?? new NullBattery();
         }
 
         public bool IsBurst { get; }
         
-        public ITimer CooldownTimer { get; }
+        public ITimer RateOfShootTimer { get; }
         
         public IWeaponMagazine Magazine { get; }
         

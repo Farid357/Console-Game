@@ -6,12 +6,12 @@ namespace Console_Game
     public sealed class InfiniteWeapon : IWeapon
     {
         private readonly IWeapon _weapon;
-        private readonly IInfiniteWeaponView _view;
+        private readonly IInfiniteWeaponView _weaponView;
         
-        public InfiniteWeapon(IWeapon weapon, IInfiniteWeaponView view)
+        public InfiniteWeapon(IWeapon weapon, IInfiniteWeaponView weaponView)
         {
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
-            _view = view ?? throw new ArgumentNullException(nameof(view));
+            _weaponView = weaponView ?? throw new ArgumentNullException(nameof(weaponView));
         }
 
         public bool CanShoot => _weapon.CanShoot;
@@ -21,8 +21,8 @@ namespace Console_Game
         public void Shoot()
         {
             _weapon.Shoot();
-            _view.Shoot();
-            _view.VisualizeBullets();
+            _weaponView.Shoot();
+            _weaponView.VisualizeBullets();
         }
     }
 }

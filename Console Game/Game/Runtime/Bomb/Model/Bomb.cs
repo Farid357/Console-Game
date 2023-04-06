@@ -21,6 +21,8 @@ namespace ConsoleGame
         }
 
         public bool IsBlownUp { get; private set; }
+        
+        public IWeaponActivityView View => _view;
 
         public void BlowUp()
         {

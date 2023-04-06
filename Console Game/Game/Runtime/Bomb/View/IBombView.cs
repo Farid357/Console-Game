@@ -1,6 +1,6 @@
 namespace ConsoleGame
 {
-    public interface IBombView
+    public interface IBombView : IWeaponActivityView
     {
         void BlowUp();
     }

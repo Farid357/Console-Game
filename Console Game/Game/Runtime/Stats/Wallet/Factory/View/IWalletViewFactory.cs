@@ -2,6 +2,6 @@ namespace ConsoleGame
 {
     public interface IWalletViewFactory
     {
-        IWalletView Create();
+        IWalletView Create(int money);
     }
 }

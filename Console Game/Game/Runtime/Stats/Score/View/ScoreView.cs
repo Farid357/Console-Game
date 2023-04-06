@@ -13,9 +13,9 @@ namespace ConsoleGame
             _text = text ?? throw new ArgumentNullException(nameof(text));
         }
 
-        public void Visualize(int count)
+        public void Visualize(int score)
         {
-            _text.Visualize($"Score: {count}");
+            _text.Visualize($"Score: {score}");
         }
     }
 }

@@ -7,7 +7,7 @@ namespace ConsoleGame
     {
         bool IsBurst { get; }
         
-        ITimer CooldownTimer { get; }
+        ITimer RateOfShootTimer { get; }
         
         IWeaponMagazine Magazine { get; }
         

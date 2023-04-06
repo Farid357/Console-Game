@@ -4,6 +4,8 @@ namespace ConsoleGame
     {
         bool IsBlownUp { get; }
         
+        IWeaponActivityView View { get; }
+        
         void BlowUp();
     }
 }

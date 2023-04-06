@@ -14,11 +14,12 @@ namespace ConsoleGame
             _textFactory = textFactory ?? throw new ArgumentNullException(nameof(textFactory));
         }
 
-        public IWalletView Create()
+        public IWalletView Create(int money)
         {
             ITransform transform = new Transform(new Vector2(75, 120));
             IText moneyText = _textFactory.Create(transform, new Font("Arial", 18), Color.Beige);
             IWalletView walletView = new WalletView(moneyText);
+            walletView.Visualize(money);
             return walletView;
         }
     }

@@ -11,9 +11,10 @@ namespace ConsoleGame.Tests.Physics
         [Test]
         public void HitsCorrectly()
         {
-            var characterWorld = new CollidersWorld<ICharacter>();
-            IRaycast<ICharacter> raycast = new Raycast<ICharacter>(characterWorld, 10);
-            characterWorld.Add(new DummyCharacter(), new BoxCollider(Vector3.One, new Vector3(1, 0, 0)));
+            ICollidersWorld<ICharacter> characterWorld = new CollidersWorld<ICharacter>();
+            IRaycast<ICharacter> raycast = new Raycast<ICharacter>(characterWorld, maxDistance: 10);
+            ICollider collider = new BoxCollider(Vector3.One, new Vector3(1, 0, 0));
+            characterWorld.Add(new DummyCharacter(), collider);
             RaycastHit<ICharacter> raycastHit = raycast.Throw(Vector3.Zero / 2f, new Vector3(1, 0, 0));
             Assert.That(raycastHit.Occurred);
             Console.WriteLine(raycastHit.HitPoint);

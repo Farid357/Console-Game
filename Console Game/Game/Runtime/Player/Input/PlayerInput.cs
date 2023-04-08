@@ -32,10 +32,10 @@ namespace ConsoleGame
         public bool IsReloading => _reloadingKey.IsPressed();
         
         public bool IsShooting => _shootKey.IsPressed();
+      
         public bool IsShootingBurst => false;
-        
 
-        public Vector3 Direction()
+        public Vector3 MoveDirection()
         {
             if (!IsMoving)
                 throw new Exception($"Input isn't using! You can't get move direction!");

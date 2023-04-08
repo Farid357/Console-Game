@@ -7,14 +7,17 @@ namespace ConsoleGame.Physics
     {
         private readonly TTarget _target;
 
-        public RaycastHit(TTarget target, Vector3 hitPoint)
+        public RaycastHit(TTarget target, Vector3 hitPoint, ICollider collider)
         {
             _target = target;
             HitPoint = hitPoint;
+            Collider = collider;
         }
 
         public bool Occurred => _target != null;
 
+        public ICollider Collider { get; }
+        
         public Vector3 HitPoint { get; }
        
         public TTarget Target

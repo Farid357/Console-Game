@@ -8,13 +8,13 @@ namespace ConsoleGame.Weapons
     public sealed class Bullet : IBullet, IGameObject
     {
         private readonly IMovement _movement;
-        private readonly IRaycast<IEnemy> _raycast;
+        private readonly IRaycast<IHealth> _raycast;
         private readonly IBulletView _view;
         private readonly int _damage;
         private bool _isThrowing;
         private Vector3 _direction;
 
-        public Bullet(IMovement movement, IRaycast<IEnemy> raycast, IBulletView view, int damage)
+        public Bullet(IMovement movement, IRaycast<IHealth> raycast, IBulletView view, int damage)
         {
             _movement = movement ?? throw new ArgumentNullException(nameof(movement));
             _raycast = raycast ?? throw new ArgumentNullException(nameof(raycast));
@@ -42,20 +42,20 @@ namespace ConsoleGame.Weapons
                 return;
 
             _movement.Move(_direction);
-            RaycastHit<IEnemy> hit = _raycast.Throw(_movement.Transform.Position, _direction);
+            RaycastHit<IHealth> hit = _raycast.Throw(_movement.Transform.Position, _direction);
 
             if (hit.Occurred)
-                Attack(hit.Target.Health);
+                Attack(hit.Target);
         }
 
-        private void Attack(IHealth enemyHealth)
+        private void Attack(IHealth health)
         {
-            if (enemyHealth.IsAlive)
+            if (health.IsAlive)
             {
-                enemyHealth.TakeDamage(_damage);
-                IsAlive = false;
+                health.TakeDamage(_damage);
             }
 
+            IsAlive = false;
             _view.Destroy();
         }
     }

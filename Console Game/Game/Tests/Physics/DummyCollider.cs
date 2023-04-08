@@ -5,6 +5,10 @@ namespace ConsoleGame.Tests.Physics
 {
     public class DummyCollider : ICollider
     {
+        public DummyCollider() : this(Vector3.Zero)
+        {
+        }
+
         public DummyCollider(Vector3 center)
         {
             Center = center;

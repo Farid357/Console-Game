@@ -7,6 +7,8 @@ namespace ConsoleGame
     {
         bool IsBurst { get; }
         
+        bool CanChargeBattery { get; }
+        
         ITimer RateOfShootTimer { get; }
         
         IWeaponMagazine Magazine { get; }

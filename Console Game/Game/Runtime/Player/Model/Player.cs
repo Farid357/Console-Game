@@ -21,7 +21,7 @@ namespace ConsoleGame
             
             if (_input.IsMoving)
             {
-                Vector3 moveDirection = _input.Direction();
+                Vector3 moveDirection = _input.MoveDirection();
                 _character.Move(moveDirection);
             }
 

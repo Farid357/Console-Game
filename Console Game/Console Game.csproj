@@ -148,6 +148,7 @@
     <Compile Include="Game\Runtime\GameLoop\Pause\View\IGamePauseView.cs" />
     <Compile Include="Game\Runtime\Inventory\Factory\IInventoryViewFactory.cs" />
     <Compile Include="Game\Runtime\Inventory\Factory\InventoryViewFactory.cs" />
+    <Compile Include="Game\Runtime\Physics\Colliders\World\LayerMask.cs" />
     <Compile Include="Game\Runtime\Player\Factory\PlayerFactory.cs" />
     <Compile Include="Game\Runtime\Player\Factory\IPlayerFactory.cs" />
     <Compile Include="Game\Runtime\Player\Input\PlayerInput.cs" />
@@ -220,7 +221,6 @@
     <Compile Include="Game\Runtime\Movement\Types\MovementToTarget.cs" />
     <Compile Include="Game\Runtime\Movement\Types\Physics\PhysicsMovement.cs" />
     <Compile Include="Game\Runtime\Movement\Types\Smooth\SmoothMovement.cs" />
-    <Compile Include="Game\Runtime\Physics\Colliders\Box.cs" />
     <Compile Include="Game\Runtime\Physics\Colliders\BoxCollider.cs" />
     <Compile Include="Game\Runtime\Physics\Colliders\ICollider.cs" />
     <Compile Include="Game\Runtime\Physics\Colliders\World\CollidersWorld.cs" />
@@ -524,6 +524,7 @@
     <Compile Include="Game\Tests\Inventory\DummyInventoryView.cs" />
     <Compile Include="Game\Tests\Inventory\DummySlot.cs" />
     <Compile Include="Game\Tests\Inventory\InventoryTest.cs" />
+    <Compile Include="Game\Tests\Physics\CollidersWorldTest.cs" />
     <Compile Include="Game\Tests\Physics\DummyCharacter.cs" />
     <Compile Include="Game\Tests\Physics\DummyCollider.cs" />
     <Compile Include="Game\Tests\Physics\RaycastTest.cs" />

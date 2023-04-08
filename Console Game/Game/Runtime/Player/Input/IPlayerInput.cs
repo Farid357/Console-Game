@@ -5,6 +5,7 @@ namespace ConsoleGame
     public interface IPlayerInput
     {
         bool IsMoving { get; }
+        Vector3 MoveDirection();
 
         bool IsReloading { get; }
        
@@ -12,6 +13,5 @@ namespace ConsoleGame
 
         bool IsShootingBurst { get; }
 
-        Vector3 Direction();
     }
 }

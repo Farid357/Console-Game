@@ -20,14 +20,14 @@ namespace ConsoleGame.Tools
             return list[randomIndex];
         }
 
-        public static void Clear<T>(this ICollidersWorld<T> collidersWorld)
-        {
-            for (var i = 0; i < collidersWorld.Colliders.Count; i++)
-            {
-                T model = collidersWorld.Colliders.Keys.ElementAt(i);
-                collidersWorld.Remove(model);
-            }
-        }
+        // public static void Clear<T>(this ICollidersWorld<T> collidersWorld)
+        // {
+        //     for (var i = 0; i < collidersWorld.Colliders().Count; i++)
+        //     {
+        //         T model = collidersWorld.Colliders.Keys.ElementAt(i);
+        //         collidersWorld.Remove(model, TODO);
+        //     }
+        // }
         
         public static T GetRandom<T>(this IReadOnlyList<(T Element, float Chance)> list)
         {

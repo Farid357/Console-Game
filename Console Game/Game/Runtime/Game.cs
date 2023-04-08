@@ -46,7 +46,7 @@ namespace ConsoleGame
             IWeaponMagazineFactory magazineFactory = new WeaponMagazineFactory(magazineViewFactory, 100);
             ICollidersWorld<IHealth> healthsCollidersWorld = new CollidersWorld<IHealth>();
             IMovementFactory enemyMovementFactory = new EnemyMovementFactory();
-            IBulletFactory bulletFactory = new RaycastBulletFactory(new Raycast<IHealth>(healthsCollidersWorld, LayerMask.Enemy, 0.2f), enemyMovementFactory, gameObjects);
+            IBulletFactory bulletFactory = new RaycastBulletFactory(healthsCollidersWorld, enemyMovementFactory, gameObjects, LayerMask.Enemy);
             IEffectFactory effectFactory = new EffectFactory();
             IWeaponViewFactory weaponViewFactory = new WeaponViewFactory(new DummyText(), effectFactory);
             IAdjustableMovement characterMovement = characterMovementFactory.Create(new Transform());

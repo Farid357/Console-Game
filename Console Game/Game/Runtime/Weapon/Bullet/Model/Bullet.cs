@@ -1,7 +1,6 @@
 using System;
 using System.Numerics;
 using ConsoleGame.Physics;
-using ConsoleGame.Tools;
 
 namespace ConsoleGame.Weapons
 {
@@ -10,15 +9,17 @@ namespace ConsoleGame.Weapons
         private readonly IMovement _movement;
         private readonly IRaycast<IHealth> _raycast;
         private readonly IBulletView _view;
+        private readonly LayerMask? _layerMask;
         private readonly int _damage;
         private bool _isThrowing;
         private Vector3 _direction;
 
-        public Bullet(IMovement movement, IRaycast<IHealth> raycast, IBulletView view, int damage)
+        public Bullet(IMovement movement, IRaycast<IHealth> raycast, IBulletView view, LayerMask? layerMask, int damage)
         {
             _movement = movement ?? throw new ArgumentNullException(nameof(movement));
             _raycast = raycast ?? throw new ArgumentNullException(nameof(raycast));
             _view = view ?? throw new ArgumentNullException(nameof(view));
+            _layerMask = layerMask;
             _damage = damage;
         }
 
@@ -42,7 +43,7 @@ namespace ConsoleGame.Weapons
                 return;
 
             _movement.Move(_direction);
-            RaycastHit<IHealth> hit = _raycast.Throw(_movement.Transform.Position, _direction);
+            RaycastHit<IHealth> hit = _raycast.Throw(_movement.Transform.Position, _direction, _layerMask.Value);
 
             if (hit.Occurred)
                 Attack(hit.Target);
@@ -51,9 +52,7 @@ namespace ConsoleGame.Weapons
         private void Attack(IHealth health)
         {
             if (health.IsAlive)
-            {
                 health.TakeDamage(_damage);
-            }
 
             IsAlive = false;
             _view.Destroy();

@@ -4,7 +4,7 @@ namespace ConsoleGame.Physics
 {
     public interface IRaycast<TTarget>
     {
-        RaycastHit<TTarget> Throw(Vector3 origin, Vector3 direction, LayerMask? layerMask = null);
+        RaycastHit<TTarget> Throw(Vector3 origin, Vector3 direction, Layer? layerMask = null);
         
     }
 }

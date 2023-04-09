@@ -1,4 +1,4 @@
-namespace ConsoleGame.Physics.Factory
+namespace ConsoleGame.Physics
 {
     public interface IAreaRaycastFactory<TTarget>
     {

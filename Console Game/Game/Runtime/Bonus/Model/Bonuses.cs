@@ -15,13 +15,20 @@ namespace ConsoleGame.Bonus
 
             _all = all.ToList();
         }
+        
+        public bool IsAlive { get; private set; }
 
         public void Pick()
         {
+            if (!IsAlive)
+                throw new Exception($"Bonus isn't alive!");
+            
+            IsAlive = false;
             foreach (IBonus bonus in _all)
             {
                 bonus.Pick();
             }
         }
+
     }
 }

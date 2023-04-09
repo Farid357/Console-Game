@@ -1,3 +1,5 @@
+using ConsoleGame.Physics;
+
 namespace ConsoleGame
 {
     public sealed class EnemyMovementFactory : IMovementFactory

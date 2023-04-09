@@ -4,7 +4,7 @@ namespace ConsoleGame.Physics
 {
     public interface ICollider
     {
-        Vector3 Center { get; }
+        IReadOnlyTransform Transform { get; }
         
         bool Contains(Vector3 point);
     }

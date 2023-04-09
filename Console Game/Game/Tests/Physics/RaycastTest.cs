@@ -13,8 +13,8 @@ namespace ConsoleGame.Tests.Physics
         {
             ICollidersWorld<ICharacter> characterWorld = new CollidersWorld<ICharacter>();
             IRaycast<ICharacter> raycast = new Raycast<ICharacter>(characterWorld, maxDistance: 10);
-            ICollider collider = new BoxCollider(Vector3.One, new Vector3(1, 0, 0));
-            characterWorld.Add(new DummyCharacter(), collider, LayerMask.Bullet);
+            ICollider collider = new BoxCollider(Vector3.One, new Transform());
+            characterWorld.Add(new DummyCharacter(), collider, Layer.Bullet);
             RaycastHit<ICharacter> raycastHit = raycast.Throw(Vector3.Zero / 2f, new Vector3(1, 0, 0));
             Assert.That(raycastHit.Occurred);
             Console.WriteLine(raycastHit.HitPoint);
@@ -25,9 +25,9 @@ namespace ConsoleGame.Tests.Physics
         {
             ICollidersWorld<ICharacter> characterWorld = new CollidersWorld<ICharacter>();
             IRaycast<ICharacter> raycast = new Raycast<ICharacter>(characterWorld, maxDistance: 10);
-            ICollider collider = new BoxCollider(Vector3.One, new Vector3(1, 0, 0));
-            characterWorld.Add(new DummyCharacter(), collider, LayerMask.Bullet);
-            RaycastHit<ICharacter> raycastHit = raycast.Throw(Vector3.Zero / 2f, new Vector3(1, 0, 0), LayerMask.Bullet);
+            ICollider collider = new BoxCollider(Vector3.One, new Transform());
+            characterWorld.Add(new DummyCharacter(), collider, Layer.Bullet);
+            RaycastHit<ICharacter> raycastHit = raycast.Throw(Vector3.Zero / 2f, new Vector3(1, 0, 0), Layer.Bullet);
             Assert.That(raycastHit.Occurred);
             Console.WriteLine(raycastHit.HitPoint);
         }

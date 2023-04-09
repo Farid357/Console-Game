@@ -1,29 +1,25 @@
 using System;
-using System.Numerics;
-using ConsoleGame.Physics;
 
 namespace ConsoleGame.Bonus
 {
     public sealed class HealBonusFactory : IBonusFactory
     {
+        private readonly IBonusFactory _bonusFactory;
         private readonly IHealth _health;
-        private readonly ICollidersWorld<IBonus> _bonusesWorld;
         private readonly Random _random;
         
-        public HealBonusFactory(IHealth health, ICollidersWorld<IBonus> bonusesWorld)
+        public HealBonusFactory(IBonusFactory bonusFactory, IHealth health)
         {
+            _bonusFactory = bonusFactory ?? throw new ArgumentNullException(nameof(bonusFactory));
             _health = health ?? throw new ArgumentNullException(nameof(health));
-            _bonusesWorld = bonusesWorld ?? throw new ArgumentNullException(nameof(bonusesWorld));
             _random = new Random();
         }
         
-        public IBonus Create(IReadOnlyTransform transform)
+        public IBonus Create(ITransform transform)
         {
             int healAmount = _random.Next(10, 25);
-            IBonus bonus = new HealBonus(_health, healAmount);
-            ICollider bonusCollider = new BoxCollider(Vector3.One, transform.Position);
-            _bonusesWorld.Add(bonus, bonusCollider);
-            return bonus;
+            IBonus bonus = _bonusFactory.Create(transform);
+            return new HealBonus(bonus, _health, healAmount);;
         }
     }
 }

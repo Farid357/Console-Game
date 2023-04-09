@@ -9,12 +9,12 @@ namespace ConsoleGame.Weapons
         private readonly IMovement _movement;
         private readonly IRaycast<IHealth> _raycast;
         private readonly IBulletView _view;
-        private readonly LayerMask? _layerMask;
+        private readonly Layer? _layerMask;
         private readonly int _damage;
         private bool _isThrowing;
         private Vector3 _direction;
 
-        public Bullet(IMovement movement, IRaycast<IHealth> raycast, IBulletView view, LayerMask? layerMask, int damage)
+        public Bullet(IMovement movement, IRaycast<IHealth> raycast, IBulletView view, Layer? layerMask, int damage)
         {
             _movement = movement ?? throw new ArgumentNullException(nameof(movement));
             _raycast = raycast ?? throw new ArgumentNullException(nameof(raycast));

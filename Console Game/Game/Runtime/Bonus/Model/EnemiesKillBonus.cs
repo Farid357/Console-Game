@@ -7,14 +7,19 @@ namespace ConsoleGame.Bonus
     public sealed class EnemiesKillBonus : IBonus
     {
         private readonly IReadOnlyList<IEnemy> _enemies;
-
-        public EnemiesKillBonus(IReadOnlyList<IEnemy> enemies)
+        private readonly IBonus _bonus;
+        
+        public EnemiesKillBonus(IBonus bonus, IReadOnlyList<IEnemy> enemies)
         {
             _enemies = enemies ?? throw new ArgumentNullException(nameof(enemies));
+            _bonus = bonus ?? throw new ArgumentNullException(nameof(bonus));
         }
+        
+        public bool IsAlive => _bonus.IsAlive;
 
         public void Pick()
         {
+            _bonus.Pick();
             KillAllEnemies();
         }
 

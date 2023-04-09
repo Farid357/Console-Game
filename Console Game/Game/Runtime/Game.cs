@@ -44,9 +44,9 @@ namespace ConsoleGame
             IHealthFactory characterHealthFactory = new CharacterHealthFactory(characterHealthViewFactory, saveStorages);
             IWeaponMagazineViewFactory magazineViewFactory = new WeaponMagazineViewFactory(textFactory);
             IWeaponMagazineFactory magazineFactory = new WeaponMagazineFactory(magazineViewFactory, 100);
-            ICollidersWorld<IHealth> healthsCollidersWorld = new CollidersWorld<IHealth>();
+            IGameObjectsCollidersWorld<IHealth> healthsCollidersWorld = new GameObjectsCollidersWorld<IHealth>();
             IMovementFactory enemyMovementFactory = new EnemyMovementFactory();
-            IBulletFactory bulletFactory = new RaycastBulletFactory(healthsCollidersWorld, enemyMovementFactory, gameObjects, LayerMask.Enemy);
+            IBulletFactory bulletFactory = new RaycastBulletFactory(healthsCollidersWorld, enemyMovementFactory, gameObjects, Layer.Enemy);
             IEffectFactory effectFactory = new EffectFactory();
             IWeaponViewFactory weaponViewFactory = new WeaponViewFactory(new DummyText(), effectFactory);
             IAdjustableMovement characterMovement = characterMovementFactory.Create(new Transform());
@@ -83,7 +83,7 @@ namespace ConsoleGame
             var grenadeSlot = weaponSlotFactory.Create(new InventoryItemViewData("Grenade", new DummyImage()), grenade);
             weaponInventory.Add(grenadeSlot);
             IAchievementViewFactory achievementViewFactory = new AchievementViewFactory(imageFactory, windowFactory, textFactory);
-            ICollidersWorld<IBonus> bonusesWorld = new CollidersWorld<IBonus>();
+            IGameObjectsCollidersWorld<IBonus> bonusesWorld = new GameObjectsCollidersWorld<IBonus>();
             ILevelFactory levelFactory = new CharacterLevelFactory(saveStorages, new LevelViewFactory(textFactory));
             ILevel level = levelFactory.Create();
             
@@ -93,11 +93,13 @@ namespace ConsoleGame
                 new ScoreAchievementsFactory(score, achievementViewFactory, loopObjects, wallet, saveStorages)
             });
 
+            IBonusFactory bonusFactory = new BonusFactory(bonusesWorld, new BonusViewFactory());
+            
             IBonusLoopFactory bonusLoopFactory = new BonusLoopFactory(new List<IBonusFactory>()
             {
-                new HealBonusFactory(characterHealth, bonusesWorld),
-                new EnemiesKillBonusFactory(allEnemies, bonusesWorld),
-                new IncreaseFactorBonusFactory(bonusesWorld, score)
+                new HealBonusFactory(bonusFactory, characterHealth),
+                new EnemiesKillBonusFactory(bonusFactory, allEnemies),
+                new IncreaseFactorBonusFactory(bonusFactory, score)
             }, 
                 new List<Vector3>
             {
@@ -115,11 +117,18 @@ namespace ConsoleGame
 
             achievementFactory.Create();
             bonusLoopFactory.StartCreate(minCreateDelay: 30, maxCreateDelay: 120);
-            IPlayerFactory playerFactory = new PlayerFactory(loopObjects, character, weapon);
+            IPlayerFactory playerFactory = new PlayerFactory(loopObjects, character);
             playerFactory.Create();
-            loopObjects.Add(killsStreak);
-            loopObjects.Add(waveFactory);
-            loopObjects.Add(gameObjects);
+            
+            loopObjects.Add(new GameLoopObjects(new List<IGameLoopObject>
+            {
+                healthsCollidersWorld,
+                killsStreak,
+                healthsCollidersWorld,
+                waveFactory,
+                bonusesWorld,
+                gameObjects
+            }));
         }
 
         public void Play()

@@ -1,6 +1,6 @@
 namespace ConsoleGame
 {
-    public interface IPlayer : IGameLoopObject
+    public interface IPlayer
     {
 
     }

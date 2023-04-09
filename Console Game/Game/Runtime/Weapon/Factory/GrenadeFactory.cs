@@ -1,4 +1,5 @@
 using System;
+using ConsoleGame.Physics;
 using ConsoleGame.Weapon;
 
 namespace ConsoleGame

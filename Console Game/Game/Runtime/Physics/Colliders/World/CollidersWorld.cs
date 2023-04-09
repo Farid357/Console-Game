@@ -5,38 +5,43 @@ namespace ConsoleGame.Physics
 {
     public sealed class CollidersWorld<TModel> : ICollidersWorld<TModel>
     {
-        private readonly Dictionary<LayerMask, Dictionary<TModel, ICollider>> _layerMaskColliders;
-
-        public IReadOnlyDictionary<TModel, ICollider> AllColliders =>
-            _layerMaskColliders.Values.SelectMany(value => value)
-                .ToDictionary(keyValuePair => keyValuePair.Key, v => v.Value);
+        private readonly Dictionary<Layer, Dictionary<TModel, ICollider>> _layersColliders;
 
         public CollidersWorld()
         {
-            _layerMaskColliders = new Dictionary<LayerMask, Dictionary<TModel, ICollider>>();
+            _layersColliders = new Dictionary<Layer, Dictionary<TModel, ICollider>>();
         }
 
-        public void Add(TModel model, ICollider collider, LayerMask layerMask)
+        public IReadOnlyDictionary<TModel, ICollider> AllColliders =>
+            _layersColliders.Values.SelectMany(value => value)
+                .ToDictionary(keyValuePair => keyValuePair.Key, v => v.Value);
+
+        public void Add(TModel model, ICollider collider, Layer layer)
         {
-            if (_layerMaskColliders.ContainsKey(layerMask))
+            if (_layersColliders.ContainsKey(layer))
             {
-                _layerMaskColliders[layerMask].Add(model, collider);
+                _layersColliders[layer].Add(model, collider);
             }
 
             else
             {
-                _layerMaskColliders.Add(layerMask, new Dictionary<TModel, ICollider> { { model, collider } });
+                _layersColliders.Add(layer, new Dictionary<TModel, ICollider> { { model, collider } });
             }
         }
 
-        public void Remove(TModel model, LayerMask layerMask)
+        public void Remove(TModel model)
         {
-            _layerMaskColliders[layerMask].Remove(model);
+            var layersWithModel = _layersColliders.ToList().FindAll(collider => collider.Value.ContainsKey(model));
+
+            foreach (var layer in layersWithModel)
+            {
+                _layersColliders[layer.Key].Remove(model);
+            }
         }
 
-        public IReadOnlyDictionary<TModel, ICollider> Colliders(LayerMask layerMask)
+        public IReadOnlyDictionary<TModel, ICollider> Colliders(Layer layer)
         {
-            return _layerMaskColliders[layerMask];
+            return _layersColliders[layer];
         }
     }
 }

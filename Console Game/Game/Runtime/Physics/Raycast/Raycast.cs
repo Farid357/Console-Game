@@ -15,7 +15,7 @@ namespace ConsoleGame.Physics
             _maxDistance = maxDistance;
         }
 
-        public RaycastHit<TTarget> Throw(Vector3 origin, Vector3 direction, LayerMask? layerMask)
+        public RaycastHit<TTarget> Throw(Vector3 origin, Vector3 direction, Layer? layerMask)
         {
             var colliders = layerMask.HasValue ? _collidersWorld.Colliders(layerMask.Value) : _collidersWorld.AllColliders;
             return Throw(origin, direction, colliders);

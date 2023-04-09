@@ -20,7 +20,8 @@ namespace ConsoleGame
         {
             IHealth health = _healthFactory.Create();
             IAdjustableMovement movement = _movementFactory.Create(transform);
-            IEnemy enemy = new Enemy(health, _behaviourTreeFactory.Create(movement), movement);
+            IBehaviorNode behaviorTree = _behaviourTreeFactory.Create(movement);
+            IEnemy enemy = new Enemy(health, behaviorTree);
             return enemy;
         }
     }

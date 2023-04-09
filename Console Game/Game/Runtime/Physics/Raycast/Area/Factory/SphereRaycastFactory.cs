@@ -1,6 +1,6 @@
 using System;
 
-namespace ConsoleGame.Physics.Factory
+namespace ConsoleGame.Physics
 {
     public sealed class SphereRaycastFactory<TTarget> : IAreaRaycastFactory<TTarget>
     {

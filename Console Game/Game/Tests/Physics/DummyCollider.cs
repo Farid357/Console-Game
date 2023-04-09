@@ -16,6 +16,8 @@ namespace ConsoleGame.Tests.Physics
 
         public Vector3 Center { get; }
         
+        public IReadOnlyTransform Transform { get; } = new Transform();
+
         public bool Contains(Vector3 point)
         {
             return Center == point;

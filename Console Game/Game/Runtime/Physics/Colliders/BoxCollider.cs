@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 
 namespace ConsoleGame.Physics
@@ -6,17 +7,17 @@ namespace ConsoleGame.Physics
     {
         private readonly Vector3 _size;
 
-        public BoxCollider(Vector3 size, Vector3 center)
+        public BoxCollider(Vector3 size, IReadOnlyTransform transform)
         {
             _size = size;
-            Center = center;
+            Transform = transform ?? throw new ArgumentNullException(nameof(transform));
         }
 
-        public Vector3 Center { get; }
+        public IReadOnlyTransform Transform { get; }
 
         public bool Contains(Vector3 point)
         {
-            return Vector3.Distance(Center, point) <= Vector3.Distance(Center, _size);
+            return Vector3.Distance(Transform.Position, point) <= Vector3.Distance(Transform.Position, _size);
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace ConsoleGame.Bonus
 {
-    public interface IBonus
+    public interface IBonus : IReadOnlyGameObject
     {
         void Pick();
     }

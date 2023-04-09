@@ -2,7 +2,7 @@ using System;
 using System.Numerics;
 using ConsoleGame.Tools;
 
-namespace ConsoleGame
+namespace ConsoleGame.Physics
 {
     public sealed class Rigidbody : IRigidbody
     {

@@ -1,11 +1,9 @@
 namespace ConsoleGame
 {
-    public interface IReadOnlyHealth
+    public interface IReadOnlyHealth : IReadOnlyGameObject
     {
         int Value { get; }
         
-        bool IsAlive { get; }
-
         bool CanHeal(int value);
 
     }

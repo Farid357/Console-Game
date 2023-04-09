@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace ConsoleGame
 {
-    public sealed class Player : IPlayer
+    public sealed class Player : IPlayer, IGameLoopObject
     {
         private readonly IPlayerInput _input;
         private readonly ICharacter _character;

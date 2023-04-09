@@ -10,5 +10,10 @@ namespace ConsoleGame.Tools
         {
             character.SwitchWeapon(_fakeWeapon);
         }
+
+        public static bool IsDied(this IReadOnlyGameObject gameObject)
+        {
+            return !gameObject.IsAlive;
+        }
     }
 }

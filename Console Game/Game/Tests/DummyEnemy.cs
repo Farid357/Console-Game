@@ -11,6 +11,5 @@ namespace ConsoleGame.Tests
 
         public IHealth Health { get; }
         
-        public IAdjustableMovement Movement { get; }
     }
 }

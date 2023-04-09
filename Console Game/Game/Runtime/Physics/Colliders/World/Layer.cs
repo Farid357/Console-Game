@@ -1,10 +1,11 @@
 namespace ConsoleGame.Physics
 {
-    public enum LayerMask
+    public enum Layer
     {
         Default,
         Enemy,
         Character,
-        Bullet
+        Bullet,
+        Bonus
     }
 }

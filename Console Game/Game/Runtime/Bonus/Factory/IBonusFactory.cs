@@ -2,6 +2,6 @@ namespace ConsoleGame.Bonus
 {
     public interface IBonusFactory
     {
-        IBonus Create(IReadOnlyTransform transform);
+        IBonus Create(ITransform transform);
     }
 }

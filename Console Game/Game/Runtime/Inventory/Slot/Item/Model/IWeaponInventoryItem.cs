@@ -4,7 +4,7 @@ namespace ConsoleGame
     {
         IWeapon Weapon { get; }
         
-        IWeaponPartsData WeaponPartsData { get; }
+        IWeaponParts WeaponParts { get; }
         
     }
 }

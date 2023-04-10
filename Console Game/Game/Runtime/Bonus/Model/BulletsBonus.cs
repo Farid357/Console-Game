@@ -26,7 +26,7 @@ namespace ConsoleGame
 
         private void AddBullets()
         {
-            foreach (IWeaponPartsData weaponData in _inventory.Slots.Select(slot => slot.Item.WeaponPartsData))
+            foreach (IWeaponParts weaponData in _inventory.Slots.Select(slot => slot.Item.WeaponParts))
             {
                 IWeaponMagazine weaponMagazine = weaponData.Magazine;
 

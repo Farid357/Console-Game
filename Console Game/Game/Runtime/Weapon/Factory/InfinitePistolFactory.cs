@@ -18,16 +18,16 @@ namespace ConsoleGame
             _bulletFactory = bulletFactory ?? throw new ArgumentNullException(nameof(bulletFactory));
         }
 
-        public (IWeapon Weapon, IWeaponPartsData PartsData) Create(IAim aim)
+        public (IWeapon Weapon, IWeaponParts PartsData) Create(IAim aim)
         {
             IInfiniteWeaponView weaponView = _viewFactory.Create();
             var cooldownTimer = new Timer(0.4f);
-            IWeaponPartsData partsData = new WeaponPartsData(false, cooldownTimer, new NullBattery(), new NullWeaponMagazine());
+            IWeaponParts parts = new WeaponParts(false, cooldownTimer, new NullBattery(), new NullWeaponMagazine());
             IWeapon characterWeapon = new Weapon(_bulletFactory, aim, weaponView, 10);
             IWeapon shootWaiting = new WeaponWithRateOfShot(characterWeapon, cooldownTimer);
             IWeapon infiniteWeapon = new InfiniteWeapon(shootWaiting, weaponView);
             _gameLoop.Add(cooldownTimer);
-            return (infiniteWeapon, partsData);
+            return (infiniteWeapon, parts);
         }
     }
 }

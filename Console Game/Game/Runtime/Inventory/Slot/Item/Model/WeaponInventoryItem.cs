@@ -6,16 +6,16 @@ namespace ConsoleGame
     {
         private readonly IInventoryItem _item;
 
-        public WeaponInventoryItem(IInventoryItem item, IWeapon weapon, IWeaponPartsData data)
+        public WeaponInventoryItem(IInventoryItem item, IWeapon weapon, IWeaponParts data)
         {
             _item = item ?? throw new ArgumentNullException(nameof(item));
             Weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
-            WeaponPartsData = data ?? throw new ArgumentNullException(nameof(data));
+            WeaponParts = data ?? throw new ArgumentNullException(nameof(data));
         }
 
         public IWeapon Weapon { get; }
 
-        public IWeaponPartsData WeaponPartsData { get; }
+        public IWeaponParts WeaponParts { get; }
 
         public IInventoryItemViewData ViewData => _item.ViewData;
 

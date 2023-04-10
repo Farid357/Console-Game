@@ -3,7 +3,7 @@ using ConsoleGame.Weapons;
 
 namespace ConsoleGame
 {
-    public interface IWeaponPartsData
+    public interface IWeaponParts
     {
         bool IsBurst { get; }
         

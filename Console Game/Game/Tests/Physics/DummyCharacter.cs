@@ -13,7 +13,7 @@ namespace ConsoleGame.Tests.Physics
         public IReadOnlyTransform Transform { get; } = new Transform();
 
         public IWeaponInventoryItem SelectedWeaponItem { get; } =
-            new WeaponInventoryItem(new DummyInventoryItem(), new DummyWeapon(), new WeaponPartsData(false));
+            new WeaponInventoryItem(new DummyInventoryItem(), new DummyWeapon(), new WeaponParts(false));
 
 
         public void Move(Vector3 direction)

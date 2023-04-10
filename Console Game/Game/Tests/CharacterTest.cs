@@ -13,7 +13,7 @@ namespace ConsoleGame.Tests
             IAdjustableMovement movement = new AdjustableMovement(new DummyMovement(), 1.5f);
             ICharacter character = new Character(new Health(50), inventory, movement);
             IWeapon weapon = new DummyWeapon();
-            IWeaponInventoryItem item = new WeaponInventoryItem(new InventoryItem(new DummyInventoryItemViewData()), weapon, new WeaponPartsData(true));
+            IWeaponInventoryItem item = new WeaponInventoryItem(new InventoryItem(new DummyInventoryItemViewData()), weapon, new WeaponParts(true));
             var slotView = new InventorySlotView(new DummyText());
             var slot = new InventorySlot<IWeaponInventoryItem>(item, slotView);
             item.Select();

@@ -14,13 +14,13 @@ namespace ConsoleGame.Weapons
             _transform = transform ?? throw new ArgumentNullException(nameof(transform));
         }
 
-        public (IWeapon Weapon, IWeaponPartsData PartsData) Create(IAim aim)
+        public (IWeapon Weapon, IWeaponParts PartsData) Create(IAim aim)
         {
             IBomb bomb = _bombFactory.Create(_transform);
             IRigidbody rigidbody = new Rigidbody(1.5f, 9.2f, 1.5f, _transform);
             IWeapon grenade = new Grenade(bomb, rigidbody);
-            IWeaponPartsData partsData = new WeaponPartsData(isBurst: false);
-            return (grenade, partsData);
+            IWeaponParts parts = new WeaponParts(isBurst: false);
+            return (grenade, parts);
         }
     }
 }

@@ -488,8 +488,8 @@
     <Compile Include="Game\Runtime\Weapon\Bullet\Model\IBullet.cs" />
     <Compile Include="Game\Runtime\Weapon\Bullet\View\BulletView.cs" />
     <Compile Include="Game\Runtime\Weapon\Bullet\View\IBulletView.cs" />
-    <Compile Include="Game\Runtime\Weapon\Data\IWeaponPartsData.cs" />
-    <Compile Include="Game\Runtime\Weapon\Data\WeaponPartsData.cs" />
+    <Compile Include="Game\Runtime\Weapon\Data\IWeaponParts.cs" />
+    <Compile Include="Game\Runtime\Weapon\Data\WeaponParts.cs" />
     <Compile Include="Game\Runtime\Weapon\Factory\GrenadeFactory.cs" />
     <Compile Include="Game\Runtime\Weapon\Factory\InfinitePistolFactory.cs" />
     <Compile Include="Game\Runtime\Weapon\Factory\IWeaponFactory.cs" />

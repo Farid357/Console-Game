@@ -78,7 +78,7 @@ namespace ConsoleGame.GameLoop
             IAreaRaycast<IHealth> sphereRaycast = new SphereRaycast<IHealth>(new CollidersWorld<IHealth>());
             IBombFactory bombFactory = new BombFactory<IHealth>(sphereRaycast, new BombViewFactory(effectFactory), 10);
             IWeaponFactory grenadeFactory = new GrenadeFactory(bombFactory, new Transform(weaponPosition));
-            (IWeapon Weapon, IWeaponPartsData PartsData) grenadeModel = grenadeFactory.Create(new DummyAim());
+            (IWeapon Weapon, IWeaponParts PartsData) grenadeModel = grenadeFactory.Create(new DummyAim());
             IInventoryItemViewData grenadeItemViewData = new InventoryItemViewData("Grenade", new DummyImage());
             IInventorySlot<IWeaponInventoryItem> grenadeSlot = weaponSlotFactory.Create(grenadeItemViewData, grenadeModel.Weapon, grenadeModel.PartsData);
             weaponInventory.Add(grenadeSlot);

@@ -23,17 +23,17 @@ namespace ConsoleGame
             _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
         }
 
-        public (IWeapon Weapon, IWeaponPartsData PartsData) Create(IAim aim)
+        public (IWeapon Weapon, IWeaponParts PartsData) Create(IAim aim)
         {
             IWeaponMagazine magazine = _magazineFactory.Create();
             var shootCooldownTimer = new Timer(0.2f);
             IWeaponView weaponView = _viewFactory.Create(new DummyImage());
-            IWeaponPartsData partsData = new WeaponPartsData(false, shootCooldownTimer, new NullBattery(), magazine);
+            IWeaponParts parts = new WeaponParts(false, shootCooldownTimer, new NullBattery(), magazine);
             IWeapon weapon = new Weapon(_bulletFactory, aim, weaponView, 10);
             IWeapon weaponWithShootWaiting = new WeaponWithRateOfShot(weapon, shootCooldownTimer);
             IWeapon weaponWithMagazine = new WeaponWithMagazine(weaponWithShootWaiting, magazine);
             _gameLoop.Add(shootCooldownTimer);
-            return (weaponWithMagazine, partsData);
+            return (weaponWithMagazine, parts);
         }
     }
 }

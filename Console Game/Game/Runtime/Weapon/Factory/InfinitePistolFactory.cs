@@ -18,7 +18,7 @@ namespace ConsoleGame
             _bulletFactory = bulletFactory ?? throw new ArgumentNullException(nameof(bulletFactory));
         }
 
-        public (IWeapon, IWeaponPartsData) Create(IAim aim)
+        public (IWeapon Weapon, IWeaponPartsData PartsData) Create(IAim aim)
         {
             IInfiniteWeaponView weaponView = _viewFactory.Create();
             var cooldownTimer = new Timer(0.4f);

@@ -11,11 +11,12 @@ namespace ConsoleGame
         public Zombie(IHealth health, IMovement movement, IReadOnlyCharacter character)
         {
             Health = health ?? throw new ArgumentNullException(nameof(health));
-
+            IReadOnlyTransform characterTransform = character.Transform;
+            
             _behaviorTree = new RepeatNode(new SequenceNode(new IBehaviorNode[]
             {
-                new IsNearNode(movement.Transform, character.Transform, 50),
-                new MoveNode(new MovementToTarget(movement, character.Transform), new IsNearNode(movement.Transform, character.Transform, 1.2f)),
+                new IsNearNode(movement.Transform, characterTransform, 50),
+                new MoveNode(new MovementToTarget(movement, characterTransform), new IsNearNode(movement.Transform, characterTransform, 1.2f)),
                 new AttackHealthNode(character.Health, 10)
             }));
         }

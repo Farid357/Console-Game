@@ -24,14 +24,6 @@ namespace ConsoleGame.GameLoop
             _loopObjects.Add(instance);
         }
 
-        public void Remove(IGameLoopObject instance)
-        {
-            if (instance == null)
-                throw new ArgumentNullException(nameof(instance));
-
-            _loopObjects.Remove(instance);
-        }
-
         public void Update(float deltaTime)
         {
             _loopObjects.ForEach(updateable => updateable.Update(deltaTime));

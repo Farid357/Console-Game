@@ -16,8 +16,8 @@ namespace ConsoleGame
             _view = view ?? throw new ArgumentNullException(nameof(view));
             _rotateSpeed = rotateSpeed.ThrowIfLessThanZeroException();
         }
-        
-        public bool IsAlive { get; private set; }
+
+        public bool IsAlive { get; private set; } = true;
 
         public void Pick()
         {

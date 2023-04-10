@@ -14,7 +14,7 @@ namespace ConsoleGame.Weapons
             _transform = transform ?? throw new ArgumentNullException(nameof(transform));
         }
 
-        public (IWeapon, IWeaponPartsData) Create(IAim aim)
+        public (IWeapon Weapon, IWeaponPartsData PartsData) Create(IAim aim)
         {
             IBomb bomb = _bombFactory.Create(_transform);
             IRigidbody rigidbody = new Rigidbody(1.5f, 9.2f, 1.5f, _transform);

@@ -23,7 +23,7 @@ namespace ConsoleGame
             _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
         }
 
-        public (IWeapon, IWeaponPartsData) Create(IAim aim)
+        public (IWeapon Weapon, IWeaponPartsData PartsData) Create(IAim aim)
         {
             IWeaponMagazine magazine = _magazineFactory.Create();
             var shootCooldownTimer = new Timer(0.2f);

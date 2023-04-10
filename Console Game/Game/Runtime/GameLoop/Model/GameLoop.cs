@@ -29,7 +29,7 @@ namespace ConsoleGame.GameLoop
 
                 TimeSpan deltaTime = _stopwatch.Elapsed - lastUpdateTime;
                 lastUpdateTime += deltaTime;
-                var deltaTimeInSeconds = (float)deltaTime.TotalSeconds;
+                float deltaTimeInSeconds = (float)deltaTime.TotalSeconds;
                 _loopObject.Update(deltaTimeInSeconds);
                 Console.WriteLine($"Delta Time: {deltaTimeInSeconds}");
                 elapsedTime += deltaTimeInSeconds;

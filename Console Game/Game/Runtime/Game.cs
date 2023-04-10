@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using ConsoleGame.Physics;
+using ConsoleGame.Rendering;
 using ConsoleGame.SaveSystem;
 using ConsoleGame.Stats;
 using ConsoleGame.Tests;
@@ -21,11 +22,13 @@ namespace ConsoleGame.GameLoop
             IGamePause gamePause = new GamePause(new GamePauseView());
             IGameLoopObjects loopObjects = new GameLoopObjects();
             IGameLoopObjects physicsObjects = new GameLoopObjects();
+            IRenderer renderers = new Renderers();
 
             _gameLoop = new GameLoops(new List<IGameLoop>
             {
                 new GameLoop(gamePause, loopObjects),
-                new PhysicsGameLoop(gamePause, physicsObjects)
+                new PhysicsGameLoop(gamePause, physicsObjects),
+                new RenderingLoop(renderers)
             });
 
             IGameObjects gameObjects = new SelfCleaningGameObjects(new GameObjects());

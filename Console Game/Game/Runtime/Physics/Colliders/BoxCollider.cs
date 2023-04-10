@@ -17,7 +17,7 @@ namespace ConsoleGame.Physics
 
         public bool Contains(Vector3 point)
         {
-            return Vector3.Distance(Transform.Position, point) <= Vector3.Distance(Transform.Position, _size);
+            return Vector3.Distance(Transform.Position, point) <= Vector3.Distance(Transform.Position, Transform.Position + _size);
         }
     }
 }

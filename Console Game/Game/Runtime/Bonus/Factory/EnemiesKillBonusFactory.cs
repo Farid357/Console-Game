@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ConsoleGame.Bonus
+namespace ConsoleGame
 {
     public sealed class EnemiesKillBonusFactory : IBonusFactory
     {

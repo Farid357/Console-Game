@@ -4,7 +4,7 @@ using System.Numerics;
 using System.Threading.Tasks;
 using ConsoleGame.Tools;
 
-namespace ConsoleGame.Bonus
+namespace ConsoleGame
 {
     public sealed class BonusLoopFactory : IBonusLoopFactory
     {
@@ -24,9 +24,11 @@ namespace ConsoleGame.Bonus
             while (true)
             {
                 int spawnDelay = _random.Next(minCreateDelay, maxCreateDelay);
-                IBonusFactory randomBonusFactory = _factories.GetRandom();
+                IBonusFactory bonusFactory = _factories.GetRandom();
                 await Task.Delay(TimeSpan.FromSeconds(spawnDelay));
-                randomBonusFactory.Create(new Transform(_createPositions.GetRandom()));
+                Vector3 position = _createPositions.GetRandom();
+                ITransform transform = new Transform(position);
+                bonusFactory.Create(transform);
             }
         }
     }

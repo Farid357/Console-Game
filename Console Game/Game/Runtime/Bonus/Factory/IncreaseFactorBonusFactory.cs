@@ -1,7 +1,7 @@
 using System;
 using ConsoleGame.Stats;
 
-namespace ConsoleGame.Bonus
+namespace ConsoleGame
 {
     public sealed class IncreaseFactorBonusFactory : IBonusFactory
     {

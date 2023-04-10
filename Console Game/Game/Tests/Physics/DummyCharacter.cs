@@ -2,15 +2,19 @@ using System.Numerics;
 
 namespace ConsoleGame.Tests.Physics
 {
-    public class DummyCharacter : ICharacter
+    public sealed class DummyCharacter : ICharacter
     {
-        public bool IsAlive => true;
-        public bool CanShoot { get; }
-        public IWeaponData WeaponData { get; }
-        public void SwitchWeapon(IWeapon weapon)
-        {
-            
-        }
+        public bool IsAlive => Health.IsAlive;
+
+        public bool CanShoot => false;
+        
+        public IHealth Health { get; } = new Health(1000);
+        
+        public IReadOnlyTransform Transform { get; } = new Transform();
+
+        public IWeaponInventoryItem SelectedWeaponItem { get; } =
+            new WeaponInventoryItem(new DummyInventoryItem(), new DummyWeapon(), new WeaponPartsData(false));
+
 
         public void Move(Vector3 direction)
         {

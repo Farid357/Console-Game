@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using ConsoleGame.Stats;
 using ConsoleGame.Tools;
 
-namespace ConsoleGame.Bonus
+namespace ConsoleGame
 {
     public sealed class IncreaseFactorBonus : IBonus
     {

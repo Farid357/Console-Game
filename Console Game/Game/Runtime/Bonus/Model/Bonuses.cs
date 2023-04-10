@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ConsoleGame.Bonus
+namespace ConsoleGame
 {
     public sealed class Bonuses : IBonus
     {

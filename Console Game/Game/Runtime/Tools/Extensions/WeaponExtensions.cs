@@ -1,3 +1,4 @@
+using System;
 using ConsoleGame.Weapons;
 
 namespace ConsoleGame.Tools
@@ -17,6 +18,14 @@ namespace ConsoleGame.Tools
         public static bool IsNotFull(this IWeaponMagazine weaponMagazine)
         {
             return weaponMagazine.Bullets < weaponMagazine.MaxBullets;
+        }
+        
+        public static bool CanAdd(this IWeaponMagazine weaponMagazine, int bullets)
+        {
+            if (bullets <= 0)
+                throw new ArgumentOutOfRangeException(nameof(bullets));
+
+            return weaponMagazine.Bullets + bullets <= weaponMagazine.MaxBullets;
         }
     }
 }

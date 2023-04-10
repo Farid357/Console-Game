@@ -1,6 +1,6 @@
-using ConsoleGame;
+using BananaParty.BehaviorTree;
 
-namespace BananaParty.BehaviorTree
+namespace ConsoleGame
 {
     public interface IEnemyBehaviourTreeFactory
     {

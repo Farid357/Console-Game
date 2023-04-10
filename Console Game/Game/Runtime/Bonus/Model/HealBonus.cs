@@ -1,7 +1,7 @@
 using System;
 using ConsoleGame.Tools;
 
-namespace ConsoleGame.Bonus
+namespace ConsoleGame
 {
     public sealed class HealBonus : IBonus
     {

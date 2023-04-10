@@ -5,19 +5,18 @@ namespace ConsoleGame
 {
     public sealed class WeaponMagazineFactory : IWeaponMagazineFactory
     {
-        private readonly IWeaponMagazineViewFactory _viewFactory;
+        private readonly IWeaponMagazineView _view;
         private readonly int _bullets;
 
-        public WeaponMagazineFactory(IWeaponMagazineViewFactory viewFactory, int bullets)
+        public WeaponMagazineFactory(IWeaponMagazineView view, int bullets)
         {
-            _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
+            _view = view ?? throw new ArgumentNullException(nameof(view));
             _bullets = bullets;
         }
 
         public IWeaponMagazine Create()
         {
-            IWeaponMagazineView view = _viewFactory.Create();
-            return new WeaponMagazine(_bullets, view);
+            return new WeaponMagazine(_bullets, _view);
         }
     }
 }

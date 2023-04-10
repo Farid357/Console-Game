@@ -10,6 +10,7 @@ namespace ConsoleGame.Tests
         }
 
         public IHealth Health { get; }
-        
+
+        public bool IsAlive => Health.IsAlive;
     }
 }

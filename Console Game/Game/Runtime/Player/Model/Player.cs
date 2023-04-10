@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using ConsoleGame.Tools;
 
 namespace ConsoleGame
 {
@@ -25,19 +26,19 @@ namespace ConsoleGame
                 _character.Move(moveDirection);
             }
 
-            if (_input.IsShooting && _character.CanShoot && _character.WeaponData.IsBurst == false)
+            if (_input.IsShooting && _character.CanShoot && _character.WeaponData().IsBurst == false)
             {
                 _character.Shoot();
             }
             
-            if (_input.IsShootingBurst && _character.CanShoot && _character.WeaponData.IsBurst)
+            if (_input.IsShootingBurst && _character.CanShoot && _character.WeaponData().IsBurst)
             {
                 _character.Shoot();
             }
 
             if (_input.IsReloading)
             {
-                _character.WeaponData.Magazine.Fill();
+                _character.WeaponData().Magazine.Fill();
             }
         }
     }

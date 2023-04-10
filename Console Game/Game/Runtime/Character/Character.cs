@@ -1,38 +1,33 @@
 using System;
+using System.Linq;
 using System.Numerics;
-using ConsoleGame.Weapon;
 
 namespace ConsoleGame
 {
     public sealed class Character : ICharacter
     {
+        private readonly IReadOnlyInventory<IWeaponInventoryItem> _inventory;
         private readonly IAdjustableMovement _movement;
-        private readonly IWeaponsData _weaponsData;
-        private readonly IHealth _health;
-        private IWeapon _weapon;
 
-        public Character(IHealth health, IAdjustableMovement movement, IWeapon weapon, IWeaponsData weaponsData)
+        public Character(IHealth health, IReadOnlyInventory<IWeaponInventoryItem> inventory, IAdjustableMovement movement)
         {
-            _health = health ?? throw new ArgumentNullException(nameof(health));
+            Health = health ?? throw new ArgumentNullException(nameof(health));
+            _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
             _movement = movement ?? throw new ArgumentNullException(nameof(movement));
-            _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
-            _weaponsData = weaponsData ?? throw new ArgumentNullException(nameof(weaponsData));
-        }
-
-        public IWeaponData WeaponData => _weaponsData.DataFor(_weapon);
-
-        public bool IsAlive => _health.IsAlive;
-        
-        public bool CanShoot => _weapon.CanShoot && IsAlive;
-
-        public void SwitchWeapon(IWeapon weapon)
-        {
-            if (!IsAlive)
-                throw new Exception($"Character isn't alive! He can't switch weapon!");
-            
-            _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
         }
         
+        public IHealth Health { get; }
+
+        private IWeapon Weapon => SelectedWeaponItem.Weapon;
+        
+        public IReadOnlyTransform Transform => _movement.Transform;
+
+        public IWeaponInventoryItem SelectedWeaponItem => _inventory.Slots.First(slot => slot.Item.IsSelected).Item;
+
+        public bool IsAlive => Health.IsAlive;
+        
+        public bool CanShoot => Weapon.CanShoot && IsAlive;
+
         public void Shoot()
         {
             if (!IsAlive)
@@ -40,9 +35,8 @@ namespace ConsoleGame
             
             if (!CanShoot)
                 throw new Exception($"Character can't shoot!");
-            
-            if (_weapon.CanShoot)
-                _weapon.Shoot();
+
+            Weapon.Shoot();
         }
 
         public void Move(Vector3 direction)

@@ -15,11 +15,17 @@ namespace ConsoleGame
         
         public void Select()
         {
+            if (IsSelected)
+                throw new Exception($"Item is already selected!");
+            
             IsSelected = true;
         }
 
         public void Unselect()
         {
+            if (IsSelected == false)
+                throw new Exception($"Item is already unselected!");
+            
             IsSelected = false;
         }
     }

@@ -6,8 +6,8 @@ namespace ConsoleGame
     {
         public IAdjustableMovement Create(ITransform transform)
         {
-            var rigidbody = new Rigidbody(1.5f, 9.2f, 2.5f, transform);
-            var physicsMovement = new PhysicsMovement(rigidbody);
+            IRigidbody rigidbody = new Rigidbody(1.5f, 9.2f, 2.5f, transform);
+            IMovement physicsMovement = new PhysicsMovement(rigidbody);
             return new AdjustableMovement(physicsMovement, 2f);
         }
     }

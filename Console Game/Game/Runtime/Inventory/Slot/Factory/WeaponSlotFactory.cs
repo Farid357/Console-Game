@@ -5,18 +5,16 @@ namespace ConsoleGame
     public sealed class WeaponSlotFactory : IWeaponSlotFactory
     {
         private readonly IInventorySlotViewFactory _slotViewFactory;
-        private readonly ICharacter _character;
 
-        public WeaponSlotFactory(IInventorySlotViewFactory slotViewFactory, ICharacter character)
+        public WeaponSlotFactory(IInventorySlotViewFactory slotViewFactory)
         {
             _slotViewFactory = slotViewFactory ?? throw new ArgumentNullException(nameof(slotViewFactory));
-            _character = character ?? throw new ArgumentNullException(nameof(character));
         }
         
-        public IInventorySlot<IWeaponInventoryItem> Create(IInventoryItemViewData viewData, IWeapon weapon)
+        public IInventorySlot<IWeaponInventoryItem> Create(IInventoryItemViewData viewData, IWeapon weapon, IWeaponPartsData weaponData)
         {
             IInventoryItem item = new InventoryItem(viewData);
-            IWeaponInventoryItem weaponItem = new WeaponInventoryItem(item, _character, weapon);
+            IWeaponInventoryItem weaponItem = new WeaponInventoryItem(item, weapon, weaponData);
             IInventorySlotView slotView = _slotViewFactory.Create();
             return new InventorySlot<IWeaponInventoryItem>(weaponItem, slotView);
         }

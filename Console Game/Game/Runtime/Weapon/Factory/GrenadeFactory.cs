@@ -1,8 +1,7 @@
 using System;
 using ConsoleGame.Physics;
-using ConsoleGame.Weapon;
 
-namespace ConsoleGame
+namespace ConsoleGame.Weapons
 {
     public sealed class GrenadeFactory : IWeaponFactory
     {
@@ -15,14 +14,13 @@ namespace ConsoleGame
             _transform = transform ?? throw new ArgumentNullException(nameof(transform));
         }
 
-        public IWeapon Create(IAim aim, IWeaponsData weaponsData)
+        public (IWeapon, IWeaponPartsData) Create(IAim aim)
         {
             IBomb bomb = _bombFactory.Create(_transform);
             IRigidbody rigidbody = new Rigidbody(1.5f, 9.2f, 1.5f, _transform);
             IWeapon grenade = new Grenade(bomb, rigidbody);
-            IWeaponData weaponData = new WeaponData(isBurst: false);
-            weaponsData.Add(grenade, weaponData);
-            return grenade;
+            IWeaponPartsData partsData = new WeaponPartsData(isBurst: false);
+            return (grenade, partsData);
         }
     }
 }

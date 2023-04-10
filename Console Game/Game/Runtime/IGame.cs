@@ -1,4 +1,4 @@
-namespace ConsoleGame
+namespace ConsoleGame.GameLoop
 {
     public interface IGame
     {

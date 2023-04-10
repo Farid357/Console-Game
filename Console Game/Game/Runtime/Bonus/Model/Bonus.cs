@@ -2,7 +2,7 @@ using System;
 using System.Numerics;
 using ConsoleGame.Tools;
 
-namespace ConsoleGame.Bonus
+namespace ConsoleGame
 {
     public sealed class Bonus : IBonus, IGameObject
     {
@@ -30,7 +30,7 @@ namespace ConsoleGame.Bonus
 
         public void Update(float deltaTime)
         {
-            if(!IsAlive)
+            if (!IsAlive)
                 throw new Exception($"Bonus isn't alive! You can't update it!");
 
             Quaternion rotation = new Quaternion(30f  * _rotateSpeed * deltaTime, 0f, 0f, 0f);

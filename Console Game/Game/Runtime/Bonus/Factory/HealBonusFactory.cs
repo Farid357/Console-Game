@@ -1,6 +1,6 @@
 using System;
 
-namespace ConsoleGame.Bonus
+namespace ConsoleGame
 {
     public sealed class HealBonusFactory : IBonusFactory
     {

@@ -1,9 +1,7 @@
-using ConsoleGame.Weapon;
-
-namespace ConsoleGame
+namespace ConsoleGame.Weapons
 {
     public interface IWeaponFactory
     {
-        IWeapon Create(IAim aim, IWeaponsData weaponsData);
+        (IWeapon Weapon, IWeaponPartsData PartsData) Create(IAim aim);
     }
 }

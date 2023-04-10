@@ -1,19 +1,16 @@
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Numerics;
-using ConsoleGame.Bonus;
-using ConsoleGame.GameLoop;
 using ConsoleGame.Physics;
 using ConsoleGame.SaveSystem;
 using ConsoleGame.Stats;
 using ConsoleGame.Tests;
 using ConsoleGame.Tests.UI;
 using ConsoleGame.UI;
-using ConsoleGame.Wave;
-using ConsoleGame.Weapon;
 using ConsoleGame.Weapons;
 
-namespace ConsoleGame
+namespace ConsoleGame.GameLoop
 {
     public sealed class Game : IGame
     {
@@ -27,7 +24,7 @@ namespace ConsoleGame
 
             _gameLoop = new GameLoops(new List<IGameLoop>
             {
-                new GameLoop.GameLoop(gamePause, loopObjects),
+                new GameLoop(gamePause, loopObjects),
                 new PhysicsGameLoop(gamePause, physicsObjects)
             });
 
@@ -42,21 +39,23 @@ namespace ConsoleGame
             IBarFactory barFactory = new BarFactory(imageFactory);
             IHealthViewFactory characterHealthViewFactory = new CharacterHealthViewFactory(textFactory, barFactory);
             IHealthFactory characterHealthFactory = new CharacterHealthFactory(characterHealthViewFactory, saveStorages);
-            IWeaponMagazineViewFactory magazineViewFactory = new WeaponMagazineViewFactory(textFactory);
-            IWeaponMagazineFactory magazineFactory = new WeaponMagazineFactory(magazineViewFactory, 100);
+            IText bulletsText = textFactory.Create(new Transform(new Vector2(70, 70)), new Font("Arial", 14), Color.Azure);
+            IWeaponMagazineFactory magazineFactory = new WeaponMagazineFactory(new WeaponMagazineView(bulletsText), 100);
             IGameObjectsCollidersWorld<IHealth> healthsCollidersWorld = new GameObjectsCollidersWorld<IHealth>();
             IMovementFactory enemyMovementFactory = new EnemyMovementFactory();
-            IBulletFactory bulletFactory = new RaycastBulletFactory(healthsCollidersWorld, enemyMovementFactory, gameObjects, Layer.Enemy);
+            IBulletFactory bulletFactory = new BulletFactory(healthsCollidersWorld, enemyMovementFactory, gameObjects, Layer.Enemy);
             IEffectFactory effectFactory = new EffectFactory();
             IWeaponViewFactory weaponViewFactory = new WeaponViewFactory(new DummyText(), effectFactory);
             IAdjustableMovement characterMovement = characterMovementFactory.Create(new Transform());
-            IWeaponFactory weaponFactory = new StartWeaponFactory(loopObjects, magazineFactory, bulletFactory, weaponViewFactory);
+            IWeaponFactory weaponFactory = new WeaponWithMagazineFactory(loopObjects, magazineFactory, bulletFactory, weaponViewFactory);
             Vector3 weaponPosition = characterMovement.Transform.Position + new Vector3(0, 9.5f, 2f);
             IAim characterAim = new CharacterAim(new Transform(weaponPosition + new Vector3(0, 0.5f, 2.5f)));
-            IWeaponsData weaponsData = new WeaponsData();
-            IWeapon weapon = weaponFactory.Create(characterAim, weaponsData);
+            var weaponModel = weaponFactory.Create(characterAim);
+            IWeaponInventoryFactory weaponInventoryFactory = new WeaponInventoryFactory(new InventoryViewFactory<IWeaponInventoryItem>());
+            IInventorySlotViewFactory slotViewFactory = new InventorySlotViewFactory(textFactory);
             IHealth characterHealth = characterHealthFactory.Create();
-            ICharacter character = new Character(characterHealth, characterMovement, weapon, weaponsData);
+            IInventory<IWeaponInventoryItem> weaponInventory = weaponInventoryFactory.Create();
+            ICharacter character = new Character(characterHealth, weaponInventory, characterMovement);
             IEnemiesWorld enemiesWorld = new EnemiesWorld();
             IScoreViewFactory scoreViewFactory = new ScoreViewFactory(textFactory);
             IScoreFactory scoreFactory = new ScoreFactory(saveStorages, scoreViewFactory);
@@ -66,25 +65,24 @@ namespace ConsoleGame
             IWalletViewFactory walletViewFactory = new WalletViewFactory(textFactory);
             IWalletFactory walletFactory = new WalletFactory(saveStorages, walletViewFactory);
             IWallet wallet = walletFactory.Create();
-            IWeaponInventoryFactory weaponInventoryFactory = new WeaponInventoryFactory(new InventoryViewFactory<IWeaponInventoryItem>());
-            IInventorySlotViewFactory slotViewFactory = new InventorySlotViewFactory(textFactory);
             IReadOnlyList<IEnemy> allEnemies = enemiesWorld.Enemies.Keys.ToList();
             IKillsStreakView killsStreakView = new KillsStreakViewFactory(textFactory).Create();
-            var killsStreak = new KillsStreak(allEnemies, killsStreakView, characterHealth);
-            var weaponSlotFactory = new WeaponSlotFactory(slotViewFactory, character);
-            var weaponInventory = weaponInventoryFactory.Create();
+            IGameLoopObject killsStreak = new KillsStreak(allEnemies, killsStreakView, characterHealth);
+            IWeaponSlotFactory weaponSlotFactory = new WeaponSlotFactory(slotViewFactory);
             IInventoryItemViewData itemViewData = new InventoryItemViewData("Pistol", new DummyImage());
-            var weaponSlot = weaponSlotFactory.Create(itemViewData, weapon);
+            IInventorySlot<IWeaponInventoryItem> weaponSlot = weaponSlotFactory.Create(itemViewData, weaponModel.Weapon, weaponModel.PartsData);
             weaponInventory.Add(weaponSlot);
             IAreaRaycast<IHealth> sphereRaycast = new SphereRaycast<IHealth>(new CollidersWorld<IHealth>());
             IBombFactory bombFactory = new BombFactory<IHealth>(sphereRaycast, new BombViewFactory(effectFactory), 10);
             IWeaponFactory grenadeFactory = new GrenadeFactory(bombFactory, new Transform(weaponPosition));
-            IWeapon grenade = grenadeFactory.Create(new DummyAim(), weaponsData);
-            var grenadeSlot = weaponSlotFactory.Create(new InventoryItemViewData("Grenade", new DummyImage()), grenade);
+            (IWeapon Weapon, IWeaponPartsData PartsData) grenadeModel = grenadeFactory.Create(new DummyAim());
+            IInventoryItemViewData grenadeItemViewData = new InventoryItemViewData("Grenade", new DummyImage());
+            IInventorySlot<IWeaponInventoryItem> grenadeSlot = weaponSlotFactory.Create(grenadeItemViewData, grenadeModel.Weapon, grenadeModel.PartsData);
             weaponInventory.Add(grenadeSlot);
             IAchievementViewFactory achievementViewFactory = new AchievementViewFactory(imageFactory, windowFactory, textFactory);
             IGameObjectsCollidersWorld<IBonus> bonusesWorld = new GameObjectsCollidersWorld<IBonus>();
             ILevelFactory levelFactory = new CharacterLevelFactory(saveStorages, new LevelViewFactory(textFactory));
+            IBonusFactory bonusFactory = new BonusFactory(bonusesWorld, new BonusViewFactory(), gameObjects);
             ILevel level = levelFactory.Create();
             
             IAchievementFactory achievementFactory = new AchievementsFactory(new List<IAchievementFactory>
@@ -93,28 +91,32 @@ namespace ConsoleGame
                 new ScoreAchievementsFactory(score, achievementViewFactory, loopObjects, wallet, saveStorages)
             });
 
-            IBonusFactory bonusFactory = new BonusFactory(bonusesWorld, new BonusViewFactory());
-            
             IBonusLoopFactory bonusLoopFactory = new BonusLoopFactory(new List<IBonusFactory>()
             {
                 new HealBonusFactory(bonusFactory, characterHealth),
                 new EnemiesKillBonusFactory(bonusFactory, allEnemies),
-                new IncreaseFactorBonusFactory(bonusFactory, score)
+                new IncreaseFactorBonusFactory(bonusFactory, score),
+                new BulletsBonusFactory(bonusFactory, weaponInventory)
             }, 
                 new List<Vector3>
             {
                 new Vector3(100, 0, 300)
             });
 
-            var zombieBehaviourTreeFactory = new ZombieBehaviourTreeFactory(characterHealth, characterMovement.Transform);
-            IEnemyFactory zombieFactory = new EnemyFactory(new HealthFactory(new EnemyHealthViewFactory(), 100), zombieBehaviourTreeFactory, enemyMovementFactory);
-            IReadOnlyList<IWave> waves = new WavesFactory().Create();
-
-            var waveFactory = new WavesLoopFactory(enemiesWorld, new Dictionary<EnemyType, IEnemyFactory>
+            IEnemyFactory zombieFactory = new ZombieFactory(character, new HealthFactory(new EnemyHealthViewFactory(), 100), enemyMovementFactory, gameObjects);
+            IWeaponMagazineFactory enemyWeaponMagazineFactory = new WeaponMagazineFactory(new DummyMagazineView(), 100000);
+            IWeaponFactory enemyWeaponFactory = new WeaponWithMagazineFactory(loopObjects, enemyWeaponMagazineFactory, bulletFactory, weaponViewFactory);
+            IEnemyFactory shooterFactory = new ShooterEnemyFactory(enemyWeaponFactory, character, new HealthFactory(new EnemyHealthViewFactory(), 80), enemyMovementFactory, gameObjects);
+          
+            IReadOnlyDictionary<EnemyType, IEnemyFactory> enemyFactories = new Dictionary<EnemyType, IEnemyFactory>
             {
-                { EnemyType.Zombie, zombieFactory }
-            }, waves);
+                { EnemyType.Zombie, zombieFactory },
+                { EnemyType.Skeleton, zombieFactory },
+                { EnemyType.Shooter, shooterFactory}
+            };
 
+            IEnemyWavesFactory waves = new EnemyWavesFactory(enemyFactories, enemiesWorld);
+            IGameLoopObject enemyWavesLoop = new EnemyWavesLoop(waves.Create());
             achievementFactory.Create();
             bonusLoopFactory.StartCreate(minCreateDelay: 30, maxCreateDelay: 120);
             IPlayerFactory playerFactory = new PlayerFactory(loopObjects, character);
@@ -123,10 +125,9 @@ namespace ConsoleGame
             loopObjects.Add(new GameLoopObjects(new List<IGameLoopObject>
             {
                 healthsCollidersWorld,
-                killsStreak,
-                healthsCollidersWorld,
-                waveFactory,
                 bonusesWorld,
+                killsStreak,
+                enemyWavesLoop,
                 gameObjects
             }));
         }

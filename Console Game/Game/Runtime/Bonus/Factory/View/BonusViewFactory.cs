@@ -1,4 +1,4 @@
-namespace ConsoleGame.Bonus
+namespace ConsoleGame
 {
     public sealed class BonusViewFactory : IBonusViewFactory
     {

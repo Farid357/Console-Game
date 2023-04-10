@@ -1,11 +1,13 @@
 namespace ConsoleGame
 {
-    public interface IReadOnlyCharacter
+    public interface IReadOnlyCharacter : IReadOnlyGameObject
     {
-        bool IsAlive { get; }
-        
         bool CanShoot { get; }
         
-        IWeaponData WeaponData { get; }
+        IHealth Health { get; }
+        
+        IReadOnlyTransform Transform { get; }
+        
+        IWeaponInventoryItem SelectedWeaponItem { get; }
     }
 }

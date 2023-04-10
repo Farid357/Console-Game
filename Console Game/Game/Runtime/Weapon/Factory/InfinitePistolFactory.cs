@@ -1,7 +1,6 @@
 using System;
 using Console_Game;
 using ConsoleGame.GameLoop;
-using ConsoleGame.Weapon;
 using ConsoleGame.Weapons;
 
 namespace ConsoleGame
@@ -19,17 +18,16 @@ namespace ConsoleGame
             _bulletFactory = bulletFactory ?? throw new ArgumentNullException(nameof(bulletFactory));
         }
 
-        public IWeapon Create(IAim aim, IWeaponsData weaponsData)
+        public (IWeapon, IWeaponPartsData) Create(IAim aim)
         {
             IInfiniteWeaponView weaponView = _viewFactory.Create();
             var cooldownTimer = new Timer(0.4f);
-            IWeaponData data = new WeaponData(false, cooldownTimer, new NullBattery(), new NullWeaponMagazine());
-            IWeapon characterWeapon = new Weapons.Weapon(_bulletFactory, aim, weaponView, 10);
+            IWeaponPartsData partsData = new WeaponPartsData(false, cooldownTimer, new NullBattery(), new NullWeaponMagazine());
+            IWeapon characterWeapon = new Weapon(_bulletFactory, aim, weaponView, 10);
             IWeapon shootWaiting = new WeaponWithRateOfShot(characterWeapon, cooldownTimer);
             IWeapon infiniteWeapon = new InfiniteWeapon(shootWaiting, weaponView);
             _gameLoop.Add(cooldownTimer);
-            weaponsData.Add(infiniteWeapon, data);
-            return infiniteWeapon;
+            return (infiniteWeapon, partsData);
         }
     }
 }

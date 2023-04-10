@@ -6,9 +6,9 @@ namespace ConsoleGame.Tools
     {
         private static readonly IWeapon _fakeWeapon = new DummyWeapon();
 
-        public static void TakeAwayWeapons(this ICharacter character)
+        public static IWeaponPartsData WeaponData(this ICharacter character)
         {
-            character.SwitchWeapon(_fakeWeapon);
+            return character.SelectedWeaponItem.WeaponPartsData;
         }
 
         public static bool IsDied(this IReadOnlyGameObject gameObject)

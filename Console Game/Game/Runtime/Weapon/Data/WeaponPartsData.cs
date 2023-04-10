@@ -3,9 +3,9 @@ using ConsoleGame.Weapons;
 
 namespace ConsoleGame
 {
-    public sealed class WeaponData : IWeaponData
+    public sealed class WeaponPartsData : IWeaponPartsData
     {
-        public WeaponData(bool isBurst, ITimer rateOfShootTimer = null, IBattery battery = null, IWeaponMagazine magazine = null)
+        public WeaponPartsData(bool isBurst, ITimer rateOfShootTimer = null, IBattery battery = null, IWeaponMagazine magazine = null)
         {
             IsBurst = isBurst;
             RateOfShootTimer = rateOfShootTimer ?? new Timer(0.3f);

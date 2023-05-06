@@ -19,13 +19,13 @@ namespace ConsoleGame
             
             else
             {
-                CanChargeBattery = true;
+                BatteryIsChargeable = true;
             }
         }
 
         public bool IsBurst { get; }
         
-        public bool CanChargeBattery { get; }
+        public bool BatteryIsChargeable { get; }
 
         public ITimer RateOfShootTimer { get; }
         

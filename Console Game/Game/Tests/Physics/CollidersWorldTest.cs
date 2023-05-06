@@ -7,7 +7,6 @@ namespace ConsoleGame.Tests.Physics
     [TestFixture]
     public class CollidersWorldTest
     {
-        private readonly Layer _layer = Layer.Bullet;
         private ICollidersWorld<IBullet> _collidersWorld;
         private IBullet _bullet;
 
@@ -21,8 +20,8 @@ namespace ConsoleGame.Tests.Physics
         [Test]
         public void AddsCorrectly()
         {
-            _collidersWorld.Add(_bullet, new DummyCollider(), _layer);
-            Assert.That(_collidersWorld.Colliders(_layer).ContainsKey(_bullet));
+            _collidersWorld.Add(_bullet, new DummyCollider());
+            Assert.That(_collidersWorld.AllColliders.ContainsKey(_bullet));
         }
         
         [Test]
@@ -30,7 +29,7 @@ namespace ConsoleGame.Tests.Physics
         {
             AddsCorrectly();
             _collidersWorld.Remove(_bullet);
-            Assert.That(_collidersWorld.Colliders(_layer).Count == 0);
+            Assert.That(_collidersWorld.AllColliders.Count == 0);
         }
     }
 }

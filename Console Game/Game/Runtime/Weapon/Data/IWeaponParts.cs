@@ -7,7 +7,7 @@ namespace ConsoleGame
     {
         bool IsBurst { get; }
         
-        bool CanChargeBattery { get; }
+        bool BatteryIsChargeable { get; }
         
         ITimer RateOfShootTimer { get; }
         

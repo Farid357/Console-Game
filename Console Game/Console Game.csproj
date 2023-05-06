@@ -170,7 +170,6 @@
     <Compile Include="Game\Runtime\Physics\Colliders\Factory\IColliderFactory.cs" />
     <Compile Include="Game\Runtime\Physics\Colliders\World\GameObjectsCollidersWorld.cs" />
     <Compile Include="Game\Runtime\Physics\Colliders\World\IGameObjectsCollidersWorld.cs" />
-    <Compile Include="Game\Runtime\Physics\Colliders\World\Layer.cs" />
     <Compile Include="Game\Runtime\Player\Factory\PlayerFactory.cs" />
     <Compile Include="Game\Runtime\Player\Factory\IPlayerFactory.cs" />
     <Compile Include="Game\Runtime\Player\Input\PlayerInput.cs" />
@@ -294,7 +293,6 @@
     <Compile Include="Game\Runtime\Stats\Health\Factory\CharacterHealthFactory.cs" />
     <Compile Include="Game\Runtime\Stats\Health\Factory\HealthFactory.cs" />
     <Compile Include="Game\Runtime\Stats\Health\Factory\IHealthFactory.cs" />
-    <Compile Include="Game\Runtime\Stats\Health\Factory\PhysicsHealthFactory.cs" />
     <Compile Include="Game\Runtime\Stats\Health\Factory\View\CharacterHealthViewFactory.cs" />
     <Compile Include="Game\Runtime\Stats\Health\Factory\View\EnemyHealthViewFactory.cs" />
     <Compile Include="Game\Runtime\Stats\Health\Factory\View\IHealthViewFactory.cs" />
@@ -641,8 +639,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Game\Runtime\UI\Model\InputField" />
-    <Folder Include="Game\Runtime\Weapon\Parts" />
+    <Folder Include="Game\Runtime\UI\Model\InputField\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

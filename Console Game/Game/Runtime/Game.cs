@@ -44,9 +44,9 @@ namespace ConsoleGame.GameLoop
             IHealthFactory characterHealthFactory = new CharacterHealthFactory(characterHealthViewFactory, saveStorages);
             IText bulletsText = textFactory.Create(new Transform(new Vector2(70, 70)), new Font("Arial", 14), Color.Azure);
             IWeaponMagazineFactory magazineFactory = new WeaponMagazineFactory(new WeaponMagazineView(bulletsText), 100);
-            IGameObjectsCollidersWorld<IHealth> healthsCollidersWorld = new GameObjectsCollidersWorld<IHealth>();
+            IGameObjectsCollidersWorld<IEnemy> enemyCollidersWorld = new GameObjectsCollidersWorld<IEnemy>();
             IMovementFactory enemyMovementFactory = new EnemyMovementFactory();
-            IBulletFactory bulletFactory = new BulletFactory(healthsCollidersWorld, enemyMovementFactory, gameObjects, Layer.Enemy);
+            IBulletFactory bulletFactory = new BulletFactory(enemyCollidersWorld, enemyMovementFactory, gameObjects);
             IEffectFactory effectFactory = new EffectFactory();
             IWeaponViewFactory weaponViewFactory = new WeaponViewFactory(new DummyText(), effectFactory);
             IAdjustableMovement characterMovement = characterMovementFactory.Create(new Transform());
@@ -127,7 +127,7 @@ namespace ConsoleGame.GameLoop
             
             loopObjects.Add(new GameLoopObjects(new List<IGameLoopObject>
             {
-                healthsCollidersWorld,
+                enemyCollidersWorld,
                 bonusesWorld,
                 killsStreak,
                 enemyWavesLoop,

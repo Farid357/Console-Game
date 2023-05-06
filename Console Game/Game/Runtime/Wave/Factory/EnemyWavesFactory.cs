@@ -11,6 +11,9 @@ namespace ConsoleGame
 
         public EnemyWavesFactory(IReadOnlyDictionary<EnemyType, IEnemyFactory> factories, IEnemiesWorld enemiesWorld)
         {
+            if (factories.Count == 0)
+                throw new ArgumentException("Value cannot be an empty collection.", nameof(factories));
+            
             _factories = factories ?? throw new ArgumentNullException(nameof(factories));
             _enemiesWorld = enemiesWorld ?? throw new ArgumentNullException(nameof(enemiesWorld));
         }

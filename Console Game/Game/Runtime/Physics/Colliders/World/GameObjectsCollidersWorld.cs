@@ -19,14 +19,9 @@ namespace ConsoleGame.Physics
 
         public IReadOnlyDictionary<TModel, ICollider> AllColliders => _collidersWorld.AllColliders;
 
-        public IReadOnlyDictionary<TModel, ICollider> Colliders(Layer layer)
+        public void Add(TModel model, ICollider collider)
         {
-            return _collidersWorld.Colliders(layer);
-        }
-
-        public void Add(TModel model, ICollider collider, Layer layer = Layer.Default)
-        {
-            _collidersWorld.Add(model, collider, layer);
+            _collidersWorld.Add(model, collider);
         }
 
         public void Remove(TModel model)

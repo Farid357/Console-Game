@@ -29,3 +29,5 @@ D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console Game.csproj.CopyC
 D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console_Game.exe
 D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console_Game.pdb
 D:\Farid\Downloads\Console Game\Console Game\bin\Debug\Console_Game.pdb
+D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console Game.csproj.AssemblyReference.cache
+D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console Game.csproj.SuggestedBindingRedirects.cache

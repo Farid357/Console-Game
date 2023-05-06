@@ -15,13 +15,7 @@ namespace ConsoleGame.Physics
             _maxDistance = maxDistance;
         }
 
-        public RaycastHit<TTarget> Throw(Vector3 origin, Vector3 direction, Layer? layerMask)
-        {
-            var colliders = layerMask.HasValue ? _collidersWorld.Colliders(layerMask.Value) : _collidersWorld.AllColliders;
-            return Throw(origin, direction, colliders);
-        }
-
-        private RaycastHit<TTarget> Throw(Vector3 origin, Vector3 direction, IReadOnlyDictionary<TTarget, ICollider> colliders)
+        public RaycastHit<TTarget> Throw(Vector3 origin, Vector3 direction)
         {
             Vector3 lastPoint = origin + direction * _maxDistance;
             Vector3 currentPosition = origin;
@@ -30,7 +24,7 @@ namespace ConsoleGame.Physics
             {
                 currentPosition += direction / 100f;
                 
-                foreach (var models in colliders)
+                foreach (var models in _collidersWorld.AllColliders)
                 {
                     ICollider collider = models.Value;
                     TTarget target = models.Key;

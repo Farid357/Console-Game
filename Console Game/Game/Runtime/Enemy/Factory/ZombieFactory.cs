@@ -1,5 +1,6 @@
+using ConsoleGame.Physics;
 using System;
-using ConsoleGame.GameLoop;
+using System.Numerics;
 
 namespace ConsoleGame
 {
@@ -8,14 +9,14 @@ namespace ConsoleGame
         private readonly IReadOnlyCharacter _character;
         private readonly IHealthFactory _healthFactory;
         private readonly IMovementFactory _movementFactory;
-        private readonly IGameObjectsGroup _gameObjects;
+        private readonly IEnemiesWorld _enemiesWorld;
 
-        public ZombieFactory(IReadOnlyCharacter character, IHealthFactory healthFactory, IMovementFactory movementFactory, IGameObjectsGroup gameObjects)
+        public ZombieFactory(IReadOnlyCharacter character, IHealthFactory healthFactory, IMovementFactory movementFactory, IEnemiesWorld enemiesWorld)
         {
             _character = character ?? throw new ArgumentNullException(nameof(character));
             _healthFactory = healthFactory ?? throw new ArgumentNullException(nameof(healthFactory));
             _movementFactory = movementFactory ?? throw new ArgumentNullException(nameof(movementFactory));
-            _gameObjects = gameObjects ?? throw new ArgumentNullException(nameof(gameObjects));
+            _enemiesWorld = enemiesWorld ?? throw new ArgumentNullException(nameof(enemiesWorld));
         }
 
         public IEnemy Create(ITransform transform)
@@ -23,7 +24,10 @@ namespace ConsoleGame
             IHealth health = _healthFactory.Create();
             IMovement movement = _movementFactory.Create(transform);
             var zombie = new Zombie(health, movement, _character);
-            _gameObjects.Add(zombie);
+            ICollider collider = new BoxCollider(Vector3.One, transform);
+            _enemiesWorld.Add(zombie, EnemyType.Zombie);
+            _enemiesWorld.PhysicsWorld.Add(zombie, collider);
+            _enemiesWorld.GameObjectsGroup.Add(zombie);
             return zombie;
         }
     }

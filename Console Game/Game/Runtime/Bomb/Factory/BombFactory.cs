@@ -4,13 +4,13 @@ using ConsoleGame.Tools;
 
 namespace ConsoleGame
 {
-    public sealed class BombFactory<TTarget> : IBombFactory where TTarget : IHealth
+    public sealed class BombFactory : IBombFactory
     {
         private readonly IBombViewFactory _viewFactory;
-        private readonly IAreaRaycast<TTarget> _raycast;
+        private readonly IAreaRaycast<IEnemy> _raycast;
         private readonly int _damage;
 
-        public BombFactory(IAreaRaycast<TTarget> raycast, IBombViewFactory viewFactory, int damage)
+        public BombFactory(IAreaRaycast<IEnemy> raycast, IBombViewFactory viewFactory, int damage)
         {
             _raycast = raycast ?? throw new ArgumentNullException(nameof(raycast));
             _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
@@ -20,7 +20,7 @@ namespace ConsoleGame
         public IBomb Create(ITransform transform)
         {
             IBombView view = _viewFactory.Create(transform);
-            return new Bomb<TTarget>(view, _raycast, transform, _damage);
+            return new Bomb(view, _raycast, transform, _damage);
         }
     }
 }

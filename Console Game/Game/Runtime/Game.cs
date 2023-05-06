@@ -46,7 +46,7 @@ namespace ConsoleGame.GameLoop
             IWeaponMagazineFactory magazineFactory = new WeaponMagazineFactory(new WeaponMagazineView(bulletsText), 100);
             IGameObjectsCollidersWorld<IEnemy> enemyCollidersWorld = new GameObjectsCollidersWorld<IEnemy>();
             IMovementFactory enemyMovementFactory = new EnemyMovementFactory();
-            IBulletFactory bulletFactory = new BulletFactory(enemyCollidersWorld, enemyMovementFactory, gameObjects);
+            IBulletFactory bulletFactory = new BulletFactory(enemyCollidersWorld, new BulletMovementFactory(), gameObjects);
             IEffectFactory effectFactory = new EffectFactory();
             IWeaponViewFactory weaponViewFactory = new WeaponViewFactory(new DummyText(), effectFactory);
             IAdjustableMovement characterMovement = characterMovementFactory.Create(new Transform());
@@ -59,7 +59,7 @@ namespace ConsoleGame.GameLoop
             IHealth characterHealth = characterHealthFactory.Create();
             IInventory<IWeaponInventoryItem> weaponInventory = weaponInventoryFactory.Create();
             ICharacter character = new Character(characterHealth, weaponInventory, characterMovement);
-            IEnemiesWorld enemiesWorld = new EnemiesWorld();
+            IEnemiesWorld enemiesWorld = new EnemiesWorld(enemyCollidersWorld, gameObjects);
             IScoreViewFactory scoreViewFactory = new ScoreViewFactory(textFactory);
             IScoreFactory scoreFactory = new ScoreFactory(saveStorages, scoreViewFactory);
             IScoreWithFactor score = new ScoreWithFactor(scoreFactory.Create());
@@ -75,8 +75,8 @@ namespace ConsoleGame.GameLoop
             IInventoryItemViewData itemViewData = new InventoryItemViewData("Pistol", new DummyImage());
             IInventorySlot<IWeaponInventoryItem> weaponSlot = weaponSlotFactory.Create(itemViewData, weaponModel.Weapon, weaponModel.PartsData);
             weaponInventory.Add(weaponSlot);
-            IAreaRaycast<IHealth> sphereRaycast = new SphereRaycast<IHealth>(new CollidersWorld<IHealth>());
-            IBombFactory bombFactory = new BombFactory<IHealth>(sphereRaycast, new BombViewFactory(effectFactory), 10);
+            IAreaRaycast<IEnemy> sphereRaycast = new SphereRaycast<IEnemy>(new CollidersWorld<IEnemy>());
+            IBombFactory bombFactory = new BombFactory(sphereRaycast, new BombViewFactory(effectFactory), 10);
             IWeaponFactory grenadeFactory = new GrenadeFactory(bombFactory, new Transform(weaponPosition));
             (IWeapon Weapon, IWeaponParts PartsData) grenadeModel = grenadeFactory.Create(new DummyAim());
             IInventoryItemViewData grenadeItemViewData = new InventoryItemViewData("Grenade", new DummyImage());
@@ -106,10 +106,12 @@ namespace ConsoleGame.GameLoop
                 new Vector3(100, 0, 300)
             });
 
-            IEnemyFactory zombieFactory = new ZombieFactory(character, new HealthFactory(new EnemyHealthViewFactory(), 100), enemyMovementFactory, gameObjects);
+            IEnemyFactory zombieFactory = new ZombieFactory(character, new HealthFactory(new EnemyHealthViewFactory(), 100), enemyMovementFactory, enemiesWorld);
             IWeaponMagazineFactory enemyWeaponMagazineFactory = new WeaponMagazineFactory(new DummyMagazineView(), 100000);
-            IWeaponFactory enemyWeaponFactory = new WeaponWithMagazineFactory(loopObjects, enemyWeaponMagazineFactory, bulletFactory, weaponViewFactory);
-            IEnemyFactory shooterFactory = new ShooterEnemyFactory(enemyWeaponFactory, character, new HealthFactory(new EnemyHealthViewFactory(), 80), enemyMovementFactory, gameObjects);
+            ICollidersWorld<IEnemy> characterCollidersWorld = new CollidersWorld<IEnemy>();
+            IBulletFactory enemyBulletFactory = new BulletFactory(characterCollidersWorld, new BulletMovementFactory(), gameObjects);
+            IWeaponFactory enemyWeaponFactory = new WeaponWithMagazineFactory(loopObjects, enemyWeaponMagazineFactory, enemyBulletFactory, weaponViewFactory);
+            IEnemyFactory shooterFactory = new ShooterEnemyFactory(enemyWeaponFactory, character, new HealthFactory(new EnemyHealthViewFactory(), 80), enemyMovementFactory, enemiesWorld);
           
             IReadOnlyDictionary<EnemyType, IEnemyFactory> enemyFactories = new Dictionary<EnemyType, IEnemyFactory>
             {
@@ -124,7 +126,9 @@ namespace ConsoleGame.GameLoop
             bonusLoopFactory.StartCreate(minCreateDelay: 30, maxCreateDelay: 120);
             IPlayerFactory playerFactory = new PlayerFactory(loopObjects, character);
             playerFactory.Create();
-            
+            ICollider characterCollider = new BoxCollider(new Vector3(4, 4, 4), character.Transform);
+            characterCollidersWorld.Add(character, characterCollider);
+
             loopObjects.Add(new GameLoopObjects(new List<IGameLoopObject>
             {
                 enemyCollidersWorld,

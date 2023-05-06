@@ -5,14 +5,14 @@ using ConsoleGame.Tools;
 
 namespace ConsoleGame
 {
-    public sealed class Bomb<TTarget> : IBomb where TTarget : IHealth
+    public sealed class Bomb : IBomb
     {
         private readonly IBombView _view;
-        private readonly IAreaRaycast<TTarget> _raycast;
+        private readonly IAreaRaycast<IEnemy> _raycast;
         private readonly IReadOnlyTransform _transform;
         private readonly int _damage;
         
-        public Bomb(IBombView view, IAreaRaycast<TTarget> raycast, IReadOnlyTransform transform, int damage)
+        public Bomb(IBombView view, IAreaRaycast<IEnemy> raycast, IReadOnlyTransform transform, int damage)
         {
             _view = view ?? throw new ArgumentNullException(nameof(view));
             _raycast = raycast ?? throw new ArgumentNullException(nameof(raycast));
@@ -33,7 +33,7 @@ namespace ConsoleGame
 
             if (_raycast.HasHits)
             {
-                foreach (TTarget health in _raycast.Hits().Select(hit => hit.Target))
+                foreach (IHealth health in _raycast.Hits().Select(hit => hit.Target))
                 {
                     health.TakeDamage(_damage);
                 }

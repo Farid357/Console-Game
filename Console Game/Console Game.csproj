@@ -142,6 +142,7 @@
     <Compile Include="Game\Runtime\Enemy\Model\ShooterEnemy.cs" />
     <Compile Include="Game\Runtime\Enemy\Model\Zombie.cs" />
     <Compile Include="Game\Runtime\Enemy\Nodes\AttackHealthNode.cs" />
+    <Compile Include="Game\Runtime\Enemy\World\IReadOnlyEnemiesWorld.cs" />
     <Compile Include="Game\Runtime\GameLoop\Model\RenderingLoop.cs" />
     <Compile Include="Game\Runtime\GameLoop\Objects\GameObject\Group\GameObjects.cs" />
     <Compile Include="Game\Runtime\GameLoop\Objects\GameObject\Group\IGameObjects.cs" />

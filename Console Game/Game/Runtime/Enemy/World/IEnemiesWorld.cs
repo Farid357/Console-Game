@@ -1,13 +1,7 @@
-using System.Collections.Generic;
-
 namespace ConsoleGame
 {
-    public interface IEnemiesWorld
+    public interface IEnemiesWorld : IReadOnlyEnemiesWorld
     {
-        bool EverybodyDied { get; }
-
-        IReadOnlyDictionary<IEnemy, EnemyType> Enemies { get; }
-
         void Add(IEnemy enemy, EnemyType type);
 
         void Clear();

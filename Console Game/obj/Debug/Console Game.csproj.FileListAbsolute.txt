@@ -23,7 +23,6 @@ D:\Farid\Downloads\Console Game\Console Game\bin\Debug\System.Text.Encodings.Web
 D:\Farid\Downloads\Console Game\Console Game\bin\Debug\System.Text.Json.xml
 D:\Farid\Downloads\Console Game\Console Game\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\Farid\Downloads\Console Game\Console Game\bin\Debug\System.ValueTuple.xml
-D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console Game.csprojAssemblyReference.cache
 D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console Game.csproj.CoreCompileInputs.cache
 D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console Game.csproj.CopyComplete
 D:\Farid\Downloads\Console Game\Console Game\obj\Debug\Console_Game.exe

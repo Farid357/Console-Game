@@ -4,6 +4,5 @@ namespace ConsoleGame
     {
         void Add(IEnemy enemy, EnemyType type);
 
-        void Clear();
     }
 }

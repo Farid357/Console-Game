@@ -167,6 +167,7 @@
     <Compile Include="Game\Runtime\Graphics\Mesh\Renderer\MeshRenderer.cs" />
     <Compile Include="Game\Runtime\Inventory\Factory\IInventoryViewFactory.cs" />
     <Compile Include="Game\Runtime\Inventory\Factory\InventoryViewFactory.cs" />
+    <Compile Include="Game\Runtime\Movement\Factory\BulletMovementFactory.cs" />
     <Compile Include="Game\Runtime\Physics\Colliders\Factory\BoxColliderFactory.cs" />
     <Compile Include="Game\Runtime\Physics\Colliders\Factory\IColliderFactory.cs" />
     <Compile Include="Game\Runtime\Physics\Colliders\World\GameObjectsCollidersWorld.cs" />
